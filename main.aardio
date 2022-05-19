@@ -1,0 +1,181 @@
+import win.ui;
+import win.ui.atom;
+/*DSG{{*/
+mainForm = win.form(text="ImTip - 通用输入法提示工具";right=759;bottom=469)
+mainForm.add()
+/*}}*/
+
+for(k,v in _ARGV){
+	if(string.endWith(v,".aardio",true)){
+		if(io.exist(v)){
+			__argvImTipConfig = v;
+		}
+	}
+}
+	
+var atom,hwnd = mainForm.atom("E474890D-1DFA-4575-B456-7B46C15665DC.imtip");
+if(!atom){
+	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig); 
+	win.quitMessage();	
+	return;
+}
+
+//显示输入状态栏
+import key.ime.stateBar;
+imeBar = key.ime.stateBar(mainForm);
+
+//下面创建托盘图标
+import win.util.tray;
+mainForm.tray = win.util.tray(mainForm)  
+mainForm.tray.tip = "ImTip - 通用输入法提示工具" //设置鼠标提示 
+
+//响应托盘消息
+mainForm.onTrayMessage = {
+	[0x205/*_WM_RBUTTONUP*/] = function(wParam){ 
+	    win.setForeground(mainForm.hwnd);
+	    mainForm.popmenu.popup(); 
+	};
+	[0x203/*_WM_LBUTTONDBLCLK*/] = function(wParam){ 
+		if(mainSettingForm){
+			return win.setForeground(mainSettingForm.hwnd); 
+		}
+		
+		var frmChild = mainForm.loadForm("\dlg\frmSetting.aardio");
+		frmChild.show(); 
+	};
+}
+
+//下面创建托盘弹出菜单
+import win.ui.menu;
+mainForm.popmenu = win.ui.popmenu(mainForm);//创建弹出菜单
+mainForm.popmenu.add('设置外观',function(id){ 
+	if(mainSettingForm){
+		return win.setForeground(mainSettingForm.hwnd); 
+	}
+	
+	var frmChild = mainForm.loadForm("\dlg\frmSetting.aardio");
+	frmChild.show(); 
+});
+
+import fsys.dlg;
+mainForm.popmenu.add('导入外观方案',function(id){ 
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.btnImport.oncommand();
+	}
+	
+	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
+	if(!path) return;
+	
+	mainForm.importImTipStyle(path); 
+});
+
+import config;
+mainForm.popmenu.add('导出外观方案',function(id){
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.btnExport.oncommand();
+	}
+	
+	var path = fsys.dlg.save("ImTip 配置(*.aardio)|*.aardio||","导出样式方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
+	if(!path) return;
+	 
+	var strImptipConfig = table.tostring(config.style); 
+	var data = string.loadcode("\dlg\template.aardio",{ imptipConfig = strImptipConfig } ); 
+	
+	if((config.style.font && string.cmp(config.style.font,"FontAwesome")==0)
+		||(config.style.iconStyle[["font"]] && string.cmp(config.style.iconStyle[["font"]],"FontAwesome")==0)){
+		data = 'import fonts.fontAwesome;\r\n' + data; 
+	}
+	
+	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
+		,function(head,code){
+			var lines = {head};
+			for(i=1;#code;2040){
+				table.push(lines,string.slice(code,i,i+2040));
+			}
+			
+			table.push(lines,"'");
+			return string.join(lines,'\r\n');
+	} );
+	
+	string.save(path,data);
+});
+
+mainForm.popmenu.add();//分隔线
+ 
+mainForm.menuDiabledImTipId = mainForm.popmenu.add('临时禁用',function(id){ 
+	var disabled = mainForm.popmenu.checked(mainForm.menuDiabledImTipId,0/*_MF_BYCOMMAND*/);
+	imeBar.imeWatch(disabled);
+	
+	mainForm.popmenu.check(mainForm.menuDiabledImTipId ,!disabled,0/*_MF_BYCOMMAND*/);
+});
+
+mainForm.popmenu.add();//分隔线
+
+mainForm.popmenu.add('官方网站',function(id){ 
+	import process;
+	process.openUrl("http://imtip.aardio.com/");
+});
+
+mainForm.popmenu.add();//分隔线
+
+mainForm.popmenu.add('退出程序',function(id){ 
+	mainForm.close();
+	win.quitMessage();
+});
+
+import fsys.update.simpleMain;
+if( fsys.update.simpleMain(
+	"ImTip ( 通用输入法提示工具 )",
+	"http://imtip.aardio.com/update/",
+	io.appData("/aardio/std/ImTip/app/update"),
+	function(version,description,status){})){
+	return 0;	
+}
+
+mainForm.importImTipStyle = function(path){ 
+	var buf = string.loadBuffer(path);
+	if(!#buf) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	
+	var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
+	if(!#data) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	
+	try{
+		var cfg = eval(data);  
+		imeBar.imeSkin(cfg);	
+		
+ 		config.style.embeddingFontData = null;
+		config.style.embeddingFontName = null; 
+		config.style.openStyle = null; 
+		config.style.border = null;
+		
+ 		table.assign(config.style,cfg); 
+ 		config.style.save();	
+	}
+	catch(e){
+		mainForm.msgboxErr(e);
+	} 
+}
+
+mainForm.onCopyData = function(data,dataType){
+	 
+	if(string.endWith(data,".aardio",true) && io.exist(data) ){
+		if(mainSettingForm) { 
+			win.setForeground(mainSettingForm.hwnd);
+			return mainSettingForm.importStyleFromFile(data);
+		}
+		
+		mainForm.importImTipStyle(data);  
+	}
+}
+
+if(config.style.width){
+	imeBar.imeSkin(config.style)
+}
+
+if(__argvImTipConfig){
+	win.sendCopyData(mainForm.hwnd,__argvImTipConfig);
+}
+
+win.loopMessage();

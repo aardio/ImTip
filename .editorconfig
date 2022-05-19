@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+
+[*.{aardio,table,aau}]
+end_of_line = crlf
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
+[*.{aau}]
+charset = utf-8-bom

@@ -1,0 +1,93 @@
+//字体图标
+import win.ui;
+/*DSG{{*/
+var frmIconFont = win.form(text="图标字体浏览器";right=733;bottom=503;bgcolor=16777215)
+frmIconFont.add()
+/*}}*/
+
+import web.form;
+var wb = web.form(frmIconFont);
+
+wb.external={
+	click = function(chr){
+		var str = ustring.fromCharCode(chr);
+		var hex = string.escape(str,true,true); 
+		frmIconFont.endModal(hex)
+	}
+	mouseover = function(chr){
+		var str = ustring.fromCharCode(chr);
+		frmIconFont.text ="图标字体浏览器 -  " + string.escape(str,true,true)
+	}  
+}
+ 
+
+var htmlTemplate = /**
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+    html,body{ height:100%; margin:0;font:bold 12pt/20pt "<?=owner.fontName?>"} 
+    a {
+        line-height:50pt;
+        height:50pt;
+        width:50pt;
+        text-align:center;
+        vertical-align:middle;
+        font-size:18pt;
+        color:#008080;
+        display:inline-block;
+        text-decoration:none;
+    }        
+    a:hover {
+            background:#ccc;
+            color:#F08000;
+    }
+    a:active {
+            background:#999;
+            color:#FF8C09;
+    }
+    </style>
+</head>
+<body>
+      <?
+      for(i=1;#owner.fontUnicodeChars/2;1){ 
+      ?>
+      		<a name="fontAwesome" href="javascript:void(0);" 
+      		onclick="javascript:external.click(<?
+      		=owner.fontUnicodeChars[i]
+      		?>)" 
+      		onmouseover="javascript:external.mouseover(<?
+      		=owner.fontUnicodeChars[i]
+      		?>)" >&#<?=owner.fontUnicodeChars[i]?>;</a>
+      <? 	
+      }
+      ?>  
+</body>
+</html>
+**/
+
+import string.fontRanges;
+frmIconFont.loadFont = function(fontName){
+	if(!#fontName) return;
+	
+	if(string.cmp(frmIconFont.parent.embeddingFontName,fontName)==0){
+		if(!io.exist(frmIconFont.parent.embeddingFontData)){
+			var fontPath = io.tmpname(,".ttf");
+			string.save(fontPath, frmIconFont.parent.embeddingFontData);
+			if( ::Gdi32.AddFontResourceEx( fontPath,0x10/*FR_PRIVATE*/,0 ) ) {
+				::PostMessage( 0xFFFF/*_HWND_BROADCAST*/,0x1D/*_WM_FONTCHANGE*/,0,0); 
+			} 
+		}
+	}
+	
+	fontUnicodeChars = string.fontRanges.getUnicodeString(fontName,0xE000,0xF8FF );
+	if(!fontUnicodeChars) return;
+	
+	wb.loadcode(htmlTemplate,{fontUnicodeChars=fontUnicodeChars;fontName=fontName});
+	return true;	
+}
+
+//frmIconFont.show(); 
+//win.loopMessage();

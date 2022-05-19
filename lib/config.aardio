@@ -1,0 +1,7 @@
+//config 配置文件
+import fsys.config;
+config  = fsys.config( io.appData("/aardio/std/ImTip/") ); 
+
+/**intellisense(config)
+? = 配置文件名,\n读写配置并序列化为一个表对象,\n表的成员值可以是支持序列化的普通变量,支持table对象\n配置文件在首次使用时自动加载,退出程序时自动保存\n!fsys_table.
+end intellisense**/

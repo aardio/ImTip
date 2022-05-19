@@ -1,0 +1,1809 @@
+import style;
+import config;
+import fonts.fontAwesome;
+import win.ui;
+/*DSG{{*/
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.0 - 通用输入法状态提示";right=701;bottom=656;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+frmSetting.add(
+bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\res\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=43};
+btnBackground={cls="plus";text=" ";left=98;top=465;right=130;bottom=480;dl=1;dt=1;edge=1;notify=1;z=41};
+btnBorderColor={cls="plus";text=" ";left=98;top=491;right=130;bottom=506;dl=1;dt=1;edge=1;notify=1;z=47};
+btnClosedBackground={cls="plus";text=" ";left=198;top=111;right=230;bottom=126;dr=1;dt=1;edge=1;notify=1;z=87};
+btnClosedBorderColor={cls="plus";text=" ";left=315;top=111;right=347;bottom=126;dl=1;dt=1;edge=1;notify=1;z=111};
+btnClosedIconTextColor={cls="plus";text=" ";left=629;top=111;right=661;bottom=126;dr=1;dt=1;edge=1;notify=1;z=91};
+btnClosedTextColor={cls="plus";text=" ";left=481;top=111;right=513;bottom=126;dr=1;dt=1;edge=1;notify=1;z=89};
+btnExport={cls="plus";text="导出";left=580;top=20;right=655;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=97};
+btnIconTextColor={cls="plus";text=" ";left=618;top=270;right=650;bottom=285;dr=1;dt=1;edge=1;notify=1;z=40};
+btnIconTextFont={cls="plus";text="导入 ...";left=606;top=318;right=671;bottom=342;align="left";color=8388608;notify=1;textPadding={left=5};z=65};
+btnImport={cls="plus";text="导入";left=499;top=20;right=574;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=96};
+btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=95};
+btnTextColor={cls="plus";text=" ";left=268;top=270;right=300;bottom=285;dl=1;dt=1;edge=1;notify=1;z=30};
+btnTextFont={cls="plus";text="选择 ...";left=270;top=318;right=335;bottom=342;align="left";color=8388608;notify=1;textPadding={left=5};z=69};
+chkClosedStyle={cls="plus";text="启用";left=39;top=102;right=106;bottom=133;align="left";iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=21};z=85};
+chkIconTextBold={cls="plus";text="粗体";left=569;top=341;right=621;bottom=372;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=80};
+chkSysRun={cls="plus";text="允许开机启动";left=28;top=621;right=227;bottom=652;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=102};
+chkTextBold={cls="plus";text="粗体";left=218;top=341;right=270;bottom=372;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=79};
+chkTimeout={cls="plus";text="仅在切换输入法状态后显示：";left=28;top=596;right=227;bottom=627;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=16};
+cmbIconTextRenderingHint={cls="combobox";left=440;top=294;right=557;bottom=314;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=83};
+cmbTextRenderingHint={cls="combobox";left=93;top=294;right=210;bottom=314;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=81};
+editCharsCapital={cls="plus";left=544;top=398;right=593;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=92};
+editCharsClose={cls="plus";left=627;top=398;right=676;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=70};
+editCharsEn={cls="plus";left=132;top=398;right=181;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=73};
+editCharsFullShape={cls="plus";left=228;top=398;right=277;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=71};
+editCharsHalfShape={cls="plus";left=324;top=398;right=373;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=66};
+editCharsLang={cls="plus";left=49;top=398;right=98;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=74};
+editCharsSymbol={cls="plus";left=448;top=398;right=497;bottom=422;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=72};
+editClasses={cls="plus";left=118;top=564;right=631;bottom=588;align="left";border={bottom=1;color=-6908266};editable=1;textPadding={top=6;bottom=3};z=93};
+editIconTextFont={cls="plus";left=440;top=312;right=604;bottom=338;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={top=6;bottom=2};z=67};
+editTextFont={cls="plus";left=93;top=312;right=269;bottom=338;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={top=6;bottom=2};z=68};
+groupbox={cls="groupbox";text="中 / En";left=17;top=139;right=348;bottom=375;bgcolor=16777215;dl=1;dt=1;edge=1;z=5};
+groupbox2={cls="groupbox";text="标点符号 / 大写";left=359;top=140;right=685;bottom=376;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=3};
+groupbox3={cls="groupbox";text="窗口 / 背景";left=16;top=437;right=685;bottom=563;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=4};
+groupbox4={cls="groupbox";text="英文模式 / 变换颜色";left=17;top=84;right=686;bottom=135;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=2};
+groupbox5={cls="groupbox";text="字符 /  字体图标";left=17;top=380;right=685;bottom=433;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=1};
+lbEditorClasses={cls="static";text="兼容窗口类名：";left=-27;top=572;right=118;bottom=596;align="right";dl=1;dt=1;transparent=1;z=94};
+lbIconTrans={cls="static";text="透明度：";left=362;top=268;right=440;bottom=289;align="right";dl=1;dt=1;transparent=1;z=78};
+lbTimeout={cls="static";text="秒";left=503;top=602;right=577;bottom=623;bgcolor=16777215;db=1;dr=1;z=18};
+lbTrans={cls="static";text="大小：";left=21;top=347;right=94;bottom=368;align="right";bgcolor=16777215;dl=1;dt=1;z=77};
+lnkCharsCapital={cls="plus";text="大写:";left=502;top=398;right=540;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=109};
+lnkCharsClose={cls="plus";text='\uF05E:';left=598;top=398;right=623;bottom=422;align="right";color=8388608;font=LOGFONT(name='FontAwesome');notify=1;textPadding={left=5};valign="bottom";z=110};
+lnkCharsEn={cls="plus";text="英:";left=103;top=398;right=128;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=107};
+lnkCharsFullShape={cls="plus";text="全角:";left=186;top=398;right=224;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=106};
+lnkCharsHalfShape={cls="plus";text="半角:";left=281;top=398;right=319;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=105};
+lnkCharsLang={cls="plus";text="中:";left=20;top=398;right=45;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=108};
+lnkCharsSymbol={cls="plus";text="中文标点:";left=377;top=398;right=444;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=104};
+preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";bgcolor=15780518;border={radius=11};db=1;disabled=1;dl=1;iconStyle={align="right";font=LOGFONT(name='FontAwesome');padding={right=11}};iconText='\uF186';textPadding={left=13};z=44};
+radIconTextAlignCenter={cls="plus";text="居中";left=496;top=213;right=561;bottom=237;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=35};
+radIconTextAlignLeft={cls="plus";text="左";left=440;top=213;right=500;bottom=237;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=34};
+radIconTextAlignRight={cls="plus";text="右";left=568;top=213;right=640;bottom=237;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=45};
+radIconTextVAlignBottom={cls="plus";text="底";left=568;top=240;right=640;bottom=264;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=46};
+radIconTextVAlignCenter={cls="plus";text="居中";left=496;top=240;right=561;bottom=264;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=38};
+radIconTextVAlignTop={cls="plus";text="顶";left=440;top=240;right=500;bottom=264;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=37};
+radTextAlignCenter={cls="plus";text="居中";left=153;top=213;right=218;bottom=237;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=24};
+radTextAlignLeft={cls="plus";text="左";left=93;top=213;right=153;bottom=237;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=22};
+radTextAlignRight={cls="plus";text="右";left=226;top=213;right=294;bottom=237;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=23};
+radTextVAlignBottom={cls="plus";text="底";left=226;top=240;right=294;bottom=264;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=28};
+radTextVAlignCenter={cls="plus";text="居中";left=153;top=240;right=218;bottom=264;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=27};
+radTextVAlignTop={cls="plus";text="顶";left=93;top=240;right=153;bottom=264;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF111 ';notify=1;textPadding={left=24};z=26};
+static={cls="static";text="圆角大小：";left=390;top=490;right=468;bottom=514;align="right";dl=1;dt=1;transparent=1;z=7};
+static10={cls="static";text="颜色：";left=220;top=269;right=270;bottom=293;align="right";dl=1;dt=1;transparent=1;z=29};
+static11={cls="static";text="左边距：";left=382;top=163;right=440;bottom=184;align="right";dl=1;dr=1;dt=1;transparent=1;z=31};
+static12={cls="static";text="水平对齐：";left=362;top=215;right=440;bottom=237;align="right";dl=1;dr=1;dt=1;transparent=1;z=33};
+static13={cls="static";text="垂直对齐：";left=362;top=242;right=440;bottom=263;align="right";dl=1;dr=1;dt=1;transparent=1;z=36};
+static14={cls="static";text="颜色：";left=571;top=269;right=619;bottom=293;align="right";dl=1;dr=1;dt=1;transparent=1;z=39};
+static15={cls="static";text="背景颜色：";left=19;top=464;right=97;bottom=488;align="right";dl=1;dt=1;transparent=1;z=42};
+static16={cls="static";text="边框颜色：";left=19;top=490;right=97;bottom=514;align="right";dl=1;dt=1;transparent=1;z=48};
+static17={cls="static";text="边框粗细：";left=125;top=490;right=203;bottom=514;align="right";dl=1;dt=1;transparent=1;z=49};
+static18={cls="static";text="右边距：";left=190;top=163;right=248;bottom=187;align="right";dl=1;dt=1;transparent=1;z=51};
+static19={cls="static";text="上边距：";left=36;top=189;right=94;bottom=210;align="right";bgcolor=16777215;dl=1;dt=1;z=53};
+static2={cls="static";text="横向偏移：";left=19;top=523;right=97;bottom=547;align="right";dl=1;dt=1;transparent=1;z=9};
+static20={cls="static";text="下边距：";left=190;top=189;right=248;bottom=213;align="right";dl=1;dt=1;transparent=1;z=55};
+static21={cls="static";text="右边距：";left=526;top=163;right=584;bottom=187;align="right";dl=1;dr=1;dt=1;transparent=1;z=57};
+static22={cls="static";text="上边距：";left=382;top=189;right=440;bottom=210;align="right";dl=1;dr=1;dt=1;transparent=1;z=59};
+static23={cls="static";text="下边距：";left=526;top=189;right=584;bottom=213;align="right";dl=1;dr=1;dt=1;transparent=1;z=61};
+static24={cls="static";text="字体：";left=21;top=320;right=94;bottom=342;align="right";bgcolor=16777215;dl=1;dt=1;z=63};
+static25={cls="static";text="字体：";left=362;top=320;right=440;bottom=342;align="right";dl=1;dt=1;transparent=1;z=64};
+static3={cls="static";text="纵向偏移：";left=349;top=525;right=427;bottom=549;align="right";dl=1;dt=1;transparent=1;z=10};
+static33={cls="static";text="修改设置立即生效，不用点「确定」";left=381;top=630;right=663;bottom=656;align="center";color=10526880;db=1;dr=1;transparent=1;z=103};
+static35={cls="static";text="大小：";left=362;top=347;right=440;bottom=368;align="right";dl=1;dt=1;transparent=1;z=99};
+static36={cls="static";text="抗锯齿：";left=21;top=294;right=94;bottom=315;align="right";bgcolor=16777215;dl=1;dt=1;z=82};
+static37={cls="static";text="抗锯齿：";left=380;top=294;right=440;bottom=315;align="right";dl=1;dt=1;transparent=1;z=84};
+static38={cls="static";text="背景颜色：";left=116;top=110;right=194;bottom=134;align="right";dl=1;dr=1;dt=1;transparent=1;z=86};
+static39={cls="static";text="中 /En 字体颜色：";left=365;top=110;right=478;bottom=134;align="right";dl=1;dr=1;dt=1;transparent=1;z=88};
+static4={cls="static";text="边框颜色：";left=236;top=110;right=314;bottom=134;align="right";dl=1;dt=1;transparent=1;z=112};
+static40={cls="static";text="标点符号颜色：";left=519;top=110;right=629;bottom=134;align="right";dl=1;dr=1;dt=1;transparent=1;z=90};
+static41={cls="static";text="透明度：";left=21;top=268;right=94;bottom=289;align="right";bgcolor=16777215;dl=1;dt=1;z=101};
+static5={cls="static";text="宽度：";left=128;top=464;right=180;bottom=488;align="right";dl=1;dt=1;transparent=1;z=12};
+static6={cls="static";text="高度：";left=404;top=464;right=454;bottom=488;align="right";dl=1;dt=1;transparent=1;z=14};
+static7={cls="static";text="垂直对齐：";left=21;top=242;right=94;bottom=264;align="right";bgcolor=16777215;dl=1;dt=1;z=25};
+static8={cls="static";text="左边距：";left=36;top=163;right=94;bottom=184;align="right";bgcolor=16777215;dl=1;dt=1;z=19};
+static9={cls="static";text="水平对齐：";left=21;top=215;right=94;bottom=237;align="right";bgcolor=16777215;dl=1;dt=1;z=21};
+tbBorderWidth={cls="plus";left=203;top=492;right=387;bottom=507;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=50};
+tbHeight={cls="plus";left=453;top=464;right=673;bottom=479;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=15};
+tbIconTextPaddingBottom={cls="plus";left=584;top=190;right=674;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=62};
+tbIconTextPaddingLeft={cls="plus";left=440;top=164;right=530;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=32};
+tbIconTextPaddingRight={cls="plus";left=585;top=164;right=675;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=58};
+tbIconTextPaddingTop={cls="plus";left=440;top=190;right=530;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=60};
+tbIconTextSize={cls="plus";left=440;top=349;right=557;bottom=364;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=76};
+tbIconTextTrans={cls="plus";left=440;top=270;right=557;bottom=285;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=100};
+tbOffsetX={cls="plus";left=98;top=524;right=341;bottom=539;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=8};
+tbOffsetY={cls="plus";left=430;top=524;right=673;bottom=539;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=11};
+tbRadius={cls="plus";left=469;top=492;right=673;bottom=507;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=6};
+tbTextPaddingBottom={cls="plus";left=246;top=190;right=336;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=56};
+tbTextPaddingLeft={cls="plus";left=93;top=164;right=183;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=20};
+tbTextPaddingRight={cls="plus";left=246;top=164;right=336;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=52};
+tbTextPaddingTop={cls="plus";left=93;top=190;right=183;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=54};
+tbTextSize={cls="plus";left=93;top=349;right=210;bottom=364;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=75};
+tbTextTrans={cls="plus";left=93;top=270;right=210;bottom=285;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=98};
+tbTimeout={cls="plus";left=228;top=603;right=492;bottom=618;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dr=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=17};
+tbWidth={cls="plus";left=180;top=464;right=400;bottom=479;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=13}
+)
+/*}}*/
+
+import key.ime.stateBar;
+if(!imeBar) imeBar = key.ime.stateBar(frmSetting);
+
+frmSetting.preview.orphanWindow(true);
+frmSetting.enableDpiScaling("init");
+frmSetting.show();
+
+//在调用 importStyle 前初始化  origX,origY
+var origX,origY,origWidth,origHeight = frmSetting.preview.getPos();
+origX,origY = win.toClient(frmSetting.hwnd,origX,origY+origHeight);
+
+/*导入外观配置{{*/
+var escape2 = lambda(s,...) string.escape(s,...) : s;
+frmSetting.importStyle = function(cfg){
+	
+	//通用基础配置
+	//----------------------------------------------------------------
+	frmSetting.chkTimeout.checked = !!cfg.timeout;
+	frmSetting.tbTimeout.progressPos = cfg.timeout;
+	frmSetting.tbOffsetX.progressPos = cfg.offsetX;//可能要取消屏蔽 thumbTrack
+	frmSetting.tbOffsetY.progressPos = cfg.offsetY; //可能要取消屏蔽 thumbTrack
+	frmSetting.tbWidth.progressPos = cfg.width;
+	frmSetting.tbHeight.progressPos = cfg.height;
+	
+	var cx,cy = frmSetting.preview.dpiScale(cfg.width),frmSetting.preview.dpiScale(cfg.height); 
+	var origX2,origY2 = win.toScreen(frmSetting.hwnd,origX,origY);
+	frmSetting.preview.setPos(origX2+frmSetting.preview.dpiScale(cfg.offsetX),origY2-cy+frmSetting.preview.dpiScale(cfg.offsetY),cx,cy);
+
+	//嵌入字体文件
+	//----------------------------------------------------------------
+	if(cfg.embeddingFontData){
+		var family = fonts.addFamily(cfg.embeddingFontData);
+		if(family){
+			cfg.embeddingFontName = family.getName();
+			
+			frmSetting.embeddingFontData = cfg.embeddingFontData;
+			frmSetting.embeddingFontName = cfg.embeddingFontName;
+		}
+	}	
+
+
+	//文本与图标抗锯齿
+	//----------------------------------------------------------------	
+	frmSetting.cmbTextRenderingHint.selIndex = cfg.textRenderingHint + 1;
+	frmSetting.cmbIconTextRenderingHint.selIndex = cfg.iconTextRenderingHint + 1;
+	
+	frmSetting.preview.iconTextRenderingHint = cfg.iconTextRenderingHint;
+	frmSetting.preview.textRenderingHint = cfg.textRenderingHint; 
+		
+	//图标字体与样式（字体、边距、对齐）
+	//----------------------------------------------------------------	
+	if(cfg.iconStyle){
+		var font = cfg.iconStyle.font;
+		if(font){
+			var font = ::LOGFONT(font);
+			frmSetting.editIconTextFont.text = font.name;
+			frmSetting.tbIconTextSize.progressPos = math.abs(font.h);
+			frmSetting.chkIconTextBold.checked = font.weight>=700;
+		}
+		
+		var textPadding = cfg.iconStyle.padding;
+		if(textPadding){
+			frmSetting.tbIconTextPaddingLeft.progressPos = textPadding.left:0;
+			frmSetting.tbIconTextPaddingRight.progressPos = textPadding.right:0;
+			frmSetting.tbIconTextPaddingTop.progressPos = textPadding.top:0;
+			frmSetting.tbIconTextPaddingBottom.progressPos = textPadding.bottom:0;
+		}
+
+		var align = cfg.iconStyle.align;
+		frmSetting.radIconTextAlignLeft.checked = (align=="left" || align === null);
+		frmSetting.radIconTextAlignCenter.checked = align=="center";
+		frmSetting.radIconTextAlignRight.checked = align=="right";
+	
+		var valign = cfg.iconStyle.valign;
+		frmSetting.radIconTextVAlignTop.checked = valign=="top";
+		frmSetting.radIconTextVAlignCenter.checked = (valign=="center" || valign === null);
+		frmSetting.radIconTextVAlignBottom.checked = valign=="bottom";
+		
+		frmSetting.preview.iconStyle = table.clone(cfg.iconStyle);
+		if(frmSetting.preview.iconStyle.font) {
+			frmSetting.preview.iconStyle.font = ::LOGFONT(frmSetting.preview.iconStyle.font);
+		}
+	}
+
+	//文本（中/En）字体
+	//----------------------------------------------------------------	
+	if(cfg.font){
+		var font = ::LOGFONT(cfg.font);
+		frmSetting.editTextFont.text = font.name;
+		frmSetting.tbTextSize.progressPos = math.abs(cfg.font.h : 12);
+		frmSetting.chkTextBold.checked = font.weight>=700; 
+		frmSetting.preview.setFont(font);
+		imeBar.setFont(font); 
+	}
+	
+ 	//文本（中/En）对齐
+	//----------------------------------------------------------------
+	frmSetting.radTextAlignLeft.checked = (cfg.align=="left" || cfg.align === null);
+	frmSetting.radTextAlignCenter.checked = cfg.align=="center";
+	frmSetting.radTextAlignRight.checked = cfg.align=="right";
+
+	frmSetting.radTextVAlignTop.checked = cfg.valign=="top";
+	frmSetting.radTextVAlignCenter.checked = (cfg.valign=="center" || cfg.valign === null);
+	frmSetting.radTextVAlignBottom.checked = cfg.valign=="bottom";
+
+	frmSetting.preview.align = cfg.align;
+	frmSetting.preview.valign = cfg.valign;  
+		
+ 	//文本（中/En）边距
+	//----------------------------------------------------------------
+	if(cfg.textPadding){
+		frmSetting.tbTextPaddingLeft.progressPos = cfg.textPadding.left:0;
+		frmSetting.tbTextPaddingRight.progressPos = cfg.textPadding.right:0;
+		frmSetting.tbTextPaddingTop.progressPos = cfg.textPadding.top:0;
+		frmSetting.tbTextPaddingBottom.progressPos = cfg.textPadding.bottom:0;
+		
+		frmSetting.preview.textPadding = table.clone(cfg.textPadding);
+	}
+	
+	
+	//颜色与边框（背景色、文本色、图标色、边框颜色、以及边框样式）
+	//----------------------------------------------------------------
+	if(cfg.background === null) cfg.background = cfg.backgroundColor;  
+	if(cfg.iconColor === null) cfg.iconColor = cfg.argbColor; 
+	frmSetting.btnBackground.background = cfg.background;
+	frmSetting.btnTextColor.background = cfg.argbColor;
+	frmSetting.btnIconTextColor.background = cfg.iconColor;
+	
+	frmSetting.preview.backgroundColor = cfg.background;
+	frmSetting.preview.argbColor = cfg.argbColor; 
+	frmSetting.preview.iconColor = cfg.iconColor;
+
+	if(cfg.border){
+		frmSetting.tbBorderWidth.progressPos = cfg.border.width : 0;
+		frmSetting.btnBorderColor.background = cfg.border.color;
+		frmSetting.tbRadius.progressPos = cfg.border.radius;
+			
+		frmSetting.preview.border = table.clone(cfg.border);	
+	}
+ 	
+ 	//中英模式切换样式（切换背景色、文本色、图标色、边框颜色）
+	//----------------------------------------------------------------
+	var openStyle = cfg.openStyle;
+	if(!openStyle) {
+		frmSetting.chkClosedStyle.checked = false;
+		
+		frmSetting.btnClosedBackground.background =  cfg.background;
+		frmSetting.btnClosedIconTextColor.background = cfg.iconColor;
+		frmSetting.btnClosedTextColor.background = cfg.argbColor;
+		if(cfg.border)frmSetting.btnClosedBorderColor.background = cfg.border.color;
+	}
+	else {
+		frmSetting.chkClosedStyle.checked = true;
+	
+		var openedStyle = openStyle[1];
+		var closedStyle = openStyle[0];
+		
+		if(openedStyle){
+			if(openedStyle.background!==null) frmSetting.btnBackground.background = openedStyle.background;
+		 	if(openedStyle.argbColor!==null) frmSetting.btnTextColor.background = openedStyle.argbColor;
+		 	if(openedStyle.iconColor!==null) frmSetting.btnIconTextColor.background = openedStyle.iconColor;
+		 
+			var border = openedStyle.border;
+			if(border){
+				if(border.width!==null) frmSetting.tbBorderWidth.progressPos = border.width;
+				if(border.color!==null) frmSetting.btnBorderColor.background = border.color;
+				if(border.radius!==null) frmSetting.tbRadius.progressPos = border.radius;
+			}
+		}
+		
+		if(closedStyle){
+			if(closedStyle.background!==null) frmSetting.btnClosedBackground.background = closedStyle.background;
+		 	if(closedStyle.argbColor!==null) frmSetting.btnClosedTextColor.background = closedStyle.argbColor;
+		 	if(closedStyle.iconColor!==null) frmSetting.btnClosedIconTextColor.background = closedStyle.iconColor;
+		 	
+			frmSetting.preview.backgroundColor = closedStyle.background;
+			frmSetting.preview.argbColor = closedStyle.argbColor; 
+			frmSetting.preview.iconColor = closedStyle.iconColor;
+		
+			var border = closedStyle.border;
+			if(border){
+				if(border.width!==null) frmSetting.tbBorderWidth.progressPos = border.width;
+				if(border.color!==null) frmSetting.btnClosedBorderColor.background = border.color;
+				if(border.radius!==null) frmSetting.tbRadius.progressPos = border.radius;
+				
+				frmSetting.preview.border = table.clone( table.assign({},cfg.border,border) );
+			}
+		}
+	}
+
+ 	//字符集
+	//----------------------------------------------------------------
+	if(cfg.tipChars){
+		frmSetting.editCharsEn.text = escape2(cfg.tipChars.en);
+		frmSetting.editCharsLang.text = escape2(cfg.tipChars.lang);
+		frmSetting.editCharsFullShape.text = escape2(cfg.tipChars.fullShape);
+		frmSetting.editCharsHalfShape.text = escape2(cfg.tipChars.halfShape);
+		frmSetting.editCharsCapital.text = escape2(cfg.tipChars.capital);
+		frmSetting.editCharsSymbol.text = escape2(cfg.tipChars.symbol);
+		frmSetting.editCharsClose.text = escape2(cfg.tipChars.close) ;
+	}
+
+ 	//兼容窗口类名
+	//----------------------------------------------------------------
+	if(cfg.editorClasses){
+		var keys = table.keys(cfg.editorClasses);
+		frmSetting.editClasses.text = string.join(keys,";");
+	}
+	
+	//重绘
+	frmSetting.preview.redraw();	
+}
+
+frmSetting.importStyleFromFile = function(path){
+ 
+	var buf = string.loadBuffer(path);
+	if(!#buf) return frmSetting.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	
+	var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
+	if(!#data) return frmSetting.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	
+	try{
+		var cfg = eval(data); 
+		frmSetting.importStyle(cfg);
+		imeBar.imeSkin(cfg);		
+	}
+	catch(e){
+		frmSetting.msgboxErr(e);
+	} 
+}
+
+frmSetting.btnImport.skin(style.button);
+frmSetting.btnImport.oncommand = function(id,event){
+	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
+	if(!path) return;
+ 
+	frmSetting.importStyleFromFile(path);
+}
+
+frmSetting.onDropFiles = function(files){
+	var path = files[1];
+	if(string.endWith(path,".aardio",true)){
+		var buf = string.loadBuffer(path);
+		if(!#buf) return frmSetting.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+		
+		var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
+		if(!#data) return frmSetting.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+		
+		try{
+			var cfg = eval(data); 
+			frmSetting.importStyle(cfg);
+			imeBar.imeSkin(cfg);		
+		}
+		catch(e){
+			frmSetting.msgboxErr(e);
+		} 
+	}
+	elseif(string.endWith(path,".ttf",true)){
+		var fontFamily = fonts.addFamily(path);
+		if(fontFamily){
+			fontFamily.getName();
+			
+			frmSetting.embeddingFontData = path;
+			frmSetting.embeddingFontName = fontFamily.getName();
+			frmSetting.editIconTextFont.text = frmSetting.embeddingFontName ;
+			
+			if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+			var font = frmSetting.preview.iconStyle.font;
+			if(!font){
+				font = ::LOGFONT( { name = fontFamily.getName() } );
+			}
+			else {
+				font.name = fontFamily.getName() 
+			} 
+			
+			frmSetting.preview.iconStyle.font = ::LOGFONT(font);
+			frmSetting.preview.redraw();	
+			
+			if(!imeBar.iconStyle) imeBar.iconStyle = {}
+			imeBar.iconStyle.font = ::LOGFONT(font);
+			imeBar.redraw() 
+		}
+	}
+}
+/*}}*/
+
+/*导出外观配置{{*/
+frmSetting.exportStyle = function(){
+	var cfg = {};
+	
+	//通用基础配置
+	//----------------------------------------------------------------
+	cfg.timeout = frmSetting.tbTimeout.progressPos;
+	cfg.offsetX = frmSetting.tbOffsetX.progressPos;
+	cfg.offsetY = frmSetting.tbOffsetY.progressPos;
+	cfg.width = frmSetting.tbWidth.progressPos;
+	cfg.height = frmSetting.tbHeight.progressPos;
+	
+	//嵌入字体文件
+	//----------------------------------------------------------------
+	if( frmSetting.embeddingFontData){ 
+		var embeddingFontName = frmSetting.embeddingFontName;
+		if((string.cmp(embeddingFontName,frmSetting.editTextFont.text)==0 )
+			|| (string.cmp(embeddingFontName,frmSetting.editIconTextFont.text)==0) ){
+		
+			if(io.exist(frmSetting.embeddingFontData)){
+				cfg.embeddingFontData = string.loadBuffer(frmSetting.embeddingFontData);
+			}
+			else {
+				cfg.embeddingFontData = frmSetting.embeddingFontData;
+			}
+				
+			cfg.embeddingFontName = frmSetting.embeddingFontName;
+		}	
+	}
+
+	//文本与图标抗锯齿
+	//----------------------------------------------------------------	
+	cfg.textRenderingHint = frmSetting.cmbTextRenderingHint.selIndex - 1;
+	cfg.iconTextRenderingHint = frmSetting.cmbIconTextRenderingHint.selIndex - 1;
+
+	//图标字体与样式（字体、边距、对齐）
+	//----------------------------------------------------------------	
+	cfg.iconStyle = table.clone(frmSetting.preview.iconStyle);
+	var font = cfg.iconStyle.font;
+	if(font){
+		cfg.iconStyle.font = {
+			h = -frmSetting.tbIconTextSize.progressPos;
+			name = frmSetting.editIconTextFont.text;
+			weight = frmSetting.chkIconTextBold.checked?700:400;
+		}		
+	}
+	
+	//文本（中/En）字体
+	//----------------------------------------------------------------	
+	cfg.font = {
+		h = -frmSetting.tbTextSize.progressPos;
+		name = frmSetting.editTextFont.text;
+		weight = frmSetting.chkTextBold.checked?700:400;
+	}
+	  
+ 	//文本（中/En）对齐
+	//----------------------------------------------------------------
+	if(frmSetting.radTextAlignRight.checked ) cfg.align="right"; 
+	elseif(frmSetting.radTextAlignCenter.checked ) cfg.align="center"; 
+	else cfg.align="left"; 
+	
+	if(frmSetting.radTextVAlignBottom.checked ) cfg.valign="bottom"; 
+	elseif(frmSetting.radTextVAlignTop.checked ) cfg.valign="top"; 
+	else cfg.valign="center"; 
+	
+ 	//文本（中/En）边距
+	//----------------------------------------------------------------
+	cfg.textPadding = {
+		left = frmSetting.tbTextPaddingLeft.progressPos;
+		right = frmSetting.tbTextPaddingRight.progressPos;
+		top = frmSetting.tbTextPaddingTop.progressPos;
+		bottom = frmSetting.tbTextPaddingBottom.progressPos;
+	} 
+	
+	//颜色与边框（背景色、文本色、图标色、边框颜色、以及边框样式）
+	//----------------------------------------------------------------
+	cfg.background = frmSetting.btnBackground.backgroundColor;
+	cfg.argbColor =frmSetting.btnTextColor.backgroundColor;
+	cfg.iconColor = frmSetting.btnIconTextColor.backgroundColor;
+	
+	cfg.border = {
+ 		width = frmSetting.tbBorderWidth.progressPos;
+ 		color = frmSetting.btnBorderColor.backgroundColor;
+ 		radius = frmSetting.tbRadius.progressPos;
+ 	}
+ 	
+ 	//中英模式切换样式（切换背景色、文本色、图标色、边框颜色）
+	//----------------------------------------------------------------
+	if(frmSetting.chkClosedStyle.checked){
+		cfg.openStyle = { 
+			[1] = {
+				background = cfg.background;
+				argbColor = cfg.argbColor;
+				iconColor = cfg.iconColor;
+				border = {
+ 					width = frmSetting.tbBorderWidth.progressPos;
+ 					color = frmSetting.btnBorderColor.backgroundColor;
+ 					radius = frmSetting.tbRadius.progressPos;	
+				}
+			};
+			[0] = {
+				background = frmSetting.btnClosedBackground.backgroundColor;
+				argbColor = frmSetting.btnClosedTextColor.backgroundColor;
+				iconColor = frmSetting.btnClosedIconTextColor.backgroundColor;
+				border = {
+ 					width = frmSetting.tbBorderWidth.progressPos;
+ 					color = frmSetting.btnClosedBorderColor.backgroundColor;
+ 					radius = frmSetting.tbRadius.progressPos;	
+				}
+			};
+		} 
+		
+		//修正英文模式边框颜色为空 
+		if(cfg.openStyle[0].border.color === null){
+			cfg.openStyle[0].border.color = frmSetting.btnBorderColor.backgroundColor;
+		}	
+	}
+
+
+ 	//字符集
+	//----------------------------------------------------------------
+	cfg.tipChars = {
+		en = appUtil.unescape(frmSetting.editCharsEn.text);
+		lang = appUtil.unescape(frmSetting.editCharsLang.text);
+		fullShape = appUtil.unescape(frmSetting.editCharsFullShape.text);
+		halfShape = appUtil.unescape(frmSetting.editCharsHalfShape.text);
+		capital = appUtil.unescape(frmSetting.editCharsCapital.text);
+		symbol = appUtil.unescape(frmSetting.editCharsSymbol.text);
+		close = appUtil.unescape(frmSetting.editCharsClose.text); 
+	}
+	
+ 	//兼容窗口类名
+	//----------------------------------------------------------------
+	var strEditorClasses = frmSetting.editClasses.text;
+	if(#strEditorClasses){
+		var arrEditorClasses = string.split(strEditorClasses,";");
+		var mapEditorClasses = {};
+		for(i=1;#arrEditorClasses;1){
+			mapEditorClasses[arrEditorClasses[i]]=1;
+		}
+		
+		cfg.editorClasses = mapEditorClasses;
+	}
+
+	return cfg;
+}
+
+import fsys.dlg;
+frmSetting.btnExport.skin(style.button);
+frmSetting.btnExport.oncommand = function(id,event){
+ 
+	var path = fsys.dlg.save("ImTip 配置(*.aardio)|*.aardio||","导出样式方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
+	if(!path) return;
+ 
+	var cfg = frmSetting.exportStyle();  
+	var strImptipConfig = table.tostring(cfg);
+	
+	var data = string.loadcode("\dlg\template.aardio",{ imptipConfig = strImptipConfig } ); 
+	
+	if((string.cmp(frmSetting.editTextFont.text,"FontAwesome")==0)
+		||(string.cmp(frmSetting.editTextFont.text,"FontAwesome")==0)){
+		data = 'import fonts.fontAwesome;\r\n' + data; 
+	}
+	
+	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
+		,function(head,code){
+			var lines = {head};
+			for(i=1;#code;2040){
+				table.push(lines,string.slice(code,i,i+2040));
+			}
+			
+			table.push(lines,"'");
+			return string.join(lines,'\r\n');
+	} );
+	
+	string.save(path,data);
+}
+
+import process;
+frmSetting.exportStyleToSysConfig = function(){
+ 	var cfg = frmSetting.exportStyle(); 
+ 	
+ 	config.style.embeddingFontData = null;
+	config.style.embeddingFontName = null; 
+	config.style.openStyle = null; 
+	config.style.border = null;
+	
+ 	table.assign(config.style,cfg); 
+ 	config.style.save();
+ 	 
+ 	collectgarbage("collect");
+	process.emptyWorkingSet()	
+}
+
+frmSetting.onMinimized = function(){
+	frmSetting.exportStyleToSysConfig();
+}
+/*}}*/
+
+/*中英变换颜色{{*/
+import appUtil;
+frmSetting.chkClosedStyle.skin(style.checkBox)
+frmSetting.chkClosedStyle.oncommand = function(id,event){
+
+	frmSetting.preview.text = appUtil.unescape(owner.checked?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
+	if(owner.checked){
+		frmSetting.preview.background = frmSetting.btnClosedBackground.backgroundColor;
+		frmSetting.preview.argbColor = frmSetting.btnClosedTextColor.backgroundColor;
+		frmSetting.preview.iconColor = frmSetting.btnClosedIconTextColor.backgroundColor;
+		
+		imeBar.openStyle = {
+			[0] = {
+				background = frmSetting.btnClosedBackground.backgroundColor;
+				argbColor = frmSetting.btnClosedTextColor.backgroundColor;
+				iconColor = frmSetting.btnClosedIconTextColor.backgroundColor;
+				border = {
+ 					width = frmSetting.tbBorderWidth.progressPos;
+ 					color = frmSetting.btnClosedBorderColor.backgroundColor;
+ 					radius = frmSetting.tbRadius.progressPos;	
+				}
+			};
+			[1] = {
+				background = frmSetting.btnBackground.backgroundColor;
+				argbColor = frmSetting.btnTextColor.backgroundColor;
+				iconColor = frmSetting.btnIconTextColor.backgroundColor;
+				border = {
+ 					width = frmSetting.tbBorderWidth.progressPos;
+ 					color = frmSetting.btnBorderColor.backgroundColor;
+ 					radius = frmSetting.tbRadius.progressPos;	
+				}	
+			};
+		}
+	}
+	else {
+		frmSetting.preview.background = frmSetting.btnBackground.backgroundColor;
+		frmSetting.preview.argbColor = frmSetting.btnTextColor.backgroundColor;
+		frmSetting.preview.iconColor = frmSetting.btnIconTextColor.backgroundColor;	
+		frmSetting.preview.border = {
+ 			width = frmSetting.tbBorderWidth.progressPos;
+ 			color = frmSetting.btnBorderColor.backgroundColor;
+ 			radius = frmSetting.tbRadius.progressPos;
+ 		}
+ 		
+ 		imeBar.background = frmSetting.btnBackground.backgroundColor;
+		imeBar.argbColor = frmSetting.btnTextColor.backgroundColor;
+		imeBar.iconColor = frmSetting.btnIconTextColor.backgroundColor;	
+		imeBar.border = {
+ 			width = frmSetting.tbBorderWidth.progressPos;
+ 			color = frmSetting.btnBorderColor.backgroundColor;
+ 			radius = frmSetting.tbRadius.progressPos;
+ 		}
+		imeBar.openStyle = null;
+	}
+	
+	imeBar.imeWatch();
+	frmSetting.preview.redraw();
+}
+/*}}*/
+
+/*设置边框样式{{*/
+frmSetting.tbRadius.setTrackbarRange(0,60);
+frmSetting.tbRadius.skin(style.trackbar)
+frmSetting.tbRadius.onPosChanged = function( pos,thumbTrack ){
+	if(!thumbTrack) return;
+	
+	if(frmSetting.chkClosedStyle.checked){
+			
+		if(!imeBar.openStyle) imeBar.openStyle = {}
+		if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {}
+		if(!imeBar.openStyle[0].border) imeBar.openStyle[0].border = {}
+		if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {}
+		if(!imeBar.openStyle[1].border) imeBar.openStyle[1].border = {}
+		
+		imeBar.openStyle[0].border.width = frmSetting.tbBorderWidth.progressPos; 
+		imeBar.openStyle[0].border.radius = pos;
+		imeBar.openStyle[1].border.width = frmSetting.tbBorderWidth.progressPos; 
+		imeBar.openStyle[1].border.radius = pos;
+		
+		imeBar.openStyle[0].border.color = frmSetting.btnClosedBorderColor.backgroundColor;; 
+		imeBar.openStyle[1].border.color = frmSetting.btnBorderColor.backgroundColor;;  
+		
+		
+		imeBar.imeWatch();
+	} 
+	else {
+		imeBar.openStyle = null;
+		if(!imeBar.border) imeBar.border = {};
+		imeBar.border.radius = pos;
+		imeBar.redraw();
+	}
+	
+	if( !frmSetting.preview.border) frmSetting.preview.border = {}
+	frmSetting.preview.border.radius = pos;
+	frmSetting.preview.redraw();
+} 
+ 
+frmSetting.tbBorderWidth.setTrackbarRange(0,10);
+frmSetting.tbBorderWidth.skin(style.trackbar)
+frmSetting.tbBorderWidth.onPosChanged = function( pos,thumbTrack ){
+	if(!thumbTrack) return;
+	
+	if(frmSetting.chkClosedStyle.checked){
+			
+		if(!imeBar.openStyle) imeBar.openStyle = {}
+		if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {}
+		if(!imeBar.openStyle[0].border) imeBar.openStyle[0].border = {}
+		if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {}
+		if(!imeBar.openStyle[1].border) imeBar.openStyle[1].border = {}
+		
+		imeBar.openStyle[0].border.width = pos; 
+		imeBar.openStyle[0].border.radius = frmSetting.tbRadius.progressPos;
+		imeBar.openStyle[1].border.width = pos; 
+		imeBar.openStyle[1].border.radius = frmSetting.tbRadius.progressPos;
+		
+		imeBar.openStyle[0].border.color = frmSetting.btnClosedBorderColor.backgroundColor;; 
+		imeBar.openStyle[1].border.color = frmSetting.btnBorderColor.backgroundColor;
+		
+		imeBar.imeWatch();
+	} 
+	else {
+		imeBar.openStyle = null;
+		if(!imeBar.border) imeBar.border = {};
+		
+		imeBar.border.width = pos;
+		imeBar.redraw();
+	}
+	
+	if( !frmSetting.preview.border) frmSetting.preview.border = {}
+	frmSetting.preview.border.width = pos;
+	frmSetting.preview.redraw();
+}
+
+import win.ui.ctrl.pick
+frmSetting.btnBorderColor.skin(style.palette)
+frmSetting.btnBorderColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnBorderColor.background);
+	
+	dlg.onColorChange = function(argb){
+		frmSetting.btnBorderColor.background = argb; 
+		
+		if(frmSetting.chkClosedStyle.checked){
+			  
+			if(!imeBar.openStyle) imeBar.openStyle = {}
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {}
+			if(!imeBar.openStyle[0].border) imeBar.openStyle[0].border = {}
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {}
+			if(!imeBar.openStyle[1].border) imeBar.openStyle[1].border = {}
+			
+			imeBar.openStyle[0].border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.openStyle[0].border.radius = frmSetting.tbRadius.progressPos;
+			imeBar.openStyle[1].border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.openStyle[1].border.radius = frmSetting.tbRadius.progressPos;
+			
+			imeBar.openStyle[0].border.color = frmSetting.btnClosedBorderColor.backgroundColor; 
+			imeBar.openStyle[1].border.color = argb;
+			
+			imeBar.imeWatch();
+		}  
+		else {
+			imeBar.openStyle = null;
+			if(!imeBar.border) imeBar.border = {};
+			
+			imeBar.border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.border.radius = frmSetting.tbRadius.progressPos; 
+			imeBar.border.color = argb ;
+			
+			imeBar.redraw();
+			
+			if( !frmSetting.preview.border) frmSetting.preview.border = {}
+			frmSetting.preview.border.color = argb;
+			frmSetting.preview.redraw();
+		}
+	};
+	
+	dlg.doModal();
+}
+
+frmSetting.btnClosedBorderColor.skin(style.palette)
+frmSetting.btnClosedBorderColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnClosedBorderColor.background);
+	
+	dlg.onColorChange = function(argb){ 
+		
+		frmSetting.btnClosedBorderColor.background = argb; 
+		
+		if(frmSetting.chkClosedStyle.checked){
+			
+			//英文模式预览
+			if(!frmSetting.preview.border) frmSetting.preview.border = {};
+			frmSetting.preview.border.color = argb; 
+			frmSetting.preview.redraw();
+			 
+			if(!imeBar.openStyle) imeBar.openStyle = {}
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {}
+			if(!imeBar.openStyle[0].border) imeBar.openStyle[0].border = {}
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {}
+			if(!imeBar.openStyle[1].border) imeBar.openStyle[1].border = {}
+			
+			imeBar.openStyle[0].border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.openStyle[0].border.radius = frmSetting.tbRadius.progressPos;
+			imeBar.openStyle[1].border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.openStyle[1].border.radius = frmSetting.tbRadius.progressPos;
+			
+			imeBar.openStyle[0].border.color = argb; 
+			imeBar.openStyle[1].border.color = frmSetting.btnBorderColor.backgroundColor; 
+			imeBar.imeWatch(); 
+			
+			if( !frmSetting.preview.border) frmSetting.preview.border = {}
+			frmSetting.preview.border.color = argb;
+			frmSetting.preview.redraw();
+		}  
+		/*
+		else {
+			imeBar.openStyle = null;
+			if(!imeBar.border) imeBar.border = {};
+			
+			imeBar.border.width = frmSetting.tbBorderWidth.progressPos; 
+			imeBar.border.radius = frmSetting.tbRadius.progressPos; 
+			imeBar.border.color = frmSetting.btnBorderColor.backgroundColor ;
+			imeBar.imeWatch(); 
+		}
+		*/
+	};
+	
+	dlg.doModal();
+}
+/*}}*/
+
+/*设置背景颜色{{*/
+
+frmSetting.btnClosedBackground.skin(style.palette)
+frmSetting.btnClosedBackground.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnClosedBackground.background);
+	
+	dlg.onColorChange = function(argb){ 
+		
+		frmSetting.btnClosedBackground.background = argb; 
+		
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.preview.background = argb;
+			frmSetting.preview.redraw();
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].background = frmSetting.btnBackground.backgroundColor; 
+			imeBar.openStyle[0].background = argb; 
+			imeBar.imeWatch();
+		}  
+		
+	};
+	
+	dlg.doModal();
+}
+
+
+frmSetting.btnBackground.skin(style.palette)
+frmSetting.btnBackground.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnBackground.background);
+	
+	dlg.onColorChange = function(argb){ 
+		
+		frmSetting.btnBackground.background = argb;
+		
+		if(frmSetting.chkClosedStyle.checked){
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].background = argb; 
+			imeBar.openStyle[0].background = frmSetting.btnClosedBackground.backgroundColor; 
+			imeBar.imeWatch();
+		} 
+		else {
+			frmSetting.preview.background = argb;
+			frmSetting.preview.redraw();
+			
+			imeBar.background = argb;
+			imeBar.redraw(); 	
+		} 
+		
+	};
+	
+	dlg.doModal();
+}
+/*}}*/
+
+/*设置中英模式字体颜色{{*/
+frmSetting.btnTextColor.skin(style.palette)
+frmSetting.btnTextColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnTextColor.background);
+	
+	dlg.onColorChange = function(argb){ 
+		frmSetting.btnTextColor.background = argb;
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.preview.argbColor = argb;
+			frmSetting.preview.redraw();
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].argbColor = argb 
+			imeBar.openStyle[0].argbColor = frmSetting.btnClosedTextColor.backgroundColor;; 
+			
+			imeBar.imeWatch();
+		} 
+		else {
+			frmSetting.preview.argbColor = argb;
+			frmSetting.preview.redraw();
+			
+			imeBar.argbColor = argb;
+			imeBar.redraw(); 
+		}
+	};
+	
+	dlg.doModal();
+}
+
+frmSetting.btnClosedTextColor.skin(style.palette)
+frmSetting.btnClosedTextColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnClosedTextColor.background);
+	
+	dlg.onColorChange = function(argb){ 
+		
+		frmSetting.btnClosedTextColor.background = argb; 
+		
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.preview.argbColor = argb;
+			frmSetting.preview.redraw();
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].argbColor = frmSetting.btnTextColor.backgroundColor; 
+			imeBar.openStyle[0].argbColor = argb; 
+			
+			imeBar.imeWatch();
+		}  
+		
+	};
+	
+	dlg.doModal();
+}
+/*}}*/
+
+/*设置标点符号颜色{{*/
+
+frmSetting.btnClosedIconTextColor.skin(style.palette)
+frmSetting.btnClosedIconTextColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnClosedIconTextColor.background);
+	
+	dlg.onColorChange = function(argb){ 
+		
+		frmSetting.btnClosedIconTextColor.background = argb; 
+		
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.preview.iconColor = argb;
+			frmSetting.preview.redraw();
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].iconColor = frmSetting.btnIconTextColor.backgroundColor; 
+			imeBar.openStyle[0].iconColor = argb; 
+			
+			imeBar.imeWatch();
+		}  
+		
+	};
+	
+	dlg.doModal();
+}
+
+
+frmSetting.btnIconTextColor.skin(style.palette)
+frmSetting.btnIconTextColor.oncommand = function(id,event){
+	var dlg = win.ui.ctrl.pick(frmSetting);
+	dlg.setColor(frmSetting.btnIconTextColor.background);
+	
+	dlg.onColorChange = function(argb){ 
+		frmSetting.btnIconTextColor.background = argb;
+		
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.preview.iconColor = argb;
+			frmSetting.preview.redraw();
+			
+			if(!imeBar.openStyle) imeBar.openStyle = {} 
+			if(!imeBar.openStyle[1]) imeBar.openStyle[1] = {};
+			if(!imeBar.openStyle[0]) imeBar.openStyle[0] = {};
+			 
+			imeBar.openStyle[1].iconColor = argb; 
+			imeBar.openStyle[0].iconColor = frmSetting.btnClosedIconTextColor.backgroundColor; 
+			
+			imeBar.imeWatch();
+		}  
+		else{
+			frmSetting.preview.iconColor = argb;
+			frmSetting.preview.redraw();
+			
+			imeBar.iconColor = argb;
+			imeBar.redraw(); 
+		}
+		
+		
+	};
+	
+	dlg.doModal();
+}
+/*}}*/
+
+/*自定义字符{{*/
+import appUtil;
+var onTipCharsChange = function(){
+	var this = owner;
+	
+	imeBar.tipChars = {
+		en = appUtil.unescape(frmSetting.editCharsEn.text);
+		lang = appUtil.unescape(frmSetting.editCharsLang.text);
+		fullShape = appUtil.unescape(frmSetting.editCharsFullShape.text);
+		halfShape = appUtil.unescape(frmSetting.editCharsHalfShape.text);
+		capital = appUtil.unescape(frmSetting.editCharsCapital.text);
+		symbol = appUtil.unescape(frmSetting.editCharsSymbol.text);
+		close = appUtil.unescape(frmSetting.editCharsClose.text); 
+	}
+	
+	if(frmSetting.chkClosedStyle.checked){
+		frmSetting.preview.text = imeBar.tipChars.en;
+	}
+	else {
+		frmSetting.preview.text = imeBar.tipChars.lang
+	}
+	
+	if((owner!=frmSetting.editCharsEn.editBox)&&(owner!=frmSetting.editCharsLang.editBox)){
+		frmSetting.preview.iconText =  appUtil.unescape(owner.text);
+	} 	
+}
+
+frmSetting.editCharsEn.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsLang.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsFullShape.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsHalfShape.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsCapital.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsSymbol.editBox.onChange = onTipCharsChange;
+frmSetting.editCharsClose.editBox.onChange = onTipCharsChange;
+
+var onEditIconCharsFocusGot = function(){
+	frmSetting.preview.iconText =  appUtil.unescape(owner.text);
+}
+
+frmSetting.editCharsFullShape.editBox.onFocusGot = onEditIconCharsFocusGot;
+frmSetting.editCharsHalfShape.editBox.onFocusGot = onEditIconCharsFocusGot;
+frmSetting.editCharsCapital.editBox.onFocusGot = onEditIconCharsFocusGot;
+frmSetting.editCharsSymbol.editBox.onFocusGot = onEditIconCharsFocusGot;
+frmSetting.editCharsClose.editBox.onFocusGot = onEditIconCharsFocusGot;
+
+frmSetting.lnkCharsSymbol.skin(style.link) 
+frmSetting.lnkCharsSymbol.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsSymbol.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsEn.skin(style.link) 
+frmSetting.lnkCharsEn.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editTextFont.text)){
+		frmChild.close();
+		frmSetting.editTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsEn.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsLang.skin(style.link) 
+frmSetting.lnkCharsLang.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editTextFont.text)){
+		frmChild.close();
+		frmSetting.editTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsLang.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsHalfShape.skin(style.link) 
+frmSetting.lnkCharsHalfShape.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+		frmSetting.editIconTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsHalfShape.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsFullShape.skin(style.link) 
+frmSetting.lnkCharsFullShape.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+		frmSetting.editIconTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsFullShape.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsSymbol.skin(style.link) 
+frmSetting.lnkCharsSymbol.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+		frmSetting.editIconTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsSymbol.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsCapital.skin(style.link) 
+frmSetting.lnkCharsCapital.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+		frmSetting.editIconTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsCapital.text = ret;
+	} 
+}
+
+frmSetting.lnkCharsClose.skin(style.link) 
+frmSetting.lnkCharsClose.oncommand = function(id,event){
+	
+	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
+		frmChild.close();
+		frmSetting.editIconTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
+		return;
+	}
+	
+	var ret = frmChild.doModal();
+	if(ret){
+		frmSetting.editCharsClose.text = ret;
+	} 
+}
+/*}}*/
+
+/*中英文本边距{{*/
+frmSetting.tbTextPaddingLeft.setTrackbarRange(0,60);
+frmSetting.tbTextPaddingLeft.skin(style.trackbar)
+frmSetting.tbTextPaddingLeft.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.textPadding) frmSetting.preview.textPadding = {};
+	frmSetting.preview.textPadding.left = pos;
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.textPadding) imeBar.textPadding = {};
+	imeBar.textPadding.left = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbTextPaddingRight.setTrackbarRange(0,60);
+frmSetting.tbTextPaddingRight.skin(style.trackbar)
+frmSetting.tbTextPaddingRight.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.textPadding) frmSetting.preview.textPadding = {};
+	frmSetting.preview.textPadding.right = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.textPadding) imeBar.textPadding = {};
+	imeBar.textPadding.right = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbTextPaddingTop.setTrackbarRange(0,60);
+frmSetting.tbTextPaddingTop.skin(style.trackbar)
+frmSetting.tbTextPaddingTop.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.textPadding) frmSetting.preview.textPadding = {};
+	frmSetting.preview.textPadding.top = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.textPadding) imeBar.textPadding = {};
+	imeBar.textPadding.right = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbTextPaddingBottom.setTrackbarRange(0,60);
+frmSetting.tbTextPaddingBottom.skin(style.trackbar)
+frmSetting.tbTextPaddingBottom.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.textPadding) frmSetting.preview.textPadding = {};
+	frmSetting.preview.textPadding.bottom = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.textPadding) imeBar.textPadding = {};
+	imeBar.textPadding.right = pos;
+	imeBar.redraw();
+}
+/*}}*/
+
+/*图标符号边距{{*/
+frmSetting.tbIconTextPaddingLeft.setTrackbarRange(0,60);
+frmSetting.tbIconTextPaddingLeft.skin(style.trackbar)
+frmSetting.tbIconTextPaddingLeft.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	
+	frmSetting.preview.iconStyle.padding.left = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.iconStyle) imeBar.iconStyle = {}
+	imeBar.iconStyle.padding.left = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbIconTextPaddingRight.setTrackbarRange(0,60);
+frmSetting.tbIconTextPaddingRight.skin(style.trackbar)
+frmSetting.tbIconTextPaddingRight.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	
+	frmSetting.preview.iconStyle.padding.right = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.iconStyle) imeBar.iconStyle = {}
+	imeBar.iconStyle.padding.right = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbIconTextPaddingTop.setTrackbarRange(0,60);
+frmSetting.tbIconTextPaddingTop.skin(style.trackbar)
+frmSetting.tbIconTextPaddingTop.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	frmSetting.preview.iconStyle.padding.top = pos;
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle) imeBar.iconStyle = {}
+	imeBar.iconStyle.padding.top = pos;
+	imeBar.redraw();
+}
+
+frmSetting.tbIconTextPaddingBottom.setTrackbarRange(0,60);
+frmSetting.tbIconTextPaddingBottom.skin(style.trackbar)
+frmSetting.tbIconTextPaddingBottom.onPosChanged = function( pos,thumbTrack ){ 
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	frmSetting.preview.iconStyle.padding.bottom = pos;
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.iconStyle) imeBar.iconStyle = {}
+	imeBar.iconStyle.padding.bottom = pos;
+	imeBar.redraw();
+}
+/*}}*/
+
+/*调整字符大小{{*/
+frmSetting.tbTextSize.setTrackbarRange(6,72);
+frmSetting.tbTextSize.skin(style.trackbar)
+frmSetting.tbTextSize.onPosChanged = function( pos,thumbTrack ){ 
+	
+	if(!thumbTrack){
+		return;
+	}
+	var font = frmSetting.preview.getFont();
+	
+	font.h = -pos;
+	frmSetting.preview.setFont(font); 
+	frmSetting.preview.redraw();	
+	
+	imeBar.setFont(font); 
+	imeBar.redraw();	
+}
+
+frmSetting.tbIconTextSize.setTrackbarRange(6,72);
+frmSetting.tbIconTextSize.skin(style.trackbar)
+frmSetting.tbIconTextSize.onPosChanged = function( pos,thumbTrack ){ 
+	if(!thumbTrack){
+		return;
+	}
+	
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	var font = frmSetting.preview.iconStyle.font;
+	if(!font){
+		frmSetting.editIconTextFont.editBox.showErrorTip("无效字体");
+		return;
+	}
+	
+	font.h = -pos;
+	frmSetting.preview.iconStyle.font = ::LOGFONT(font);
+	frmSetting.preview.redraw();	
+	
+	if(!imeBar.iconStyle) imeBar.iconStyle = {}
+	imeBar.iconStyle.font = ::LOGFONT(font);
+	imeBar.redraw();
+}
+/*}}*/
+
+/*调整字符透明度{{*/
+frmSetting.tbTextTrans.setTrackbarRange(0,255);
+frmSetting.tbTextTrans.skin(style.trackbar)
+frmSetting.tbTextTrans.onPosChanged = function( pos,thumbTrack ){ 
+	var clr = frmSetting.btnTextColor.backgroundColor;
+	
+	var r,g,b = gdi.getRgba(clr);
+	clr = gdi.ARGB(r,g,b,255-pos);
+	frmSetting.btnTextColor.background = clr;
+	 
+	frmSetting.preview.argbColor = clr;
+	frmSetting.preview.redraw();	
+	
+	imeBar.argbColor = clr;
+	imeBar.redraw();
+}
+
+frmSetting.tbIconTextTrans.setTrackbarRange(0,255);
+frmSetting.tbIconTextTrans.skin(style.trackbar)
+frmSetting.tbIconTextTrans.onPosChanged = function( pos,thumbTrack ){ 
+	var clr = frmSetting.btnTextColor.backgroundColor;
+	
+	var r,g,b = gdi.getRgba(clr);
+	clr = gdi.ARGB(r,g,b,255-pos);
+	frmSetting.btnIconTextColor.background = clr;
+	 
+	frmSetting.preview.iconColor = clr;
+	frmSetting.preview.redraw();	
+	
+	imeBar.iconColor = clr;
+	imeBar.redraw();	
+}
+/*}}*/
+
+/*设置字符粗体{{*/
+frmSetting.chkIconTextBold.skin(style.checkBox)
+frmSetting.chkIconTextBold.oncommand = function(id,event){
+	var font = frmSetting.preview.iconFont;
+	if(!font){
+		frmSetting.editIconTextFont.editBox.showErrorTip("无效字体");
+		return;
+	}
+	
+	font.weight = owner.checked ? 700 : 400;
+	frmSetting.preview.iconFont = ::LOGFONT(font);
+	frmSetting.preview.redraw();	
+	 
+	imeBar.iconFont = ::LOGFONT(font);
+	imeBar.redraw();
+}
+
+frmSetting.chkTextBold.skin(style.checkBox)
+frmSetting.chkTextBold.oncommand = function(id,event){ return;
+	var font = frmSetting.preview.getFont();
+	
+	font.weight = owner.checked ? 700 : 400;
+	frmSetting.preview.setFont(font); 
+	frmSetting.preview.redraw();	
+	
+	imeBar.setFont(font); 
+	imeBar.redraw();	
+}
+/*}}*/
+
+/*设置超时关闭{{*/
+frmSetting.chkTimeout.skin(style.checkBox);
+frmSetting.tbTimeout.setTrackbarRange(0,30);
+frmSetting.tbTimeout.skin(style.trackbar)
+frmSetting.tbTimeout.onPosChanged = function( pos,thumbTrack ){ 
+	if(thumbTrack) frmSetting.chkTimeout.checked = !!pos;
+	imeBar.timeout = pos;
+	frmSetting.lbTimeout.text = pos + "秒"; 	
+}
+
+frmSetting.chkTimeout.oncommand = function( id,event ){
+	if(!frmSetting.chkTimeout.checked){
+		frmSetting.tbTimeout.progressPos = 0;
+	}
+	elseif(!frmSetting.tbTimeout.progressPos){
+		frmSetting.tbTimeout.progressPos = 2;
+	} 
+	
+	imeBar.timeout = frmSetting.tbTimeout.progressPos;	
+}
+
+/*}}*/
+
+/*窗口偏移{{*/
+frmSetting.tbOffsetX.setTrackbarRange(-300,300);
+frmSetting.tbOffsetX.skin(style.trackbar)
+frmSetting.tbOffsetX.onPosChanged = function( pos,thumbTrack ){  
+	if(!thumbTrack) return;
+	
+	var x,y = frmSetting.preview.getPos();
+	var origX2,origY2 = win.toScreen(frmSetting.hwnd,origX,origY)
+	frmSetting.preview.setPos(origX2 + frmSetting.dpiScale(pos),y); 
+	
+	imeBar.offsetX = pos;
+}
+
+frmSetting.tbOffsetY.setTrackbarRange(-300,300);
+frmSetting.tbOffsetY.skin(style.trackbar)
+frmSetting.tbOffsetY.onPosChanged = function( pos,thumbTrack ){  
+	if(!thumbTrack) return;
+	
+	var x,y,cx,cy = frmSetting.preview.getPos();
+	var origX2,origY2 = win.toScreen(frmSetting.hwnd,origX,origY)
+	frmSetting.preview.setPos(x,(origY2 - cy) + frmSetting.dpiScale(pos)); 
+	
+	imeBar.offsetY = pos;
+}
+/*}}*/
+
+/*窗口大小{{*/
+frmSetting.tbWidth.setTrackbarRange(0,300);
+frmSetting.tbWidth.skin(style.trackbar)
+frmSetting.tbWidth.onPosChanged = function( pos,thumbTrack ){ 
+	if(!thumbTrack) return;
+	 
+	frmSetting.preview.width = frmSetting.dpiScale( pos ); 
+	frmSetting.preview.redraw();
+	
+	imeBar.width = frmSetting.dpiScale(pos); 
+}
+
+frmSetting.tbHeight.setTrackbarRange(0,300);
+frmSetting.tbHeight.skin(style.trackbar)
+frmSetting.tbHeight.onPosChanged = function( pos,thumbTrack ){ 
+	if(!thumbTrack) return;
+	
+	var x,y,cx,cy = frmSetting.preview.getPos();
+	
+	var height = frmSetting.dpiScale( pos );
+	y = y+cy - height;
+	
+	frmSetting.preview.setPos(x,y,cx,height);
+	frmSetting.preview.redraw();
+	
+	imeBar.height = frmSetting.dpiScale(pos);
+}
+/*}}*/
+
+/*字符对齐{{*/
+frmSetting.radTextAlignLeft.skin(style.radio);
+frmSetting.radTextAlignLeft.radioGroup = "text.align"
+frmSetting.radTextAlignCenter.skin(style.radio);
+frmSetting.radTextAlignCenter.radioGroup = "text.align"
+frmSetting.radTextAlignRight.skin(style.radio);
+frmSetting.radTextAlignRight.radioGroup = "text.align"
+
+frmSetting.radIconTextAlignLeft.skin(style.radio);
+frmSetting.radIconTextAlignLeft.radioGroup = "iconText.align"
+frmSetting.radIconTextAlignCenter.skin(style.radio);
+frmSetting.radIconTextAlignCenter.radioGroup = "iconText.align"
+frmSetting.radIconTextAlignRight.skin(style.radio);
+frmSetting.radIconTextAlignRight.radioGroup = "iconText.align"
+
+frmSetting.radIconTextVAlignTop.skin(style.radio);
+frmSetting.radIconTextVAlignTop.radioGroup = "text.valign"
+frmSetting.radIconTextVAlignCenter.skin(style.radio);
+frmSetting.radIconTextVAlignCenter.radioGroup = "text.valign"
+frmSetting.radIconTextVAlignBottom.skin(style.radio);
+frmSetting.radIconTextVAlignBottom.radioGroup = "text.valign"
+
+frmSetting.radTextVAlignTop.skin(style.radio);
+frmSetting.radTextVAlignTop.radioGroup = "iconText.valign"
+frmSetting.radTextVAlignCenter.skin(style.radio);
+frmSetting.radTextVAlignCenter.radioGroup = "iconText.valign"
+frmSetting.radTextVAlignBottom.skin(style.radio);
+frmSetting.radTextVAlignBottom.radioGroup = "iconText.valign"
+
+frmSetting.radTextAlignLeft.oncommand = function(id,event){
+	frmSetting.preview.align = "left";
+	frmSetting.preview.redraw();
+	
+	imeBar.align = "left";
+	imeBar.redraw();
+}
+
+frmSetting.radTextAlignCenter.oncommand = function(id,event){
+	frmSetting.preview.align = "center";
+	frmSetting.preview.redraw();	
+	
+	imeBar.align = "center";
+	imeBar.redraw();
+}
+
+frmSetting.radTextAlignRight.oncommand = function(id,event){
+	frmSetting.preview.align = "right";
+	frmSetting.preview.redraw();
+	
+	imeBar.align = "right";
+	imeBar.redraw();
+}
+
+frmSetting.radTextVAlignTop.oncommand = function(id,event){
+	frmSetting.preview.valign = "top";
+	frmSetting.preview.redraw();
+	
+	imeBar.valign = "top";
+	imeBar.redraw();
+}
+
+frmSetting.radTextVAlignCenter.oncommand = function(id,event){
+	frmSetting.preview.valign = "center";
+	frmSetting.preview.redraw();
+	
+	imeBar.valign = "center";	
+	imeBar.redraw();
+}
+
+frmSetting.radTextVAlignBottom.oncommand = function(id,event){
+	frmSetting.preview.valign = "bottom";
+	frmSetting.preview.redraw();
+	
+	imeBar.valign = "bottom";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextAlignLeft.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.align = "left";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.align = "left";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextAlignCenter.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.align = "center";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.align = "center";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextAlignRight.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.align = "right";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.align = "right";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextVAlignTop.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.valign = "top";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.valign = "top";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextVAlignCenter.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.valign = "center";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.valign = "center";
+	imeBar.redraw();
+}
+
+frmSetting.radIconTextVAlignBottom.oncommand = function(id,event){
+	if(!frmSetting.preview.iconStyle)frmSetting.preview.iconStyle={};
+	frmSetting.preview.iconStyle.valign = "bottom";
+	frmSetting.preview.redraw();
+	
+	if(!imeBar.iconStyle)imeBar.iconStyle={};
+	imeBar.iconStyle.valign = "bottom";
+	imeBar.redraw();
+}
+/*}}*/
+
+/*字体{{*/
+import win.dlg.font;
+frmSetting.btnTextFont.skin(style.transButton)
+frmSetting.btnTextFont.oncommand = function(id,event){
+	var dlg = win.dlg.font(frmSetting);
+	dlg.logFont = frmSetting.preview.getFont();
+	var font = dlg.chooseFont();
+	if(font){
+		frmSetting.editTextFont.text = font.name;
+		frmSetting.tbTextSize.progressPos = font.getPointSize(,frmSetting.hwnd);
+		frmSetting.chkTextBold.checked = font.weight>=700;
+		
+		frmSetting.preview.setFont(font);
+	
+		imeBar.setFont(font);
+		imeBar.redraw();
+	}
+}
+
+import fsys.dlg;
+frmSetting.btnIconTextFont.skin(style.transButton)
+frmSetting.btnIconTextFont.oncommand = function(id,event){
+	var path = fsys.dlg.open("图标字体(*.ttf)|*.ttf|","导入图标字体文件（可直接拖动 *.ttf 字体到「设置外观」窗口）"); 
+	if(path){
+		
+		var fontFamily = fonts.addFamily(path);
+		if(fontFamily){
+				frmSetting.embeddingFontData = cfg.embeddingFontData;
+			frmSetting.embeddingFontName = cfg.embeddingFontName;
+			
+			frmSetting.embeddingFontData = path; 
+			frmSetting.embeddingFontName = fontFamily.getName();
+			frmSetting.editIconTextFont.text = frmSetting.embeddingFontName;
+			
+			if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+			var font = frmSetting.preview.iconStyle.font;
+			if(!font){
+				font = ::LOGFONT( { name = fontFamily.getName() } );
+			}
+			else {
+				font.name = fontFamily.getName() 
+			} 
+			
+			frmSetting.preview.iconStyle.font = ::LOGFONT(font);
+			frmSetting.preview.redraw();	
+			
+			if(!imeBar.iconStyle) imeBar.iconStyle = {}
+			imeBar.iconStyle.font = ::LOGFONT(font);
+			imeBar.redraw() 
+		}
+	}
+}
+
+frmSetting.editIconTextFont.editBox.onChange = function(){
+ 
+	if(!#owner.text) return; 
+	
+	if(!frmSetting.preview.iconStyle) frmSetting.preview.iconStyle = {}
+	
+	var font = frmSetting.preview.iconFont;
+	if(!font) font = ::LOGFONT( { name = owner.text } ); 
+	else font.name = owner.text;
+	
+	frmSetting.preview.iconFont = font;
+	frmSetting.preview.redraw();
+				 
+	imeBar.iconStyle.iconFont = font;
+	imeBar.redraw();
+}
+
+frmSetting.editTextFont.editBox.onChange = function(){ 
+	if(!#owner.text) return; 
+	var font = ::LOGFONT({
+		name=owner.text;
+		h=-frmSetting.tbTextSize.progressPos;
+		weight=frmSetting.chkTextBold.checked?700:400
+	} );
+	
+	frmSetting.preview.setFont(font); 
+	frmSetting.preview.redraw();	
+	 
+	imeBar.setFont(font); 
+	imeBar.redraw();	
+}
+
+/*}}*/
+
+/*抗锯齿{{*/
+frmSetting.cmbTextRenderingHint.onListChange= function(){ 
+	frmSetting.preview.textRenderingHint = owner.selIndex - 1;	
+	frmSetting.preview.redraw();
+	
+	imeBar.textRenderingHint = owner.selIndex - 1;	
+	imeBar.redraw();
+}
+
+frmSetting.cmbIconTextRenderingHint.onListChange= function(){ 
+	frmSetting.preview.iconTextRenderingHint = owner.selIndex - 1;
+	frmSetting.preview.redraw();
+	
+	imeBar.iconTextRenderingHint = owner.selIndex - 1;	
+	imeBar.redraw();
+}
+/*}}*/
+
+/*兼容类名{{*/
+frmSetting.editClasses.editBox.onChange = function(){ 
+	var strEditorClasses = frmSetting.editClasses.text;
+	if(#strEditorClasses){
+		var arrEditorClasses = string.split(strEditorClasses,";");
+		var mapEditorClasses = {};
+		for(i=1;#arrEditorClasses;1){
+			mapEditorClasses[arrEditorClasses[i]]=1;
+		}
+		
+		imeBar.editorClasses = mapEditorClasses;
+	}
+}
+/*}}*/
+
+/*重置{{*/
+frmSetting.btnReset.skin(style.button);
+frmSetting.btnReset.oncommand = function(id,event){
+	var cfg = {
+		timeout=2;
+		backgroundColor=3852913392;
+		argbColor=4278190080;
+		align="left";
+		valign="center";
+		iconStyle={align="right";font={name="FontAwesome";h=-12;weight=400};padding={top=0;right=11;left=0;bottom=0}};
+		tipChars={fullShape='\uF1DB';close='\uF05E';symbol="。";en="英";capital='\uF031';lang="中";halfShape='\uF186'};
+		font={name="Segoe UI";h=-12;weight=400}; 
+		textRenderingHint=3;  
+		iconTextRenderingHint=3; 
+		iconColor=4278190080;
+		width=56;
+		height=28;
+		textPadding={top=0;right=0;left=13;bottom=0};
+		offsetX=30;
+		offsetY=0;
+		border={radius=11};
+		editorClasses = {
+			["_WwG"]=1;["AVL_AVView"]=1;["OneNote::DocumentCanvas"]=1;["EXCEL6"]=1;["EXCEL7"]=1;["IMTIP_SETTING_FORM"]=1
+		};
+	}
+ 
+	frmSetting.importStyle(cfg,frmSetting.preview);
+	imeBar.imeSkin(cfg);
+}
+/*}}*/
+
+/*开机启动{{*/
+frmSetting.chkSysRun.skin(style.checkBox);
+frmSetting.chkSysRun.oncommand = function( id,event ){ 
+	import sys.run;
+	if(owner.checked){
+		sys.run("ImTip").register();
+	}
+	else {
+		sys.run("ImTip").delete()
+	} 
+	
+	config.setting.sysRun = owner.checked;
+	config.setting.save();
+}
+frmSetting.chkSysRun.checked = config.setting.sysRun;
+frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED;
+/*}}*/
+
+if(!config.style.width){
+	frmSetting.btnReset.oncommand();
+}
+else {
+	frmSetting.importStyle(config.style); 
+}
+
+frmSetting.saveConfigBeforeDestroy = function(){
+ 	frmSetting.exportStyleToSysConfig();
+	mainSettingForm = null;
+}
+mainSettingForm = frmSetting;
+
+win.loopMessage();

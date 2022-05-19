@@ -1,0 +1,15 @@
+﻿//appUtil 应用函数
+import string.xml;
+namespace appUtil;
+
+var ncr = ..string.xml.ncr;
+unescape = function(s){
+	s = ncr(s);
+	var hex = ..string.match(s,"\x\x\x\x+");   
+	if(hex) return ..string.unescape( ..string.format("\U%06x",tonumber(hex,16) ) ); 
+	return s; 
+} 
+
+/**intellisense(appUtil)
+unescape(__) = 还原图标字体转义符，\n支持 NCR（Numeric Character Reference）编码
+end intellisense**/

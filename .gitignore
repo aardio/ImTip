@@ -1,0 +1,7 @@
+﻿/.build/default.main.aardio
+/.build/default.Manifest.xml
+/.build/update-maker.table
+/.build/update-maker.aardio
+dist/
+.build/default.init.aardio
+.build/mp.lock
