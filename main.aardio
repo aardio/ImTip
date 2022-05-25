@@ -1,5 +1,6 @@
 import win.ui;
 import win.ui.atom;
+import fonts.fontAwesome
 /*DSG{{*/
 mainForm = win.form(text="ImTip - 通用输入法提示工具";right=759;bottom=469)
 mainForm.add()
