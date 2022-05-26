@@ -12,10 +12,12 @@ btnClosedBackground={cls="plus";text=" ";left=206;top=111;right=238;bottom=126;d
 btnClosedBorderColor={cls="plus";text=" ";left=325;top=111;right=357;bottom=126;dl=1;dt=1;edge=1;notify=1;z=111};
 btnClosedIconTextColor={cls="plus";text=" ";left=629;top=111;right=661;bottom=126;dr=1;dt=1;edge=1;notify=1;z=91};
 btnClosedTextColor={cls="plus";text=" ";left=486;top=111;right=518;bottom=126;dr=1;dt=1;edge=1;notify=1;z=89};
+btnCopy={cls="plus";left=635;top=638;right=660;bottom=660;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0C5';notify=1;textPadding={left=25};z=117};
 btnExport={cls="plus";text="导出";left=580;top=20;right=655;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=97};
 btnIconTextColor={cls="plus";text=" ";left=618;top=270;right=650;bottom=285;dr=1;dt=1;edge=1;notify=1;z=40};
 btnIconTextFont={cls="plus";text="导入 ...";left=606;top=319;right=671;bottom=343;align="left";color=8388608;notify=1;textPadding={left=5};z=65};
 btnImport={cls="plus";text="导入";left=499;top=20;right=574;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=96};
+btnPaste={cls="plus";left=660;top=638;right=685;bottom=660;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=116};
 btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=95};
 btnTextColor={cls="plus";text=" ";left=268;top=270;right=300;bottom=285;dl=1;dt=1;edge=1;notify=1;z=30};
 btnTextFont={cls="plus";text="选择 ...";left=270;top=319;right=335;bottom=343;align="left";color=8388608;notify=1;textPadding={left=5};z=69};
@@ -44,10 +46,11 @@ groupbox5={cls="groupbox";text="字符 /  字体图标";left=17;top=380;right=68
 lbEditorClasses={cls="static";text="兼容窗口类名：";left=-21;top=562;right=106;bottom=582;align="right";dl=1;dt=1;transparent=1;z=94};
 lbIconTrans={cls="static";text="透明度：";left=362;top=268;right=440;bottom=289;align="right";dl=1;dt=1;transparent=1;z=78};
 lbInterval={cls="static";text="毫秒";left=385;top=588;right=681;bottom=609;bgcolor=16777215;db=1;dr=1;z=115};
+lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=338;top=640;right=620;bottom=661;align="right";color=10526880;db=1;dr=1;transparent=1;z=103};
 lbTimeout={cls="static";text="秒";left=502;top=614;right=576;bottom=634;bgcolor=16777215;db=1;dr=1;z=18};
 lbTrans={cls="static";text="大小：";left=20;top=348;right=93;bottom=369;align="right";bgcolor=16777215;dl=1;dt=1;z=77};
 lnkCharsCapital={cls="plus";text="大写:";left=502;top=398;right=540;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=109};
-lnkCharsClose={cls="plus";text='\uF05E:';left=598;top=398;right=620;bottom=422;align="right";color=8388608;font=LOGFONT(h=-13;name='imtip');iconStyle={font=LOGFONT(name='imtip')};notify=1;valign="bottom";z=110};
+lnkCharsClose={cls="plus";text='\uF05E:';left=598;top=398;right=620;bottom=422;align="right";color=8388608;font=LOGFONT(h=-13;name='imtip');notify=1;valign="bottom";z=110};
 lnkCharsEn={cls="plus";text="英:";left=103;top=398;right=128;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=107};
 lnkCharsFullShape={cls="plus";text="全角:";left=186;top=398;right=224;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=106};
 lnkCharsHalfShape={cls="plus";text="半角:";left=281;top=398;right=319;bottom=422;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=105};
@@ -86,7 +89,6 @@ static24={cls="static";text="字体：";left=20;top=321;right=93;bottom=343;alig
 static25={cls="static";text="字体：";left=362;top=321;right=440;bottom=343;align="right";dl=1;dt=1;transparent=1;z=64};
 static26={cls="static";text="检测速度：";left=-8;top=588;right=106;bottom=608;align="right";dl=1;dt=1;transparent=1;z=114};
 static3={cls="static";text="纵向偏移：";left=349;top=525;right=427;bottom=549;align="right";dl=1;dt=1;transparent=1;z=10};
-static33={cls="static";text="修改设置立即生效，不用点「确定」";left=383;top=641;right=665;bottom=662;align="center";color=10526880;db=1;dr=1;transparent=1;z=103};
 static35={cls="static";text="大小：";left=362;top=348;right=440;bottom=369;align="right";dl=1;dt=1;transparent=1;z=99};
 static36={cls="static";text="抗锯齿：";left=20;top=294;right=93;bottom=315;align="right";bgcolor=16777215;dl=1;dt=1;z=82};
 static37={cls="static";text="抗锯齿：";left=380;top=294;right=440;bottom=315;align="right";dl=1;dt=1;transparent=1;z=84};
@@ -352,7 +354,9 @@ frmSetting.importStyleFromFile = function(path){
 	try{
 		var cfg = eval(data); 
 		frmSetting.importStyle(cfg);
-		imeBar.imeSkin(cfg);		
+		imeBar.imeSkin(cfg);	
+		
+		frmSetting.lbStatus.text = "已自文件导入配置";		
 	}
 	catch(e){
 		frmSetting.msgboxErr(e);
@@ -373,7 +377,9 @@ frmSetting.importStyleFromClip = function(path){
 		var cfg = eval(data); 
 		frmSetting.importStyle(cfg);
 		
-		imeBar.imeSkin(cfg);		
+		imeBar.imeSkin(cfg);	
+		
+		frmSetting.lbStatus.text = "已自剪贴板导入配置";	
 	}
 	catch(e){
 		frmSetting.msgboxErr(e);
@@ -611,6 +617,8 @@ frmSetting.btnExport.oncommand = function(id,event){
 	} );
 	
 	string.save(path,data);
+	
+	frmSetting.lbStatus.text = "已导出配置到文件";	
 }
 
 import process;
@@ -1842,6 +1850,36 @@ frmSetting.chkSysRun.checked = config.setting.sysRun;
 frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED;
 /*}}*/
 
+/*复制粘贴配置{{*/
+frmSetting.btnCopy.skin(style.transButton)
+frmSetting.btnCopy.oncommand = function(id,event){
+	var cfg = frmSetting.exportStyle();  
+	if(cfg.embeddingFontData){
+		return frmSetting.msgboxErr("配置已导入外部字体文件,请点击「导出」按钮导出到文件!")
+	}
+	var strImptipConfig = table.tostring(cfg);
+	
+	var data = string.loadcode("\dlg\template.aardio",{ imptipConfig = strImptipConfig } ); 
+	data = string.match(data,"\/\*ImTipConfig\{\{\*\/.+\/\*\}\}\*\/");
+	
+	win.clip.write("imeBar.imeSkin("+data+")" );
+	
+	frmSetting.btnCopy.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''} 
+	thread.delay(500);
+	frmSetting.btnCopy.disabledText = null;
+	
+	frmSetting.lbStatus.text = "配置已复制到剪贴板";
+}
+
+frmSetting.btnPaste.skin(style.transButton)
+frmSetting.btnPaste.oncommand = function(id,event){
+	frmSetting.importStyleFromClip();	
+	frmSetting.btnPaste.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''} 
+	thread.delay(500);
+	frmSetting.btnPaste.disabledText = null;
+}
+/*}}*/
+
 if(!config.style.width){
 	frmSetting.btnReset.oncommand();
 }
@@ -1853,6 +1891,6 @@ frmSetting.saveConfigBeforeDestroy = function(){
  	frmSetting.exportStyleToSysConfig();
 	mainSettingForm = null;
 }
-mainSettingForm = frmSetting;
 
+mainSettingForm = frmSetting;
 win.loopMessage();
