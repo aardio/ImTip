@@ -114,7 +114,7 @@ mainForm.popmenu.add('自剪贴板导入配置',function(id){
 	}
 	
 	var buf = win.clip.read();
-	var data = #buf && string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
+	var data = #buf ? string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/") : null;
 	if(!#data) return mainForm.msgboxErr("剪贴板不包含有效的 ImTip 配置方案!");
 	
 	try{
