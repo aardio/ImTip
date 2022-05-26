@@ -1,6 +1,6 @@
 # ImTip ( 通用输入法状态提示 )
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a>，  体积仅 615KB。   
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a>，  体积仅 560 KB。   
 单文件绿色软件，无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
 
 #### 效果演示：
@@ -30,6 +30,11 @@
 <hr>
 
 ![通用输入法提示工具 / UWP](./screenshots/uwp.gif)
+
+#### 支持 多语言键盘
+<hr>
+
+![通用输入法提示工具 / UWP](./screenshots/layout.gif)
 
 #### 可视化编辑外观，可导入导出外观方案：
 <hr>
