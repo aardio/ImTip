@@ -79,6 +79,9 @@ mainForm.popmenu.add('导出配置',function(id){
 		||(config.style.iconStyle[["font"]] && string.cmp(config.style.iconStyle[["font"]],"imtip")==0)){
 		data = 'import fonts.imtip;\r\n' + data; 
 	}
+	else {
+		data = 'import fonts;\r\n' + data; 
+	}
 	
 	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
 		,function(head,code){

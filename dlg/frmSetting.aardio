@@ -604,6 +604,9 @@ frmSetting.btnExport.oncommand = function(id,event){
 		||(string.cmp(frmSetting.editIconTextFont.text,"imtip")==0)){
 		data = 'import fonts.imtip;\r\n' + data; 
 	}
+	else {
+		data = 'import fonts;\r\n' + data; 
+	}
 	
 	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
 		,function(head,code){
