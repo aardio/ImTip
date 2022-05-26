@@ -10,6 +10,14 @@ unescape = function(s){
 	return s; 
 } 
 
+updateFontAwesome = function(cfg){
+	if(!cfg.embeddingFontData){
+		var font = cfg.iconStyle[["font"]]; 
+		if( font && ! ..string.cmp(font.name:"","FontAwesome") ) font.name = "imtip"; 
+	}	
+}
+
 /**intellisense(appUtil)
 unescape(__) = 还原图标字体转义符，\n支持 NCR（Numeric Character Reference）编码
+updateFontAwesome(__) = 替换旧版自带 FontAwesome 字体为 imtip 字体
 end intellisense**/

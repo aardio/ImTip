@@ -2,6 +2,35 @@
 import fsys.config;
 config  = fsys.config( io.appData("/aardio/std/ImTip/") ); 
 
+if(!config.style.width){
+	config.style.mix({
+			timeout=2;
+			backgroundColor=3852913392;
+			argbColor=4278190080;
+			align="left";
+			valign="center";
+			iconStyle={align="right";font={name="imtipfont";h=-12;weight=400};padding={top=0;right=11;left=0;bottom=0}};
+			tipChars={
+				halfShape = '\uF186';fullShape = '\uF1DB';capital = '\uF031';symbol = '。';close = '\uF05E';
+				en = '英';katakana = "カ";hanja="漢";[0x804] = "中";[0x412] = "가";[0x411] = "あ";
+			}; 	
+			font={name="Segoe UI";h=-12;weight=400}; 
+			textRenderingHint=3;  
+			iconTextRenderingHint=3; 
+			iconColor=4278190080;
+			width=56;
+			height=28;
+			textPadding={top=0;right=0;left=13;bottom=0};
+			offsetX=30;
+			offsetY=0;
+			border={radius=11};
+			editorClasses = {
+				["AVL_AVView"]=1;["ConsoleWindowClass"]=1;["Windows.UI.Input.InputSite.WindowClass"]=1
+			};
+		}
+ 	);	
+}
+
 /**intellisense(config)
 ? = 配置文件名,\n读写配置并序列化为一个表对象,\n表的成员值可以是支持序列化的普通变量,支持table对象\n配置文件在首次使用时自动加载,退出程序时自动保存\n!fsys_table.
 end intellisense**/

@@ -1,6 +1,6 @@
 import win.ui;
 import win.ui.atom;
-import fonts.fontAwesome
+import fonts.imtip;
 /*DSG{{*/
 mainForm = win.form(text="ImTip - 通用输入法提示工具";right=759;bottom=469)
 mainForm.add()
@@ -13,13 +13,14 @@ for(k,v in _ARGV){
 		}
 	}
 }
-	
+
 var atom,hwnd = mainForm.atom("E474890D-1DFA-4575-B456-7B46C15665DC.imtip");
 if(!atom){
 	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig); 
 	win.quitMessage();	
 	return;
 }
+mainForm.enableDpiScaling("init");
 
 //显示输入状态栏
 import key.ime.stateBar;
@@ -49,7 +50,7 @@ mainForm.onTrayMessage = {
 //下面创建托盘弹出菜单
 import win.ui.menu;
 mainForm.popmenu = win.ui.popmenu(mainForm);//创建弹出菜单
-mainForm.popmenu.add('设置外观',function(id){ 
+mainForm.popmenu.add('配置外观',function(id){ 
 	if(mainSettingForm){
 		return win.setForeground(mainSettingForm.hwnd); 
 	}
@@ -58,21 +59,11 @@ mainForm.popmenu.add('设置外观',function(id){
 	frmChild.show(); 
 });
 
-import fsys.dlg;
-mainForm.popmenu.add('导入外观方案',function(id){ 
-	if(mainSettingForm){
-		win.setForeground(mainSettingForm.hwnd);
-		return mainSettingForm.btnImport.oncommand();
-	}
-	
-	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
-	if(!path) return;
-	
-	mainForm.importImTipStyle(path); 
-});
+mainForm.popmenu.add();//分隔线
 
 import config;
-mainForm.popmenu.add('导出外观方案',function(id){
+import fsys.dlg;
+mainForm.popmenu.add('导出配置',function(id){
 	if(mainSettingForm){
 		win.setForeground(mainSettingForm.hwnd);
 		return mainSettingForm.btnExport.oncommand();
@@ -84,9 +75,9 @@ mainForm.popmenu.add('导出外观方案',function(id){
 	var strImptipConfig = table.tostring(config.style); 
 	var data = string.loadcode("\dlg\template.aardio",{ imptipConfig = strImptipConfig } ); 
 	
-	if((config.style.font && string.cmp(config.style.font,"FontAwesome")==0)
-		||(config.style.iconStyle[["font"]] && string.cmp(config.style.iconStyle[["font"]],"FontAwesome")==0)){
-		data = 'import fonts.fontAwesome;\r\n' + data; 
+	if((config.style.font && string.cmp(config.style.font,"imtip")==0)
+		||(config.style.iconStyle[["font"]] && string.cmp(config.style.iconStyle[["font"]],"imtip")==0)){
+		data = 'import fonts.imtip;\r\n' + data; 
 	}
 	
 	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
@@ -101,6 +92,50 @@ mainForm.popmenu.add('导出外观方案',function(id){
 	} );
 	
 	string.save(path,data);
+});
+
+mainForm.popmenu.add('导入配置',function(id){ 
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.btnImport.oncommand();
+	}
+	
+	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
+	if(!path) return;
+	
+	mainForm.importImTipStyle(path); 
+});
+
+import win.clip;
+mainForm.popmenu.add('自剪贴板导入配置',function(id){ 
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.importStyleFromClip();
+	}
+	
+	var buf = win.clip.read();
+	var data = #buf && string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
+	if(!#data) return mainForm.msgboxErr("剪贴板不包含有效的 ImTip 配置方案!");
+	
+	try{
+		data = string.replace(data,'<\u2032>|<\u2018>|<\u2019>',`'`);
+		data = string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
+
+		var cfg = eval(data);  
+		appUtil.updateFontAwesome(cfg);
+		imeBar.imeSkin(cfg);	
+		
+ 		config.style.embeddingFontData = null;
+		config.style.embeddingFontName = null; 
+		config.style.openStyle = null; 
+		config.style.border = null;
+		
+ 		table.assign(config.style,cfg); 
+ 		config.style.save();	
+	}
+	catch(e){
+		mainForm.msgboxErr(e);
+	} 
 });
 
 mainForm.popmenu.add();//分隔线
@@ -122,6 +157,8 @@ mainForm.popmenu.add('官方网站',function(id){
 mainForm.popmenu.add();//分隔线
 
 mainForm.popmenu.add('退出程序',function(id){ 
+	if(mainSettingForm) mainSettingForm.exportStyleToSysConfig();
+	
 	mainForm.close();
 	win.quitMessage();
 });
@@ -135,6 +172,7 @@ if( fsys.update.simpleMain(
 	return 0;	
 }
 
+import appUtil;
 mainForm.importImTipStyle = function(path){ 
 	var buf = string.loadBuffer(path);
 	if(!#buf) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
@@ -144,6 +182,7 @@ mainForm.importImTipStyle = function(path){
 	
 	try{
 		var cfg = eval(data);  
+		appUtil.updateFontAwesome(cfg);
 		imeBar.imeSkin(cfg);	
 		
  		config.style.embeddingFontData = null;
@@ -172,6 +211,7 @@ mainForm.onCopyData = function(data,dataType){
 }
 
 if(config.style.width){
+	appUtil.updateFontAwesome(config.style);
 	imeBar.imeSkin(config.style)
 }
 

@@ -12,7 +12,7 @@ wb.external={
 	click = function(chr){
 		var str = ustring.fromCharCode(chr);
 		var hex = string.escape(str,true,true); 
-		frmIconFont.endModal(hex)
+		frmIconFont.editCurChar.text = hex;
 	}
 	mouseover = function(chr){
 		var str = ustring.fromCharCode(chr);
@@ -54,7 +54,7 @@ var htmlTemplate = /**
       <?
       for(i=1;#owner.fontUnicodeChars/2;1){ 
       ?>
-      		<a name="fontAwesome" href="javascript:void(0);" 
+      		<a href="javascript:void(0);" 
       		onclick="javascript:external.click(<?
       		=owner.fontUnicodeChars[i]
       		?>)" 
@@ -79,6 +79,8 @@ frmIconFont.loadFont = function(fontName){
 			if( ::Gdi32.AddFontResourceEx( fontPath,0x10/*FR_PRIVATE*/,0 ) ) {
 				::PostMessage( 0xFFFF/*_HWND_BROADCAST*/,0x1D/*_WM_FONTCHANGE*/,0,0); 
 			} 
+			
+			::Kernel32.MoveFileEx(fontPath,null,4/*_MOVEFILE_DELAY_UNTIL_REBOOT*/);
 		}
 	}
 	

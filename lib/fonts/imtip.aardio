@@ -1,0 +1,16 @@
+﻿import fonts;
+
+namespace fonts.imtip{
+    family = ..fonts.addFamily(
+		..io.appData("aardio/std/imtip1.0.ttf",$"~\lib\fonts\.res\imtip.ttf"),"imtip"
+	)
+}
+
+/**intellisense()
+fonts.imtip = 导入图标字体,\n所有图标请参考 aardio 工具->文本文件->图标字体
+fonts.imtip.family = GDI+字样集合,可用于plus控件,gdip等库函数,\n!gdipfamily.
+end intellisense**/
+
+/**details(感谢)
+imtip 字体基于 fontello，iconfont，FontAwesome 4.7 生成。
+end details**/
