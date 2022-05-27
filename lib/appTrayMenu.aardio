@@ -1,0 +1,121 @@
+﻿import config;
+import fsys.dlg;
+
+namespace appTrayMenu{}
+
+//下面创建托盘弹出菜单
+import win.ui.menu;
+mainForm.popmenu = win.ui.popmenu(mainForm);//创建弹出菜单
+mainForm.popmenu.add('配置外观',function(id){ 
+	if(mainSettingForm){
+		return win.setForeground(mainSettingForm.hwnd); 
+	}
+	
+	var frmChild = mainForm.loadForm("\dlg\frmSetting.aardio");
+	frmChild.show(); 
+});
+
+mainForm.popmenu.add();//分隔线
+
+mainForm.popmenu.add('导出配置',function(id){
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.btnExport.oncommand();
+	}
+	
+	var path = fsys.dlg.save("ImTip 配置(*.aardio)|*.aardio||","导出样式方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
+	if(!path) return;
+	 
+	var strImptipConfig = table.tostring(config.style); 
+	var data = string.loadcode("\dlg\template.aardio",{ imptipConfig = strImptipConfig } ); 
+	
+	if((config.style.font && string.cmp(config.style.font,"imtip")==0)
+		||(config.style.iconStyle[["font"]] && string.cmp(config.style.iconStyle[["font"]],"imtip")==0)){
+		data = 'import fonts.imtip;\r\n' + data; 
+	}
+	else {
+		data = 'import fonts;\r\n' + data; 
+	}
+	
+	data = string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
+		,function(head,code){
+			var lines = {head};
+			for(i=1;#code;2040){
+				table.push(lines,string.slice(code,i,i+2040));
+			}
+			
+			table.push(lines,"'");
+			return string.join(lines,'\r\n');
+	} );
+	
+	string.save(path,data);
+});
+
+mainForm.popmenu.add('导入配置',function(id){ 
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.btnImport.oncommand();
+	}
+	
+	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
+	if(!path) return;
+	
+	mainForm.importImTipStyle(path); 
+});
+
+import win.clip;
+mainForm.popmenu.add('自剪贴板导入配置',function(id){ 
+	if(mainSettingForm){
+		win.setForeground(mainSettingForm.hwnd);
+		return mainSettingForm.importStyleFromClip();
+	}
+	
+	var buf = win.clip.read();
+	var data = #buf ? string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/") : null;
+	if(!#data) return mainForm.msgboxErr("剪贴板不包含有效的 ImTip 配置方案!");
+	
+	try{
+		data = string.replace(data,'<\u2032>|<\u2018>|<\u2019>',`'`);
+		data = string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
+
+		var cfg = eval(data);  
+		appUtil.updateFontAwesome(cfg);
+		imeBar.imeSkin(cfg);	
+		
+ 		config.style.embeddingFontData = null;
+		config.style.embeddingFontName = null; 
+		config.style.openStyle = null; 
+		config.style.border = null;
+		
+ 		table.assign(config.style,cfg); 
+ 		config.style.save();	
+	}
+	catch(e){
+		mainForm.msgboxErr(e);
+	} 
+});
+
+mainForm.popmenu.add();//分隔线
+ 
+mainForm.menuDiabledImTipId = mainForm.popmenu.add('临时禁用',function(id){ 
+	var disabled = mainForm.popmenu.checked(mainForm.menuDiabledImTipId,0/*_MF_BYCOMMAND*/);
+	imeBar.imeWatch(disabled);
+	
+	mainForm.popmenu.check(mainForm.menuDiabledImTipId ,!disabled,0/*_MF_BYCOMMAND*/);
+});
+
+mainForm.popmenu.add();//分隔线
+
+mainForm.popmenu.add('官方网站',function(id){ 
+	import process;
+	process.openUrl("http://imtip.aardio.com/");
+});
+
+mainForm.popmenu.add();//分隔线
+
+mainForm.popmenu.add('退出程序',function(id){ 
+	if(mainSettingForm) mainSettingForm.exportStyleToSysConfig();
+	
+	mainForm.close();
+	win.quitMessage();
+});
