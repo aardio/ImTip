@@ -12,8 +12,8 @@ if(!config.style.width){
 			iconStyle={align="right";font={name="imtip";h=-12;weight=400};padding={top=0;right=11;left=0;bottom=0}};
 			tipChars={
 				halfShape = '\uF186';fullShape = '\uF1DB';capital = '\uF031';symbol = '。';close = '\uF05E';
-				en = '英';katakana = "カ";hanja="漢";[0x804] = "中";[0x412] = "가";[0x411] = "あ";
-			}; 	
+				katakana = "カ";hanja="漢";[0x409] = '英';[0x804] = "中";[0x412] = "가";[0x411] = "あ";
+			}; 
 			font={name="Segoe UI";h=-12;weight=400}; 
 			textRenderingHint=3;  
 			iconTextRenderingHint=3; 

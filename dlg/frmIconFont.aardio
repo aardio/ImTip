@@ -35,7 +35,7 @@ var htmlTemplate = /**
         width:50pt;
         text-align:center;
         vertical-align:middle;
-        font-size:18pt;
+        font-size:32px;
         color:#008080;
         display:inline-block;
         text-decoration:none;
