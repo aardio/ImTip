@@ -2,33 +2,37 @@
 import fsys.config;
 config  = fsys.config( io.appData("/aardio/std/ImTip/") ); 
 
+namespace config {
+	
+	__defaultStyle = {
+		timeout=2;
+		interval=50;
+		width=55;height=34;
+		offsetX=31;offsetY=2;
+		background=-151026827;
+		argbColor=-1;
+		iconColor=-1;
+		align="left";
+		valign="center";
+		textRenderingHint=3;
+		iconTextRenderingHint=3;
+		font={h=-18;name="Segoe UI";weight=700};
+		border={radius=6;width=0};
+		iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=4;right=6;left=0;bottom=0}};
+		openStyle={[1]={iconColor=-1;background=-151026827;border={color=14395508;radius=6;width=0};argbColor=-1};[0]={iconColor=-1;background=-1136150017;border={color=14395508;radius=6;width=0};argbColor=-1}};
+		textPadding={top=0;right=0;left=4;bottom=0};
+		editorClasses = {
+			["AVL_AVView"]=1;["ConsoleWindowClass"]=1;["Windows.UI.Input.InputSite.WindowClass"]=1
+		};
+		tipChars={
+			fullShape='\uF111';halfShape='\uF186';close='\uF05E';katakana="カ";hanja="漢";
+			[0x409]="En";[0x804]="中";[0x411]="あ";[0x412]="가";capital='\uF031';symbol="。"
+		};
+	}
+}
+
 if(!config.style.width){
-	config.style.mix({
-			timeout=2;
-			backgroundColor=3852913392;
-			argbColor=4278190080;
-			align="left";
-			valign="center";
-			iconStyle={align="right";font={name="imtip";h=-12;weight=400};padding={top=0;right=11;left=0;bottom=0}};
-			tipChars={
-				halfShape = '\uF186';fullShape = '\uF1DB';capital = '\uF031';symbol = '。';close = '\uF05E';
-				katakana = "カ";hanja="漢";[0x409] = '英';[0x804] = "中";[0x412] = "가";[0x411] = "あ";
-			}; 
-			font={name="Segoe UI";h=-12;weight=400}; 
-			textRenderingHint=3;  
-			iconTextRenderingHint=3; 
-			iconColor=4278190080;
-			width=56;
-			height=28;
-			textPadding={top=0;right=0;left=13;bottom=0};
-			offsetX=30;
-			offsetY=0;
-			border={radius=11};
-			editorClasses = {
-				["AVL_AVView"]=1;["ConsoleWindowClass"]=1;["Windows.UI.Input.InputSite.WindowClass"]=1
-			};
-		}
- 	);	
+	config.style.mix( config.__defaultStyle );	
 }
 
 /**intellisense(config)
