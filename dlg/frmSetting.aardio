@@ -3,7 +3,7 @@ import config;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.4 - 输入法状态跟踪提示";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.4 - 输入法状态跟踪提示 / 配置方案";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\res\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=42};
 btnBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;notify=1;z=40};
@@ -21,14 +21,14 @@ btnPaste={cls="plus";left=660;top=652;right=685;bottom=674;align="left";font=LOG
 btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=94};
 btnTextColor={cls="plus";text=" ";left=266;top=345;right=298;bottom=360;dl=1;dt=1;edge=1;notify=1;z=29};
 btnTextFont={cls="plus";text="选择 ...";left=268;top=395;right=333;bottom=419;align="left";color=8388608;notify=1;textPadding={left=5};z=68};
-chkClosedStyle={cls="plus";text="改变颜色";left=37;top=536;right=119;bottom=561;align="left";iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=21};z=84};
-chkIconTextBold={cls="plus";text="粗体";left=567;top=420;right=619;bottom=446;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=79};
+chkClosedStyle={cls="plus";text="改变颜色";left=37;top=536;right=119;bottom=560;align="left";iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=21};z=84};
+chkIconTextBold={cls="plus";text="粗体";left=567;top=420;right=619;bottom=444;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=79};
 chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};db=1;dr=1;font=LOGFONT(name='FontAwesome');z=119};
 chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};db=1;dr=1;font=LOGFONT(name='FontAwesome');z=118};
-chkQuirksMode={cls="plus";text="怪异模式";left=596;top=599;right=681;bottom=624;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=117};
-chkSysRun={cls="plus";text="允许开机启动";left=17;top=650;right=134;bottom=675;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=101};
-chkTextBold={cls="plus";text="粗体";left=216;top=420;right=268;bottom=446;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
-chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=625;right=226;bottom=650;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=122};
+chkQuirksMode={cls="plus";text="怪异模式";left=596;top=599;right=681;bottom=623;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=117};
+chkSysRun={cls="plus";text="允许开机启动";left=17;top=650;right=134;bottom=674;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=101};
+chkTextBold={cls="plus";text="粗体";left=216;top=420;right=268;bottom=444;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
+chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=625;right=226;bottom=649;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=122};
 cmbIconTextRenderingHint={cls="combobox";left=438;top=369;right=555;bottom=389;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=82};
 cmbTextRenderingHint={cls="combobox";left=91;top=370;right=208;bottom=390;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
 editCharsCapital={cls="plus";left=542;top=477;right=591;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=91};
@@ -45,7 +45,7 @@ groupbox={cls="groupbox";text="中 / En";left=15;top=219;right=346;bottom=450;bg
 groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=219;right=683;bottom=450;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=3};
 groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=4};
 groupbox4={cls="groupbox";text="默认键盘或英文输入状态";left=15;top=515;right=684;bottom=566;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=2};
-groupbox5={cls="groupbox";text="字符 /  字体图标";left=15;top=456;right=683;bottom=509;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=1};
+groupbox5={cls="groupbox";text="自定义显示字符";left=15;top=456;right=683;bottom=509;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=1};
 lbEditorClasses={cls="static";text="兼容窗口类名：";left=0;top=576;right=107;bottom=596;align="right";dl=1;dt=1;transparent=1;z=93};
 lbIconTrans={cls="bk";text="透明度：";left=360;top=343;right=438;bottom=364;align="right";dl=1;dt=1;transparent=1;z=77};
 lbInterval={cls="static";text="毫秒";left=381;top=603;right=575;bottom=624;bgcolor=16777215;db=1;dr=1;z=114};
@@ -479,7 +479,7 @@ frmSetting.importStyleFromClip = function(path){
 
 frmSetting.btnImport.skin(style.button);
 frmSetting.btnImport.oncommand = function(id,event){
-	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入配置（可拖动配置文件到「配置外观」窗口、或 ImTip.exe 上导入）");
+	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入配置（可拖动配置文件到「配置方案」窗口、或 ImTip.exe 上导入）");
 	if(!path) return;
  
 	frmSetting.importStyleFromFile(path);
@@ -1275,9 +1275,8 @@ frmSetting.lnkCharsEn.oncommand = function(id,event){
 
 frmSetting.lnkCharsLang.skin(style.link) 
 frmSetting.lnkCharsLang.oncommand = function(id,event){
-	
 	var frmChild = frmSetting.loadForm("\dlg\frmIconFont.aardio");
-	if(!frmChild.loadFont(frmSetting.editTextFont.text)){
+	if(!frmChild.loadFont(frmSetting.editIconTextFont.text)){
 		frmChild.close();
 		frmSetting.editTextFont.editBox.showErrorTip("ImTip","请先指定有效的图标字体名");
 		return;
@@ -1819,7 +1818,7 @@ frmSetting.btnTextFont.oncommand = function(id,event){
 import fsys.dlg;
 frmSetting.btnIconTextFont.skin(style.transButton)
 frmSetting.btnIconTextFont.oncommand = function(id,event){
-	var path = fsys.dlg.open("图标字体(*.ttf)|*.ttf|","导入图标字体文件（可直接拖动 *.ttf 字体到「设置外观」窗口）"); 
+	var path = fsys.dlg.open("图标字体(*.ttf)|*.ttf|","导入图标字体文件（可直接拖动 *.ttf 字体到「配置方案」窗口）"); 
 	if(path){
 		
 		var fontFamily = fonts.addFamily(path);
@@ -2017,8 +2016,14 @@ frmSetting.chkQuirksMode.oncommand = function(id,event){
 }
 
 frmSetting.setTimeout(
-	function(){
-		frmSetting.lbStatus.text = "点击滑块，按「左右方向键」可以微调"
+	function(){ 
+		frmSetting.lbStatus.text = string.random("点击滑块，按「左右方向键」可以微调"
+			,"点击「自定义显示字符」内的标点，可打开字体图标选择工具"
+			,"「自定义显示字符」编辑框可输入 NCR 编码或16进制编码"
+			,"可以直接将配置方案拖放到「配置方案」窗口"
+			,"可以直接将配置方案拖放到 ImTip.exe上"
+			,"可以双击 ImTip.exe 取代点击托盘菜单的「配置方案」"
+			,"导出的「配置方案」也是一个独立 EXE 的源代码")
 	},5000
 )
 

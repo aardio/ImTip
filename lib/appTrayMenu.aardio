@@ -1,4 +1,5 @@
-﻿import config;
+﻿//appTrayMenu 托盘菜单
+import config;
 import fsys.dlg;
 
 namespace appTrayMenu{}
@@ -6,7 +7,7 @@ namespace appTrayMenu{}
 //下面创建托盘弹出菜单
 import win.ui.menu;
 mainForm.popmenu = win.ui.popmenu(mainForm);//创建弹出菜单
-mainForm.popmenu.add('配置外观',function(id){ 
+mainForm.popmenu.add('配置方案',function(id){ 
 	if(mainSettingForm){
 		return win.setForeground(mainSettingForm.hwnd); 
 	}
