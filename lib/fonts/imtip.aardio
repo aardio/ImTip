@@ -2,7 +2,7 @@
 
 namespace fonts.imtip{
     family = ..fonts.addFamily(
-		..io.appData("aardio/std/imtip1.0.ttf",$"~\lib\fonts\.res\imtip.ttf"),"imtip"
+		..io.appData("/aardio/std/imtip1.0.ttf",$"~\lib\fonts\.res\imtip.ttf"),"imtip"
 	)
 }
 
