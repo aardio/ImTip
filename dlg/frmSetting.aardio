@@ -1931,7 +1931,7 @@ frmSetting.chkSysRun.skin(style.checkBox);
 frmSetting.chkSysRun.oncommand = function( id,event ){ 
 	import sys.run;
 	if(owner.checked){
-		sys.run("ImTip").register();
+		sys.run("ImTip").register("/sys");
 	}
 	else {
 		sys.run("ImTip").delete()

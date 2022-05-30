@@ -138,7 +138,7 @@ winform.btnReset.oncommand = function(id,event){
 winform.editTable.modified = false;
 
 winform.btnSave.oncommand();
-if(_ARGV.tray){  
+if(_ARGV.sys){  
 	winform.setTimeout( 
 		function(){
 			winform.btnSave.oncommand();
