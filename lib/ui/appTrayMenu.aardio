@@ -1,0 +1,167 @@
+﻿//appTrayMenu 托盘菜单
+import config;
+import fsys.dlg;
+import ui.doublePinyinMenu;
+import tsfInput;
+import win.ui.menu;
+import win.clip;
+
+namespace ui;
+
+class appTrayMenu{
+	ctor(winform){
+		var popmenu = ..win.ui.popmenu(winform);//创建弹出菜单
+		popmenu.add('配置方案',function(id){ 
+			if(..mainSettingForm){
+				return ..win.setForeground(..mainSettingForm.hwnd); 
+			}
+			
+			var frmChild = winform.loadForm("\dlg\frmSetting.aardio");
+			frmChild.show(); 
+		});
+		
+		var id = popmenu.add('└──  临时禁用',function(id){ 
+			imtipDisabled = !imtipDisabled;
+			..imeBar.imeWatch(!imtipDisabled);
+		});
+		popmenu.check(id,!!imtipDisabled,0/*_MF_BYCOMMAND*/);
+		
+		popmenu.add('导出配置',function(id){
+			if(..mainSettingForm){
+				..win.setForeground(..mainSettingForm.hwnd);
+				return ..mainSettingForm.btnExport.oncommand();
+			}
+			
+			var path = ..fsys.dlg.save("ImTip 配置(*.aardio)|*.aardio||","导出样式方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
+			if(!path) return;
+	 		
+			var strImTipConfig= ..table.tostring(..config.style); 
+			var data = ..string.loadcode("\dlg\template.aardio",{ imTipConfig= strImTipConfig} ); 
+			
+			if((..config.style.font && ..string.cmp(..config.style.font,"imtip")==0)
+				||(..config.style.iconStyle[["font"]] && ..string.cmp(..config.style.iconStyle[["font"]],"imtip")==0)){
+				data = 'import fonts.imtip;\r\n' + data; 
+			}
+			else {
+				data = 'import fonts;\r\n' + data; 
+			}
+			
+			data = ..string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
+				,function(head,code){
+					var lines = {head};
+					for(i=1;#code;2040){
+						..table.push(lines,..string.slice(code,i,i+2040));
+					}
+					
+					..table.push(lines,"'");
+					return ..string.join(lines,'\r\n');
+			} );
+			
+			..string.save(path,data);
+		});
+		
+		popmenu.add('自文件导入配置',function(id){ 
+			if(..mainSettingForm){
+				..win.setForeground(..mainSettingForm.hwnd);
+				return ..mainSettingForm.btnImport.oncommand();
+			}
+			
+			var path = ..fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入样式方案（可拖动方案到「设置外观」窗口、或 ImTip.exe 上快速导入）");
+			if(!path) return;
+			
+			winform.importImTipStyle(path); 
+		});
+		
+		
+		popmenu.add('自剪贴板导入配置',function(id){ 
+			if(..mainSettingForm){
+				..win.setForeground(..mainSettingForm.hwnd);
+				return ..mainSettingForm.importStyleFromClip();
+			}
+			
+			var buf = ..win.clip.read();
+			var data = #buf ? ..string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/") : null;
+			if(!#data) return winform.msgErr("剪贴板不包含有效的 ImTip 配置方案!");
+			
+			try{
+				data = ..string.replace(data,'<\u2032>|<\u2018>|<\u2019>',`'`);
+				data = ..string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
+		
+				var cfg = eval(data);  
+				..appUtil.updateFontAwesome(cfg);
+				..imeBar.imeSkin(cfg);	
+				
+ 				..config.style.embeddingFontData = null;
+				..config.style.embeddingFontName = null; 
+				..config.style.openStyle = null; 
+				..config.style.border = null;
+				
+ 				..table.assign(..config.style,cfg); 
+ 				..config.style.save();	
+ 				
+ 				winform.msgGreat("已成功导入配置");
+			}
+			catch(e){
+				winform.msgboxErr(e);
+			} 
+		});
+		
+		popmenu.add();//分隔线
+		
+		if(_WIN10_LATER){
+			var imStatus = ..tsfInput.getStatus();
+			var id = popmenu.add('启用英文键盘',function(id){
+				..tsfInput.enableUsKeyboard(!imStatus.en);
+			});
+			popmenu.check(id,imStatus.en,0/*_MF_BYCOMMAND*/); 
+		
+			var id = popmenu.add('启用微软拼音',function(id){
+				..tsfInput.enablePinyin(!imStatus.pinyin);
+			});
+			popmenu.check(id,imStatus.pinyin,0/*_MF_BYCOMMAND*/);
+		 	
+			popmenu.add('└──  双拼方案',..ui.doublePinyinMenu(winform)); 
+			
+			var id = popmenu.add('启用微软五笔',function(id){
+				..tsfInput.enableWubi(!imStatus.wubi);
+			});
+			popmenu.check(id,imStatus.wubi,0/*_MF_BYCOMMAND*/);
+			
+			popmenu.add('└──  词库管理（五笔、郑码、表形码）',function(id){
+				import process;
+				process.openUrl("http://wubi.aardio.com/");
+			});
+			
+			popmenu.add();//分隔线			
+		}
+ 		
+		var id = popmenu.add("管理超级热键",function(){
+			
+			if(!..mainHotkeyForm){
+				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
+			}
+			
+			..mainHotkeyForm.show(); 
+		})
+		
+		popmenu.add('官方网站',function(id){ 
+			import process;
+			process.openUrl("http://imtip.aardio.com/");
+		});
+		
+		popmenu.add();//分隔线
+		
+		popmenu.add('退出程序',function(id){ 
+			if(..mainSettingForm) ..mainSettingForm.exportStyleToSysConfig();
+			
+			winform.close();
+			..win.quitMessage();
+		});	
+		
+		return popmenu; 
+	};
+}
+
+/**intellisense()
+ui.appTrayMenu() = 托盘菜单\n!popmenu.
+end intellisense**/

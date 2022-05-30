@@ -1,0 +1,171 @@
+//chineseNumber 大写数值
+import win.ui;
+import fonts.imtip;
+import winex.caret;
+import win.ui.tabs;
+
+namespace ui;
+class chineseNumber{
+	ctor(parent,tParam){
+	/*DSG{{*/
+	this = ..win.form(text="WubiLex - 中文化数值";right=498;bottom=30;border="none";exmode="toolwindow";mode="popup";topmost=1)
+	this.add(
+	btnClose={cls="plus";text='\uF839';left=466;top=0;right=500;bottom=34;color=2368548;font=LOGFONT(h=-15;name='imtip');notify=1;z=5};
+	dropdown={cls="plus";left=0;top=0;right=466;bottom=31;align="right";bgcolor=16777215;border={color=-3546113;width=2};editable="edit";font=LOGFONT(h=-16);forecolor=16777215;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=8}};notify=1;textPadding={left=2;top=6;right=7;bottom=2};z=1};
+	menuItem={cls="plus";text="测试菜单三";left=1;top=33;right=500;bottom=78;align="right";bgcolor=11525002;border={left=1;right=1;bottom=1;color=-3546113};tabstop=1;textPadding={right=20};z=2};
+	menuItem2={cls="plus";text="测试菜单三";left=1;top=78;right=500;bottom=123;align="right";bgcolor=11525002;border={left=1;right=1;bottom=1;color=-3546113};tabstop=1;textPadding={right=20};z=3};
+	menuItem3={cls="plus";text="测试菜单三";left=1;top=123;right=500;bottom=168;align="right";bgcolor=11525002;border={left=1;right=1;bottom=1;color=-3546113};tabstop=1;textPadding={right=20};z=4}
+	)
+	/*}}*/
+	
+	import style;
+	this.dropdown.skin(style.transButton)
+	
+	this.btnClose.skin(style.button)
+	
+	var menu = ..win.ui.tabs(this.menuItem,this.menuItem2,this.menuItem3)
+	menu.skin( { 
+		foreground={
+			default = 0xFFFFFFFF;
+			hover= 0xFF8ADBAF;
+		};
+		checked = { 
+			foreground={
+				default = 0xFFDB8A8E;
+				hover= 0xFF8ADBAF;
+			}; 
+		}
+	})
+	
+	menu.initPopup(this.dropdown.editBox)
+	
+	import string.chineseNumber; 
+	this.dropdown.editBox.disableInputMethod();
+	this.dropdown.editBox.onChange = function(){
+		var items = {}; 
+		menu.setItemTexts(items);
+		
+		var text = string.replace(owner.text,"[\s,\_]","");
+    	var num = string.match(text,"^([+-]?0*\d+\.?\d*)$");
+    	if(!#num){
+    		var data = string.match(text,"^(\d{2,4}\.[01]*\d\.\d*)$"); 
+    		if(data){
+    			if(string.endWith(data,".")){
+    				menu.popup(false);
+    				return;
+    			} 
+    			data = ..time(data+"","%Y.%m.%d");
+    			var zh = string.chineseNumber('〇一二三四五六七八九'); 
+    			items[1] = zh.date(data,"%Y年%m月%d日");
+				items[2] = zh.date(data,"%Y年%m月%d日 星期%w");
+    		}
+    		else {
+    			var tm = string.match(text,"^(\d{1,2}\:\d{1,2}\:\d{1,2})$");
+    			if(tm){
+    				var zh = string.chineseNumber('〇一二三四五六七八九'); 
+					items[1] = zh.time(..time(tm,"%H:%M:%S"),"%H时%M分%S秒");
+					items[2] = zh.time(..time(tm,"%H:%M:%S"),"%p %I时%M分%S秒");
+				}
+				elseif(string.indexOf(text,":")){
+					return;
+				}
+				elseif( text == "now" ){
+					var zh = string.chineseNumber('〇一二三四五六七八九'); 
+					var now = ..time();
+					items[1] = zh.date(now,"%Y年%m月%d日 星期%w")
+					items[2] = zh.time(now,"%p %I时%M分%S秒");
+					items[3] = zh.datetime(now);
+					items[4] = tostring(now,"%Y/%m/%d  %H:%M:%S");
+				}
+    			else {
+    				try{
+    					num = eval(text)
+    				}
+    				
+    				if(type(num)!=type.number){
+    					owner.showInfoTip("可输入以下格式：",'数值或金额示例: 12345.67 或 12,345.67 或 12_345.67\n自定义进制示例:2#1010 或 0xFFFF\n数学表达式示例: (12+23)*2\n日期示例: 2020.2.29\n时间示例: 23:50:56\n当前日期时间: now');
+    					menu.popup(false);
+    					return;	
+    				}
+    				else{
+    					items[1] = tostring(num)
+    				}
+    			}
+    		}
+    	} 
+    	
+    	if(num!==null){ 
+    		
+    		var zh = string.chineseNumber('零壹贰叁肆伍陆柒捌玖','拾佰仟');
+    		items[#items+1] = zh.money(num); 
+    		items[#items+1] = zh.number(num); 
+    		
+    		var zh = string.chineseNumber();
+    		items[#items+1] = zh.number(num); 
+    	}
+     	
+    	menu.setItemTexts(items);
+    	if(self.selIndex && self.selIndex<#items){
+    		menu.selIndex = self.selIndex
+    	}
+    	else {
+    		menu.selIndex = 1;
+    	}
+    	
+    	menu.popup(true) 
+	}
+	
+	import key;
+	menu.onOk = function(strip){ 
+		self.selIndex = menu.selIndex;
+		
+    	var text = strip.text;
+    	this.onDestroy = function(){
+    		if(this.oldFocus) ..win.setFocus(this.oldFocus)
+        	key.sendString(text);
+    	}
+		this.close();
+	}
+ 	
+	this.btnClose.oncommand = function(id,event){
+		this.close();
+	} 
+	
+	var hwnd,oldFocus = ..win.getForeground();
+	..win.setOwner(this.hwnd,hwnd);
+	 
+	var rcCaret = ..winex.caret.get();
+	if(rcCaret){  
+		this.setPos(rcCaret.left,rcCaret.top  + (rcCaret.right ? rcCaret.height() : 50));	
+	}
+	else {
+		..win.center(this.hwnd,hwnd);
+	}
+	
+	var width,height = ..win.getScreen();
+	var x,y,cx,cy = this.getPos();
+	if(y+200>height){
+		y = height -200;
+		this.setPos(x,y);
+	}
+	
+	this.oldFocus = oldFocus : ..winex.getFocus();
+	this.show() 
+	..win.setTopmost(this.hwnd)
+	this.dropdown.editBox.setFocus();
+	
+	this.dropdown.editBox.onOk = function(){
+		this.close()
+	}
+	
+	this.dropdown.editBox.onCancel = function(){
+	    this.close();
+	}
+	
+	};
+}
+
+if( !owner ) ..wubi.chineseNumber().doModal();
+/**intellisense()
+wubi.chineseNumber() = 窗口类\n!winform.
+end intellisense**/

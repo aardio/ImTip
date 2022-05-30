@@ -1,0 +1,125 @@
+﻿
+namespace app.hotkey;
+
+defaultCode = /***********************
+
+/* 大写金额(可输入数学表达式)、日期、时间  */
+["Ctrl+$"] = function(){  
+    ui.chineseNumber().show();
+};
+
+/* 放在这中间的是注释,首尾星号数目要配对 */
+/******************************************************************
+
+//运行QQ
+["Ctrl+Q,Q"] = function(){
+    qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
+    process.execute( qqpath )
+};
+
+//把斜杠“/”改为顿号
+["/"] = function(){
+	var openState,mode = key.ime.state();//
+    if( !openState /*&&(mode==3) */ ) return true; 
+    key.sendString("、")
+};
+
+//切换鼠标左右键，经常换左右手耍鼠标是好习惯
+["Ctrl+SHIFT+RIGHT"] = function(){  
+   ::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));
+}
+
+//按 shift + back 变 ctrl + z，因为这时候shift是按下状态，所以可以先发一个key.up("SHIFT")弹起shift键
+["SHIFT+BACK"] = function(){
+    key.up("SHIFT")
+    key.combine("CTRL","Z")
+};
+
+//引号配对
+[`SHIFT+"`] = function(){  
+   key.sendString(`""`);
+   key.up("SHIFT");
+   key.press("LEFT");
+}
+
+//括号配对
+[`SHIFT+(`] = function(){  
+   key.sendString(`()`);
+   key.up("SHIFT"); 
+   key.press("LEFT");
+}
+
+//按`date输入大写的当前日期
+["~date"] = function(){ 
+    var zh = string.chineseNumber('〇一二三四五六七八九');
+    key.sendString(zh.date()); //改为 zh.time() 输出大写的当前时间
+}; 
+
+//增加音量
+["Ctrl+F6"] = function(){
+    key.press("VOLUME_UP");
+}
+
+//降低音量
+["Ctrl+F7"] = function(){
+    key.press("VOLUME_DOWN");
+}
+
+//切换静音
+["Ctrl+F8"] = function(){
+    key.press("VOLUME_MUTE");
+}
+
+//运行计算器
+["~calc"] = function(){
+    process.execute("calc.exe")
+};
+
+//运行word
+["~word"] = function(){
+    var word = com.CreateObject("Word.Application")
+    if(word)word.Visible = true; 
+};
+
+//微软五笔打开或关闭拼音混输
+["Ctrl+,"] = function(){  
+    import win.reg;
+    var reg = win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
+    var mode = !reg.queryValue("PinyinMixEnable") ? 1 : 0
+    reg.setDwValue("PinyinMixEnable",mode)	
+    
+    key.ime.changeRequest(0x4090409)
+    key.ime.changeRequest(0x8040804)
+};
+
+******************************************************************/
+
+/******************************************************************
+//本程序已默认载入大量aardio库，可以在这里直接调用，具体用法请参考 aardio 文档。
+
+//发送字符串
+key.sendString("这里是要发送的字符串")
+
+//发送按键
+key.send("/")
+
+//发送按键
+key.press("ENTER")
+
+//判断中文输入法是否打开，打开则执行花括号中的语句
+if( key.ime.state() ){ }
+
+配置代码使用 aardio 编程语言（ 开发环境仅6.5MB 官网：http://www.aardio.com ）
+中括号里是按键名字串，等号的后面指定输入文本或者执行输入的函数。
+如果第一个按键是控制键并紧跟一个加号，后面所有键名都要使用逗号分开，例如"Ctrl+Q,Q"。
+
+超级热键检测规则如下：
+1、如果首个按下的键不是控制键，则不需要同时按住多个键
+2、如果首次按住控制键不放开，则直到放开该键才完成超级热键
+控制键指的是CTRL,ALT,SHIFT,WIN键
+
+注意热键 ~hi 在按第一个~时不要按Shift键。
+******************************************************************/
+
+
+***********************/

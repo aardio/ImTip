@@ -1,0 +1,125 @@
+﻿//tsfInput 语言
+import sys.input;
+import win.rt.bcp47;
+import win.reg;
+
+namespace tsfInput;
+
+var input = ..raw.loadDll("input.dll","","stdcall,unicode")
+
+enablePinyin = function(enabled){ 
+	..sys.input.disable("0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}",!enabled )
+}
+
+enableWubi = function(enabled){
+	..sys.input.disable("0x0804:{6A498709-E00B-4C45-A018-8F9E4081AE40}{82590C13-F4DD-44F4-BA1D-8667246FDF8E}",!enabled)
+}
+
+enableUsKeyboard = function(enabled){ 
+	..sys.input.disable("0409:00000409",!enabled?1:0 )
+}
+
+getInputMethods = ..win.rt.bcp47.getInputMethods;
+
+getStatus = function(){
+    var status = {wubi=false;pinyin=false;en=false}
+	var imes = getInputMethods()
+	if(imes){
+		if( ..table.find(imes["zh-Hans-CN"],"0804:{6A498709-E00B-4C45-A018-8F9E4081AE40}{82590C13-F4DD-44F4-BA1D-8667246FDF8E}")){
+			status.wubi = true;
+		}	
+		if( ..table.find(imes["zh-Hans-CN"],"0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}")){
+			status.pinyin = true;
+		}	
+		if( ..table.find(imes["en-US"],"0409:00000409")){
+			status.en = true;
+		}	
+	}
+	
+	return status;
+}
+
+getDoublePinyinSchemes = function(){
+	var result = {
+		{name = "微软双拼",index = 0, scheme = ""};
+		{name = "智能ABC",index = 1, scheme = ""};
+		{name = "自然码",index = 3, scheme = ""}; 
+	}
+	
+	var regSettings = ..win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
+	if(!regSettings) return result;
+
+	for(name,scheme,t in regSettings.eachValue()) {
+		if(..string.find(name,"UserDefinedDoublePinyinScheme\d+")){
+			if(scheme  && type.isString(scheme) ){
+				var schemeName = ..string.match(scheme,"^([^*]+)");
+				if(schemeName){
+					var i = ..string.match(name,"(\d+)");
+					if(i){
+						..table.push(result,{
+							name = schemeName;
+							index = 10 + (tonumber(i):0);
+							scheme = scheme;
+						})
+					}
+				}
+			}
+		}
+	}
+	
+	var freeIndex = 10; 
+	for i,v in ..table.eachIndex(result){
+		if(..string.find(v.name,"小鹤") || ..string.endWith(v.scheme,"*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt") ){
+			result.xhup = i; 
+			break;
+		}
+		
+		if(v.index>=freeIndex){
+			freeIndex = v.index+1;
+		}
+	}
+	result.freeIndex = freeIndex;
+	
+	if(regSettings.queryValue("Enable Double Pinyin")){
+		result.default = regSettings.queryValue("DoublePinyinScheme") : 0;
+	}
+	
+	regSettings.close();
+	return result;	
+}
+
+enableoublePinyinScheme = function(enabled,schemeId){
+	 
+	var regSettings = ..win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
+	if(!regSettings) return false;
+	
+	if(enabled){
+		if(schemeId!==null)regSettings.setDwValue("DoublePinyinScheme",schemeId);
+		regSettings.setDwValue("Enable Double Pinyin",1);
+	}
+	else {
+		regSettings.setDwValue("DoublePinyinScheme",0);
+		regSettings.setDwValue("Enable Double Pinyin",0);
+	}
+	
+	regSettings.close();
+	return true; 
+}
+
+enableXhup = function(enabled){
+	var schemes = getDoublePinyinSchemes();
+	if(!schemes.xhup) return false;
+	
+	enableoublePinyinScheme(enabled,schemes.xhup);
+}
+
+/**intellisense(tsfInput)
+getDoublePinyinSchemes() = 获取全部双拼方案,\n如果不存在小鹤双拼方案，就安装该方案
+enableoublePinyinScheme(.(enabled,schemeId) = 是否启用指定的双拼方案\n@schemeId 参数为双拼方案 ID
+enableXhup(.(enabled) = 是否安装并开启小鹤双拼
+enablePinyin(.(enabled) = 是否启用微软拼音
+enableWubi(.(enabled) = 是否启用微软五笔
+enableUsKeyboard(.(enabled) = 是否启用英文键盘
+getInputMethods() = 返回所有启用的输入法
+getStatus() = 返回输入法状态
+end intellisense**/

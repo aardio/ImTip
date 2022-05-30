@@ -8,7 +8,7 @@ import key.ime.stateBar;
 var imeBar = key.ime.stateBar(mainForm);
 
 //输入法状态提示
-imeBar.imeSkin(/*ImTipConfig{{*/<?= owner.imptipConfig ?>/*}}*/)
+imeBar.imeSkin(/*ImTipConfig{{*/<?= owner.imTipConfig ?>/*}}*/)
 
 //托盘图标
 import win.util.tray;

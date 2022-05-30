@@ -1,5 +1,6 @@
 import win.ui;
 import win.ui.atom;
+import win.dlg.message;
 import fonts.imtip;
 /*DSG{{*/
 mainForm = win.form(text="ImTip - 通用输入法提示工具";right=759;bottom=469)
@@ -36,9 +37,10 @@ mainForm.tray.tip = "ImTip - 通用输入法提示工具" //设置鼠标提示
 //响应托盘消息
 mainForm.onTrayMessage = {
 	[0x205/*_WM_RBUTTONUP*/] = function(wParam){ 
-		import appTrayMenu; //延迟创建,避免系统启动时 DPI 缩放前创建菜单
+		import ui.appTrayMenu;
+		var menu = ui.appTrayMenu(mainForm); //延迟创建,避免系统启动时 DPI 缩放前创建菜单
 	    win.setForeground(mainForm.hwnd); //避免不点击菜单不会消失，父窗口隐藏也要这样做
-	    mainForm.popmenu.popup(); 
+	    menu.popup(); 
 	};
 	[0x203/*_WM_LBUTTONDBLCLK*/] = function(wParam){ 
 		if(mainSettingForm){
@@ -113,6 +115,10 @@ if(config.style.width){
 
 if(__argvImTipConfig){
 	win.sendCopyData(mainForm.hwnd,__argvImTipConfig);
+}
+
+if(config.hotkey.chkEnableHotkey){
+	mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
 }
 
 win.loopMessage();

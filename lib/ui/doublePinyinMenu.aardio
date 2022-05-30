@@ -1,0 +1,55 @@
+﻿//doublePinyinMenu 菜单
+
+import tsfInput;
+
+namespace ui;
+
+class doublePinyinMenu{
+	ctor( winform ){
+		var dpSchemes = ..tsfInput.getDoublePinyinSchemes();
+		var popmenuPinyinSchemes = ..win.ui.popmenu(winform);
+		
+		var id = popmenuPinyinSchemes.add("禁用双拼",function(id){
+			..tsfInput.enableoublePinyinScheme(dpSchemes.default===null);
+		});
+		popmenuPinyinSchemes.check(id,dpSchemes.default===null,0/*_MF_BYCOMMAND*/);
+		popmenuPinyinSchemes.add();
+			
+		for i,scheme in ..table.eachIndex(dpSchemes){
+			var id = popmenuPinyinSchemes.add(scheme.name,function(id){
+				..tsfInput.enableoublePinyinScheme(dpSchemes.default!=scheme.index,scheme.index);
+			});
+			popmenuPinyinSchemes.check(id,dpSchemes.default==scheme.index,0/*_MF_BYCOMMAND*/);
+		}
+		
+		if(!dpSchemes.xhup){
+			var id = popmenuPinyinSchemes.add("小鹤双拼",function(id){
+				var regSettings = ..win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
+				if(!regSettings) return winform.msgboxErr("系统不支持小鹤双拼")
+	
+				regSettings.setSzValue("UserDefinedDoublePinyinScheme"+(dpSchemes.freeIndex-10),"小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt") 
+				..table.push(dpSchemes,{
+					name = "小鹤双拼";
+					index = dpSchemes.freeIndex;
+					scheme = "小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt";
+				})
+		
+				..tsfInput.enableoublePinyinScheme(true,dpSchemes.freeIndex);
+				regSettings.close();
+			}); 
+		}
+		
+		popmenuPinyinSchemes.add();
+		popmenuPinyinSchemes.add("设置",function(id){
+			import process;
+			process.execute("ms-settings:regionlanguage-chsime-pinyin");
+		});
+		
+		return popmenuPinyinSchemes; 
+	};
+}
+
+/**intellisense()
+ui.doublePinyinMenu(winform) = 创建双拼弹出菜单
+ui.doublePinyinMenu() = !popmenu.
+end intellisense**/
