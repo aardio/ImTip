@@ -78,3 +78,6 @@ ImTip 正常工作是基本为休眠状态，基本不占 CPU 和内存。
 
 ![跟踪检测速度](./screenshots/cpu.png)
 
+****
+
+上面的动画使用 [开源免费，下载体积仅 820 KB 的极简录屏软件 Gif123](https://gif123.aardio.com/) 录制。
