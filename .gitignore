@@ -2,6 +2,7 @@
 /.build/default.Manifest.xml
 /.build/update-maker.table
 /.build/update-maker.aardio
+/.update-files/
 dist/
 .build/default.init.aardio
 .build/mp.lock

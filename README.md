@@ -1,7 +1,7 @@
 # ImTip ( 通用输入法状态跟踪提示 )
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a>，  体积仅 563 KB。   
-单文件绿色软件，无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a>。   
+免费开源，仅 563 KB。单文件绿色软件，无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
 
 
 1、仅用两个字符就可提示中英、全半角、大小写、中英标点、多语言键盘布局等所有状态。
