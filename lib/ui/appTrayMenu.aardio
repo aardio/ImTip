@@ -88,7 +88,7 @@ class appTrayMenu{
 				data = ..string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
 		
 				var cfg = eval(data);  
-				..appUtil.updateFontAwesome(cfg);
+				..app.util.updateFontAwesome(cfg);
 				..imeBar.imeSkin(cfg);	
 				
  				..config.style.embeddingFontData = null;
@@ -108,7 +108,19 @@ class appTrayMenu{
 		
 		popmenu.add();//分隔线
 		
+		var id = popmenu.add("管理超级热键",function(){
+			
+			if(!..mainHotkeyForm){
+				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
+			}
+			
+			..mainHotkeyForm.show(); 
+		})
+		
 		if(_WIN10_LATER){
+			
+			popmenu.add();//分隔线
+			 
 			var imStatus = ..tsfInput.getStatus();
 			var id = popmenu.add('启用英文键盘',function(id){
 				..tsfInput.enableUsKeyboard(!imStatus.en);
@@ -130,20 +142,26 @@ class appTrayMenu{
 			popmenu.add('└──  词库管理（五笔、郑码、表形码）',function(id){
 				import process;
 				process.openUrl("http://wubi.aardio.com/");
-			});
-			
-			popmenu.add();//分隔线			
+			}); 
 		}
  		
-		var id = popmenu.add("管理超级热键",function(){
-			
-			if(!..mainHotkeyForm){
-				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
-			}
-			
-			..mainHotkeyForm.show(); 
-		})
+		popmenu.add();//分隔线
 		
+		popmenu.add('打开系统输入法设置',function(id){
+			import process.control;
+			process.control("ms-settings:keyboard")
+		}); 
+		
+		var id = popmenu.add('反转鼠标左右按键',function(id){
+			::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));
+		});
+		popmenu.check(id,::User32.GetSystemMetrics(23),0/*_MF_BYCOMMAND*/); 
+		
+		popmenu.add('打开屏幕键盘',function(id){
+			import process.wow64;
+			process.wow64.execute("osk")
+		});
+			 
 		popmenu.add('官方网站',function(id){ 
 			import process;
 			process.openUrl("http://imtip.aardio.com/");

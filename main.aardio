@@ -54,7 +54,7 @@ mainForm.onTrayMessage = {
 
 import fsys.update.simpleMain;
 if( fsys.update.simpleMain(
-	"ImTip ( 通用输入法提示工具 )",
+	"ImTip ( 通用输入法跟踪提示工具 )",
 	"http://imtip.aardio.com/update/",
 	io.appData("/aardio/std/ImTip/app/update"),
 	function(version,description,status){})){
@@ -62,7 +62,7 @@ if( fsys.update.simpleMain(
 }
 
 import config;
-import appUtil;
+import app.util;
 mainForm.importImTipStyle = function(path){ 
 	var buf = string.loadBuffer(path);
 	if(!#buf) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
@@ -72,7 +72,7 @@ mainForm.importImTipStyle = function(path){
 	
 	try{
 		var cfg = eval(data);  
-		appUtil.updateFontAwesome(cfg);
+		app.util.updateFontAwesome(cfg);
 		imeBar.imeSkin(cfg);	
 		
  		config.style.embeddingFontData = null;
@@ -109,7 +109,7 @@ mainForm.onCopyData = function(data,dataType){
 }
 
 if(config.style.width){
-	appUtil.updateFontAwesome(config.style);
+	app.util.updateFontAwesome(config.style);
 	imeBar.imeSkin(config.style)
 }
 

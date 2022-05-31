@@ -12,17 +12,18 @@ import winex;
 import winex.mouse;
 import winex.key;
 import winex.accObject;
-import ui.chineseNumber;
 import string.chineseNumber;
+import ui.chineseNumber;
+import ui.colorPicker;
 import win.ui;
 /*DSG{{*/
 var winform = win.form(text="设置";right=984;bottom=589;bgcolor=16777215)
 winform.add(
-btnHelp={cls="plus";text="aardio 语法";left=824;top=28;right=933;bottom=50;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
-btnReset={cls="plus";text='\uF021   恢复到范例';left=619;top=529;right=765;bottom=565;bgcolor=14935259;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=6};
-btnSave={cls="plus";text='\uF0C7   保存';left=777;top=529;right=923;bottom=565;bgcolor=11580047;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=5};
-chkEnableHotkey={cls="plus";text="启用超级热键";left=33;top=23;right=473;bottom=54;align="left";dl=1;dt=1;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8';notify=1;textPadding={left=24};z=2};
-editTable={cls="edit";left=33;top=61;right=951;bottom=498;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=3};
+btnHelp={cls="plus";text="aardio 语法";left=824;top=12;right=933;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
+btnReset={cls="plus";text='\uF021   恢复到范例';left=619;top=544;right=765;bottom=580;bgcolor=14935259;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=6};
+btnSave={cls="plus";text='\uF0C7   保存';left=777;top=544;right=923;bottom=580;bgcolor=11580047;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=5};
+chkEnableHotkey={cls="plus";text="启用超级热键";left=33;top=7;right=473;bottom=38;align="left";dl=1;dt=1;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8';notify=1;textPadding={left=24};z=2};
+editTable={cls="edit";left=33;top=42;right=951;bottom=535;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=3};
 lbTip={cls="static";left=39;top=523;right=594;bottom=574;db=1;dl=1;dr=1;transparent=1;z=1}
 )
 /*}}*/
@@ -137,14 +138,11 @@ winform.btnReset.oncommand = function(id,event){
 }
 winform.editTable.modified = false;
 
-winform.btnSave.oncommand();
-if(_ARGV.sys){  
-	winform.setTimeout( 
-		function(){
-			winform.btnSave.oncommand();
-		},3000
-	); 	
-}
+winform.setTimeout( 
+	function(){
+		winform.btnSave.oncommand();
+	},3000
+); 	
 
 import process;
 winform.btnHelp.oncommand = function(id,event){
@@ -154,6 +152,11 @@ winform.btnHelp.oncommand = function(id,event){
 winform.btnHelp.skin(style.plainButton);
 
 ..mainHotkeyForm = winform;
+
+winform.onClose = function(hwnd,message,wParam,lParam){
+	winform.show(false);
+    return true;
+}
 
 winform.onDestroy = function(){
     ..mainHotkeyForm = null;

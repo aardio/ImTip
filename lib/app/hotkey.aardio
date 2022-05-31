@@ -11,6 +11,10 @@ defaultCode = /***********************
 /* 放在这中间的是注释,首尾星号数目要配对 */
 /******************************************************************
 
+["Ctrl+#"] = function(){  
+    ui.colorPicker(); //打开调色器
+};
+
 //运行QQ
 ["Ctrl+Q,Q"] = function(){
     qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
@@ -19,7 +23,7 @@ defaultCode = /***********************
 
 //把斜杠“/”改为顿号
 ["/"] = function(){
-	var openState,mode = key.ime.state();//
+    var openState,mode = key.ime.state();//
     if( !openState /*&&(mode==3) */ ) return true; 
     key.sendString("、")
 };

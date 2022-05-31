@@ -1,11 +1,12 @@
 import style;
 import config;
+import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.5 - 通用输入法状态跟踪提示 / 配置方案";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.6 - 通用输入法状态跟踪提示 / 配置方案";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
-bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\res\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=42};
+bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\dlg\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=42};
 btnBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;notify=1;z=40};
 btnBorderColor={cls="plus";text=" ";left=97;top=163;right=129;bottom=178;dl=1;dt=1;edge=1;notify=1;z=46};
 btnClosedBackground={cls="plus";text=" ";left=204;top=541;right=236;bottom=556;dr=1;dt=1;edge=1;notify=1;z=86};
@@ -163,10 +164,11 @@ frmSetting.tbsPreviewMode.skin({
 }); 
 frmSetting.tbsPreviewMode.selIndex = 1;
 
+var unescapeColor = app.util.unescape;
 frmSetting.tbsPreviewMode.onSelchange = function(idx,strip,form){
 	frmSetting.preview.imeModeEn = idx==2;
 
-	frmSetting.preview.text = appUtil.unescape(frmSetting.preview.imeModeEn?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
+	frmSetting.preview.text = unescapeColor(frmSetting.preview.imeModeEn?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
 	if(frmSetting.preview.imeModeEn){
 	
 		if(frmSetting.chkClosedStyle.checked){
@@ -255,7 +257,7 @@ frmSetting.importStyle = function(cfg){
 	if(cfg.iconStyle){
 		var font = cfg.iconStyle.font;
 		if(font){
-			appUtil.updateFontAwesome(cfg);
+			app.util.updateFontAwesome(cfg);
 			
 			var font = ::LOGFONT(font);
 			frmSetting.editIconTextFont.text = font.name;
@@ -609,6 +611,7 @@ frmSetting.exportStyle = function(){
 	
 	//颜色与边框（背景色、文本色、图标色、边框颜色、以及边框样式）
 	//----------------------------------------------------------------
+	cfg.backgroundColor = null;
 	cfg.background = frmSetting.btnBackground.backgroundColor;
 	cfg.argbColor =frmSetting.btnTextColor.backgroundColor;
 	cfg.iconColor = frmSetting.btnIconTextColor.backgroundColor;
@@ -656,13 +659,13 @@ frmSetting.exportStyle = function(){
  	//字符集
 	//----------------------------------------------------------------
 	cfg.tipChars = table.assign(,frmSetting.tipChars:{}, {
-		fullShape = appUtil.unescape(frmSetting.editCharsFullShape.text);
-		halfShape = appUtil.unescape(frmSetting.editCharsHalfShape.text);
-		capital = appUtil.unescape(frmSetting.editCharsCapital.text);
-		symbol = appUtil.unescape(frmSetting.editCharsSymbol.text);
-		close = appUtil.unescape(frmSetting.editCharsClose.text); 
-		[0x409] = appUtil.unescape(frmSetting.editCharsEn.text);
-		[0x804] = appUtil.unescape(frmSetting.editCharsLang.text);
+		fullShape = unescapeColor(frmSetting.editCharsFullShape.text);
+		halfShape = unescapeColor(frmSetting.editCharsHalfShape.text);
+		capital = unescapeColor(frmSetting.editCharsCapital.text);
+		symbol = unescapeColor(frmSetting.editCharsSymbol.text);
+		close = unescapeColor(frmSetting.editCharsClose.text); 
+		[0x409] = unescapeColor(frmSetting.editCharsEn.text);
+		[0x804] = unescapeColor(frmSetting.editCharsLang.text);
 	});
 	
  	//兼容窗口类名
@@ -738,11 +741,11 @@ frmSetting.onMinimized = function(){
 /*}}*/
 
 /*中英变换颜色{{*/
-import appUtil;
+import app.util;
 frmSetting.chkClosedStyle.skin(style.checkBox)
 frmSetting.chkClosedStyle.oncommand = function(id,event){
 
-	//frmSetting.preview.text = appUtil.unescape(owner.checked?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
+	//frmSetting.preview.text = unescapeColor(owner.checked?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
 	if(owner.checked){
 		frmSetting.showStatus("已开启英文模式外观变换");
 		
@@ -1181,33 +1184,33 @@ frmSetting.btnIconTextColor.oncommand = function(id,event){
 /*}}*/
 
 /*自定义字符{{*/
-import appUtil;
+import app.util;
 var onTipCharsChange = function(){
 	var this = owner;
 
 	//考虑多语言键盘，不要覆盖
 	imeBar.tipChars = table.assign(imeBar.tipChars,{
-		fullShape = appUtil.unescape(frmSetting.editCharsFullShape.text);
-		halfShape = appUtil.unescape(frmSetting.editCharsHalfShape.text);
-		capital = appUtil.unescape(frmSetting.editCharsCapital.text);
-		symbol = appUtil.unescape(frmSetting.editCharsSymbol.text);
-		close = appUtil.unescape(frmSetting.editCharsClose.text); 
-		[0x409] = appUtil.unescape(frmSetting.editCharsEn.text);
-		[0x804] = appUtil.unescape(frmSetting.editCharsLang.text);
+		fullShape = unescapeColor(frmSetting.editCharsFullShape.text);
+		halfShape = unescapeColor(frmSetting.editCharsHalfShape.text);
+		capital = unescapeColor(frmSetting.editCharsCapital.text);
+		symbol = unescapeColor(frmSetting.editCharsSymbol.text);
+		close = unescapeColor(frmSetting.editCharsClose.text); 
+		[0x409] = unescapeColor(frmSetting.editCharsEn.text);
+		[0x804] = unescapeColor(frmSetting.editCharsLang.text);
 	});
 	
 	if(owner==frmSetting.editCharsLang.editBox){ 
 		if(frmSetting.tbsPreviewMode.selIndex = 1 ){
-			frmSetting.preview.text =  appUtil.unescape(owner.text);	
+			frmSetting.preview.text =  unescapeColor(owner.text);	
 		}
 	}
 	elseif(owner==frmSetting.editCharsEn.editBox){
 		if(frmSetting.tbsPreviewMode.selIndex = 2 ){
-			frmSetting.preview.text =  appUtil.unescape(owner.text);	
+			frmSetting.preview.text =  unescapeColor(owner.text);	
 		}
 	}
 	else{
-		frmSetting.preview.iconText =  appUtil.unescape(owner.text);
+		frmSetting.preview.iconText =  unescapeColor(owner.text);
 	} 
 		
 	imeBar.imeWatch();
@@ -1230,7 +1233,7 @@ frmSetting.editCharsEn.editBox.onFocusGot = function(){
 }
 
 var onEditIconCharsFocusGot = function(){
-	frmSetting.preview.iconText =  appUtil.unescape(owner.text);
+	frmSetting.preview.iconText =  unescapeColor(owner.text);
 }
 
 frmSetting.editCharsFullShape.editBox.onFocusGot = onEditIconCharsFocusGot;
@@ -1916,7 +1919,7 @@ frmSetting.editClasses.editBox.onChange = function(){
 /*重置{{*/
 frmSetting.btnReset.skin(style.button);
 frmSetting.btnReset.oncommand = function(id,event){
-	var cfg = table.clone(config.__defaultStyle);
+	var cfg = table.clone(config.__imTipDefaultStyle);
 	frmSetting.importStyle(cfg,frmSetting.preview);
 	imeBar.imeSkin(cfg);
 	
@@ -1941,7 +1944,7 @@ frmSetting.chkSysRun.oncommand = function( id,event ){
 	config.setting.save();
 }
 frmSetting.chkSysRun.checked = config.setting.sysRun;
-frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED;
+frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED; 
 /*}}*/
 
 /*复制粘贴配置{{*/
@@ -2004,6 +2007,11 @@ else {
 frmSetting.saveConfigBeforeDestroy = function(){
  	frmSetting.exportStyleToSysConfig();
 	mainSettingForm = null;
+	
+	if(imeBar.parent == frmSetting){
+		imeBar.close();
+		imeBar = null;
+	}
 }
 
 //兼容某些输入法的怪异模式，开启输入法后用中英标点状态替换中英输入状态。

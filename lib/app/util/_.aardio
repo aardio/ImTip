@@ -1,6 +1,7 @@
-﻿//appUtil 应用函数
-import string.xml;
-namespace appUtil;
+﻿import string.xml;
+import win.ui.atom;
+
+namespace app.util;
 
 var ncr = ..string.xml.ncr;
 unescape = function(s){
@@ -17,7 +18,13 @@ updateFontAwesome = function(cfg){
 	}	
 }
 
-/**intellisense(appUtil)
+findHwnd = function(){
+	var atom,hwnd = ..win.ui.atom.find("E474890D-1DFA-4575-B456-7B46C15665DC.imtip");
+	return hwnd;
+}
+
+/**intellisense(app.util)
 unescape(__) = 还原图标字体转义符，\n支持 NCR（Numeric Character Reference）编码
 updateFontAwesome(__) = 替换旧版自带 FontAwesome 字体为 imtip 字体
+findHwnd() = 用于 WubiLex ：\n查找并返回独立运行的 ImTip.exe 主窗口句柄，\n失败返回 null
 end intellisense**/

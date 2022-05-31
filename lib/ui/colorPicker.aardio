@@ -1,0 +1,12 @@
+﻿//colorPicker 超级调色器
+import win.ui.ctrl.pick;
+
+namespace ui;
+
+class colorPicker{
+	ctor( /*输入构造函数所需要的参数*/ ){
+		this = ..win.ui.ctrl.pick();
+		..win.setTopmost(this.hwnd,true); 
+		this.doModal();
+	}; 
+}
