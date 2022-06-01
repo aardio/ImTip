@@ -431,6 +431,9 @@ frmSetting.importStyle = function(cfg){
 		var keys = table.keys(cfg.editorClasses);
 		frmSetting.editClasses.text = string.join(keys,";");
 	}
+	else {
+		frmSetting.editClasses.text = "";
+	}
 	
 	//重绘
 	frmSetting.preview.redraw();	
@@ -680,7 +683,10 @@ frmSetting.exportStyle = function(){
 		
 		cfg.editorClasses = mapEditorClasses;
 	}
-
+	else {
+		cfg.editorClasses = {};
+	}
+	
 	return cfg;
 }
 

@@ -21,6 +21,19 @@ defaultCode = /***********************
     process.execute( qqpath )
 };
 
+//改键演示
+["Ctrl+."] = function(){  
+    key.up("Ctrl"); //先把已经按下的键弹起来
+    key.combine("CTRL","A"); //换成别的键，具体看 aardio 库函数文档
+    return false; //阻止按键事件
+};
+
+//按 shift + back 变 ctrl + z
+["SHIFT+BACK"] = function(){
+    key.up("SHIFT"); //先把已经按下的键弹起来
+    key.combine("CTRL","Z")
+};
+
 //把斜杠“/”改为顿号
 ["/"] = function(){
     var openState,mode = key.ime.state();//
