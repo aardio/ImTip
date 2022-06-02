@@ -16,6 +16,7 @@ enableWubi = function(enabled){
 }
 
 enableUsKeyboard = function(enabled){ 
+	..sys.input.disable("0804:00000409",1) //简体中文美式键盘
 	..sys.input.disable("0409:00000409",!enabled?1:0 )
 }
 
@@ -27,13 +28,24 @@ getStatus = function(){
 	if(imes){
 		if( ..table.find(imes["zh-Hans-CN"],"0804:{6A498709-E00B-4C45-A018-8F9E4081AE40}{82590C13-F4DD-44F4-BA1D-8667246FDF8E}")){
 			status.wubi = true;
-		}	
+		}
+		elseif( ..table.find(imes["zh-Hans"],"0804:{6A498709-E00B-4C45-A018-8F9E4081AE40}{82590C13-F4DD-44F4-BA1D-8667246FDF8E}")){
+			status.wubi = true;
+		}
+			
 		if( ..table.find(imes["zh-Hans-CN"],"0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}")){
 			status.pinyin = true;
-		}	
+		}
+		elseif( ..table.find(imes["zh-Hans"],"0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}")){
+			status.pinyin = true;
+		}
+			
 		if( ..table.find(imes["en-US"],"0409:00000409")){
 			status.en = true;
 		}	
+		elseif( ..table.find(imes["zh-Hans-CN"] || imes["zh-Hans"],"0804:00000409")){
+			status.en = true;
+		}
 	}
 	
 	return status;

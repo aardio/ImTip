@@ -117,10 +117,9 @@ class appTrayMenu{
 			..mainHotkeyForm.show(); 
 		})
 		
+		popmenu.add();//分隔线
+		
 		if(_WIN10_LATER){
-			
-			popmenu.add();//分隔线
-			 
 			var imStatus = ..tsfInput.getStatus();
 			var id = popmenu.add('启用英文键盘',function(id){
 				..tsfInput.enableUsKeyboard(!imStatus.en);
@@ -143,14 +142,14 @@ class appTrayMenu{
 				import process;
 				process.openUrl("http://wubi.aardio.com/");
 			}); 
-		}
- 		
-		popmenu.add();//分隔线
+			
+			popmenu.add();//分隔线
 		
-		popmenu.add('打开系统输入法设置',function(id){
-			import process.control;
-			process.control("ms-settings:keyboard")
-		}); 
+			popmenu.add('打开系统输入法设置',function(id){
+				import process.control;
+				process.control("ms-settings:keyboard")
+			}); 
+		}
 		
 		var id = popmenu.add('反转鼠标左右按键',function(id){
 			::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));

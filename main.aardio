@@ -32,7 +32,7 @@ imeBar = key.ime.stateBar(mainForm);
 //下面创建托盘图标
 import win.util.tray;
 mainForm.tray = win.util.tray(mainForm)  
-mainForm.tray.tip = "ImTip - 通用输入法跟踪提示工具" //设置鼠标提示 
+mainForm.tray.tip = "ImTip：通用输入法状态跟踪提示工具" //设置鼠标提示 
 
 //响应托盘消息
 mainForm.onTrayMessage = {
@@ -54,7 +54,7 @@ mainForm.onTrayMessage = {
 
 import fsys.update.simpleMain;
 if( fsys.update.simpleMain(
-	"ImTip ( 通用输入法跟踪提示工具 )",
+	"ImTip ( 通用输入法状态跟踪提示工具 )",
 	"http://imtip.aardio.com/update/",
 	io.appData("/aardio/std/ImTip/app/update"),
 	function(version,description,status){})){
