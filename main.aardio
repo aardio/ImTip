@@ -32,7 +32,7 @@ imeBar = key.ime.stateBar(mainForm);
 //下面创建托盘图标
 import win.util.tray;
 mainForm.tray = win.util.tray(mainForm)  
-mainForm.tray.tip = "ImTip - 通用输入法提示工具" //设置鼠标提示 
+mainForm.tray.tip = "ImTip - 通用输入法跟踪提示工具" //设置鼠标提示 
 
 //响应托盘消息
 mainForm.onTrayMessage = {

@@ -4,7 +4,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.6 - 通用输入法状态跟踪提示 / 配置方案";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.7 - 通用输入法状态跟踪提示 / 配置方案";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\dlg\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=42};
 btnBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;notify=1;z=40};
