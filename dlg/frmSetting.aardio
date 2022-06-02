@@ -30,8 +30,8 @@ chkQuirksMode={cls="plus";text="怪异模式";left=596;top=599;right=681;bottom=
 chkSysRun={cls="plus";text="允许开机启动";left=17;top=650;right=134;bottom=674;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=101};
 chkTextBold={cls="plus";text="粗体";left=216;top=420;right=268;bottom=444;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
 chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=625;right=224;bottom=649;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=122};
-cmbIconTextRenderingHint={cls="combobox";left=438;top=369;right=555;bottom=389;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=82};
-cmbTextRenderingHint={cls="combobox";left=91;top=370;right=208;bottom=390;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
+cmbIconTextRenderingHint={cls="combobox";left=438;top=368;right=555;bottom=388;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=82};
+cmbTextRenderingHint={cls="combobox";left=91;top=369;right=208;bottom=389;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
 editCharsCapital={cls="plus";left=542;top=477;right=591;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=91};
 editCharsClose={cls="plus";left=625;top=477;right=674;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=69};
 editCharsEn={cls="plus";left=130;top=477;right=179;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=72};
@@ -40,8 +40,8 @@ editCharsHalfShape={cls="plus";left=322;top=477;right=371;bottom=501;align="left
 editCharsLang={cls="plus";left=47;top=477;right=96;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=73};
 editCharsSymbol={cls="plus";left=446;top=477;right=495;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=71};
 editClasses={cls="plus";left=107;top=567;right=684;bottom=591;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=92};
-editIconTextFont={cls="plus";left=438;top=389;right=602;bottom=415;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={top=6;bottom=2};z=66};
-editTextFont={cls="plus";left=91;top=389;right=267;bottom=415;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={top=6;bottom=2};z=67};
+editIconTextFont={cls="plus";left=438;top=395;right=602;bottom=417;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=66};
+editTextFont={cls="plus";left=91;top=395;right=267;bottom=417;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=67};
 groupbox={cls="groupbox";text="中 / En";left=15;top=219;right=346;bottom=450;bgcolor=16777215;dl=1;dt=1;edge=1;z=5};
 groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=219;right=683;bottom=450;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=3};
 groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=4};
@@ -1270,7 +1270,13 @@ frmSetting.lnkCharsEn.oncommand = function(id,event){
 		return;
 	}
 	
+	var origText = frmSetting.editCharsEn.text;
+	var origFontBeforeChanged,origTextBold;
 	if(frmSetting.editTextFont.text!=frmSetting.editIconTextFont.text){
+		origFontBeforeChanged = frmSetting.editTextFont.text;
+		origTextBold = frmSetting.chkTextBold.checked;
+		
+		frmSetting.chkTextBold.checked = false;
 		frmSetting.editTextFont.text = frmSetting.editIconTextFont.text;
 		frmSetting.editTextFont.editBox.showInfoTip("已切换为图标字体:" + frmSetting.editTextFont.text);
 		thread.delay(1000);
@@ -1280,6 +1286,12 @@ frmSetting.lnkCharsEn.oncommand = function(id,event){
 	//切换为英文预览
 	frmSetting.tbsPreviewMode.selIndex = 2;
 	frmChild.doModal(); 
+	
+	if(origFontBeforeChanged && (origText == frmSetting.editCharsEn.text) ){
+		frmSetting.editTextFont.text = origFontBeforeChanged;
+		frmSetting.chkTextBold.checked = origTextBold;
+		frmSetting.chkTextBold.oncommand();
+	}
 }
 
 frmSetting.lnkCharsLang.skin(style.link) 
@@ -1291,7 +1303,13 @@ frmSetting.lnkCharsLang.oncommand = function(id,event){
 		return;
 	}
 	
+	var origText = frmSetting.editCharsLang.text;
+	var origFontBeforeChanged,origTextBold;
 	if(frmSetting.editTextFont.text!=frmSetting.editIconTextFont.text){
+		origFontBeforeChanged = frmSetting.editTextFont.text;
+		origTextBold = frmSetting.chkTextBold.checked;
+		
+		frmSetting.chkTextBold.checked = false;
 		frmSetting.editTextFont.text = frmSetting.editIconTextFont.text;
 		frmSetting.editTextFont.editBox.showInfoTip("已切换为图标字体:" + frmSetting.editTextFont.text);
 		thread.delay(1000);
@@ -1301,6 +1319,12 @@ frmSetting.lnkCharsLang.oncommand = function(id,event){
 	//切换为中文预览
 	frmSetting.tbsPreviewMode.selIndex = 1;
 	frmChild.doModal(); 
+	
+	if(origFontBeforeChanged && (origText == frmSetting.editCharsLang.text) ){
+		frmSetting.editTextFont.text = origFontBeforeChanged;
+		frmSetting.chkTextBold.checked = origTextBold;
+		frmSetting.chkTextBold.oncommand();
+	}
 }
 
 frmSetting.lnkCharsHalfShape.skin(style.link) 
