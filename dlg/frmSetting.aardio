@@ -4,130 +4,125 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.8 - 通用输入法状态跟踪提示";right=698;bottom=677;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.9 - 通用输入法状态跟踪提示";right=698;bottom=615;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
-bk={cls="bkplus";left=7;top=27;right=444;bottom=82;background="\dlg\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=42};
-btnBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;notify=1;z=40};
-btnBorderColor={cls="plus";text=" ";left=97;top=163;right=129;bottom=178;dl=1;dt=1;edge=1;notify=1;z=46};
-btnClosedBackground={cls="plus";text=" ";left=204;top=541;right=236;bottom=556;dr=1;dt=1;edge=1;notify=1;z=86};
-btnClosedBorderColor={cls="plus";text=" ";left=323;top=541;right=355;bottom=556;dl=1;dt=1;edge=1;notify=1;z=110};
-btnClosedIconTextColor={cls="plus";text=" ";left=627;top=541;right=659;bottom=556;dr=1;dt=1;edge=1;notify=1;z=90};
-btnClosedTextColor={cls="plus";text=" ";left=484;top=541;right=516;bottom=556;dr=1;dt=1;edge=1;notify=1;z=88};
-btnCopy={cls="plus";left=635;top=652;right=660;bottom=674;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0C5';notify=1;textPadding={left=25};z=116};
-btnExport={cls="plus";text="导出";left=580;top=20;right=655;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=96};
-btnIconTextColor={cls="plus";text=" ";left=616;top=345;right=648;bottom=360;dr=1;dt=1;edge=1;notify=1;z=39};
-btnIconTextFont={cls="plus";text="导入 ...";left=604;top=395;right=669;bottom=419;align="left";color=8388608;notify=1;textPadding={left=5};z=64};
-btnImport={cls="plus";text="导入";left=499;top=20;right=574;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=95};
-btnPaste={cls="plus";left=660;top=652;right=685;bottom=674;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=115};
-btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=94};
-btnTextColor={cls="plus";text=" ";left=266;top=345;right=298;bottom=360;dl=1;dt=1;edge=1;notify=1;z=29};
-btnTextFont={cls="plus";text="选择 ...";left=268;top=395;right=333;bottom=419;align="left";color=8388608;notify=1;textPadding={left=5};z=68};
-chkClosedStyle={cls="plus";text="改变颜色";left=37;top=536;right=119;bottom=560;align="left";iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=21};z=84};
-chkIconTextBold={cls="plus";text="粗体";left=567;top=420;right=619;bottom=444;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=79};
-chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=119};
-chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=118};
-chkQuirksMode={cls="plus";text="怪异模式";left=596;top=599;right=681;bottom=623;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=117};
-chkSysRun={cls="plus";text="允许开机启动";left=17;top=650;right=134;bottom=674;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=101};
-chkTextBold={cls="plus";text="粗体";left=216;top=420;right=268;bottom=444;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
-chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=625;right=224;bottom=649;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=122};
-cmbIconTextRenderingHint={cls="combobox";left=438;top=368;right=555;bottom=388;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=82};
-cmbTextRenderingHint={cls="combobox";left=91;top=369;right=208;bottom=389;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
-editCharsCapital={cls="plus";left=542;top=477;right=591;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=91};
-editCharsClose={cls="plus";left=625;top=477;right=674;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=69};
-editCharsEn={cls="plus";left=130;top=477;right=179;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=72};
-editCharsFullShape={cls="plus";left=226;top=477;right=275;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=70};
-editCharsHalfShape={cls="plus";left=322;top=477;right=371;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=65};
-editCharsLang={cls="plus";left=47;top=477;right=96;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=73};
-editCharsSymbol={cls="plus";left=446;top=477;right=495;bottom=501;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=71};
-editClasses={cls="plus";left=107;top=567;right=684;bottom=591;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=92};
-editIconTextFont={cls="plus";left=438;top=395;right=602;bottom=417;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=66};
-editTextFont={cls="plus";left=91;top=395;right=267;bottom=417;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=67};
-groupbox={cls="groupbox";text="中 / En";left=15;top=219;right=346;bottom=450;bgcolor=16777215;dl=1;dt=1;edge=1;z=5};
-groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=219;right=683;bottom=450;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=3};
-groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=4};
-groupbox4={cls="groupbox";text="默认键盘或英文输入状态";left=15;top=515;right=684;bottom=566;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=2};
-groupbox5={cls="groupbox";text="自定义显示字符";left=15;top=456;right=683;bottom=509;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=1};
-lbEditorClasses={cls="static";text="兼容窗口类名：";left=0;top=576;right=107;bottom=596;align="right";dl=1;dt=1;transparent=1;z=93};
-lbIconTrans={cls="bk";text="透明度：";left=360;top=343;right=438;bottom=364;align="right";dl=1;dt=1;transparent=1;z=77};
-lbInterval={cls="static";text="毫秒";left=381;top=603;right=575;bottom=624;bgcolor=16777215;db=1;dr=1;z=114};
-lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=232;top=654;right=620;bottom=675;align="right";bgcolor=16777215;color=10526880;db=1;dr=1;z=102};
-lbTimeout={cls="static";text="秒";left=505;top=630;right=579;bottom=650;bgcolor=16777215;db=1;dr=1;z=17};
-lbTrans={cls="bk";text="大小：";left=18;top=424;right=91;bottom=445;align="right";bgcolor=16777215;dl=1;dt=1;z=76};
-lnkCharsCapital={cls="plus";text="大写:";left=500;top=477;right=538;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=108};
-lnkCharsClose={cls="plus";text='\uF05E:';left=596;top=477;right=618;bottom=501;align="right";color=8388608;font=LOGFONT(h=-13;name='imtip');notify=1;valign="bottom";z=109};
-lnkCharsEn={cls="plus";text="英:";left=101;top=477;right=126;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=106};
-lnkCharsFullShape={cls="plus";text="全角:";left=184;top=477;right=222;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=105};
-lnkCharsHalfShape={cls="plus";text="半角:";left=279;top=477;right=317;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=104};
-lnkCharsLang={cls="plus";text="中:";left=18;top=477;right=43;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=107};
-lnkCharsSymbol={cls="plus";text="中文标点:";left=375;top=477;right=442;bottom=501;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=103};
-plus={cls="plus";left=1;top=83;right=15;bottom=115;border={top=1;color=-16744448};db=1;dr=1;z=121};
-plus9={cls="plus";left=75;top=83;right=498;bottom=84;bgcolor=16777215;border={color=-16744448};db=1;dl=1;dr=1;forecolor=32768;linearGradient=180;z=120};
-preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";bgcolor=15780518;border={radius=11};db=1;disabled=1;dl=1;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=11}};iconText='\uF186';textPadding={left=13};z=43};
-radIconTextAlignCenter={cls="plus";text="居中";left=488;top=288;right=548;bottom=312;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=34};
-radIconTextAlignLeft={cls="plus";text="左";left=438;top=288;right=486;bottom=312;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=33};
-radIconTextAlignRight={cls="plus";text="右";left=550;top=288;right=598;bottom=312;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=44};
-radIconTextVAlignBottom={cls="plus";text="底";left=550;top=315;right=598;bottom=339;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=45};
-radIconTextVAlignCenter={cls="plus";text="居中";left=488;top=315;right=548;bottom=339;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=37};
-radIconTextVAlignTop={cls="plus";text="顶";left=438;top=315;right=486;bottom=339;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=36};
-radTextAlignCenter={cls="plus";text="居中";left=144;top=288;right=204;bottom=312;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=23};
-radTextAlignLeft={cls="plus";text="左";left=91;top=288;right=139;bottom=312;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=21};
-radTextAlignRight={cls="plus";text="右";left=208;top=288;right=256;bottom=312;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=22};
-radTextVAlignBottom={cls="plus";text="底";left=208;top=315;right=256;bottom=339;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=27};
-radTextVAlignCenter={cls="plus";text="居中";left=144;top=315;right=204;bottom=339;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=26};
-radTextVAlignTop={cls="plus";text="顶";left=91;top=315;right=139;bottom=339;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=25};
-static={cls="bk";text="圆角大小：";left=389;top=159;right=467;bottom=183;align="right";dl=1;dt=1;transparent=1;z=7};
-static10={cls="bk";text="颜色：";left=218;top=343;right=268;bottom=364;align="right";dl=1;dt=1;transparent=1;z=28};
-static11={cls="bk";text="左边距：";left=380;top=240;right=438;bottom=261;align="right";dl=1;dr=1;dt=1;transparent=1;z=30};
-static12={cls="bk";text="水平对齐：";left=360;top=290;right=438;bottom=312;align="right";dl=1;dr=1;dt=1;transparent=1;z=32};
-static13={cls="bk";text="垂直对齐：";left=360;top=317;right=438;bottom=338;align="right";dl=1;dr=1;dt=1;transparent=1;z=35};
-static14={cls="bk";text="颜色：";left=569;top=343;right=617;bottom=364;align="right";dl=1;dr=1;dt=1;transparent=1;z=38};
-static15={cls="bk";text="背景颜色：";left=18;top=133;right=96;bottom=157;align="right";dl=1;dt=1;transparent=1;z=41};
-static16={cls="bk";text="边框颜色：";left=18;top=159;right=96;bottom=183;align="right";dl=1;dt=1;transparent=1;z=47};
-static17={cls="bk";text="边框粗细：";left=124;top=159;right=202;bottom=183;align="right";dl=1;dt=1;transparent=1;z=48};
-static18={cls="bk";text="右边距：";left=188;top=240;right=246;bottom=264;align="right";dl=1;dt=1;transparent=1;z=50};
-static19={cls="bk";text="上边距：";left=33;top=265;right=91;bottom=286;align="right";bgcolor=16777215;dl=1;dt=1;z=52};
-static2={cls="bk";text="横向偏移：";left=18;top=185;right=96;bottom=209;align="right";dl=1;dt=1;transparent=1;z=9};
-static20={cls="bk";text="下边距：";left=188;top=265;right=246;bottom=289;align="right";dl=1;dt=1;transparent=1;z=54};
-static21={cls="bk";text="右边距：";left=524;top=240;right=582;bottom=264;align="right";dl=1;dr=1;dt=1;transparent=1;z=56};
-static22={cls="bk";text="上边距：";left=380;top=265;right=438;bottom=286;align="right";dl=1;dr=1;dt=1;transparent=1;z=58};
-static23={cls="bk";text="下边距：";left=524;top=265;right=582;bottom=289;align="right";dl=1;dr=1;dt=1;transparent=1;z=60};
-static24={cls="bk";text="字体：";left=18;top=397;right=91;bottom=419;align="right";bgcolor=16777215;dl=1;dt=1;z=62};
-static25={cls="bk";text="字体：";left=360;top=397;right=438;bottom=419;align="right";dl=1;dt=1;transparent=1;z=63};
-static26={cls="bk";text="跟踪检测速度：";left=0;top=600;right=107;bottom=620;align="right";dl=1;dt=1;transparent=1;z=113};
-static3={cls="bk";text="纵向偏移：";left=348;top=185;right=426;bottom=209;align="right";dl=1;dt=1;transparent=1;z=10};
-static35={cls="bk";text="大小：";left=360;top=424;right=438;bottom=445;align="right";dl=1;dt=1;transparent=1;z=98};
-static36={cls="bk";text="抗锯齿：";left=18;top=369;right=91;bottom=390;align="right";bgcolor=16777215;dl=1;dt=1;z=81};
-static37={cls="bk";text="抗锯齿：";left=378;top=369;right=438;bottom=390;align="right";dl=1;dt=1;transparent=1;z=83};
-static38={cls="bk";text="背景颜色：";left=122;top=537;right=200;bottom=561;align="right";dl=1;dr=1;dt=1;transparent=1;z=85};
-static39={cls="bk";text="中 /En 字体颜色：";left=368;top=537;right=481;bottom=561;align="right";dl=1;dr=1;dt=1;transparent=1;z=87};
-static4={cls="bk";text="边框颜色：";left=244;top=537;right=322;bottom=561;align="right";dl=1;dt=1;transparent=1;z=111};
-static40={cls="bk";text="标点符号颜色：";left=517;top=537;right=627;bottom=561;align="right";dl=1;dr=1;dt=1;transparent=1;z=89};
-static41={cls="bk";text="透明度：";left=18;top=343;right=91;bottom=364;align="right";bgcolor=16777215;dl=1;dt=1;z=100};
-static5={cls="bk";text="宽度：";left=127;top=133;right=179;bottom=157;align="right";dl=1;dt=1;transparent=1;z=12};
-static6={cls="bk";text="高度：";left=403;top=133;right=453;bottom=157;align="right";dl=1;dt=1;transparent=1;z=14};
-static7={cls="bk";text="垂直对齐：";left=18;top=317;right=91;bottom=339;align="right";bgcolor=16777215;dl=1;dt=1;z=24};
-static8={cls="bk";text="左边距：";left=33;top=240;right=91;bottom=261;align="right";bgcolor=16777215;dl=1;dt=1;z=18};
-static9={cls="bk";text="水平对齐：";left=18;top=290;right=91;bottom=312;align="right";bgcolor=16777215;dl=1;dt=1;z=20};
-tbBorderWidth={cls="plus";left=202;top=163;right=386;bottom=178;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=49};
-tbHeight={cls="plus";left=452;top=137;right=672;bottom=152;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=15};
-tbIconTextPaddingBottom={cls="plus";left=582;top=266;right=672;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=61};
-tbIconTextPaddingLeft={cls="plus";left=438;top=241;right=528;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=31};
-tbIconTextPaddingRight={cls="plus";left=583;top=241;right=673;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=57};
-tbIconTextPaddingTop={cls="plus";left=438;top=266;right=528;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=59};
-tbIconTextSize={cls="plus";left=438;top=426;right=555;bottom=441;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=75};
-tbIconTextTrans={cls="plus";left=438;top=345;right=555;bottom=360;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=99};
-tbInterval={cls="plus";left=107;top=603;right=371;bottom=618;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dr=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=112};
-tbOffsetX={cls="plus";left=97;top=190;right=340;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=8};
-tbOffsetY={cls="plus";left=429;top=190;right=672;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=11};
-tbRadius={cls="plus";left=466;top=163;right=672;bottom=178;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=6};
-tbTextPaddingBottom={cls="plus";left=244;top=266;right=334;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=55};
-tbTextPaddingLeft={cls="plus";left=91;top=241;right=181;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=19};
-tbTextPaddingRight={cls="plus";left=244;top=241;right=334;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=51};
-tbTextPaddingTop={cls="plus";left=91;top=266;right=181;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=53};
-tbTextSize={cls="plus";left=91;top=426;right=208;bottom=441;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=74};
-tbTextTrans={cls="plus";left=91;top=345;right=208;bottom=360;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=97};
-tbTimeout={cls="plus";left=228;top=630;right=492;bottom=645;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dr=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=16};
-tbWidth={cls="plus";left=179;top=137;right=399;bottom=152;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=13}
+bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=41};
+btnBackground={cls="plus";text=" ";left=97;top=138;right=129;bottom=153;dl=1;dt=1;edge=1;notify=1;z=39};
+btnBorderColor={cls="plus";text=" ";left=97;top=164;right=129;bottom=179;dl=1;dt=1;edge=1;notify=1;z=45};
+btnClosedBackground={cls="plus";text=" ";left=97;top=138;right=129;bottom=153;dr=1;dt=1;edge=1;hide=1;notify=1;z=83};
+btnClosedBorderColor={cls="plus";text=" ";left=97;top=164;right=129;bottom=179;dl=1;dt=1;edge=1;hide=1;notify=1;z=102};
+btnClosedIconTextColor={cls="plus";text=" ";left=438;top=425;right=470;bottom=440;dr=1;dt=1;edge=1;hide=1;notify=1;z=85};
+btnClosedTextColor={cls="plus";text=" ";left=91;top=425;right=123;bottom=440;dr=1;dt=1;edge=1;hide=1;notify=1;z=84};
+btnCopy={cls="plus";left=635;top=591;right=660;bottom=613;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0C5';notify=1;textPadding={left=25};z=107};
+btnExport={cls="plus";text="导出";left=580;top=20;right=655;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=91};
+btnIconTextColor={cls="plus";text=" ";left=438;top=424;right=470;bottom=439;dr=1;dt=1;edge=1;notify=1;z=38};
+btnIconTextFont={cls="plus";text="导入 ...";left=604;top=368;right=669;bottom=392;align="left";color=8388608;notify=1;textPadding={left=5};z=63};
+btnImport={cls="plus";text="导入";left=499;top=20;right=574;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=90};
+btnPaste={cls="plus";left=660;top=591;right=685;bottom=613;align="left";font=LOGFONT(h=-13);iconColor=5921370;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=106};
+btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=89};
+btnTextColor={cls="plus";text=" ";left=91;top=424;right=123;bottom=439;dl=1;dt=1;edge=1;notify=1;z=28};
+btnTextFont={cls="plus";text="选择 ...";left=268;top=368;right=333;bottom=392;align="left";color=8388608;notify=1;textPadding={left=5};z=67};
+chkClosedStyle={cls="plus";text="变换颜色";left=97;top=87;right=189;bottom=109;align="left";color=8553090;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');valign="top"};iconText='\uF0C8 ';notify=1;textPadding={left=21};valign="top";z=82};
+chkIconTextBold={cls="plus";text="粗体";left=567;top=394;right=619;bottom=418;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=77};
+chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=110};
+chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=109};
+chkQuirksMode={cls="plus";text="怪异模式";left=596;top=538;right=681;bottom=562;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=108};
+chkSysRun={cls="plus";text="允许开机启动";left=17;top=589;right=134;bottom=613;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=93};
+chkTextBold={cls="plus";text="粗体";left=216;top=395;right=268;bottom=419;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=76};
+chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=564;right=224;bottom=588;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=113};
+cmbIconTextRenderingHint={cls="combobox";left=438;top=345;right=555;bottom=365;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
+cmbTextRenderingHint={cls="combobox";left=91;top=345;right=208;bottom=365;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=78};
+editCharsCapital={cls="plus";left=542;top=476;right=591;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=86};
+editCharsClose={cls="plus";left=625;top=476;right=674;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";notify=1;textPadding={top=6;bottom=3};z=68};
+editCharsEn={cls="plus";left=130;top=476;right=179;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=71};
+editCharsFullShape={cls="plus";left=226;top=476;right=275;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=69};
+editCharsHalfShape={cls="plus";left=322;top=476;right=371;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=64};
+editCharsLang={cls="plus";left=47;top=476;right=96;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=72};
+editCharsSymbol={cls="plus";left=446;top=476;right=495;bottom=500;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=70};
+editClasses={cls="plus";left=107;top=506;right=684;bottom=530;align="left";border={bottom=1;color=-6908266};editable="edit";textPadding={top=6;bottom=3};z=87};
+editIconTextFont={cls="plus";left=438;top=368;right=602;bottom=390;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=65};
+editTextFont={cls="plus";left=91;top=368;right=267;bottom=390;align="left";border={bottom=1;color=-6908266};editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=66};
+groupbox={cls="groupbox";text="中 / En";left=15;top=219;right=346;bottom=450;bgcolor=16777215;dl=1;dt=1;edge=1;z=4};
+groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=219;right=683;bottom=450;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=2};
+groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=112;right=684;bottom=215;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=3};
+groupbox5={cls="groupbox";text="自定义显示字符";left=15;top=455;right=683;bottom=508;bgcolor=16777215;dl=1;dr=1;dt=1;edge=1;z=1};
+handRight1={cls="static";text='\uD83D\uDC49';left=2;top=130;right=31;bottom=162;align="right";color=255;font=LOGFONT(h=-23);hide=1;transparent=1;z=114};
+handRight2={cls="static";text='\uD83D\uDC49';left=0;top=157;right=31;bottom=189;align="right";color=255;font=LOGFONT(h=-23);hide=1;transparent=1;z=115};
+handRight3={cls="static";text='\uD83D\uDC49';left=22;top=418;right=51;bottom=450;align="right";color=255;font=LOGFONT(h=-23);hide=1;transparent=1;z=116};
+handRight4={cls="static";text='\uD83D\uDC49';left=365;top=418;right=398;bottom=450;align="right";color=255;font=LOGFONT(h=-23);hide=1;transparent=1;z=117};
+lbEditorClasses={cls="static";text="兼容窗口类名：";left=0;top=515;right=107;bottom=535;align="right";dl=1;dt=1;transparent=1;z=88};
+lbInterval={cls="static";text="毫秒";left=381;top=542;right=575;bottom=563;bgcolor=16777215;db=1;dr=1;z=105};
+lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=232;top=593;right=620;bottom=614;align="right";bgcolor=16777215;color=10526880;db=1;dr=1;z=94};
+lbTimeout={cls="static";text="秒";left=505;top=569;right=579;bottom=589;bgcolor=16777215;db=1;dr=1;z=16};
+lbTrans={cls="bk";text="大小：";left=18;top=397;right=91;bottom=418;align="right";bgcolor=16777215;dl=1;dt=1;z=75};
+lnkCharsCapital={cls="plus";text="大写:";left=500;top=476;right=538;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=100};
+lnkCharsClose={cls="plus";text='\uF05E:';left=596;top=476;right=618;bottom=500;align="right";color=8388608;font=LOGFONT(h=-13;name='imtip');notify=1;valign="bottom";z=101};
+lnkCharsEn={cls="plus";text="英:";left=101;top=476;right=126;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=98};
+lnkCharsFullShape={cls="plus";text="全角:";left=184;top=476;right=222;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=97};
+lnkCharsHalfShape={cls="plus";text="半角:";left=279;top=476;right=317;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=96};
+lnkCharsLang={cls="plus";text="中:";left=18;top=476;right=43;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=99};
+lnkCharsSymbol={cls="plus";text="中文标点:";left=375;top=476;right=442;bottom=500;align="right";color=8388608;notify=1;textPadding={left=5};valign="bottom";z=95};
+plus={cls="plus";left=1;top=83;right=15;bottom=115;border={top=1;color=-16744448};db=1;dr=1;z=112};
+plus9={cls="plus";left=75;top=83;right=498;bottom=84;bgcolor=16777215;border={color=-16744448};db=1;dl=1;dr=1;forecolor=32768;linearGradient=180;z=111};
+preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";bgcolor=15780518;border={radius=11};db=1;disabled=1;dl=1;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=11}};iconText='\uF186';textPadding={left=13};z=42};
+radIconTextAlignCenter={cls="plus";text="居中";left=488;top=290;right=548;bottom=314;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=33};
+radIconTextAlignLeft={cls="plus";text="左";left=438;top=290;right=486;bottom=314;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=32};
+radIconTextAlignRight={cls="plus";text="右";left=550;top=290;right=598;bottom=314;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=43};
+radIconTextVAlignBottom={cls="plus";text="底";left=550;top=317;right=598;bottom=341;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=44};
+radIconTextVAlignCenter={cls="plus";text="居中";left=488;top=317;right=548;bottom=341;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=36};
+radIconTextVAlignTop={cls="plus";text="顶";left=438;top=317;right=486;bottom=341;align="left";dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=35};
+radTextAlignCenter={cls="plus";text="居中";left=144;top=290;right=204;bottom=314;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=22};
+radTextAlignLeft={cls="plus";text="左";left=91;top=290;right=139;bottom=314;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=20};
+radTextAlignRight={cls="plus";text="右";left=208;top=290;right=256;bottom=314;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=21};
+radTextVAlignBottom={cls="plus";text="底";left=208;top=317;right=256;bottom=341;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=26};
+radTextVAlignCenter={cls="plus";text="居中";left=144;top=317;right=204;bottom=341;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=25};
+radTextVAlignTop={cls="plus";text="顶";left=91;top=317;right=139;bottom=341;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=24};
+static={cls="bk";text="圆角大小：";left=389;top=160;right=467;bottom=184;align="right";dl=1;dt=1;transparent=1;z=6};
+static10={cls="bk";text="颜色：";left=41;top=423;right=91;bottom=444;align="right";dl=1;dt=1;transparent=1;z=27};
+static11={cls="bk";text="左边距：";left=380;top=237;right=438;bottom=258;align="right";dl=1;dr=1;dt=1;transparent=1;z=29};
+static12={cls="bk";text="水平对齐：";left=360;top=289;right=438;bottom=311;align="right";dl=1;dr=1;dt=1;transparent=1;z=31};
+static13={cls="bk";text="垂直对齐：";left=360;top=316;right=438;bottom=337;align="right";dl=1;dr=1;dt=1;transparent=1;z=34};
+static14={cls="bk";text="颜色：";left=390;top=423;right=438;bottom=444;align="right";dl=1;dr=1;dt=1;transparent=1;z=37};
+static15={cls="bk";text="背景颜色：";left=18;top=134;right=96;bottom=158;align="right";dl=1;dt=1;transparent=1;z=40};
+static16={cls="bk";text="边框颜色：";left=18;top=160;right=96;bottom=184;align="right";dl=1;dt=1;transparent=1;z=46};
+static17={cls="bk";text="边框粗细：";left=124;top=160;right=202;bottom=184;align="right";dl=1;dt=1;transparent=1;z=47};
+static18={cls="bk";text="右边距：";left=188;top=237;right=246;bottom=261;align="right";dl=1;dt=1;transparent=1;z=49};
+static19={cls="bk";text="上边距：";left=33;top=262;right=91;bottom=283;align="right";bgcolor=16777215;dl=1;dt=1;z=51};
+static2={cls="bk";text="横向偏移：";left=18;top=186;right=96;bottom=210;align="right";dl=1;dt=1;transparent=1;z=8};
+static20={cls="bk";text="下边距：";left=188;top=262;right=246;bottom=286;align="right";dl=1;dt=1;transparent=1;z=53};
+static21={cls="bk";text="右边距：";left=524;top=237;right=582;bottom=261;align="right";dl=1;dr=1;dt=1;transparent=1;z=55};
+static22={cls="bk";text="上边距：";left=380;top=262;right=438;bottom=283;align="right";dl=1;dr=1;dt=1;transparent=1;z=57};
+static23={cls="bk";text="下边距：";left=524;top=262;right=582;bottom=286;align="right";dl=1;dr=1;dt=1;transparent=1;z=59};
+static24={cls="bk";text="字体：";left=18;top=370;right=91;bottom=392;align="right";bgcolor=16777215;dl=1;dt=1;z=61};
+static25={cls="bk";text="字体：";left=360;top=370;right=438;bottom=392;align="right";dl=1;dt=1;transparent=1;z=62};
+static26={cls="bk";text="跟踪检测速度：";left=0;top=539;right=107;bottom=559;align="right";dl=1;dt=1;transparent=1;z=104};
+static3={cls="bk";text="纵向偏移：";left=348;top=186;right=426;bottom=210;align="right";dl=1;dt=1;transparent=1;z=9};
+static35={cls="bk";text="大小：";left=360;top=397;right=438;bottom=418;align="right";dl=1;dt=1;transparent=1;z=92};
+static36={cls="bk";text="抗锯齿：";left=18;top=344;right=91;bottom=365;align="right";bgcolor=16777215;dl=1;dt=1;z=79};
+static37={cls="bk";text="抗锯齿：";left=378;top=344;right=438;bottom=365;align="right";dl=1;dt=1;transparent=1;z=81};
+static5={cls="bk";text="宽度：";left=127;top=134;right=179;bottom=158;align="right";dl=1;dt=1;transparent=1;z=11};
+static6={cls="bk";text="高度：";left=403;top=134;right=453;bottom=158;align="right";dl=1;dt=1;transparent=1;z=13};
+static7={cls="bk";text="垂直对齐：";left=18;top=316;right=91;bottom=338;align="right";bgcolor=16777215;dl=1;dt=1;z=23};
+static8={cls="bk";text="左边距：";left=33;top=237;right=91;bottom=258;align="right";bgcolor=16777215;dl=1;dt=1;z=17};
+static9={cls="bk";text="水平对齐：";left=18;top=289;right=91;bottom=311;align="right";bgcolor=16777215;dl=1;dt=1;z=19};
+tbBorderWidth={cls="plus";left=202;top=164;right=386;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=48};
+tbHeight={cls="plus";left=452;top=138;right=672;bottom=153;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=14};
+tbIconTextPaddingBottom={cls="plus";left=582;top=266;right=672;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=60};
+tbIconTextPaddingLeft={cls="plus";left=438;top=241;right=528;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=30};
+tbIconTextPaddingRight={cls="plus";left=583;top=241;right=673;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=56};
+tbIconTextPaddingTop={cls="plus";left=438;top=266;right=528;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=58};
+tbIconTextSize={cls="plus";left=438;top=401;right=555;bottom=416;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=74};
+tbInterval={cls="plus";left=107;top=542;right=371;bottom=557;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dr=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=103};
+tbOffsetX={cls="plus";left=97;top=191;right=340;bottom=206;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=7};
+tbOffsetY={cls="plus";left=429;top=191;right=672;bottom=206;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=10};
+tbRadius={cls="plus";left=466;top=164;right=672;bottom=179;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dr=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=5};
+tbTextPaddingBottom={cls="plus";left=244;top=266;right=334;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=54};
+tbTextPaddingLeft={cls="plus";left=91;top=241;right=181;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=18};
+tbTextPaddingRight={cls="plus";left=244;top=241;right=334;bottom=256;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=50};
+tbTextPaddingTop={cls="plus";left=91;top=266;right=181;bottom=281;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=52};
+tbTextSize={cls="plus";left=91;top=401;right=208;bottom=416;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;notify=1;paddingBottom=5;paddingTop=5;z=73};
+tbTimeout={cls="plus";left=228;top=569;right=492;bottom=584;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dr=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=15};
+tbWidth={cls="plus";left=179;top=138;right=399;bottom=153;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=12}
 )
 /*}}*/
 
@@ -165,8 +160,8 @@ frmSetting.tbsPreviewMode.skin({
 frmSetting.tbsPreviewMode.selIndex = 1;
 
 var unescapeColor = app.util.unescape;
-frmSetting.tbsPreviewMode.onSelchange = function(idx,strip,form){
-	frmSetting.preview.imeModeEn = idx==2;
+frmSetting.tbsPreviewMode.onSelchange = function(/*idx,strip,form*/){
+	frmSetting.preview.imeModeEn = frmSetting.chkPreviewEn.checked;
 
 	frmSetting.preview.text = unescapeColor(frmSetting.preview.imeModeEn?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
 	if(frmSetting.preview.imeModeEn){
@@ -193,6 +188,30 @@ frmSetting.tbsPreviewMode.onSelchange = function(idx,strip,form){
  			}
 		}
 		
+		if(frmSetting.chkClosedStyle.checked){
+			frmSetting.btnClosedBackground.hide = false;
+			frmSetting.btnClosedTextColor.hide = false;
+			frmSetting.btnClosedIconTextColor.hide = false;
+			frmSetting.btnClosedBorderColor.hide = false;
+			
+			frmSetting.btnBackground.hide = true;
+			frmSetting.btnTextColor.hide = true;
+			frmSetting.btnIconTextColor.hide = true;
+			frmSetting.btnBorderColor.hide = true;			
+		}
+		else {
+			frmSetting.btnClosedBackground.hide = true;
+			frmSetting.btnClosedTextColor.hide = true;
+			frmSetting.btnClosedIconTextColor.hide = true;
+			frmSetting.btnClosedBorderColor.hide = true;
+			
+			frmSetting.btnBackground.hide = false;
+			frmSetting.btnTextColor.hide = false;
+			frmSetting.btnIconTextColor.hide = false;
+			frmSetting.btnBorderColor.hide = false;
+		}
+		
+ 
 		frmSetting.showStatus("已切换到默认键盘或英文输入状态预览");
 	}
 	else {
@@ -206,6 +225,16 @@ frmSetting.tbsPreviewMode.onSelchange = function(idx,strip,form){
  			radius = frmSetting.tbRadius.progressPos;
  		}
  		
+ 		frmSetting.btnClosedBackground.hide = true;
+		frmSetting.btnClosedTextColor.hide = true;
+		frmSetting.btnClosedIconTextColor.hide = true;
+		frmSetting.btnClosedBorderColor.hide = true;
+		
+		frmSetting.btnBackground.hide = false;
+		frmSetting.btnTextColor.hide = false;
+		frmSetting.btnIconTextColor.hide = false;
+		frmSetting.btnBorderColor.hide = false;
+		
  		frmSetting.showStatus("已切换到中文输入状态预览");
 	}
 	
@@ -349,7 +378,7 @@ frmSetting.importStyle = function(cfg){
 	//----------------------------------------------------------------
 	var openStyle = cfg.openStyle;
 	if(!openStyle) {
-		frmSetting.chkClosedStyle.checked = false;
+		frmSetting.chkClosedStyle.checked = false; 
 		
 		frmSetting.btnClosedBackground.background =  cfg.background;
 		frmSetting.btnClosedIconTextColor.background = cfg.iconColor;
@@ -359,7 +388,7 @@ frmSetting.importStyle = function(cfg){
 	}
 	else {
 		frmSetting.chkClosedStyle.checked = true;
-	
+		 
 		var openedStyle = openStyle[1];
 		var closedStyle = openStyle[0];
 		
@@ -408,7 +437,32 @@ frmSetting.importStyle = function(cfg){
 		 		}
 			}
 		}
+	} 
+	
+	if(frmSetting.chkPreviewEn.checked && frmSetting.chkClosedStyle.checked){
+		
+		frmSetting.btnClosedBackground.hide = false;
+		frmSetting.btnClosedTextColor.hide = false;
+		frmSetting.btnClosedIconTextColor.hide = false;
+		frmSetting.btnClosedBorderColor.hide = false; 
+		
+		frmSetting.btnBackground.hide = true;
+		frmSetting.btnTextColor.hide = true;
+		frmSetting.btnIconTextColor.hide = true;
+		frmSetting.btnBorderColor.hide = true;	
 	}
+	else {
+		frmSetting.btnClosedBackground.hide = true;
+		frmSetting.btnClosedTextColor.hide = true;
+		frmSetting.btnClosedIconTextColor.hide = true;
+		frmSetting.btnClosedBorderColor.hide = true; 
+		
+		frmSetting.btnBackground.hide = false;
+		frmSetting.btnTextColor.hide = false;
+		frmSetting.btnIconTextColor.hide = false;
+		frmSetting.btnBorderColor.hide = false;	
+	}
+	 
 	
 	frmSetting.tbInterval.progressPos = (cfg.interval : 50);
 
@@ -418,11 +472,11 @@ frmSetting.importStyle = function(cfg){
 		frmSetting.tipChars = table.clone(cfg.tipChars);
 		frmSetting.editCharsEn.text = escape2(cfg.tipChars[0x409] || cfg.tipChars.en);
 		frmSetting.editCharsLang.editBox.text = escape2(cfg.tipChars[0x804] || cfg.tipChars.lang);
-		frmSetting.editCharsFullShape.text = escape2(cfg.tipChars.fullShape);
-		frmSetting.editCharsHalfShape.text = escape2(cfg.tipChars.halfShape);
+		frmSetting.editCharsFullShape.text = escape2(cfg.tipChars.fullShape); 
 		frmSetting.editCharsCapital.text = escape2(cfg.tipChars.capital);
 		frmSetting.editCharsSymbol.text = escape2(cfg.tipChars.symbol);
 		frmSetting.editCharsClose.text = escape2(cfg.tipChars.close);
+		frmSetting.editCharsHalfShape.text = escape2(cfg.tipChars.halfShape);
 	}
 
  	//兼容窗口类名
@@ -433,7 +487,7 @@ frmSetting.importStyle = function(cfg){
 	}
 	else {
 		frmSetting.editClasses.text = "";
-	}
+	} 
 	
 	//重绘
 	frmSetting.preview.redraw();	
@@ -747,14 +801,31 @@ frmSetting.onMinimized = function(){
 /*}}*/
 
 /*中英变换颜色{{*/
+
+var showHandRight = function(){
+	if(!_WIN10_LATER) return;
+	
+	frmSetting.handRight1.hide = false;
+	frmSetting.handRight2.hide = false;
+	frmSetting.handRight3.hide = false;
+	frmSetting.handRight4.hide = false;
+	
+	frmSetting.setTimeout( 
+		function(){
+			frmSetting.handRight1.hide = true;
+			frmSetting.handRight2.hide = true;
+			frmSetting.handRight3.hide = true;
+			frmSetting.handRight4.hide = true;	
+		},2000); 
+}
+
 import app.util;
-frmSetting.chkClosedStyle.skin(style.checkBox)
+frmSetting.chkClosedStyle.skin(style.checkBoxGray)
 frmSetting.chkClosedStyle.oncommand = function(id,event){
 
 	//frmSetting.preview.text = unescapeColor(owner.checked?frmSetting.editCharsEn.text:frmSetting.editCharsLang.text);
 	if(owner.checked){
-		frmSetting.showStatus("已开启英文模式外观变换");
-		
+		 
 		imeBar.openStyle = {
 			[0] = {
 				background = frmSetting.btnClosedBackground.backgroundColor;
@@ -784,14 +855,27 @@ frmSetting.chkClosedStyle.oncommand = function(id,event){
 		frmSetting.preview.argbColor = frmSetting.btnClosedTextColor.backgroundColor;
 		frmSetting.preview.iconColor = frmSetting.btnClosedIconTextColor.backgroundColor;
 		
+		frmSetting.btnClosedBackground.hide = false;
+		frmSetting.btnClosedTextColor.hide = false;
+		frmSetting.btnClosedIconTextColor.hide = false;
+		frmSetting.btnClosedBorderColor.hide = false;
+		
+		frmSetting.btnBackground.hide = true;
+		frmSetting.btnTextColor.hide = true;
+		frmSetting.btnIconTextColor.hide = true;
+		frmSetting.btnBorderColor.hide = true;		
+			
 		frmSetting.preview.border = {
  			width = frmSetting.tbBorderWidth.progressPos;
  			color = frmSetting.btnClosedBorderColor.backgroundColor;
  			radius = frmSetting.tbRadius.progressPos;
  		}	 
+ 		
+ 		frmSetting.showStatus("已开启英文模式颜色变换（背景色、边框色、字体色、符号色）");
+ 		
 	}
-	else {
-		frmSetting.showStatus("已关闭英文模式外观变换");
+	else { 
+		frmSetting.showStatus("已关闭英文模式颜色变换");
  		
  		imeBar.background = frmSetting.btnBackground.backgroundColor;
 		imeBar.argbColor = frmSetting.btnTextColor.backgroundColor;
@@ -811,11 +895,21 @@ frmSetting.chkClosedStyle.oncommand = function(id,event){
  			color = frmSetting.btnBorderColor.backgroundColor;
  			radius = frmSetting.tbRadius.progressPos;
  		}
+ 		
+ 		frmSetting.btnClosedBackground.hide = true;
+		frmSetting.btnClosedTextColor.hide = true;
+		frmSetting.btnClosedIconTextColor.hide = true;
+		frmSetting.btnClosedBorderColor.hide = true;
+		
+		frmSetting.btnBackground.hide = false;
+		frmSetting.btnTextColor.hide = false;
+		frmSetting.btnIconTextColor.hide = false;
+		frmSetting.btnBorderColor.hide = false;		
 	}
 	
 	imeBar.imeWatch();
-	frmSetting.preview.redraw();
-	
+	frmSetting.preview.redraw(); 
+	showHandRight();
 }
 /*}}*/
 
@@ -939,7 +1033,6 @@ frmSetting.btnBorderColor.oncommand = function(id,event){
 		frmSetting.preview.redraw();
 	};
 	
-	frmSetting.tbsPreviewMode.selIndex = 1;
 	dlg.doModal();
 }
 
@@ -1048,7 +1141,6 @@ frmSetting.btnBackground.oncommand = function(id,event){
 		frmSetting.preview.redraw();
 	};
 	
-	frmSetting.tbsPreviewMode.selIndex = 1;
 	dlg.doModal();
 }
 /*}}*/
@@ -1083,7 +1175,6 @@ frmSetting.btnTextColor.oncommand = function(id,event){
 		frmSetting.preview.redraw();
 	};
 	
-	frmSetting.tbsPreviewMode.selIndex = 1;
 	dlg.doModal();
 }
 
@@ -1173,8 +1264,6 @@ frmSetting.btnIconTextColor.oncommand = function(id,event){
 			imeBar.imeWatch();
 		}  
 		else{
-			//frmSetting.btnClosedIconTextColor.background = argb;
-			
 			imeBar.iconColor = argb;
 			imeBar.redraw(); 
 		}
@@ -1183,8 +1272,6 @@ frmSetting.btnIconTextColor.oncommand = function(id,event){
 		frmSetting.preview.redraw();		
 	};
 	
-
-	frmSetting.tbsPreviewMode.selIndex = 1;
 	dlg.doModal();
 }
 /*}}*/
@@ -1239,14 +1326,21 @@ frmSetting.editCharsEn.editBox.onFocusGot = function(){
 }
 
 var onEditIconCharsFocusGot = function(){
-	frmSetting.preview.iconText =  unescapeColor(owner.text);
+	frmSetting.preview.iconText =  unescapeColor(owner.text); 
 }
 
 frmSetting.editCharsFullShape.editBox.onFocusGot = onEditIconCharsFocusGot;
 frmSetting.editCharsHalfShape.editBox.onFocusGot = onEditIconCharsFocusGot;
 frmSetting.editCharsCapital.editBox.onFocusGot = onEditIconCharsFocusGot;
-frmSetting.editCharsSymbol.editBox.onFocusGot = onEditIconCharsFocusGot;
-frmSetting.editCharsClose.editBox.onFocusGot = onEditIconCharsFocusGot;
+frmSetting.editCharsSymbol.editBox.onFocusGot = function(){
+	frmSetting.tbsPreviewMode.selIndex = 1;
+	frmSetting.preview.iconText =  unescapeColor(owner.text); 	
+}
+frmSetting.editCharsClose.editBox.onFocusGot = function(){
+	frmSetting.tbsPreviewMode.selIndex = 2;
+	frmSetting.preview.iconText =  unescapeColor(owner.text); 	
+}
+
 
 frmSetting.lnkCharsSymbol.skin(style.link) 
 frmSetting.lnkCharsSymbol.oncommand = function(id,event){
@@ -1528,40 +1622,6 @@ frmSetting.tbIconTextSize.onPosChanged = function( pos,triggeredByUser ){
 }
 /*}}*/
 
-/*调整字符透明度{{*/
-frmSetting.tbTextTrans.setTrackbarRange(0,255);
-frmSetting.tbTextTrans.skin(style.trackbar)
-frmSetting.tbTextTrans.onPosChanged = function( pos,triggeredByUser ){ 
-	var clr = frmSetting.btnTextColor.backgroundColor;
-	
-	var r,g,b = gdi.getRgba(clr);
-	clr = gdi.ARGB(r,g,b,255-pos);
-	frmSetting.btnTextColor.background = clr;
-	 
-	frmSetting.preview.argbColor = clr;
-	frmSetting.preview.redraw();	
-	
-	imeBar.argbColor = clr;
-	imeBar.redraw();
-}
-
-frmSetting.tbIconTextTrans.setTrackbarRange(0,255);
-frmSetting.tbIconTextTrans.skin(style.trackbar)
-frmSetting.tbIconTextTrans.onPosChanged = function( pos,triggeredByUser ){ 
-	var clr = frmSetting.btnTextColor.backgroundColor;
-	
-	var r,g,b = gdi.getRgba(clr);
-	clr = gdi.ARGB(r,g,b,255-pos);
-	frmSetting.btnIconTextColor.background = clr;
-	 
-	frmSetting.preview.iconColor = clr;
-	frmSetting.preview.redraw();	
-	
-	imeBar.iconColor = clr;
-	imeBar.redraw();	
-}
-/*}}*/
-
 /*设置字符粗体{{*/
 frmSetting.chkIconTextBold.skin(style.checkBox)
 frmSetting.chkIconTextBold.oncommand = function(id,event){
@@ -1605,9 +1665,15 @@ frmSetting.tbTimeout.onPosChanged = function( pos,triggeredByUser ){
 frmSetting.chkTimeout.oncommand = function( id,event ){
 	if(!frmSetting.chkTimeout.checked){
 		frmSetting.tbTimeout.progressPos = 0;
+		if(frmSetting.tbInterval.progressPos == 50){
+			frmSetting.tbInterval.progressPos = 5;
+		}
 	}
 	elseif(!frmSetting.tbTimeout.progressPos){
 		frmSetting.tbTimeout.progressPos = 2;
+		if(frmSetting.tbInterval.progressPos == 5){
+			frmSetting.tbInterval.progressPos = 50;
+		}
 	} 
 	
 	imeBar.timeout = frmSetting.tbTimeout.progressPos;	

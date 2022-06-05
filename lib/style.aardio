@@ -38,6 +38,21 @@ namespace style{
 			iconText = '\uF14a'/*_FA_CHECK_SQUARE*/
 		} 	
 	};
+	checkBoxGray = {
+		color = { 
+			hover = 0xFFFF0000; 
+			active = 0xFF00FF00;
+			disabled = 0xEE666666;
+		}
+		checked = {
+			color = { 
+				hover = 0xFFFF0000; 
+				active = 0xFF00FF00;
+				disabled = 0xEE666666;
+			}
+			iconText = '\uF14a'/*_FA_CHECK_SQUARE*/
+		} 	
+	};
 	radio ={
 		color = { 
 			hover = 0xFFFF0000; 
