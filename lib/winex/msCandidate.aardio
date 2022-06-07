@@ -1,0 +1,30 @@
+﻿//msCandidate 候选窗口
+import win;
+import winex;
+import process;
+
+namespace winex.msCandidate;
+
+getHwnd = function(){
+	
+	for processEntry in ..process.each( "TextInputHost.exe" ) { 
+		var hwnd = ..winex.findEx2("Windows.UI.Core.CoreWindow",,"ApplicationFrameWindow",,processEntry.th32ProcessID)
+ 		if(hwnd) return hwnd;
+	} 
+	
+	var hwnd = ..winex.find("Microsoft.IME.UIManager.CandidateWindow.Host");
+	if(hwnd){
+		return ..winex.findEx(hwnd , ,"Microsoft\.IME\.CandidateWindow\.View");
+	}
+}
+
+isVisible = function(){
+	var hwnd = getHwnd();
+	return hwnd && ..winex.isVisible(hwnd)
+}
+
+/**intellisense(winex.msCandidate)
+getHwnd() = 获取输入法候选窗口句柄
+isVisible() = 输入法候选窗口是否打开状态
+end intellisense**/
+ 

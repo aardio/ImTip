@@ -21,11 +21,56 @@ defaultCode = /***********************
     process.execute( qqpath )
 };
 
+//按大写 + 自动切换到英文输入
+["CAPSLK"]  = function(){  
+    key.ime.setOpenStatus(false);
+    key.ime.setConversionMode(0); 
+    
+    return true;//允许按键继续发送，不改变大小写键的默认行为
+};
+
+//切换到中文输入 + 小写
+["Ctrl+."]  = function(){    
+    var openState,mode = key.ime.state();
+    if( openState ) return true; //当前已经是中文输入模式，不改变默认行为
+    
+    //如果是大写状态，切换为小写
+    if(key.ime.capital()){  key.press("CAPSLK")  }
+
+    //英文直接切中文 
+    key.ime.setOpenStatus(true);
+    key.ime.setConversionMode(1|0x400);
+};
+
 //改键演示
 ["Ctrl+."] = function(){  
     key.up("Ctrl"); //先把已经按下的键弹起来
     key.combine("CTRL","A"); //换成别的键，具体看 aardio 库函数文档
     return false; //阻止按键事件
+};
+
+//叠字键演示
+["`"]  = function(){  
+   var openState,mode = key.ime.state();//用法请查看 aardio 文档
+   if(!openState 
+   		||  mode !=3 || key.getState("Shift")  
+   		|| key.getState("Ctrl")  
+   		|| key.getState("CAPSLK")  ) {
+  		return true; //允许此按键继续发送
+   }
+   
+   key.combine("SHIFT","LEFT"); //向后选一个字
+   key.combine("CTRL","C"); //复制
+   key.press("RIGHT"); //取消选中
+   key.combine("CTRL","V"); //粘贴
+};
+
+//取消次选键
+[";"] = function(){
+    if( winex.msCandidate.isVisible() ){
+        key.send(" ;") 
+    } 
+    else return true;
 };
 
 //按 shift + back 变 ctrl + z
@@ -66,7 +111,7 @@ defaultCode = /***********************
    key.press("LEFT");
 }
 
-//按`date输入大写的当前日期
+//按 `date 输入大写的当前日期
 ["~date"] = function(){ 
     var zh = string.chineseNumber('〇一二三四五六七八九');
     key.sendString(zh.date()); //改为 zh.time() 输出大写的当前时间
@@ -112,7 +157,8 @@ defaultCode = /***********************
 ******************************************************************/
 
 /******************************************************************
-//本程序已默认载入大量aardio库，可以在这里直接调用，具体用法请参考 aardio 文档。
+//本程序已默认载入大量 aardio 库，可以在这里直接调用，具体用法请参考 aardio 文档。
+//可以自行添加更多的 aardio 库，按原路径放到 ImTip.exe 所在目录的 /lib/ 目录下即可。
 
 //发送字符串
 key.sendString("这里是要发送的字符串")

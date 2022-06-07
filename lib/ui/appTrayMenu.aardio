@@ -5,6 +5,7 @@ import ui.doublePinyinMenu;
 import tsfInput;
 import win.ui.menu;
 import win.clip;
+import sys.input;
 
 namespace ui;
 
@@ -146,8 +147,61 @@ class appTrayMenu{
 			popmenu.add();//分隔线
 		
 			popmenu.add('打开系统输入法设置',function(id){
-				import process.control;
-				process.control("ms-settings:keyboard")
+				..raw.execute("ms-settings:keyboard")
+			});
+			
+			var menuDefTip = ..win.ui.popmenu(winform);
+			var id = menuDefTip.add("所有应用使用同一输入法",function(){ 
+				..tsfInput.setLocal(!..tsfInput.getLocal());
+			})
+			menuDefTip.check(id,!..tsfInput.getLocal(),0/*_MF_BYCOMMAND*/);  
+			
+			var inputMethodOverride = ..tsfInput.getInputMethodOverride();
+			var tips = ..sys.input.getEnabledLayoutOrTips();
+			if(..table.next(tips)){
+				
+				for(tip,tipType in tips){
+					if(tipType==2/*_LOTP_KEYBOARDLAYOUT*/){
+						var desc = ..sys.input.getDescription(tip);
+						if(#desc){
+							var id = menuDefTip.add(desc,function(){ 
+								if(tip!=inputMethodOverride) ..sys.input.setDefault(tip);
+								else ..sys.input.setDefault("");
+							})
+							menuDefTip.check(id,tip==inputMethodOverride,0/*_MF_BYCOMMAND*/);  
+						}
+					} 
+				} 
+							
+				for(tip,tipType in tips){
+					if(tipType==1/*_LOTP_INPUTPROCESSOR*/){
+						var desc = ..sys.input.getDescription(tip);
+						if(#desc){
+							var id = menuDefTip.add(desc,function(){ 
+								if(tip!=inputMethodOverride) ..sys.input.setDefault(tip);
+								else ..sys.input.setDefault("");
+							})
+							menuDefTip.check(id,tip==inputMethodOverride,0/*_MF_BYCOMMAND*/);  
+						}
+					} 
+				} 
+			}
+			
+			popmenu.add('设置默认输入法',menuDefTip);   
+			popmenu.add();//分隔线
+		}
+		else{
+			
+			if(_WIN7_LATER){
+				var imStatus = ..tsfInput.getStatus();
+				var id = popmenu.add('启用英文键盘',function(id){
+					..tsfInput.enableUsKeyboard(!imStatus.en);
+				});
+				popmenu.check(id,imStatus.en,0/*_MF_BYCOMMAND*/); 	
+			}
+			 
+			popmenu.add('打开系统输入法设置',function(id){
+				..raw.execute("control.exe","input.dll")
 			}); 
 		}
 		

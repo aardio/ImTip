@@ -4,7 +4,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 2.9 - 通用输入法状态跟踪提示";right=698;bottom=615;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.0 - 通用输入法状态跟踪提示";right=698;bottom=615;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";db=1;dl=1;dr=1;repeat="scale";z=41};
 btnBackground={cls="plus";text=" ";left=97;top=138;right=129;bottom=153;dl=1;dt=1;edge=1;notify=1;z=39};
@@ -27,7 +27,7 @@ chkIconTextBold={cls="plus";text="粗体";left=567;top=394;right=619;bottom=418;
 chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=110};
 chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};db=1;dr=1;z=109};
 chkQuirksMode={cls="plus";text="怪异模式";left=596;top=538;right=681;bottom=562;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=108};
-chkSysRun={cls="plus";text="允许开机启动";left=17;top=589;right=134;bottom=613;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=93};
+chkSysRun={cls="plus";text="允许开机启动";left=17;top=589;right=213;bottom=613;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=93};
 chkTextBold={cls="plus";text="粗体";left=216;top=395;right=268;bottom=419;align="left";iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=76};
 chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=564;right=224;bottom=588;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=113};
 cmbIconTextRenderingHint={cls="combobox";left=438;top=345;right=555;bottom=365;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=80};
@@ -129,6 +129,7 @@ tbWidth={cls="plus";left=179;top=138;right=399;bottom=153;bgcolor=-2512093;borde
 import key.ime.stateBar;
 if(!imeBar) imeBar = key.ime.stateBar(frmSetting);
 
+frmSetting.preview.show(false);
 frmSetting.preview.orphanWindow(true);
 frmSetting.enableDpiScaling("init");
 
@@ -2029,12 +2030,31 @@ frmSetting.btnReset.oncommand = function(id,event){
 frmSetting.chkSysRun.skin(style.checkBox);
 frmSetting.chkSysRun.oncommand = function( id,event ){ 
 	import sys.run;
-	if(owner.checked){
-		sys.run("ImTip").register("/sys");
+	import process.admin
+	
+	
+	if(process.admin.isRunAs()){
+		import sys.runAsTask;
+		
+		sys.run("ImTip").delete();
+		
+		if(owner.checked){
+			sys.runAsTask("ImTip","通用输入法跟踪提示工具").register("/sys");
+		}
+		else {
+			sys.runAsTask("ImTip","通用输入法跟踪提示工具").delete();
+		} 	
+		
+		frmSetting.chkSysRun.text = "允许开机以管理权限启动"
 	}
-	else {
-		sys.run("ImTip").delete()
-	} 
+	else{
+		if(owner.checked){
+			sys.run("ImTip").register("/sys");
+		}
+		else {
+			sys.run("ImTip").delete()
+		} 
+	}
 	
 	config.setting.sysRun = owner.checked;
 	config.setting.save();
@@ -2132,5 +2152,7 @@ frmSetting.setTimeout(
 )
 
 frmSetting.show();
+frmSetting.preview.show(true);
+
 mainSettingForm = frmSetting;
 win.loopMessage();

@@ -12,12 +12,13 @@ import winex;
 import winex.mouse;
 import winex.key;
 import winex.accObject;
+import winex.msCandidate;
 import string.chineseNumber;
 import ui.chineseNumber;
 import ui.colorPicker;
 import win.ui;
 /*DSG{{*/
-var winform = win.form(text="设置";right=984;bottom=589;bgcolor=16777215)
+var winform = win.form(text="ImTip - 超级热键";right=984;bottom=589;bgcolor=16777215)
 winform.add(
 btnHelp={cls="plus";text="aardio 语法";left=824;top=12;right=933;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
 btnReset={cls="plus";text='\uF021   恢复到范例';left=619;top=544;right=765;bottom=580;bgcolor=14935259;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=6};
