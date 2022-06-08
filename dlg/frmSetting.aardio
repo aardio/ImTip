@@ -2033,7 +2033,7 @@ frmSetting.chkSysRun.oncommand = function( id,event ){
 	import process.admin
 	
 	
-	if(process.admin.isRunAs()){
+	if( process.admin.isRunAs() &&  ! _WINXP ){
 		import sys.runAsTask;
 		
 		sys.run("ImTip").delete();
