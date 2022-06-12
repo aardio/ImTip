@@ -79,6 +79,17 @@ mainForm.importImTipStyle = function(path){
 		config.style.embeddingFontName = null; 
 		config.style.openStyle = null; 
 		config.style.border = null;
+		config.style.embeddingFontData = null;
+		config.style.embeddingFontName = null; 
+		config.style.openStyle = null; 
+		config.style.border = null;
+		config.style.background = null;
+		config.style.foreground = null;
+		config.style.linearGradient = null;
+		config.style.paddingLeft = null;
+		config.style.paddingRight = null;
+		config.style.paddingTop = null;
+		config.style.paddingBottom = null;
 		
  		table.assign(config.style,cfg); 
  		config.style.save();	

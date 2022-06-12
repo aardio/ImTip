@@ -21,7 +21,7 @@ defaultCode = /***********************
     process.execute( qqpath )
 };
 
-//按大写 + 自动切换到英文输入
+//按大写自动切换到英文输入
 ["CAPSLK"]  = function(){  
     key.ime.setOpenStatus(false);
     key.ime.setConversionMode(0); 
@@ -29,17 +29,29 @@ defaultCode = /***********************
     return true;//允许按键继续发送，不改变大小写键的默认行为
 };
 
-//切换到中文输入 + 小写
+//按 Ctrl + .  切换到中文输入 + 中文标点 + 小写
 ["Ctrl+."]  = function(){    
     var openState,mode = key.ime.state();
-    if( openState ) return true; //当前已经是中文输入模式，不改变默认行为
+    if( openState && !key.ime.capital() ) return true; //当前已经是中文输入模式，不改变默认行为
     
-    //如果是大写状态，切换为小写
-    if(key.ime.capital()){  key.press("CAPSLK")  }
+    key.up("Ctrl");//先放开 Ctrl 键
 
-    //英文直接切中文 
-    key.ime.setOpenStatus(true);
-    key.ime.setConversionMode(1|0x400);
+    //如果是大写状态，切换为小写
+    if(key.ime.capital())    key.press("CAPSLK") 
+
+    //英文直接切中文 + 中文标点
+    key.ime.setOpenStatus(true); //打开输入法
+    key.ime.setConversionMode(1|0x400); //切换到中文状态，这一步不能省略
+    
+    //再次尝试用键盘切换中文标点，这一步不能省略
+    key.combine("CTRL",".");
+    
+    //现在再次检测中文标点状态
+    var openState,mode = key.ime.state();
+    if(mode!=3/*_IME_SYMBOLMODE_SYMBOL*/){
+        //说明切换到了英文标点，再切换回去
+         key.combine("CTRL",".")
+    }  
 };
 
 //改键演示
