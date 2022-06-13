@@ -20,7 +20,7 @@ import win.ui;
 /*DSG{{*/
 var winform = win.form(text="ImTip - 超级热键";right=984;bottom=589;bgcolor=16777215)
 winform.add(
-btnHelp={cls="plus";text="aardio 语法";left=824;top=12;right=933;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
+btnHelp={cls="plus";text="在 aardio 开发环境中打开";left=724;top=12;right=920;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
 btnReset={cls="plus";text='\uF021   恢复到范例';left=619;top=544;right=765;bottom=580;bgcolor=14935259;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=6};
 btnSave={cls="plus";text='\uF0C7   保存';left=777;top=544;right=923;bottom=580;bgcolor=11580047;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=5};
 chkEnableHotkey={cls="plus";text="启用超级热键";left=33;top=7;right=473;bottom=38;align="left";dl=1;dt=1;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8';notify=1;textPadding={left=24};z=2};
@@ -55,20 +55,17 @@ var hotkeyMgr;
 winform.btnSave.oncommand = function(id,event){
     config.hotkey.save();
     winform.btnSave.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
+    
+    if(hotkeyMgr){
+    	 hotkeyMgr.close(); 
+    	 hotkeyMgr= null;
+    }
+    
     if(!winform.chkEnableHotkey.checked){
-    	if(hotkeyMgr){
-    		hotkeyMgr.close();
-    	    hotkeyMgr= null;
-    	}
-    	
     	win.delay(500);
     	winform.btnSave.disabledText = null;
     	return;
-    }
-    
-    if(hotkeyMgr){
-        hotkeyMgr.close();
-    }
+    } 
        
 	hotkeyMgr =  key.hotkey(winform)
 	var code = "{" + winform.editTable.text + "}"
@@ -83,22 +80,14 @@ winform.btnSave.oncommand = function(id,event){
 	
 	var err;
 	try{
-		if(type(keyTable)==type.table){
-			for k,v in table.eachName(keyTable){ 
-				hotkeyMgr.regStr(k,v);
-			} 
-		}		
+		hotkeyMgr.loadTable(keyTable);		
 	}
 	catch(e){
 		winform.editTable.showErrorTip(e);
 		err = e;
 	}
-	if(err){
-		winform.btnSave.disabledText = null;
-		return;
-	}
 	
-	win.delay(500);
+	if(!err) win.delay(500);
 	winform.btnSave.disabledText = null;
 }
 
@@ -146,8 +135,25 @@ winform.setTimeout(
 ); 	
 
 import process;
-winform.btnHelp.oncommand = function(id,event){
-	process.openUrl("http://www.aardio.com");
+winform.btnHelp.oncommand = function(id,event){ 
+	
+	import win.reg;
+	var aardio = win.reg.query("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\aardio.exe")
+	 
+	if(!io.exist(aardio)){
+		process.openUrl("http://www.aardio.com");
+		return;
+	}
+ 
+	var data = string.loadcode("\dlg\templateHotkey.aardio",{ hotkeyTableString = winform.editTable.text } ); 
+	
+	if(data){
+		var tempPath = io.tmpname("imtip",".aardio");
+		string.save(tempPath,data);
+		
+		process.execute(aardio,tempPath); 
+		::Kernel32.MoveFileEx(tempPath,null,0x4/*_MOVEFILE_DELAY_UNTIL_REBOOT*/);
+	}
 }
 
 winform.btnHelp.skin(style.plainButton);

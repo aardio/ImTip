@@ -12,6 +12,18 @@ namespace ui;
 class appTrayMenu{
 	ctor(winform){
 		var popmenu = ..win.ui.popmenu(winform);//创建弹出菜单
+		
+		var id = popmenu.add("管理超级热键",function(){
+			
+			if(!..mainHotkeyForm){
+				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
+			}
+			
+			..mainHotkeyForm.show(); 
+		})
+		
+		popmenu.add();//分隔线
+		
 		popmenu.add('配置方案',function(id){ 
 			if(..mainSettingForm){
 				return ..win.setForeground(..mainSettingForm.hwnd); 
@@ -107,18 +119,7 @@ class appTrayMenu{
 			} 
 		});
 		
-		popmenu.add();//分隔线
-		
-		var id = popmenu.add("管理超级热键",function(){
-			
-			if(!..mainHotkeyForm){
-				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
-			}
-			
-			..mainHotkeyForm.show(); 
-		})
-		
-		popmenu.add();//分隔线
+		popmenu.add();//分隔线 
 		
 		if(_WIN10_LATER){
 			var imStatus = ..tsfInput.getStatus();
