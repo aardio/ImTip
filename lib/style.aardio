@@ -143,4 +143,18 @@ namespace style{
 		};
 		group="palette";
 	};
+	scheme = {
+		color={
+			default=0xFFE0E3D1
+		};
+		border={
+			active={color=0xFF9D9E96;width=2};hover={color=0xFF00AEFF;width=2}
+		};
+		checked={
+			border={
+				default={color=0xF0FF0000;width=1};hover={color=0xFF00AEFF;width=2}
+			}
+		};
+		group="palette";
+	};
 }

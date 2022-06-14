@@ -36,6 +36,129 @@ if(!config.style.width){
 	config.style.mix( config.__imTipDefaultStyle );	
 }
 
+if(!config.setting.schemes) {
+	config.setting.schemes = {
+	[1] = {
+		argbColor=-1;
+		border={color=14395508;radius=6;width=0};
+		offsetX=31;
+		iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=4;right=6;left=0;bottom=0}};
+		background=-151026827;
+		textRenderingHint=3;
+		openStyle={[1]={argbColor=-1;background=-151026827;border={color=14395508;radius=6;width=0};iconColor=-1};[0]={argbColor=-1;background=-1136150017;border={color=14395508;radius=6;width=0};iconColor=-1}};
+		timeout=2;
+		align="left";
+		textPadding={top=0;right=0;left=4;bottom=0};
+		tipChars={fullShape='\uF111';close='\uF05E';hanja="漢";[1033]="En";[2052]="中";[1041]="あ";katakana="カ";halfShape='\uF186';[1042]="가";capital='\uF031';symbol="。"};
+		width=55;
+		editorClasses={ConsoleWindowClass=1;["Windows.UI.Input.InputSite.WindowClass"]=1;AVL_AVView=1};
+		font={h=-18;name="Segoe UI";weight=700};
+		interval=50;
+		iconColor=-1;
+		height=34;
+		offsetY=2;
+		iconTextRenderingHint=3;
+		valign="center"
+	};
+	[2] = {
+		argbColor=-1836295;
+		border={color=-1261241864;radius=18;width=2};
+		offsetX=23;
+		iconStyle={font={h=-12;name="imtip";weight=400};align="right";padding={top=3;right=6;left=0;bottom=0};valign="center"};
+		background=-16562265;
+		textRenderingHint=5;
+		openStyle={[1]={argbColor=-1836295;background=-16562265;border={color=-1261241864;radius=18;width=2};iconColor=-4194379};[0]={argbColor=-1771533;background=-16476777;border={color=-8143936;radius=18;width=2};iconColor=-2490625}};
+		timeout=1;
+		align="left";
+		textPadding={top=7;right=0;left=7;bottom=7};
+		tipChars={fullShape='\uF111';close='\uE801';[1033]="英";[2052]="中";symbol='\uF82B';en="英";capital='\uF031';lang="中";halfShape='\uF042'};
+		width=49;
+		editorClasses={ConsoleWindowClass=1;["Windows.UI.Input.InputSite.WindowClass"]=1;AVL_AVView=1};
+		font={h=-14;name="Segoe UI";weight=400};
+		interval=50;
+		iconColor=-4194379;
+		height=29;
+		offsetY=-5;
+		iconTextRenderingHint=4;
+		valign="center"
+	};
+	[3] = {
+		argbColor=-1;
+		border={color=-7810305;radius=29;width=1};
+		offsetX=27;
+		paddingBottom=14;
+		iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=-2;right=5;left=0;bottom=-26}};
+		background=-134163201;
+		textRenderingHint=3;
+		openStyle={[1]={argbColor=-1;foreground=-286406415;background=-134163201;border={color=-7810305;radius=29;width=1};iconColor=-1};[0]={argbColor=-1;foreground=-16539905;background=-12058775;border={color=14395508;radius=29;width=1};iconColor=-1}};
+		linearGradient=265;
+		paddingTop=3;
+		timeout=2;
+		interval=50;
+		align="left";
+		valign="center";
+		tipChars={fullShape='\uF111';close='\uF05E';symbol="。";[1033]="En";[2052]="中";[1041]="あ";capital='\uF031';halfShape='\uF186';[1042]="가";katakana="カ";hanja="漢"};
+		width=36;
+		editorClasses={ConsoleWindowClass=1;["Windows.UI.Input.InputSite.WindowClass"]=1;AVL_AVView=1};
+		font={h=-17;name="Segoe UI";weight=700};
+		iconColor=-1;
+		foreground=-286406415;
+		height=43;
+		offsetY=4;
+		iconTextRenderingHint=3;
+		textPadding={top=0;right=0;left=2;bottom=0}
+	};
+	[4] = {
+		argbColor=-1;
+		border={color=-6647046;radius=29;width=0};
+		offsetX=28;
+		iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=-2;right=5;left=-10;bottom=-25}};
+		background=-4223027;
+		textRenderingHint=3;
+		openStyle={[1]={argbColor=-1;foreground=-7441272;background=-4223027;border={color=-6647046;radius=29;width=0};iconColor=-1};[0]={argbColor=-10061202;foreground=-4727353;background=-5072435;border={color=14395508;radius=29;width=0};iconColor=-1}};
+		paddingBottom=21;
+		timeout=2;
+		interval=50;
+		align="left";
+		valign="center";
+		tipChars={fullShape='\uF111';close='\uF05E';symbol="。";[1033]="En";[2052]="中";[1041]="あ";capital='\uF031';halfShape='\uF186';[1042]="가";katakana="カ";hanja="漢"};
+		width=43;
+		editorClasses={ConsoleWindowClass=1;["Windows.UI.Input.InputSite.WindowClass"]=1;AVL_AVView=1};
+		font={h=-19;name="Segoe UI";weight=700};
+		iconColor=-1;
+		foreground=-7441272;
+		height=43;
+		offsetY=2;
+		iconTextRenderingHint=3;
+		textPadding={top=-7;right=-14;left=6;bottom=-13}
+	};
+	[5] = {
+		argbColor=-1;
+		border={color=-10454122;radius=10;width=0};
+		offsetX=37;
+		iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=-6;right=0;left=-21;bottom=-10}};
+		background=-11639686;
+		textRenderingHint=3;
+		openStyle={[1]={argbColor=-1;foreground=-3373177;background=-11639686;border={color=-10454122;radius=10;width=0};iconColor=-1};[0]={argbColor=-6144;foreground=-10561920;background=-11700124;border={color=14395508;radius=10;width=0};iconColor=-1854}};
+		paddingBottom=21;
+		timeout=2;
+		interval=50;
+		align="left";
+		valign="center";
+		tipChars={fullShape='\uF111';close='\uF05E';symbol="。";[1033]="En";[2052]="中";[1041]="あ";capital='\uF031';halfShape='\uF186';[1042]="가";katakana="カ";hanja="漢"};
+		width=48;
+		editorClasses={ConsoleWindowClass=1;["Windows.UI.Input.InputSite.WindowClass"]=1;AVL_AVView=1};
+		font={h=-21;name="Segoe UI";weight=700};
+		iconColor=-1;
+		foreground=-3373177;
+		height=36;
+		offsetY=2;
+		iconTextRenderingHint=3;
+		textPadding={top=-5;right=-41;left=3;bottom=-23}
+	}; 
+	}
+}
+
 config.style.backgroundColor = null;
 
 /**intellisense(config)
