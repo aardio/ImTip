@@ -1,0 +1,67 @@
+﻿import web.json;
+import web.rpc.externalServer;
+namespace app;
+	
+externalServer = ..web.rpc.externalServer();
+
+externalServer.external = {
+	
+	openSetting = function(){
+		if(..mainSettingForm){
+			..win.setForeground(..mainSettingForm.hwnd);
+			..win.showForeground(..mainSettingForm.hwnd); 
+			return;
+		}
+		
+		var frmChild = ..mainForm.loadForm("\dlg\frmSetting.aardio");
+		frmChild.show();	
+	}
+	
+ 
+	loadScheme = function(cfg){
+		if(!cfg) return false;
+		
+		if(cfg.openStyle){
+			cfg.openStyle[0] = cfg.openStyle[1];
+			cfg.openStyle[1] = cfg.openStyle[2];
+			cfg.openStyle[2] = null;
+		}
+		
+		if(cfg.tipChars){
+			var tipChars = {};
+			for(k,v in cfg.tipChars){
+				tipChars[tonumber(k):k] = v;
+			} 
+			
+			cfg.tipChars = tipChars;
+		}
+		
+		if(..mainSettingForm){
+			..mainSettingForm.importStyle(cfg);
+		}
+		else {
+			..config.style.embeddingFontData = null;
+			..config.style.embeddingFontName = null; 
+			..config.style.openStyle = null; 
+			..config.style.border = null;
+			
+ 			..table.assign(..config.style,cfg); 
+ 			..config.style.save();	
+		} 
+		
+		..imeBar.imeSkin(cfg);	
+		return true;	
+	}
+}
+
+//限定只有下面允许的外部域名才能访问 aardio 函数
+externalServer.accessControlAllowOrigin = {
+    ["https://imtip.aardio.com"] = true; //指定准确前缀，域名后不要加斜杆
+    ["http://imtip.aardio.com"] = true;
+}
+
+externalServer.start();
+
+/**intellisense()
+app.externalServer = RPC 服务端\n!webRpcExternalServer.
+end intellisense**/

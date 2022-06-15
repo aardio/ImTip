@@ -1,3 +1,4 @@
+import fonts.imTipUi;
 import fonts.imtip;
 import fsys;
 import fsys.lnk;
@@ -20,7 +21,7 @@ import win.ui;
 /*DSG{{*/
 var winform = win.form(text="ImTip - 超级热键";right=984;bottom=589;bgcolor=16777215)
 winform.add(
-btnHelp={cls="plus";text="在 aardio 开发环境中打开";left=724;top=12;right=920;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='imtip')};iconText='\uF0EB';notify=1;paddingLeft=20;z=4};
+btnHelp={cls="plus";text="在 aardio 开发环境中打开";left=724;top=12;right=920;bottom=34;align="left";color=3947580;dr=1;dt=1;font=LOGFONT(h=-13);iconColor=2960685;iconStyle={align="left";font=LOGFONT(h=-16;name='ImTipUi')};iconText='\uF121';notify=1;paddingLeft=20;z=4};
 btnReset={cls="plus";text='\uF021   恢复到范例';left=619;top=544;right=765;bottom=580;bgcolor=14935259;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=6};
 btnSave={cls="plus";text='\uF0C7   保存';left=777;top=544;right=923;bottom=580;bgcolor=11580047;db=1;dr=1;font=LOGFONT(h=-16;name='imtip');notify=1;tabstop=1;z=5};
 chkEnableHotkey={cls="plus";text="启用超级热键";left=33;top=7;right=473;bottom=38;align="left";dl=1;dt=1;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF0C8';notify=1;textPadding={left=24};z=2};

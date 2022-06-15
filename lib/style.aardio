@@ -155,6 +155,6 @@ namespace style{
 				default={color=0xF0FF0000;width=1};hover={color=0xFF00AEFF;width=2}
 			}
 		};
-		group="palette";
+		group="scheme";
 	};
 }

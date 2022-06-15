@@ -1,10 +1,11 @@
+import fonts.imTipUi;
 import style;
 import config;
 import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.4 - 通用输入法状态跟踪提示";right=694;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.5 - 通用输入法状态跟踪提示";right=694;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
 bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};
@@ -26,18 +27,18 @@ btnForeground={cls="plus";text=" ";left=97;top=240;right=129;bottom=255;dl=1;dt=
 btnIconTextColor={cls="plus";text=" ";left=438;top=497;right=470;bottom=512;db=1;dl=1;edge=1;notify=1;z=39};
 btnIconTextFont={cls="plus";text="导入 ...";left=604;top=441;right=669;bottom=465;align="left";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};z=64};
 btnImport={cls="plus";text="导入";left=499;top=20;right=574;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=91};
-btnMoreSchemes={cls="plus";text="更多 ...";left=754;top=591;right=831;bottom=613;align="right";dl=1;dt=1;font=LOGFONT(h=-13);iconColor=11829830;notify=1;z=142};
-btnOpenSchemes={cls="plus";text="选择方案";left=598;top=90;right=694;bottom=112;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-14;name='imtip');padding={top=2}};iconText='\uE8CE';notify=1;textPadding={left=20;bottom=1};z=141};
+btnMoreSchemes={cls="plus";text='\uF019 更多 ...';left=754;top=591;right=831;bottom=613;align="right";dl=1;dt=1;font=LOGFONT(h=-13;name='ImTipUi');iconColor=11829830;notify=1;z=142};
+btnOpenSchemes={cls="plus";text="选择方案";left=586;top=90;right=682;bottom=112;align="right";dl=1;dt=1;iconStyle={align="right";font=LOGFONT(h=-14;name='ImTipUi')};iconText='\uF101';notify=1;textPadding={right=14};z=141};
 btnPaste={cls="plus";left=660;top=667;right=685;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=107};
 btnReset={cls="plus";text="重置";left=418;top=20;right=493;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=90};
-btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;dl=1;dt=1;edge=1;notify=1;z=136};
-btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;dl=1;dt=1;edge=1;notify=1;z=137};
-btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;db=1;dl=1;dt=1;edge=1;notify=1;z=138};
-btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;db=1;dl=1;edge=1;notify=1;z=139};
-btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;db=1;dl=1;edge=1;notify=1;z=140};
+btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=136};
+btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=137};
+btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;db=1;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=138};
+btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=139};
+btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=140};
 btnTextColor={cls="plus";text=" ";left=91;top=497;right=123;bottom=512;db=1;dl=1;edge=1;notify=1;z=29};
 btnTextFont={cls="plus";text="选择 ...";left=268;top=441;right=333;bottom=465;align="left";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};z=68};
-btnUndo={cls="plus";left=609;top=667;right=634;bottom=689;align="left";db=1;disabled=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF021';notify=1;textPadding={left=25};z=134};
+btnUndo={cls="plus";left=609;top=667;right=634;bottom=689;align="left";db=1;disabled=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='ImTipUi')};iconText='\uF0E2';notify=1;textPadding={left=25};z=134};
 chkClosedStyle={cls="plus";text="变换颜色";left=97;top=87;right=189;bottom=109;align="left";color=8553090;dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');valign="top"};iconText='\uF0C8 ';notify=1;textPadding={left=21};valign="top";z=83};
 chkIconTextBold={cls="plus";text="粗体";left=567;top=467;right=619;bottom=491;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
 chkLinearGradient={cls="plus";text="前景到背景色渐变效果";left=172;top=234;right=336;bottom=258;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=131};
@@ -396,6 +397,7 @@ frmSetting.importStyle = function(cfg){
 	//----------------------------------------------------------------
 	if(cfg.background === null) cfg.background = cfg.backgroundColor;  
 	if(cfg.iconColor === null) cfg.iconColor = cfg.argbColor; 
+	
 	frmSetting.btnBackground.background = cfg.background;
 	frmSetting.btnForeground.background = cfg.foreground;
 	frmSetting.btnTextColor.background = cfg.argbColor;
@@ -403,7 +405,6 @@ frmSetting.importStyle = function(cfg){
 	
 	frmSetting.preview.backgroundColor = cfg.background;
 	frmSetting.preview.foregroundColor = cfg.foreground;
-	frmSetting.preview.foreground = cfg.foreground;
 	frmSetting.preview.argbColor = cfg.argbColor; 
 	frmSetting.preview.iconColor = cfg.iconColor;
 	
@@ -453,7 +454,6 @@ frmSetting.importStyle = function(cfg){
 	var openStyle = cfg.openStyle;
 	if(!openStyle) {
 		frmSetting.chkClosedStyle.checked = false;
-		
 	}
 	else {
 		frmSetting.chkClosedStyle.checked = true;
@@ -584,8 +584,6 @@ frmSetting.importStyle = function(cfg){
 	
 	//重绘
 	frmSetting.preview.redraw();	
-	
-	frmSetting.updateSchemeThumbnail(config.setting.schemeIndex);
 }
 
 frmSetting.importStyleFromFile = function(path){
@@ -830,7 +828,6 @@ frmSetting.exportStyle = function(){
 			else {
 				cfg.openStyle[0].foreground = 0; //用全透明色变换
 			}
-			
 		}
 		else {
 			if(!cfg.openStyle[1].foreground) cfg.openStyle[1].foreground  = 0;
@@ -838,7 +835,7 @@ frmSetting.exportStyle = function(){
 	}
 	else {
 		if((cfg.foreground !== null) && !(cfg.foreground & 0xFF000000) ){
-			cfg.foreground = null; //用全透明色变换
+			cfg.foreground = null; 
 		}
 	}
 	
@@ -952,11 +949,13 @@ frmSetting.onMinimized = function(){
 /*}}*/
 
 /*选择配置方案{{*/
-frmSetting.btnScheme1.skin(style.scheme);frmSetting.btnScheme1.schemeIndex = 1;
-frmSetting.btnScheme2.skin(style.scheme);frmSetting.btnScheme2.schemeIndex = 2;
-frmSetting.btnScheme3.skin(style.scheme);frmSetting.btnScheme3.schemeIndex = 3;
-frmSetting.btnScheme4.skin(style.scheme);frmSetting.btnScheme4.schemeIndex = 4;
-frmSetting.btnScheme5.skin(style.scheme);frmSetting.btnScheme5.schemeIndex = 5;
+for(i=1;5;1){
+	var ctrl = frmSetting["btnScheme" + i ]; 
+	ctrl.schemeIndex = i; 
+	ctrl.foreRepeat = "auto"; 
+	ctrl.skin(style.scheme);
+}
+
 if(!config.setting.schemeIndex 
 		|| ! frmSetting["btnScheme" + config.setting.schemeIndex ] ){
 	config.setting.schemeIndex = 1;
@@ -966,69 +965,73 @@ frmSetting["btnScheme" + config.setting.schemeIndex ].checked = true;
 var schemeThumbnails = config.setting.schemeThumbnails;
 if(schemeThumbnails){
 	for(i=1;5;1){
+		var ctrl = frmSetting["btnScheme" + i ]; 
 		var buf = schemeThumbnails[i];
 		if(buf){
-			var ctrl = frmSetting["btnScheme" + i ]; 
-			ctrl.text = "";
 			
+			ctrl.text = "";
 			var bmp = gdip.bitmap(buf);
 			if(!bmp) continue;
-			
-			var x,y,cx,cy = ctrl.getPos();
-			if(bmp.width>cx || bmp.height>cy){
-				ctrl.foreRepeat = "scale"
-			}
-			else {
-				ctrl.foreRepeat = "center"	
-			}
 			
 			ctrl.foreground =  bmp;
 		} 
 	}	
 }
  
-import gdip.snap; 
-import win.debounce;
-frmSetting.updateSchemeThumbnail = win.debounce( function(schemeIndex){ 
- 
-	if(!config.setting.schemeThumbnails) config.setting.schemeThumbnails = {}; 
-	var ctrl = frmSetting["btnScheme" + schemeIndex ]; 
-	
-	var bmp = gdip.snap(frmSetting.preview.hwnd)
- 
- 	var x,y,cx,cy = ctrl.getPos();
- 	var dpiScaleX = ctrl.dpiScaleX : 1;
- 	if(dpiScaleX>1){
- 		var img = bmp.getThumbnail(bmp.width/dpiScaleX,bmp.height/dpiScaleX,true);
- 		config.setting.schemeThumbnails[schemeIndex] = img.saveToBuffer();
- 		img.dispose();
- 	}
- 	else {
- 		config.setting.schemeThumbnails[schemeIndex]  = bmp.saveToBuffer();
- 	} 
- 	
-	if(bmp.width>cx || bmp.height>cy){
-		ctrl.foreRepeat = "scale"
+frmSetting.preview.SnapThumbnail = function(snap){ 
+	if(!snap){
+		owner.onDrawEnd = null;
+		return;
 	}
-	else {
-		ctrl.foreRepeat = "center"	
+ 	 
+	owner.onDrawEnd = function(graphics,rc,bmpTemp){ 
+		var schemeIndex = config.setting.schemeIndex;
+		var ctrl = frmSetting["btnScheme" + schemeIndex ]; 
+		
+		var foreground;
+ 		var dpiScaleX = owner.dpiScaleX : 1;
+ 		if(dpiScaleX>1){
+ 			
+ 			foreground = gdip.bitmap(bmpTemp.width/dpiScaleX,bmpTemp.height/dpiScaleX);
+ 			
+ 			var graphics = foreground.getGraphics();
+ 			graphics.drawImageScale(bmpTemp,::RECT(0,0,bmpTemp.width/dpiScaleX,bmpTemp.height/dpiScaleX));
+ 			graphics.delete();
+ 			
+ 		}
+ 		else {
+ 			foreground = bmpTemp.clone();
+ 		} 
+ 		
+ 		ctrl.text = "";
+ 		var prevBmp = ctrl.setForeground(foreground,false);
+		if(prevBmp){
+			prevBmp.dispose();
+		}
 	}
-	bmp.dispose();
-	
-	ctrl.text = "";
-	var prevBmp = ctrl.setForeground(config.setting.schemeThumbnails[schemeIndex],false);
-	if(prevBmp){
-		prevBmp.dispose();
-	}
-},1000);
+}
 
 var onSchemeClick = function(/*id,event*/){
+
+/*
+	frmSetting.width = frmSetting.width - frmSetting.groupboxScheme.width;
+	frmSetting.btnOpenSchemes.hide = false;
+	frmSetting.groupboxScheme.hide = true;
+	frmSetting.preview.SnapThumbnail(false);
+*/
+	
+	frmSetting.preview.SnapThumbnail(false);
 	if(!config.setting.schemes) config.setting.schemes = {};
 	if(!config.setting.schemeThumbnails) config.setting.schemeThumbnails = {};
 	
 	var schemeIndex = config.setting.schemeIndex;
 	config.setting.schemes[schemeIndex] = frmSetting.exportStyle();  
-	  
+	
+	var ctrl = frmSetting["btnScheme" + schemeIndex ]; 
+	if(ctrl.foreground){
+		config.setting.schemeThumbnails[schemeIndex] = ctrl.foreground.saveToBuffer("*.png");
+	}
+
 	config.setting.schemeIndex = owner.schemeIndex;
 	var scheme = config.setting.schemes[owner.schemeIndex];
 	
@@ -1040,11 +1043,13 @@ var onSchemeClick = function(/*id,event*/){
 		imeBar.imeSkin(scheme);
 	}
 		
-	config.setting.save(); 	
+	config.setting.save();
 	
-	frmSetting.width = frmSetting.width - frmSetting.groupboxScheme.width;
-	frmSetting.btnOpenSchemes.hide = false;
-	frmSetting.groupboxScheme.hide = true;
+	frmSetting.preview.SnapThumbnail(true);
+	var ctrl = frmSetting["btnScheme" + config.setting.schemeIndex ]; 
+	if(!ctrl.foreground){
+		frmSetting.preview.predraw()
+	}
 }
 
 frmSetting.btnScheme1.oncommand = onSchemeClick;
@@ -1058,12 +1063,56 @@ frmSetting.btnOpenSchemes.oncommand = function(id,event){
 	frmSetting.width = frmSetting.width + frmSetting.groupboxScheme.width;
 	frmSetting.groupboxScheme.hide = false;
 	frmSetting.btnOpenSchemes.hide = true;
+	
+	frmSetting.preview.SnapThumbnail(true);
+	frmSetting.preview.redraw();
 }
 
 frmSetting.btnMoreSchemes.skin(style.link)
 frmSetting.btnMoreSchemes.oncommand = function(id,event){
 	import process;
-	process.openUrl("http://imtip.aardio.com/schemes")
+	import app.externalServer;
+	
+	var rpcUrl = app.externalServer.getUrl("http://imtip.aardio.com/schemes");
+	
+	var findPath = function(browsers){
+    	var path;
+    	for i,filename in ..table.eachIndex(browsers){
+        	var reg = ..win.reg("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" + filename)
+        	if(reg){
+            	path  = reg.queryValue("");
+            	reg.close();
+        	};
+        	
+        	if( !#path ) {
+        	
+            	var reg = ..win.reg("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\" + filename)
+            	if(reg){
+                	path  = reg.queryValue("");
+                	reg.close();
+            	};
+        	}
+        	
+        	if( #path ) {
+            	break;
+        	}
+    	}
+    	
+    	return path;
+	}  
+	
+	var chromePath = findPath({
+			"msedge.exe"; 
+			"chrome.exe";  
+	})
+	
+	if(chromePath){
+		process.executeEx(chromePath,{ "--app=" + rpcUrl;"--url=" + rpcUrl;"--hide-controls" });
+	}
+	else {
+		process.openUrl(rpcUrl)
+	}
+	
 }
 /*}}*/
 
@@ -1345,10 +1394,7 @@ frmSetting.btnClosedBorderColor.oncommand = function(id,event){
 			frmSetting.preview.redraw();
 		}  
 	};
-	
-	frmSetting.chkClosedStyle.checked = true;
-	frmSetting.chkClosedStyle.oncommand();
-	frmSetting.tbsPreviewMode.selIndex = 2;
+	 
 	dlg.doModal();
 }
 /*}}*/
@@ -1377,10 +1423,7 @@ frmSetting.btnClosedBackground.oncommand = function(id,event){
 			imeBar.imeWatch();
 		}  
 	};
-	
-	frmSetting.chkClosedStyle.checked = true;
-	frmSetting.chkClosedStyle.oncommand();
-	frmSetting.tbsPreviewMode.selIndex = 2;
+	 
 	dlg.doModal();
 }
 
@@ -1442,9 +1485,6 @@ frmSetting.btnClosedForeground.oncommand = function(id,event){
 		}  
 	};
 	
-	frmSetting.chkClosedStyle.checked = true;
-	frmSetting.chkClosedStyle.oncommand();
-	frmSetting.tbsPreviewMode.selIndex = 2;
 	dlg.doModal();
 }
 
@@ -1471,7 +1511,7 @@ frmSetting.btnForeground.oncommand = function(id,event){
 		} 
 		else {
 			imeBar.foreground = argb;
-			imeBar.redraw(); 	
+			imeBar.redraw(); 
 		} 
 		
 		frmSetting.preview.foreground = argb;
@@ -1613,9 +1653,6 @@ frmSetting.btnClosedTextColor.oncommand = function(id,event){
 		
 	};
 	
-	frmSetting.chkClosedStyle.checked = true;
-	frmSetting.chkClosedStyle.oncommand();
-	frmSetting.tbsPreviewMode.selIndex = 2;
 	dlg.doModal();
 }
 /*}}*/
@@ -1647,9 +1684,6 @@ frmSetting.btnClosedIconTextColor.oncommand = function(id,event){
 		
 	};
 	
-	frmSetting.chkClosedStyle.checked = true;
-	frmSetting.chkClosedStyle.oncommand();
-	frmSetting.tbsPreviewMode.selIndex = 2;
 	dlg.doModal();
 }
 
@@ -2441,7 +2475,8 @@ frmSetting.editClasses.editBox.onChange = function(){
 /*重置{{*/
 frmSetting.btnReset.skin(style.button);
 frmSetting.btnReset.oncommand = function(id,event){
-	var cfg = table.clone(config.__imTipDefaultStyle);
+	
+	var cfg = config.__defaultScheme()
 	frmSetting.importStyle(cfg,frmSetting.preview);
 	imeBar.imeSkin(cfg);
 	
@@ -2588,6 +2623,13 @@ frmSetting.setTimeout(
 			,"导出的「配置方案」也是一个独立 EXE 的源代码")
 	},5000
 )
+
+frmSetting.preview.onDrawEnd = function(graphics,rc,bitmap){
+	var ctrl = frmSetting["btnScheme" + config.setting.schemeIndex ]; 
+	if(ctrl){
+ 
+	}
+}
 
 frmSetting.show();
 frmSetting.preview.show(true);
