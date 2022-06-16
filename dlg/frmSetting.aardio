@@ -5,7 +5,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.5 - 通用输入法状态跟踪提示";right=694;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.6 - 配置方案";right=694;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
 bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};
@@ -65,7 +65,7 @@ groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=292;right=68
 groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dt=1;edge=1;z=4};
 groupbox4={cls="groupbox";text="前景";left=16;top=217;right=685;bottom=288;bgcolor=16777215;dl=1;dt=1;edge=1;z=1};
 groupbox5={cls="groupbox";text="自定义显示字符";left=15;top=527;right=683;bottom=580;bgcolor=16777215;db=1;dl=1;edge=1;z=2};
-groupboxScheme={cls="groupbox";text="选择配置方案";left=692;top=112;right=841;bottom=580;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;hide=1;z=135};
+groupboxScheme={cls="groupbox";text="外观配置方案";left=692;top=112;right=841;bottom=580;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;hide=1;z=135};
 handRight1={cls="static";text='\uD83D\uDC49';left=3;top=125;right=32;bottom=157;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=115};
 handRight2={cls="static";text='\uD83D\uDC49';left=1;top=151;right=32;bottom=183;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=116};
 handRight3={cls="static";text='\uD83D\uDC49';left=24;top=488;right=53;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=117};
@@ -288,13 +288,10 @@ frmSetting.importStyle = function(cfg){
 	
 	//通用基础配置
 	//----------------------------------------------------------------
-	frmSetting.chkTimeout.checked = !!cfg.timeout;
-	frmSetting.tbTimeout.progressPos = cfg.timeout;
 	frmSetting.tbOffsetX.progressPos = cfg.offsetX;//可能要取消屏蔽 triggeredByUser
 	frmSetting.tbOffsetY.progressPos = cfg.offsetY; //可能要取消屏蔽 triggeredByUser
 	frmSetting.tbWidth.progressPos = cfg.width;
 	frmSetting.tbHeight.progressPos = cfg.height;
-	frmSetting.chkQuirksMode.checked = cfg.quirksMode;
 	
 	var cx,cy = frmSetting.preview.dpiScale(cfg.width),frmSetting.preview.dpiScale(cfg.height); 
 	var origX2,origY2 = win.toScreen(frmSetting.hwnd,origX,origY);
@@ -542,9 +539,6 @@ frmSetting.importStyle = function(cfg){
 		frmSetting.btnBorderColor.hide = false;	
 	}
 	 
-	
-	frmSetting.tbInterval.progressPos = (cfg.interval : 50);
-
  	//字符集
 	//----------------------------------------------------------------
 	if(cfg.tipChars){
@@ -572,16 +566,6 @@ frmSetting.importStyle = function(cfg){
 		frmSetting.editCharsLang.editBox.text = escape2(langChar : "中");
 	}
 
- 	//兼容窗口类名
-	//----------------------------------------------------------------
-	if(cfg.editorClasses){
-		var keys = table.keys(cfg.editorClasses);
-		frmSetting.editClasses.text = string.join(keys,";");
-	}
-	else {
-		frmSetting.editClasses.text = "";
-	} 
-	
 	//重绘
 	frmSetting.preview.redraw();	
 }
@@ -589,17 +573,17 @@ frmSetting.importStyle = function(cfg){
 frmSetting.importStyleFromFile = function(path){
  
 	var buf = string.loadBuffer(path);
-	if(!#buf) return frmSetting.msgErr("此文件不包含有效的 ImTip 配置!");
+	if(!#buf) return frmSetting.msgErr("此文件不包含有效的 ImTip 外观配置方案!");
 	
 	var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
-	if(!#data) return frmSetting.msgErr("此文件不包含有效的 ImTip 配置!");
+	if(!#data) return frmSetting.msgErr("此文件不包含有效的 ImTip 外观配置方案!");
 	
 	try{
 		var cfg = eval(data); 
 		frmSetting.importStyle(cfg);
 		imeBar.imeSkin(cfg);	
 		
-		frmSetting.showStatus("已自文件导入配置");		
+		frmSetting.showStatus("已自文件导入外观配置方案");		
 	}
 	catch(e){
 		frmSetting.msgErr(e);
@@ -611,7 +595,7 @@ frmSetting.importStyleFromClip = function(path){
  
 	var buf = win.clip.read();
 	var data = #buf ? string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/") : null;
-	if(!#data) return frmSetting.msgErr("剪贴板不包含有效的 ImTip 配置!");
+	if(!#data) return frmSetting.msgErr("剪贴板不包含有效的 ImTip 外观配置方案!");
 	
 	try{
 		data = string.replace(data,'<\u2032>|<\u2018>|<\u2019>',`'`);
@@ -622,7 +606,7 @@ frmSetting.importStyleFromClip = function(path){
 		
 		imeBar.imeSkin(cfg);	
 		
-		frmSetting.showStatus("已自剪贴板导入配置");	
+		frmSetting.showStatus("已自剪贴板导入外观配置方案");	
 	}
 	catch(e){
 		frmSetting.msgErr(e);
@@ -631,7 +615,7 @@ frmSetting.importStyleFromClip = function(path){
 
 frmSetting.btnImport.skin(style.button);
 frmSetting.btnImport.oncommand = function(id,event){
-	var path = fsys.dlg.open("ImTip 配置(*.aardio)|*.aardio||","导入配置（可拖动配置文件到「配置方案」窗口、或 ImTip.exe 上导入）");
+	var path = fsys.dlg.open("ImTip 外观配置方案(*.aardio)|*.aardio||","导入外观配置方案（可直接拖动配置方案文件到「配置方案」窗口）");
 	if(!path) return;
  
 	frmSetting.importStyleFromFile(path);
@@ -641,10 +625,10 @@ frmSetting.onDropFiles = function(files){
 	var path = files[1];
 	if(string.endWith(path,".aardio",true)){
 		var buf = string.loadBuffer(path);
-		if(!#buf) return frmSetting.msgErr("此文件不包含有效的 ImTip 配置!");
+		if(!#buf) return frmSetting.msgErr("此文件不包含有效的 ImTip 外观配置方案!");
 		
 		var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
-		if(!#data) return frmSetting.msgErr("此文件不包含有效的 ImTip 配置!");
+		if(!#data) return frmSetting.msgErr("此文件不包含有效的 ImTip 外观配置方案!");
 		
 		try{
 			var cfg = eval(data); 
@@ -690,13 +674,11 @@ frmSetting.exportStyle = function(){
 	
 	//通用基础配置
 	//----------------------------------------------------------------
-	cfg.timeout = frmSetting.tbTimeout.progressPos;
 	cfg.offsetX = frmSetting.tbOffsetX.progressPos;
 	cfg.offsetY = frmSetting.tbOffsetY.progressPos;
 	cfg.width = frmSetting.tbWidth.progressPos;
 	cfg.height = frmSetting.tbHeight.progressPos;
-	cfg.quirksMode = frmSetting.chkQuirksMode.checked;
-	
+
 	//嵌入字体文件
 	//----------------------------------------------------------------
 	if( frmSetting.embeddingFontData){ 
@@ -838,8 +820,6 @@ frmSetting.exportStyle = function(){
 			cfg.foreground = null; 
 		}
 	}
-	
-	cfg.interval = frmSetting.tbInterval.progressPos;
 
  	//字符集
 	//----------------------------------------------------------------
@@ -866,22 +846,6 @@ frmSetting.exportStyle = function(){
 		cfg.tipChars[0x804] = langChar;
 	} 
 	
- 	//兼容窗口类名
-	//----------------------------------------------------------------
-	var strEditorClasses = frmSetting.editClasses.text;
-	if(#strEditorClasses){
-		var arrEditorClasses = string.split(strEditorClasses,";");
-		var mapEditorClasses = {};
-		for(i=1;#arrEditorClasses;1){
-			mapEditorClasses[arrEditorClasses[i]]=1;
-		}
-		
-		cfg.editorClasses = mapEditorClasses;
-	}
-	else {
-		cfg.editorClasses = {};
-	}
-	
 	return cfg;
 }
 
@@ -889,7 +853,7 @@ import fsys.dlg;
 frmSetting.btnExport.skin(style.button);
 frmSetting.btnExport.oncommand = function(id,event){
  
-	var path = fsys.dlg.save("ImTip 配置(*.aardio)|*.aardio||","导出样式方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
+	var path = fsys.dlg.save("ImTip 外观配置方案(*.aardio)|*.aardio||","导出外观配置方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
 	if(!path) return;
  
 	var cfg = frmSetting.exportStyle();  
@@ -917,7 +881,7 @@ frmSetting.btnExport.oncommand = function(id,event){
 	
 	string.save(path,data);
 	
-	frmSetting.showStatus("已导出配置到文件");	
+	frmSetting.showStatus("已导出外观配置方案到文件");	
 }
 
 import process;
@@ -2117,14 +2081,21 @@ frmSetting.chkTimeout.skin(style.checkBox);
 frmSetting.tbTimeout.setTrackbarRange(0,30);
 frmSetting.tbTimeout.skin(style.trackbar)
 frmSetting.tbTimeout.onPosChanged = function( pos,triggeredByUser ){ 
-	if(triggeredByUser) frmSetting.chkTimeout.checked = !!pos;
-	imeBar.timeout = pos;
 	frmSetting.lbTimeout.text = pos + " 秒"; 	
+	imeBar.timeout = pos;
+	
+	if(triggeredByUser) {
+		frmSetting.chkTimeout.checked = !!pos;
+		config.setting.timeout = pos;
+		config.setting.save();
+	}
 }
 
 frmSetting.chkTimeout.oncommand = function( id,event ){
 	if(!frmSetting.chkTimeout.checked){
 		frmSetting.tbTimeout.progressPos = 0;
+		config.setting.timeout = 0;
+		
 		if(frmSetting.tbInterval.progressPos == 50){
 			frmSetting.tbInterval.progressPos = 5;
 		}
@@ -2137,8 +2108,12 @@ frmSetting.chkTimeout.oncommand = function( id,event ){
 	} 
 	
 	imeBar.timeout = frmSetting.tbTimeout.progressPos;	
+	config.setting.timeout = imeBar.timeout;
+	config.setting.save();
 }
 
+frmSetting.chkTimeout.checked = !!config.setting.timeout;
+frmSetting.tbTimeout.progressPos = config.setting.timeout : 0;
 /*}}*/
 
 /*设置检测速度{{*/
@@ -2154,12 +2129,16 @@ frmSetting.tbInterval.onPosChanged = function( pos,triggeredByUser ){
 	
 	imeBar.interval = pos;
 	frmSetting.lbInterval.text = pos + " 毫秒 " + tip; 	
+	
+	config.setting.interval = pos;
+	config.setting.save();
 }
 
 frmSetting.tbInterval.onMouseUp = function(wParam,lParam){
 	imeBar.imeWatch();
 }
 
+frmSetting.tbInterval.progressPos = (config.setting.interval : 50);
 /*}}*/
 
 /*窗口偏移{{*/
@@ -2467,9 +2446,17 @@ frmSetting.editClasses.editBox.onChange = function(){
 			mapEditorClasses[arrEditorClasses[i]]=1;
 		}
 		
-		imeBar.editorClasses = mapEditorClasses;
+		imeBar.editorClasses = mapEditorClasses; 
+		config.setting.editorClasses = table.clone(mapEditorClasses);
+		config.setting.save(); 
 	}
 }
+
+if(config.setting.editorClasses){
+	var keys = table.keys(config.setting.editorClasses);
+	frmSetting.editClasses.text = string.join(keys,";");
+}
+
 /*}}*/
 
 /*重置{{*/
@@ -2528,7 +2515,7 @@ frmSetting.btnCopy.skin(style.transButton)
 frmSetting.btnCopy.oncommand = function(id,event){
 	var cfg = frmSetting.exportStyle();  
 	if(cfg.embeddingFontData){
-		return frmSetting.msgErr("配置已导入外部字体文件,请点击「导出」按钮导出到文件!")
+		return frmSetting.msgErr("外观配置方案包含外部字体文件,请点击「导出」按钮导出到文件!")
 	}
 	var strImTipConfig = table.tostring(cfg);
 	
@@ -2541,7 +2528,7 @@ frmSetting.btnCopy.oncommand = function(id,event){
 	thread.delay(500);
 	frmSetting.btnCopy.disabledText = null;
 	
-	frmSetting.showStatus("配置已复制到剪贴板");
+	frmSetting.showStatus("外观配置方案已复制到剪贴板");
 }
 
 frmSetting.btnPaste.skin(style.transButton)
@@ -2562,7 +2549,7 @@ frmSetting.btnUndo.oncommand = function(id,event){
 	thread.delay(500);
 	frmSetting.btnUndo.disabledText = null;
 	
-	frmSetting.showStatus("已恢复上次使用的配置方案");
+	frmSetting.showStatus("已恢复上次使用的外观配置方案");
 }
 /*}}*/
 
@@ -2581,7 +2568,7 @@ frmSetting.showStatus = function(text){
 		function(){
 			frmSetting.lbStatus.color = 0xa0a0a0;
 			frmSetting.lbStatus.text = "";
-			frmSetting.text = header + "通用输入法状态跟踪提示";
+			frmSetting.text = header + "配置方案";
 		},3000);
 }
 
@@ -2609,18 +2596,22 @@ frmSetting.chkQuirksMode.oncommand = function(id,event){
 	imeBar.quirksMode = frmSetting.chkQuirksMode.checked;
 	imeBar.imeWatch();
 	
+	config.setting.quirksMode = imeBar.quirksMode;
+	config.setting.save();
+	
 	frmSetting.showStatus(imeBar.quirksMode?"已开启怪异模式，当前以中文标点状态识别中英模式":"已关闭怪异模式");
 }
+frmSetting.chkQuirksMode.checked = config.setting.quirksMode;
 
 frmSetting.setTimeout(
 	function(){ 
 		frmSetting.lbStatus.text = string.random("点击滑块，按「左右方向键」可以微调"
 			,"点击「自定义显示字符」内的标点，可打开字体图标选择工具"
 			,"「自定义显示字符」编辑框可输入 NCR 编码或16进制编码"
-			,"可以直接将配置方案拖放到「配置方案」窗口"
-			,"可以直接将配置方案拖放到 ImTip.exe上"
+			,"可以直接将外观配置方案拖放到「配置方案」窗口"
+			,"可以直接将外观配置方案拖放到 ImTip.exe上"
 			,"可以双击 ImTip.exe 取代点击托盘菜单的「配置方案」"
-			,"导出的「配置方案」也是一个独立 EXE 的源代码")
+			,"导出的「外观配置方案」也是一个独立 EXE 的源代码")
 	},5000
 )
 

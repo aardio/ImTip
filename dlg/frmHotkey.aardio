@@ -52,6 +52,11 @@ winform.bindConfig( config.hotkey,{
 
 winform.btnSave.skin(style.primaryButton)
 
+winform.enableHotkey = function(enabled){
+	winform.chkEnableHotkey.checked = enabled;
+	winform.btnSave.oncommand();
+}
+
 var hotkeyMgr;
 winform.btnSave.oncommand = function(id,event){
     config.hotkey.save();

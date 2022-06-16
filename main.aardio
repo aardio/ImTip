@@ -29,6 +29,12 @@ mainForm.enableDpiScaling("init");
 import key.ime.stateBar;
 imeBar = key.ime.stateBar(mainForm);
 
+import config;
+imeBar.interval = config.setting.interval;
+imeBar.timeout = config.setting.timeout;
+imeBar.editorClasses = config.setting.editorClasses;
+imeBar.quirksMode = config.setting.quirksMode;
+
 //下面创建托盘图标
 import win.util.tray;
 mainForm.tray = win.util.tray(mainForm)  
@@ -65,10 +71,10 @@ import config;
 import app.util;
 mainForm.importImTipStyle = function(path){ 
 	var buf = string.loadBuffer(path);
-	if(!#buf) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	if(!#buf) return mainForm.msgboxErr("此文件不包含有效的 ImTip 外观配置方案!");
 	
 	var data = string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/");
-	if(!#data) return mainForm.msgboxErr("此文件不包含有效的 ImTip 配置方案!");
+	if(!#data) return mainForm.msgboxErr("此文件不包含有效的 ImTip 外观配置方案!");
 	
 	try{
 		var cfg = eval(data);  

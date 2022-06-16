@@ -140,9 +140,18 @@ if(!config.setting.schemes) {
 	config.setting.schemes = table.clone(config.__defaultSchemes)
 }
 
+if(!config.setting.editorClasses){
+	config.setting.interval = 50;
+	config.setting.timeout = 2;
+	config.setting.editorClasses = {
+		["AVL_AVView"]=1;["ConsoleWindowClass"]=1;["Windows.UI.Input.InputSite.WindowClass"]=1
+	};	
+}
+
 config.style.backgroundColor = null;
 
 /**intellisense(config)
+setting = 通用设置
 saveAll() = 写入所有配置到文件
 ? = 获取值时指定不以下划线开始的配置表名称，\n返回一个可自动序列化到同名配置文件的表对象。\n如果此对象名以下划线开始，则可以正常读写值不会序列化为配置文件。\n否则不能对此对象直接赋值，只能对配置表对象的成员赋值。\n\n配置表可自动自文件加载,退出线程前自动序列化并存入文件。\n仅序列化以字符串、数值为键的元素，\n仅序列化值为字符串、数值、buffer 以及定义了 _serialize 元方法的成员。\n循环引用的值转换为 null，序列化时忽略成员函数\n!fsys_table.
 __defaultScheme() = 返回当前选择的配置方案初始默认方案
