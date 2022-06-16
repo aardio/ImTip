@@ -2450,6 +2450,12 @@ frmSetting.editClasses.editBox.onChange = function(){
 		config.setting.editorClasses = table.clone(mapEditorClasses);
 		config.setting.save(); 
 	}
+	else {
+		imeBar.editorClasses = {}; 
+		config.setting.editorClasses = {};
+		config.setting.save(); 
+	}
+	
 }
 
 if(config.setting.editorClasses){
@@ -2462,15 +2468,19 @@ if(config.setting.editorClasses){
 /*重置{{*/
 frmSetting.btnReset.skin(style.button);
 frmSetting.btnReset.oncommand = function(id,event){
-	
+	 
 	var cfg = config.__defaultScheme()
 	frmSetting.importStyle(cfg,frmSetting.preview);
 	imeBar.imeSkin(cfg);
-	
+ 
 	frmSetting.btnReset.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''};
 	thread.delay(500);
 	frmSetting.btnReset.disabledText = null;
 }
+
+frmSetting.editClasses.editBox.enablePopMenu({{}, { "重置为默认值";  function(id){
+		frmSetting.editClasses.text = "AVL_AVView;ConsoleWindowClass;Windows.UI.Input.InputSite.WindowClass";
+} }  })
 /*}}*/
 
 /*开机启动{{*/
