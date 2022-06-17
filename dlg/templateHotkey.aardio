@@ -8,11 +8,12 @@ import key;
 import key.ime;
 import key.hotkey;
 import winex;
+import win.dlg.chineseNumber;
 
 var hotkeyMgr = key.hotkey(winform);
 hotkeyMgr.loadTable({
 <?= owner.hotkeyTableString ?>
 })
 
-winform.show();
+winform.show(6/*_SW_MINIMIZE*/);
 win.loopMessage();

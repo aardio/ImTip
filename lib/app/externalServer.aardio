@@ -52,6 +52,15 @@ externalServer.external = {
 		..imeBar.imeSkin(cfg);	
 		return true;	
 	}
+	
+	getCurrentScheme = function(){
+		if(!..mainSettingForm){
+			..mainForm.loadForm("\dlg\frmSetting.aardio");
+		} 	
+		 
+		return ..mainSettingForm.exportStyleToJson();
+	}
+	
 }
 
 //限定只有下面允许的外部域名才能访问 aardio 函数

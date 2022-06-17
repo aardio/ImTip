@@ -14,10 +14,10 @@ import winex.mouse;
 import winex.key;
 import winex.accObject;
 import winex.msCandidate;
-import string.chineseNumber;
-import ui.chineseNumber;
+import win.dlg.chineseNumber;
 import ui.colorPicker;
 import win.ui;
+import win.clip;
 /*DSG{{*/
 var winform = win.form(text="ImTip - 超级热键";right=984;bottom=589;bgcolor=16777215)
 winform.add(
@@ -174,3 +174,6 @@ winform.onClose = function(hwnd,message,wParam,lParam){
 winform.onDestroy = function(){
     ..mainHotkeyForm = null;
 }
+
+// @Deprecated
+ui.chineseNumber = win.dlg.chineseNumber;

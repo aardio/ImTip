@@ -4,7 +4,7 @@ namespace app.hotkey;
 defaultCode = /***********************
 /* 大写金额(可输入数学表达式)、日期、时间  */
 ["Ctrl+$"] = function(){  
-    ui.chineseNumber().show();
+    win.dlg.chineseNumber().show();
 };
 
 /*范例及说明{{*/
