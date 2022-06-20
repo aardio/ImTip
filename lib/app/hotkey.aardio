@@ -67,10 +67,10 @@ defaultCode = /***********************
 ["`"]  = function(hFocus){  
    var openState,mode = key.ime.state();//用法请查看 aardio 文档
    if(!openState 
-   		||  mode !=3 || key.getState("Shift")  
-   		|| key.getState("Ctrl")  
-   		|| key.getState("CAPSLK")  ) {
-  		return true; //允许此按键继续发送
+           ||  mode !=3 || key.getState("Shift")  
+           || key.getState("Ctrl")  
+           || key.getState("CAPSLK")  ) {
+          return true; //允许此按键继续发送
    }
    
    key.combine("SHIFT","LEFT"); //向后选一个字
@@ -189,6 +189,11 @@ defaultCode = /***********************
        key.press("LEFT");
    } ; 
 }
+
+//禁用/启用 ImTip 提示快捷键
+["Ctrl+F1"] = function(){  
+    imeBar.imeWatch(!!..imeBar.paused);
+};
 
 ******************************************************************/
 

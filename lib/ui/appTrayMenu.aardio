@@ -43,11 +43,10 @@ class appTrayMenu{
 			frmChild.show(); 
 		});
 		
-		var id = popmenu.add('└──  临时禁用',function(id){ 
-			imtipDisabled = !imtipDisabled;
-			..imeBar.imeWatch(!imtipDisabled);
+		var id = popmenu.add('└──  临时禁用提示',function(id){
+			..imeBar.imeWatch(!!..imeBar.paused);
 		});
-		popmenu.check(id,!!imtipDisabled,0/*_MF_BYCOMMAND*/);
+		popmenu.check(id,!!..imeBar.paused,0/*_MF_BYCOMMAND*/);
 		
 		popmenu.add('导出外观配置方案',function(id){
 			if(..mainSettingForm){
