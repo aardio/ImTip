@@ -30,11 +30,11 @@ btnImport={cls="plus";text="导入";left=528;top=20;right=603;bottom=50;align="l
 btnMoreSchemes={cls="plus";text="更多 ...";left=736;top=588;right=827;bottom=618;align="left";dl=1;dt=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-14;name='ImTipUi');padding={top=2}};iconText='\uF019 ';notify=1;textPadding={left=17;bottom=2};z=141};
 btnPaste={cls="plus";left=660;top=667;right=685;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=107};
 btnReset={cls="plus";text="重置";left=447;top=20;right=522;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=90};
-btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=136};
-btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=137};
-btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;db=1;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=138};
-btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=139};
-btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=140};
+btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=136};
+btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=137};
+btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;color=5921370;db=1;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=138};
+btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=139};
+btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=140};
 btnTextColor={cls="plus";text=" ";left=91;top=497;right=123;bottom=512;db=1;dl=1;edge=1;notify=1;z=29};
 btnTextFont={cls="plus";text="选择 ...";left=268;top=441;right=333;bottom=465;align="left";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};z=68};
 btnUndo={cls="plus";left=609;top=667;right=634;bottom=689;align="left";db=1;disabled=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='ImTipUi')};iconText='\uF0E2';notify=1;textPadding={left=25};z=134};
@@ -2360,7 +2360,7 @@ frmSetting.btnIconTextFont.oncommand = function(id,event){
 			frmSetting.preview.redraw();	
 			
 			if(!imeBar.iconStyle) imeBar.iconStyle = {}
-			imeBar.iconStyle.font = ::LOGFONT(font);
+			imeBar.iconFont = ::LOGFONT(font);
 			imeBar.redraw() 
 		}
 	}
@@ -2379,8 +2379,16 @@ frmSetting.editIconTextFont.editBox.onChange = function(){
 	frmSetting.preview.iconFont = font;
 	frmSetting.preview.redraw();
 				 
-	imeBar.iconStyle.iconFont = font;
+	imeBar.iconFont = font;
 	imeBar.redraw();
+	
+	if(owner.text == "Segoe UI"){
+		frmSetting.editCharsFullShape.text = "〇";
+		frmSetting.editCharsHalfShape.text = "◑";
+		frmSetting.editCharsClose.text = "╳";
+		frmSetting.editCharsSymbol.text = "。";
+		frmSetting.editCharsCapital.text = "A";
+	}
 }
 
 frmSetting.editTextFont.editBox.onChange = function(){ 

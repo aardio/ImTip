@@ -2,9 +2,13 @@
 namespace app.hotkey;
 
 defaultCode = /***********************
+(function(){
+	//这里的代码可以直接执行	
+})();
+
 /* 大写金额(可输入数学表达式)、日期、时间  */
 ["Ctrl+$"] = function(hFocus){  
-    win.dlg.chineseNumber().show();
+	win.dlg.chineseNumber().show();
 };
 
 /*范例及说明{{*/
@@ -14,185 +18,185 @@ defaultCode = /***********************
 /******************************************************************
 
 ["Ctrl+#"] = function(hFocus){  
-    ui.colorPicker(); //打开调色器
+	ui.colorPicker(); //打开调色器
 };
 
 //运行QQ
 ["Ctrl+Q,Q"] = function(hFocus){
-    qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
-    process.execute( qqpath )
+	qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
+	process.execute( qqpath )
 };
 
 //按大写自动切换到英文输入
 ["CAPSLK"]  = function(hFocus){  
-    key.ime.setOpenStatus(false);
-    key.ime.setConversionMode(0); 
-    
-    return true;//允许按键继续发送，不改变大小写键的默认行为
+	key.ime.setOpenStatus(false);
+	key.ime.setConversionMode(0); 
+	
+	return true;//允许按键继续发送，不改变大小写键的默认行为
 };
 
 //按 Ctrl + .  切换到中文输入 + 中文标点 + 小写
 ["Ctrl+."]  = function(hFocus){    
-    var openState,mode = key.ime.state();
-    if( openState && !key.ime.capital() ) return true; //当前已经是中文输入模式，不改变默认行为
-    
-    key.up("Ctrl");//先放开 Ctrl 键
+	var openState,mode = key.ime.state();
+	if( openState && !key.ime.capital() ) return true; //当前已经是中文输入模式，不改变默认行为
+	
+	key.up("Ctrl");//先放开 Ctrl 键
 
-    //如果是大写状态，切换为小写
-    if(key.ime.capital())    key.press("CAPSLK") 
+	//如果是大写状态，切换为小写
+	if(key.ime.capital())    key.press("CAPSLK") 
 
-    //英文直接切中文 + 中文标点
-    key.ime.setOpenStatus(true); //打开输入法
-    key.ime.setConversionMode(1|0x400); //切换到中文状态，这一步不能省略
-    
-    //再次尝试用键盘切换中文标点，这一步不能省略
-    key.combine("CTRL",".");
-    
-    //现在再次检测中文标点状态
-    var openState,mode = key.ime.state();
-    if(mode!=3/*_IME_SYMBOLMODE_SYMBOL*/){
-        //说明切换到了英文标点，再切换回去
-         key.combine("CTRL",".")
-    }  
+	//英文直接切中文 + 中文标点
+	key.ime.setOpenStatus(true); //打开输入法
+	key.ime.setConversionMode(1|0x400); //切换到中文状态，这一步不能省略
+	
+	//再次尝试用键盘切换中文标点，这一步不能省略
+	key.combine("CTRL",".");
+	
+	//现在再次检测中文标点状态
+	var openState,mode = key.ime.state();
+	if(mode!=3/*_IME_SYMBOLMODE_SYMBOL*/){
+		//说明切换到了英文标点，再切换回去
+			key.combine("CTRL",".")
+	}  
 };
 
 //改键演示
 ["Ctrl+."] = function(hFocus){  
-    key.up("Ctrl"); //先把已经按下的键弹起来
-    key.combine("CTRL","A"); //换成别的键，具体看 aardio 库函数文档
-    return false; //阻止按键事件
+	key.up("Ctrl"); //先把已经按下的键弹起来
+	key.combine("CTRL","A"); //换成别的键，具体看 aardio 库函数文档
+	return false; //阻止按键事件
 };
 
 //叠字键演示
 ["`"]  = function(hFocus){  
-   var openState,mode = key.ime.state();//用法请查看 aardio 文档
-   if(!openState 
-           ||  mode !=3 || key.getState("Shift")  
-           || key.getState("Ctrl")  
-           || key.getState("CAPSLK")  ) {
-          return true; //允许此按键继续发送
-   }
-   
-   key.combine("SHIFT","LEFT"); //向后选一个字
-   key.combine("CTRL","C"); //复制
-   key.press("RIGHT"); //取消选中
-   key.combine("CTRL","V"); //粘贴
+	var openState,mode = key.ime.state();//用法请查看 aardio 文档
+	if(!openState 
+			||  mode !=3 || key.getState("Shift")  
+			|| key.getState("Ctrl")  
+			|| key.getState("CAPSLK")  ) {
+			return true; //允许此按键继续发送
+	}
+	
+	key.combine("SHIFT","LEFT"); //向后选一个字
+	key.combine("CTRL","C"); //复制
+	key.press("RIGHT"); //取消选中
+	key.combine("CTRL","V"); //粘贴
 };
 
 //取消次选键
 [";"] = function(hFocus){
-    if( winex.msCandidate.isVisible() ){
-        key.send(" ;") 
-    } 
-    else return true;
+	if( winex.msCandidate.isVisible() ){
+		key.send(" ;") 
+	} 
+	else return true;
 };
 
 //按 shift + back 变 ctrl + z
 ["SHIFT+BACK"] = function(hFocus){
-    key.up("SHIFT"); //先把已经按下的键弹起来
-    key.combine("CTRL","Z")
+	key.up("SHIFT"); //先把已经按下的键弹起来
+	key.combine("CTRL","Z")
 };
 
 //把斜杠“/”改为顿号
 ["/"] = function(hFocus){
-    var openState,mode = key.ime.state();//
-    if( !openState /*&&(mode==3) */ ) return true; 
-    key.sendString("、")
+	var openState,mode = key.ime.state();//
+	if( !openState /*&&(mode==3) */ ) return true; 
+	key.sendString("、")
 };
 
 //切换鼠标左右键，经常换左右手耍鼠标是好习惯
 ["Ctrl+SHIFT+RIGHT"] = function(hFocus){  
-   ::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));
+	::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));
 }
 
 //按 Shift + Back 变 Ctrl + Z，因为这时候 Shift 是按下状态，所以可以先发一个 key.up("SHIFT") 弹起shift键
 ["SHIFT+BACK"] = function(hFocus){
-    key.up("SHIFT")
-    key.combine("CTRL","Z")
+	key.up("SHIFT")
+	key.combine("CTRL","Z")
 };
 
 //引号配对
 [`SHIFT+"`] = function(hFocus){  
-   var o,s = key.ime.state();
-   key.sendString(s==3 ? `“”` : `""`); 
+	var o,s = key.ime.state();
+	key.sendString(s==3 ? `“”` : `""`); 
 
-   //与目标窗口共享输入状态
-   winex.attach(hFocus,true);
-   
-   //设置LSHIFT,RSHIFT 为弹起状态
-   key.up("RSHIFT","LSHIFT","SHIFT");
-   key.setState(false,"RSHIFT","LSHIFT","SHIFT"); 
+	//与目标窗口共享输入状态
+	winex.attach(hFocus,true);
+	
+	//设置LSHIFT,RSHIFT 为弹起状态
+	key.up("RSHIFT","LSHIFT","SHIFT");
+	key.setState(false,"RSHIFT","LSHIFT","SHIFT"); 
 
-   //移动光标
-   key.press("LEFT");
-   
-   //取消共享输入状态
-   winex.attach(hFocus,false);
+	//移动光标
+	key.press("LEFT");
+	
+	//取消共享输入状态
+	winex.attach(hFocus,false);
 } 
 
 //括号配对
 [`SHIFT+(`] = function(hFocus){  
-   key.sendString(`()`);
-   key.up("SHIFT"); 
-   key.press("LEFT");
+	key.sendString(`()`);
+	key.up("SHIFT"); 
+	key.press("LEFT");
 }
 
 //按 `date 输入大写的当前日期
 ["~date"] = function(hFocus){ 
-    var zh = string.chineseNumber('〇一二三四五六七八九');
-    key.sendString(zh.date()); //改为 zh.time() 输出大写的当前时间
+	var zh = string.chineseNumber('〇一二三四五六七八九');
+	key.sendString(zh.date()); //改为 zh.time() 输出大写的当前时间
 }; 
 
 //增加音量
 ["Ctrl+F6"] = function(hFocus){
-    key.press("VOLUME_UP");
+	key.press("VOLUME_UP");
 }
 
 //降低音量
 ["Ctrl+F7"] = function(hFocus){
-    key.press("VOLUME_DOWN");
+	key.press("VOLUME_DOWN");
 }
 
 //切换静音
 ["Ctrl+F8"] = function(){
-    key.press("VOLUME_MUTE");
+	key.press("VOLUME_MUTE");
 }
 
 //运行计算器
 ["~calc"] = function(hFocus){
-    process.execute("calc.exe")
+	process.execute("calc.exe")
 };
 
 //运行word
 ["~word"] = function(hFocus){
-    var word = com.CreateObject("Word.Application")
-    if(word)word.Visible = true; 
+	var word = com.CreateObject("Word.Application")
+	if(word)word.Visible = true; 
 };
 
 //微软五笔打开或关闭拼音混输
 ["Ctrl+,"] = function(hFocus){  
-    import win.reg;
-    var reg = win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
-    var mode = !reg.queryValue("PinyinMixEnable") ? 1 : 0
-    reg.setDwValue("PinyinMixEnable",mode)	
-    
-    key.ime.changeRequest(0x4090409)
-    key.ime.changeRequest(0x8040804)
+	import win.reg;
+	var reg = win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
+	var mode = !reg.queryValue("PinyinMixEnable") ? 1 : 0
+	reg.setDwValue("PinyinMixEnable",mode)	
+	
+	key.ime.changeRequest(0x4090409)
+	key.ime.changeRequest(0x8040804)
 };
 
 //不可直接在上述键盘回调函数中执行耗时操作，这会导致操作系统禁用热键。
 //如果有耗时操作必须如下返回一个异步函数，将异步执行该函数，并取消已按键不再执行默认操作
 [`SHIFT+"`] = function(hFocus){  
-   return function(){
-       key.waitUp("SHIFT")
-       key.sendString(`"`);
-       key.press("LEFT");
-   } ; 
+	return function(){
+		key.waitUp("SHIFT")
+		key.sendString(`"`);
+		key.press("LEFT");
+	} ; 
 }
 
 //禁用/启用 ImTip 提示快捷键
 ["Ctrl+F1"] = function(){  
-    imeBar.imeWatch(!!..imeBar.paused);
+	imeBar.imeWatch(!!..imeBar.paused);
 };
 
 ******************************************************************/

@@ -7,7 +7,7 @@ mainForm.add()
 import key.ime.stateBar;
 var imeBar = key.ime.stateBar(mainForm);
 
-//输入法状态提示
+//输入法状态提示（应先退出 ImTip ，多个提示窗口同时出现会闪烁）
 imeBar.imeSkin(/*ImTipConfig{{*/<?= owner.imTipConfig ?>/*}}*/)
 
 //托盘图标
@@ -26,12 +26,29 @@ mainForm.onTrayMessage = {
 //托盘弹出菜单
 import win.ui.menu;
 mainForm.popmenu = win.ui.popmenu(mainForm); 
-mainForm.popmenu.add('临时禁用',function(id){ 
-	var disabled = mainForm.popmenu.checked(2);
-	imeBar.imeWatch(disabled);
-	mainForm.popmenu.check(1,!disabled);
+mainForm.popmenu.add('临时禁用提示',function(id){ 
+	imeBar.imeWatch(!!imeBar.paused);
+	mainForm.popmenu.check(1,!!imeBar.paused);
 });
 
 mainForm.popmenu.add('退出',function(id){ mainForm.close() });
+
+/*
+//输入法状态或目标窗口变更触发此事件
+var lastFocus,lastPath,lastClass;
+imeBar.onImeStateChange = function(hFocus,x,y,openNative,symbolMode,text,iconText){
+	if(lastFocus!=hFocus){
+		lastClass = win.getClass(hFocus);
+		var tid,pid = win.getThreadProcessId(hFocus);
+		lastPath = process.getPath(pid);
+	}
+
+	//指定文件名的程序禁止显示提示
+	if(lastPath && io.splitpath(lastPath).file == "应用程序名称.exe"){
+		return false;
+	}
+	return true;
+}
+*/
 
 win.loopMessage();

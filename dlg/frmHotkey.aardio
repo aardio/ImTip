@@ -57,14 +57,13 @@ winform.enableHotkey = function(enabled){
 	winform.btnSave.oncommand();
 }
 
-var hotkeyMgr;
 winform.btnSave.oncommand = function(id,event){
     config.hotkey.save();
     winform.btnSave.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
     
-    if(hotkeyMgr){
-    	 hotkeyMgr.close(); 
-    	 hotkeyMgr= null;
+    if(..superHotkey){
+    	 ..superHotkey.close(); 
+    	 ..superHotkey= null;
     }
     
     if(!winform.chkEnableHotkey.checked){
@@ -73,7 +72,7 @@ winform.btnSave.oncommand = function(id,event){
     	return;
     } 
        
-	hotkeyMgr =  key.hotkey(winform)
+	..superHotkey =  key.hotkey(winform)
 	var code = "{" + winform.editTable.text + "}"
 	var keyTable
 	try{
@@ -86,7 +85,7 @@ winform.btnSave.oncommand = function(id,event){
 	
 	var err;
 	try{
-		hotkeyMgr.loadTable(keyTable);		
+		..superHotkey.loadTable(keyTable);		
 	}
 	catch(e){
 		winform.editTable.showErrorTip(e);
@@ -133,6 +132,8 @@ winform.btnReset.oncommand = function(id,event){
 	winform.editTable.modified = false;
 }
 winform.editTable.modified = false;
+
+winform.editTable.isDialogMessage = function(){}
 
 winform.setTimeout( 
 	function(){
