@@ -7,11 +7,11 @@ winform.add()
 import key;
 import key.ime;
 import key.hotkey;
-import winex;
 import win.dlg.chineseNumber;
+import winex;
 
-var hotkeyMgr = key.hotkey(winform);
-hotkeyMgr.loadTable({
+var superHotkey = key.hotkey(winform);
+superHotkey.loadTable({
 <?= owner.hotkeyTableString ?>
 })
 

@@ -14,11 +14,8 @@ class appTrayMenu{
 		var popmenu = ..win.ui.popmenu(winform);//创建弹出菜单
 		
 		popmenu.add("管理超级热键",function(){
-			
-			if(!..mainHotkeyForm){
-				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
-			}
-			
+			if(..mainSettingForm) ..mainSettingForm.show(false);
+			if(!..mainHotkeyForm) ..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");  
 			..mainHotkeyForm.show(); 
 		})
 		
@@ -35,12 +32,9 @@ class appTrayMenu{
 		popmenu.add();//分隔线
 		
 		popmenu.add('配置方案',function(id){ 
-			if(..mainSettingForm){
-				return ..win.setForeground(..mainSettingForm.hwnd); 
-			}
-			
-			var frmChild = winform.loadForm("\dlg\frmSetting.aardio");
-			frmChild.show(); 
+			if(..mainHotkeyForm) ..mainHotkeyForm.show(false); 
+			if(!..mainSettingForm) ..mainSettingForm = ..mainForm.loadForm("\dlg\frmSetting.aardio");
+			..mainSettingForm.show(); 
 		});
 		
 		var id = popmenu.add('└──  临时禁用提示',function(id){

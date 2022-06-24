@@ -48,13 +48,10 @@ mainForm.onTrayMessage = {
 	    win.setForeground(mainForm.hwnd); //避免不点击菜单不会消失，父窗口隐藏也要这样做
 	    menu.popup(); 
 	};
-	[0x203/*_WM_LBUTTONDBLCLK*/] = function(wParam){ 
-		if(mainSettingForm){
-			return win.setForeground(mainSettingForm.hwnd); 
-		}
-		
-		var frmChild = mainForm.loadForm("\dlg\frmSetting.aardio");
-		frmChild.show(); 
+	[0x201/*_WM_LBUTTONDOWN*/] = function(wParam){ 
+		if(mainHotkeyForm) mainHotkeyForm.show(false); 
+		if(!mainSettingForm) mainSettingForm = mainForm.loadForm("\dlg\frmSetting.aardio");
+		mainSettingForm.show(); 
 	};
 }
 
