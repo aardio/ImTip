@@ -5,7 +5,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.8 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.9 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
 bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};
@@ -2081,12 +2081,16 @@ frmSetting.chkTimeout.oncommand = function( id,event ){
 		if(frmSetting.tbInterval.progressPos == 50){
 			frmSetting.tbInterval.progressPos = 5;
 		}
+		
+		frmSetting.showStatus("已设为检测到「输入光标/文本指针」后总是显示");
 	}
 	elseif(!frmSetting.tbTimeout.progressPos){
 		frmSetting.tbTimeout.progressPos = 2;
 		if(frmSetting.tbInterval.progressPos == 5){
 			frmSetting.tbInterval.progressPos = 50;
 		}
+		
+		frmSetting.showStatus("已设为「仅切换输入目标或输入法状态」显示 " + frmSetting.tbTimeout.progressPos + " 秒");
 	} 
 	
 	imeBar.timeout = frmSetting.tbTimeout.progressPos;	
@@ -2468,9 +2472,30 @@ frmSetting.btnReset.oncommand = function(id,event){
 	frmSetting.btnReset.disabledText = null;
 }
 
-frmSetting.editClasses.editBox.enablePopMenu({{}, { "重置为默认值";  function(id){
+frmSetting.editClasses.editBox.enablePopMenu({{}, 
+	{ "重置为默认值";  function(id){
 		frmSetting.editClasses.text = "AVL_AVView;ConsoleWindowClass;Windows.UI.Input.InputSite.WindowClass";
-} }  })
+	} }, 
+	{ "提取窗口类名热键";  function(id){
+		var code = /*
+["Ctrl+F12"] = function(hFocus){  
+	var cls = win.getClass(hFocus);
+	winex.tooltip.trackPopup(cls + " 已复制到剪贴板!");
+	win.clip.write(cls);
+};
+*/
+		win.clip.write(code);
+		if( frmSetting.msgAsk('已复制提取类名热键配置，\n点「确定」转到超级热键配置。') ){
+			if(!..mainHotkeyForm) ..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");  
+			
+			..mainHotkeyForm.show(); 
+			..win.setForeground(..mainHotkeyForm.hwnd);
+			
+			frmSetting.show(false);
+		} 
+		
+	} }   
+})
 /*}}*/
 
 /*开机启动{{*/
@@ -2478,7 +2503,6 @@ frmSetting.chkSysRun.skin(style.checkBox);
 frmSetting.chkSysRun.oncommand = function( id,event ){ 
 	import sys.run;
 	import process.admin
-	
 	
 	if( process.admin.isRunAs() &&  ! _WINXP ){
 		import sys.runAsTask;
@@ -2644,13 +2668,13 @@ frmSetting.chkQuirksMode.oncommand = function(id,event){
 }
 frmSetting.chkQuirksMode.checked = config.setting.quirksMode;
 
-frmSetting.setTimeout(
-	function(){ 
+frmSetting.beforeShowWindow = function(shown,status){ 
+	if(shown){
 		frmSetting.lbStatus.text = string.random("点击滑块，按「左右方向键」可以微调"
 			,"点击「自定义显示字符」内的标题，可打开字体图标选择工具"
-			,"修改设置立即生效，不用点「确定」")
-	},2000
-)
+			,"修改设置立即生效，不用点「确定」");		
+	}
+}
 
 frmSetting.show();
 frmSetting.preview.show(true);

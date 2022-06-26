@@ -16,7 +16,9 @@ class appTrayMenu{
 		popmenu.add("管理超级热键",function(){
 			if(..mainSettingForm) ..mainSettingForm.show(false);
 			if(!..mainHotkeyForm) ..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");  
+			
 			..mainHotkeyForm.show(); 
+			..win.setForeground(..mainHotkeyForm.hwnd);
 		})
 		
 		var id = popmenu.add('└──  启用超级热键',function(id){  
@@ -32,9 +34,11 @@ class appTrayMenu{
 		popmenu.add();//分隔线
 		
 		popmenu.add('配置方案',function(id){ 
-			if(..mainHotkeyForm) ..mainHotkeyForm.show(false); 
+			if(..mainHotkeyForm) ..mainHotkeyForm.hitMin(); 
 			if(!..mainSettingForm) ..mainSettingForm = ..mainForm.loadForm("\dlg\frmSetting.aardio");
+			
 			..mainSettingForm.show(); 
+			..win.setForeground(..mainSettingForm.hwnd);
 		});
 		
 		var id = popmenu.add('└──  临时禁用提示',function(id){

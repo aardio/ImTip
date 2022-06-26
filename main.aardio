@@ -45,13 +45,16 @@ mainForm.onTrayMessage = {
 	[0x205/*_WM_RBUTTONUP*/] = function(wParam){ 
 		import ui.appTrayMenu;
 		var menu = ui.appTrayMenu(mainForm); //延迟创建,避免系统启动时 DPI 缩放前创建菜单
+		
 	    win.setForeground(mainForm.hwnd); //避免不点击菜单不会消失，父窗口隐藏也要这样做
 	    menu.popup(); 
 	};
 	[0x201/*_WM_LBUTTONDOWN*/] = function(wParam){ 
-		if(mainHotkeyForm) mainHotkeyForm.show(false); 
+		if(mainHotkeyForm) mainHotkeyForm.hitMin(); 
 		if(!mainSettingForm) mainSettingForm = mainForm.loadForm("\dlg\frmSetting.aardio");
+
 		mainSettingForm.show(); 
+		win.setForeground(mainSettingForm.hwnd);
 	};
 }
 

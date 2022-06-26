@@ -21,11 +21,26 @@ defaultCode = /***********************
 	ui.colorPicker(); //打开调色器
 };
 
+//复制输入焦点所在窗口类名
+["Ctrl+F12"] = function(hFocus){  
+	var cls = win.getClass(hFocus);
+	winex.tooltip.trackPopup(cls + " 已复制到剪贴板!");
+	win.clip.write(cls);
+};
+
 //运行QQ
 ["Ctrl+Q,Q"] = function(hFocus){
 	qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
 	process.execute( qqpath )
 };
+
+["@Shift"] = function(hFocus){
+	/*
+	如果 Ctrl,Shift,Alt,Win 等单控制键作为热键，显在前面加上@ 字符。
+	则仅在按下并放开该键后（中间没有按其他键）才会触发热键。
+	这通常不干扰该键原有热键（因为一般都是按下触发）。
+	*/
+} 
 
 //按大写自动切换到英文输入
 ["CAPSLK"]  = function(hFocus){  
@@ -268,9 +283,12 @@ if( key.ime.state() ){ }
 二、示例
 例如注册了以下 4 个热键，则使用规则如下：
 热键 "~hi" 用法：按连续按 3 个键，每个键都要放开。
-热键 "SHIFT+Q,Q" 用法：按下Shift不放，再按2下Q。
-热键 "Ctrl+K" 用法：按下Ctrl不放，再按K, 然后都放开。
-热键 "Ctrl+K,K"	用法：按下Ctrl不放，再按2次K（因为不是其他热键的前半部分，不需要等待放开）。
+热键 "SHIFT+Q,Q" 用法：按下 Shift 不放，再按 2 下 Q。
+热键 "Ctrl+K" 用法：按下 Ctrl 不放，再按 K, 然后都放开。
+热键 "Ctrl+K,K"	用法：按下 Ctrl 不放，再按 2 次 K（因为不是其他热键的前半部分，不需要等待放开）。
+热键 "@Shift"	用法：单按 Shift 并放开 Shift，中间不按其他键
+
+注意键名键名忽略大小写。
 
 三、热键回调函数
 热键回调函数返回 true 表示允许系统继续发送按键，
