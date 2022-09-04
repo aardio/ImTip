@@ -1,6 +1,6 @@
 # ImTip ( 通用输入法状态跟踪提示 )
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 639 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 605 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
 
 <a href="https://www.toutiao.com/article/7135834986963517964/?log_from=c329e5c14053a_1662110952400">官方头条号 | 交流反馈 | 教程 </a>
 

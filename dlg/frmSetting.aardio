@@ -5,7 +5,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 3.9 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 4.0 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
 bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};
@@ -1017,48 +1017,7 @@ frmSetting.btnScheme5.oncommand = onSchemeClick;
 frmSetting.btnMoreSchemes.skin(style.link)
 frmSetting.btnMoreSchemes.oncommand = function(id,event){
 	import process;
-	import app.externalServer;
-	
-	var rpcUrl = app.externalServer.getUrl("http://imtip.aardio.com/schemes");
-	
-	var findPath = function(browsers){
-    	var path;
-    	for i,filename in ..table.eachIndex(browsers){
-        	var reg = ..win.reg("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" + filename)
-        	if(reg){
-            	path  = reg.queryValue("");
-            	reg.close();
-        	};
-        	
-        	if( !#path ) {
-        	
-            	var reg = ..win.reg("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\" + filename)
-            	if(reg){
-                	path  = reg.queryValue("");
-                	reg.close();
-            	};
-        	}
-        	
-        	if( #path ) {
-            	break;
-        	}
-    	}
-    	
-    	return path;
-	}  
-	
-	var chromePath = findPath({
-			"msedge.exe"; 
-			"chrome.exe";  
-	})
-	
-	if(chromePath){
-		process.executeEx(chromePath,{ "--app=" + rpcUrl;"--url=" + rpcUrl;"--hide-controls" });
-	}
-	else {
-		process.openUrl(rpcUrl)
-	}
-	
+	process.openUrl("https://imtip.aardio.com/#schemes")
 }
 /*}}*/
 
@@ -2536,35 +2495,15 @@ frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED;
 
 /*复制粘贴配置{{*/
 import web.json;
-frmSetting.exportStyleToJson = function(){ 
-	var schemeIndex = ..config.setting.schemeIndex; 
-	var	cfg = ..mainSettingForm.exportStyle();  
-	 
-	if(cfg.openStyle){
-		cfg.openStyle[2] = cfg.openStyle[1];
-		cfg.openStyle[1] = cfg.openStyle[0];
-	}
-	
-	var tipChars = {};
-	for(k,v in cfg.tipChars){
-		tipChars[tostring(k)] = v;
-	} 
-	
-	cfg.tipChars = tipChars;
-		
-	var ctrl = ..mainSettingForm["btnScheme" + schemeIndex ];  
-	var imgBuffer;
+frmSetting.exportPreviewImage = function(){ 
+	var schemeIndex = ..config.setting.schemeIndex;   
+	var ctrl = ..mainSettingForm["btnScheme" + schemeIndex ];   
 	if(ctrl ? ctrl.foreground){
 		imgBuffer = ctrl.foreground.saveToBuffer("*.png");
 		
 		import crypt;
-		imgBuffer = string.format('data:image/png;base64,%s',crypt.encodeBin(imgBuffer ) );
-	} 
-		
-	return {
-		data = ..web.json.stringify(cfg);
-		image = imgBuffer;
-	} 
+		return string.format('data:image/png;base64,%s',crypt.encodeBin(imgBuffer ) );
+	}  
 }
 
 frmSetting.btnCopy.skin(style.transButton)
@@ -2574,11 +2513,10 @@ frmSetting.btnCopy.oncommand = function(id,event){
 		return frmSetting.msgErr("外观配置方案包含外部字体文件,请点击「导出」按钮导出到文件!")
 	}
 	
-	if(::GetKeyState(0x11/*_VK_CTRL*/) & 0x8000){
-		var cfg = web.json.stringify( frmSetting.exportStyleToJson() );
-		win.clip.write(cfg);
+	if(::GetKeyState(0x11/*_VK_CTRL*/) & 0x8000){ 
+		win.clip.write(frmSetting.exportPreviewImage());
 		
-		frmSetting.showStatus("外观配置方案(JSON)已复制到剪贴板");
+		frmSetting.showStatus("外观配置预览图像地址已复制到剪贴板");
 		return;
 	}
 
