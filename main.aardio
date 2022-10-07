@@ -17,9 +17,7 @@ for(k,v in _ARGV){
 
 var atom,hwnd = mainForm.atom("E474890D-1DFA-4575-B456-7B46C15665DC.imtip");
 if(!atom){
-	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig); 
-	else win.sendCopyData(hwnd,"start"); 
-	
+	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig);
 	win.quitMessage();	
 	return;
 }
@@ -78,7 +76,7 @@ mainForm.importImTipStyle = function(path){
 	
 	try{
 		var cfg = eval(data);  
-		app.util.updateFontAwesome(cfg);
+		app.util.updateTipStyle(cfg);
 		imeBar.imeSkin(cfg);	
 		
  		config.style.embeddingFontData = null;
@@ -126,7 +124,7 @@ mainForm.onCopyData = function(data,dataType){
 }
 
 if(config.style.width){
-	app.util.updateFontAwesome(config.style);
+	app.util.updateTipStyle(config.style);
 	imeBar.imeSkin(config.style)
 }
 

@@ -136,6 +136,7 @@ if(!config.setting.editorClasses){
 }
 
 config.style.backgroundColor = null;
+config.style.timeout = null;
 
 /**intellisense(config)
 setting = 通用设置

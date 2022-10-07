@@ -11,11 +11,13 @@ unescape = function(s){
 	return s; 
 } 
 
-updateFontAwesome = function(cfg){
+updateTipStyle = function(cfg){
 	if(!cfg.embeddingFontData){
 		var font = cfg.iconStyle[["font"]]; 
 		if( font && ! ..string.cmp(font.name:"","FontAwesome") ) font.name = "imtip"; 
 	}	
+	
+	cfg.timeout = null;
 }
 
 findHwnd = function(){
@@ -25,6 +27,6 @@ findHwnd = function(){
 
 /**intellisense(app.util)
 unescape(__) = 还原图标字体转义符，\n支持 NCR（Numeric Character Reference）编码
-updateFontAwesome(__) = 替换旧版自带 FontAwesome 字体为 imtip 字体
+updateTipStyle(__) = 升级旧版输入法提示外观配置
 findHwnd() = 用于 WubiLex ：\n查找并返回独立运行的 ImTip.exe 主窗口句柄，\n失败返回 null
 end intellisense**/

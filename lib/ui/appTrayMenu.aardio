@@ -108,7 +108,7 @@ class appTrayMenu{
 				data = ..string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
 		
 				var cfg = eval(data);  
-				..app.util.updateFontAwesome(cfg);
+				..app.util.updateTipStyle(cfg);
 				..imeBar.imeSkin(cfg);	
 				
  				..config.style.embeddingFontData = null;
