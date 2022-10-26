@@ -245,6 +245,29 @@ defaultCode = /***********************
 	imeBar.imeWatch(!!..imeBar.paused);
 };
 
+//屏蔽指定的程序窗口
+(function(){
+	var lastFocus,lastPath,lastClass;
+	checkImeProcess = function(hFocus,exeFile){
+		if(lastFocus != hFocus){
+			lastClass = win.getClass(hFocus);
+			var tid,pid = win.getThreadProcessId(hFocus);
+			lastPath = process.getPath(pid);
+			lastFocus = hFocus
+		}
+	
+		return (lastPath && io.splitpath(lastPath).file == exeFile )
+	}	
+	
+	//显示提示窗口前触发下面的事件
+	imeBar.onImeStateChange = function(hFocus,imeX,imeY,openNative,symbolMode,text,iconText){
+		if( !checkImeProcess(hFocus,"Code.exe") ){
+			return true;//允许提示
+		}
+	}
+})();
+
+
 ******************************************************************/
 
 /******************************************************************
