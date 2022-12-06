@@ -2,7 +2,7 @@
  
 <a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 606 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
 
-<a href="https://www.toutiao.com/article/7135834986963517964/?log_from=c329e5c14053a_1662110952400">官方头条号 | 交流反馈 | 教程 </a>
+<a href="https://mp.weixin.qq.com/s/-bdN1oypEdpHhx_SKx2p-Q">官方微信 | 意见反馈 | 教程</a>
 
 ImTip 通过**在输入光标处显示 2 个简单的图标** —— 提前知道中英、中英标点、全半角、大小写、多语言键盘布局等所有状态。
 
@@ -34,7 +34,7 @@ ImTip 提供可编程扩展的「超级热键」。
 
 ![超级热键](./screenshots/cn.gif)
 
-<a href="https://www.toutiao.com/article/7135834986963517964/?log_from=c329e5c14053a_1662110952400">官方头条号 | 超级热键大全 | 教程 </a>
+<a href="https://mp.weixin.qq.com/s/-bdN1oypEdpHhx_SKx2p-Q">官方微信 | 超级热键大全 | 教程 </a>
 
 ImTip 托盘菜单提供快捷启用系统输入法、切换双拼方案等功能。
 
