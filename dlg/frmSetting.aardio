@@ -5,7 +5,7 @@ import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 4.2 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 4.3 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
 bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};

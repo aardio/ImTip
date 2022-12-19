@@ -5,6 +5,7 @@ import fsys.lnk;
 import process;
 import process.cache;
 import process.popen;
+import process.curl;
 import win.dlg.message;
 import key.hotkey;
 import key;
