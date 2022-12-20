@@ -131,7 +131,7 @@ if(!config.setting.editorClasses){
 	config.setting.interval = 50;
 	config.setting.timeout = 2;
 	config.setting.editorClasses = {
-		["AVL_AVView"]=1;["ConsoleWindowClass"]=1;["Windows.UI.Input.InputSite.WindowClass"]=1
+		["AVL_AVView"]=1;["ConsoleWindowClass"]=1
 	};	
 }
 
