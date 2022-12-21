@@ -27,7 +27,7 @@ class appTrayMenu{
 				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
 			}	
 			
-			..mainHotkeyForm .enableHotkey(!..config.hotkey.chkEnableHotkey)
+			..mainHotkeyForm.enableHotkey(!..config.hotkey.chkEnableHotkey)
 		});
 		popmenu.check(id,!!..config.hotkey.chkEnableHotkey,0/*_MF_BYCOMMAND*/);
 		
