@@ -135,6 +135,12 @@ if(!config.setting.editorClasses){
 	};	
 }
 
+..table.assign(config.setting.editorClasses,{
+	["@WeChatMainWndForPC"]=1;
+	["@ChatWnd"]=1;
+	["#EXCEL6"]=1;
+});
+
 config.style.backgroundColor = null;
 config.style.timeout = null;
 

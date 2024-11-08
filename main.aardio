@@ -31,7 +31,18 @@ import config;
 imeBar.interval = config.setting.interval;
 imeBar.timeout = config.setting.timeout;
 imeBar.editorClasses = config.setting.editorClasses;
-imeBar.quirksMode = config.setting.quirksMode;
+
+if(config.setting.quirksMode){
+	import sys.input;
+	var tips = sys.input.getEnabledLayoutOrTips();
+	if(tips["0804:{B722B5D7-0C4C-4933-A7B9-DF8C91F2C643}{0C7479AF-F27F-488C-A46B-5BDA6BF43E50}"] ){
+		imeBar.quirksMode = 2;
+	}
+	else {
+		imeBar.quirksMode = 1;	
+	}
+}
+
 
 //下面创建托盘图标
 import win.util.tray;
