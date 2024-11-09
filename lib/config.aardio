@@ -144,6 +144,38 @@ if(!config.setting.editorClasses){
 config.style.backgroundColor = null;
 config.style.timeout = null;
 
+config.setting.updateQuirksMode = function(quirksMode){
+	if(quirksMode===null){
+		quirksMode = config.setting.quirksMode;
+	}
+	
+	if(quirksMode){
+		import ..sys.input;
+		var tips = ..sys.input.getEnabledLayoutOrTips();
+		
+		if(tips["0804:{86598FB9-66A2-463E-B9C2-AEB906D477AD}{607FDF85-FCC8-4DBD-A365-41296F980C9C}"]){
+			quirksMode = 3;//WX
+		}
+		elseif(tips["0804:{B722B5D7-0C4C-4933-A7B9-DF8C91F2C643}{0C7479AF-F27F-488C-A46B-5BDA6BF43E50}"] ){
+			quirksMode = 2;//XF
+		}
+		elseif(tips["0804:{6573078D-A793-4CD9-A6E6-0FFB01F35262}{CE7B668C-8260-4496-AEE0-5305D3FB8E0E}"] ){
+			quirksMode = 1;//SX
+		}
+		else {
+			quirksMode = 3;	
+		}
+	}
+	else {
+		quirksMode = 0;
+	}
+	
+	
+	config.setting.quirksMode = quirksMode;
+	return quirksMode;	
+}
+
+
 /**intellisense(config)
 setting = 通用设置
 saveAll() = 写入所有配置到文件
