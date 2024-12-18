@@ -1,330 +1,89 @@
-﻿
+﻿import config;
+
 namespace app.hotkey;
 
-defaultCode = /***********************
-(function(){
-	//这里的代码可以直接执行	
-})();
-
-/* 大写金额(可输入数学表达式)、日期、时间  */
-["Ctrl+$"] = function(hFocus){  
-	win.dlg.chineseNumber().show();
-};
-
-/*范例及说明{{*/
-
-/* 放在这中间的是注释,首尾星号数目要配对 */
-
-/******************************************************************
-
-["Ctrl+#"] = function(hFocus){  
-	ui.colorPicker(); //打开调色器
-};
-
-//复制输入焦点所在窗口类名
-["Ctrl+F12"] = function(hFocus){  
-	var cls = win.getClass(hFocus);
-	winex.tooltip.trackPopup(cls + " 已复制到剪贴板!");
-	win.clip.write(cls);
-};
-
-//运行QQ
-["Ctrl+Q,Q"] = function(hFocus){
-	qqpath = fsys.lnk.search( {"qq.exe";"QQScLauncher.exe";"QQProtect.exe"} )   
-	process.execute( qqpath )
-};
-
-["@Shift"] = function(hFocus){
-	/*
-	如果 Ctrl,Shift,Alt,Win 等单控制键作为热键，显在前面加上@ 字符。
-	则仅在按下并放开该键后（中间没有按其他键）才会触发热键。
-	这通常不干扰该键原有热键（因为一般都是按下触发）。
-	*/
-} 
-
-//按大写自动切换到英文输入
-["CAPSLK"]  = function(hFocus){  
-	key.ime.setOpenStatus(false);
-	key.ime.setConversionMode(0); 
-	
-	return true;//允许按键继续发送，不改变大小写键的默认行为
-};
-
-//按 Ctrl + .  切换到中文输入 + 中文标点 + 小写
-["Ctrl+."]  = function(hFocus){    
-	var openState,mode = key.ime.state();
-	if( openState && !key.ime.capital() ) return true; //当前已经是中文输入模式，不改变默认行为
-	
-	key.up("Ctrl");//先放开 Ctrl 键
-
-	//如果是大写状态，切换为小写
-	if(key.ime.capital())    key.press("CAPSLK") 
-
-	//英文直接切中文 + 中文标点
-	key.ime.setOpenStatus(true); //打开输入法
-	key.ime.setConversionMode(1|0x400); //切换到中文状态，这一步不能省略
-	
-	//再次尝试用键盘切换中文标点，这一步不能省略
-	key.combine("CTRL",".");
-	
-	//现在再次检测中文标点状态
-	var openState,mode = key.ime.state();
-	if(mode!=3/*_IME_SYMBOLMODE_SYMBOL*/){
-		//说明切换到了英文标点，再切换回去
-			key.combine("CTRL",".")
-	}  
-};
-
-//改键演示
-["Ctrl+."] = function(hFocus){  
-	key.up("Ctrl"); //先把已经按下的键弹起来
-	key.combine("CTRL","A"); //换成别的键，具体看 aardio 库函数文档
-	return false; //阻止按键事件
-};
-
-//叠字键演示
-["`"]  = function(hFocus){  
-	var openState,mode = key.ime.state();//用法请查看 aardio 文档
-	if(!openState 
-			||  mode !=3 || key.getState("Shift")  
-			|| key.getState("Ctrl")  
-			|| key.getState("CAPSLK")  ) {
-			return true; //允许此按键继续发送
+mainPath = ..io.appData("/aardio/std/ImTip/.hotkey/hotkey.aardio")
+if(!..io.exist(mainPath)){
+	..string.save(mainPath, $"\hotkey\hotkey.aardio")
+}
+ 
+var hotkeyThreadHandle;
+var hotkeyThreadId;
+update = function(enabled){
+	if(hotkeyThreadId){ 
+		::User32.PostThreadMessage(hotkeyThreadId,0x12/*_WM_QUIT*/,0,0);
+		if( !..thread.waitOne(hotkeyThreadHandle,1000) ){
+			..thread.terminate(hotkeyThreadHandle,0); 
+			..io.print("异常终止热键线程");
+		}
+		else {
+			..io.print("正常终止热键线程");
+		} 
+		..raw.closehandle(hotkeyThreadHandle)
+		
+		hotkeyThreadHandle = null;
+		hotkeyThreadId = null;
 	}
 	
-	key.combine("SHIFT","LEFT"); //向后选一个字
-	key.combine("CTRL","C"); //复制
-	key.press("RIGHT"); //取消选中
-	key.combine("CTRL","V"); //粘贴
-};
-
-//取消次选键
-[";"] = function(hFocus){
-	if( winex.msCandidate.isVisible() ){
-		key.send(" ;") 
-	} 
-	else return true;
-};
-
-//按 shift + back 变 ctrl + z
-["SHIFT+BACK"] = function(hFocus){
-	key.up("SHIFT"); //先把已经按下的键弹起来
-	key.combine("CTRL","Z")
-};
-
-//把斜杠“/”改为顿号
-["/"] = function(hFocus){
-	var openState,mode = key.ime.state();//
-	if( !openState /*&&(mode==3) */ ) return true; 
-	key.sendString("、")
-};
-
-//切换鼠标左右键，经常换左右手耍鼠标是好习惯
-["Ctrl+SHIFT+RIGHT"] = function(hFocus){  
-	::User32.SwapMouseButton(!::User32.GetSystemMetrics(23));
-}
-
-//按 Shift + Back 变 Ctrl + Z，因为这时候 Shift 是按下状态，所以可以先发一个 key.up("SHIFT") 弹起shift键
-["SHIFT+BACK"] = function(hFocus){
-	key.up("SHIFT")
-	key.combine("CTRL","Z")
-};
-
-//引号配对
-[`SHIFT+"`] = function(hFocus){  
-	var o,s = key.ime.state();
-	key.sendString(s==3 ? `“”` : `""`); 
-
-	//与目标窗口共享输入状态
-	winex.attach(hFocus,true);
-	
-	//设置LSHIFT,RSHIFT 为弹起状态
-	key.up("RSHIFT","LSHIFT","SHIFT");
-	key.setState(false,"RSHIFT","LSHIFT","SHIFT"); 
-
-	//移动光标
-	key.press("LEFT");
-	
-	//取消共享输入状态
-	winex.attach(hFocus,false);
-} 
-
-//括号配对
-[`SHIFT+(`] = function(hFocus){  
-	key.sendString(`()`);
-	key.up("SHIFT"); 
-	key.press("LEFT");
-}
-
-//右 SHIFT 键切换为英文
-["RSHIFT"]  = function(hFocus){  
-	key.ime.setOpenStatus(false);
-	key.ime.setConversionMode(0); 
-};
-
-//左 SHIFT 键切换为中文
-["LSHIFT"]  = function(hFocus){    
-	var openState,mode = key.ime.state();
-	if( openState && !key.ime.capital() ) return true; //当前已经是中文输入模式，不改变默认行为
-	
-	key.up("SHIFT");//先放开 SHIFT 键
-
-	//如果是大写状态，切换为小写
-	if(key.ime.capital())    key.press("CAPSLK") 
-
-	//英文直接切中文 + 中文标点
-	key.ime.setOpenStatus(true); //打开输入法
-	key.ime.setConversionMode(1|0x400); //切换到中文状态，这一步不能省略
-	
-	//再次尝试用键盘切换中文标点，这一步不能省略
-	key.combine("CTRL",".");
-	
-	//现在再次检测中文标点状态
-	var openState,mode = key.ime.state();
-	if(mode!=3/*_IME_SYMBOLMODE_SYMBOL*/){
-		//说明切换到了英文标点，再切换回去
-		key.combine("CTRL",".")
-	}  
-};
-
-//按 `date 输入大写的当前日期
-["~date"] = function(hFocus){ 
-	var zh = string.chineseNumber('〇一二三四五六七八九');
-	key.sendString(zh.date()); //改为 zh.time() 输出大写的当前时间
-}; 
-
-//增加音量
-["Ctrl+F6"] = function(hFocus){
-	key.press("VOLUME_UP");
-}
-
-//降低音量
-["Ctrl+F7"] = function(hFocus){
-	key.press("VOLUME_DOWN");
-}
-
-//切换静音
-["Ctrl+F8"] = function(){
-	key.press("VOLUME_MUTE");
-}
-
-//运行计算器
-["~calc"] = function(hFocus){
-	process.execute("calc.exe")
-};
-
-//运行word
-["~word"] = function(hFocus){
-	var word = com.CreateObject("Word.Application")
-	if(word)word.Visible = true; 
-};
-
-//微软五笔打开或关闭拼音混输
-["Ctrl+,"] = function(hFocus){  
-	import win.reg;
-	var reg = win.reg("HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS");
-	var mode = !reg.queryValue("PinyinMixEnable") ? 1 : 0
-	reg.setDwValue("PinyinMixEnable",mode)	
-	
-	key.ime.changeRequest(0x4090409)
-	key.ime.changeRequest(0x8040804)
-};
-
-//不可直接在上述键盘回调函数中执行耗时操作，这会导致操作系统禁用热键。
-//如果有耗时操作必须如下返回一个异步函数，将异步执行该函数，并取消已按键不再执行默认操作
-[`SHIFT+"`] = function(hFocus){  
-	return function(){
-		key.waitUp("SHIFT")
-		key.sendString(`"`);
-		key.press("LEFT");
-	} ; 
-}
-
-//禁用/启用 ImTip 提示快捷键
-["Ctrl+F1"] = function(){  
-	imeBar.imeWatch(!!..imeBar.paused);
-};
-
-//屏蔽指定的程序窗口
-(function(){
-	var lastFocus,lastPath,lastClass;
-	checkImeProcess = function(hFocus,exeFile){
-		if(lastFocus != hFocus){
-			lastClass = win.getClass(hFocus);
-			var tid,pid = win.getThreadProcessId(hFocus);
-			lastPath = process.getPath(pid);
-			lastFocus = hFocus
+	if(!enabled) return; 	
+		 
+	hotkeyThreadHandle = ..thread.create( 
+		function(){
+			import process.aardio;
+			process.aardio.run(
+				function(){ 
+					import win;
+					import win.ui;
+					
+					//禁止在关闭最后一个独立窗口时自动退出消息循环。
+					win.autoQuitMessage = false;
+					
+					mainPath = ..io.appData("/aardio/std/ImTip/.hotkey/hotkey.aardio");
+					loadcodex(mainPath,"ImTip"); 
+				} 
+			)
 		}
+	)
 	
-		return (lastPath && io.splitpath(lastPath).file == exeFile )
+	if(hotkeyThreadHandle){
+		hotkeyThreadId = ::Kernel32.GetThreadId(hotkeyThreadHandle); 	
+	}
+	
+}
+
+var thrdWatcher;
+edit = function(){
+	import process.aardio;
+	var path = process.aardio.getPath();
+	if(!path){
+		if(!process.aardio.download()) return;
+	}
+	
+	if(!thrdWatcher){
+		import fsys.dirWatcher;
+		import win.debounce;
+		
+		var updateOnCodeChange = win.debounce(update,500);
+		
+		thrdWatcher = ..fsys.dirWatcher.thread(
+			function(filename,action,actionText){ 
+				updateOnCodeChange(..config.hotkey.chkEnableHotkey);
+			}, ..io.appData("/aardio/std/ImTip/.hotkey/") ); 	
+	}
+
+	process.aardio(mainPath);
+}
+
+..subscribe("beforeUnload",function(){
+	if(hotkeyThreadId){ 
+		::User32.PostThreadMessage(hotkeyThreadId,0x12/*_WM_QUIT*/,0,0); 
+		..raw.closehandle(hotkeyThreadHandle);
+		
+		hotkeyThreadHandle = null;
+		hotkeyThreadId = null; 
+	}
+	
+	if(thrdWatcher){
+		thrdWatcher.close(); //停止监视文件
 	}	
-	
-	//显示提示窗口前触发下面的事件
-	imeBar.onImeStateChange = function(hFocus,imeX,imeY,openNative,symbolMode,text,iconText){
-		if( !checkImeProcess(hFocus,"Code.exe") ){
-			return true;//允许提示
-		}
-	}
-})();
-
-
-******************************************************************/
-
-/******************************************************************
-//本程序已默认载入大量 aardio 库，可以在这里直接调用，具体用法请参考 aardio 文档。
-//可以自行添加更多的 aardio 库，按原路径放到 ImTip.exe 所在目录的 /lib/ 目录下即可。
-
-//发送字符串
-key.sendString("这里是要发送的字符串")
-
-//发送按键
-key.send("/")
-
-//发送按键
-key.press("ENTER")
-
-//判断中文输入法是否打开，打开则执行花括号中的语句
-if( key.ime.state() ){ }
-
-配置代码使用 aardio 编程语言（ 开发环境仅 6.5MB 官网：http://www.aardio.com ）
-中括号里是按键名字串，等号的后面指定输入文本或者执行输入的函数。
-如果第一个按键是控制键并紧跟一个加号，后面所有键名都要使用逗号分开，例如"Ctrl+Q,Q"。
-
-一、超级热键检测规则
-
-1、如果首个按下的键不是控制键，则不需要同时按住多个键。
-如果按下的键是已注册的热键前半部分，则阻止当前按键继续发送。
-如果继续按键已不符合任何热键，则释放已捕获的按键并按原顺序重新发送。
-2、如果首次按住的是控制键（ CTRL,ALT,SHIFT,WIN 之一），则必须同时按住多个键才算已完成热键。
-如果这样同时按住的多个键是一个已完成的热键，但同时又是其他热键的前半部分，则必须放开所有键才会生效。
-3、如果注册单个控制键热键，并且加上 @ 前缀，则放开该键（且中间没有按其他键）才算完成热键。
-不拦截或取消该键按下事件。
-
-超键热键中任何键名都只表示该键名所在的按键，不区分上档键。
-例如热键 "~hi" 指连续按 3 个键，其中 ~ 不是指同时按 Shift + ` 。
-
-二、示例
-例如注册了以下 4 个热键，则使用规则如下：
-热键 "~hi" 用法：按连续按 3 个键，每个键都要放开。
-热键 "SHIFT+Q,Q" 用法：按下 Shift 不放，再按 2 下 Q。
-热键 "Ctrl+K" 用法：按下 Ctrl 不放，再按 K, 然后都放开。
-热键 "Ctrl+K,K"	用法：按下 Ctrl 不放，再按 2 次 K（因为不是其他热键的前半部分，不需要等待放开）。
-热键 "@Shift"	用法：单按 Shift 并放开 Shift，中间不按其他键
-
-注意键名键名忽略大小写。
-
-三、热键回调函数
-热键回调函数返回 true 表示允许系统继续发送按键，
-否则取消该按键，不再继续发送。
-
-如果热键回调函数返回一个函数对象，
-则取消该按键不再发送，并在返回函数以后异步执行返回的函数对象。
-这样可以避免在热键回调函数中执行耗时操作。
-
-超级热键基于低级键盘钩子，
-在热键回调中不允许做耗时操作（在热键回调中返回异步执行的函数则不受限制），
-如果耗时超过一秒或超过注册表限制的更小时间，系统会直接删除键盘钩子（导致热键不可用）。
-没有任何方法可以检查到删除操作，应当遵守规则避免滥用。 
-******************************************************************/
-/*}}*/
-***********************/
+} );

@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project ver="10" name="ImTip" libEmbed="true" icon="\app.ico" ui="win" output="ImTip.exe" CompanyName="aardio" FileDescription="通用输入法状态跟踪提示工具" LegalCopyright="Copyright (C) aardio 2022" ProductName="ImTip" InternalName="ImTip" FileVersion="4.6.0.0" ProductVersion="4.6.0.0" publishDir="\dist\" dstrip="true" local="false" ignored="false">
+<project ver="10" name="ImTip" libEmbed="true" icon="\app.ico" ui="win" output="ImTip.exe" CompanyName="aardio" FileDescription="ImTip 桌面助手" LegalCopyright="Copyright (C) aardio 2022" ProductName="ImTip" InternalName="ImTip" FileVersion="5.0.0.1" ProductVersion="5.0.0.1" publishDir="\dist\" dstrip="true" local="false" ignored="false">
 	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
 	<folder name="资源文件" path="res" embed="true" local="false" ignored="false"/>
 	<folder name="窗体文件" path="dlg" comment="目录" embed="true" local="false" ignored="false">
-		<file name="frmHotkey.aardio" path="dlg\frmHotkey.aardio" comment="dlg\frmHotkey.aardio"/>
+		<file name="aiChat.aardio" path="dlg\aiChat.aardio" comment="dlg\aiChat.aardio"/>
 		<file name="frmIconFont.aardio" path="dlg\frmIconFont.aardio" comment="dlg\frmIconFont.aardio"/>
 		<file name="frmSetting.aardio" path="dlg\frmSetting.aardio" comment="dlg\frmSetting.aardio"/>
 		<file name="template.aardio" path="dlg\template.aardio" comment="dlg\template.aardio"/>
-		<file name="templateHotkey.aardio" path="dlg\templateHotkey.aardio" comment="dlg\templateHotkey.aardio"/>
-		<folder name="images" path="dlg\images" comment="dlg\images">
+		<folder name="images" path="dlg\images" comment="dlg\images" local="false" embed="false" ignored="false">
 			<file name="input.gif" path="dlg\images\input.gif" comment="dlg\images\input.gif"/>
 		</folder>
 	</folder>

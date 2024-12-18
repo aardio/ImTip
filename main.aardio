@@ -1,11 +1,11 @@
-import fonts.imtip;
-import win.ui.atom;
-import win.ui;
-import win.dlg.message;
-/*DSG{{*/
-mainForm = win.form(text="ImTip - 通用输入法提示工具";right=759;bottom=469)
-mainForm.add()
-/*}}*/
+
+/*启动参数{{*/
+_IMTIP_APP = true;
+
+if(_ARGV.chat){ 
+	loadcodex("\dlg\aiChat.aardio");
+	return; 
+}
 
 for(k,v in _ARGV){
 	if(string.endWith(v,".aardio",true)){
@@ -14,20 +14,79 @@ for(k,v in _ARGV){
 		}
 	}
 }
+/*}}*/
+
+import style;
+import fonts.imtip;
+import win.ui.atom;
+import win.ui;
+import win.dlg.message;
+import fonts.fontAwesomeSub;
+/*DSG{{*/
+mainForm = win.form(text="ImTip 5.0 - 桌面助手";right=649;bottom=418;max=false;min=false)
+mainForm.add(
+btnAiChat={cls="plus";text="AI 智能助手";left=36;top=273;right=178;bottom=303;align="left";bgcolor=11580047;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF007';notify=1;tabstop=1;textPadding={left=29};z=10};
+btnHotkey={cls="plus";text="编辑超级热键";left=36;top=40;right=178;bottom=70;align="left";bgcolor=11580047;dl=1;dt=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='imtip');padding={left=10;top=1}};iconText='\uE8CE';notify=1;tabstop=1;textPadding={left=29};z=6};
+btnImTip={cls="plus";text="配置输入法提示";left=36;top=226;right=178;bottom=256;align="left";bgcolor=11580047;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF0F6';notify=1;tabstop=1;textPadding={left=29};z=8};
+chkHotkey={cls="plus";text="启用超级热键";left=214;top=41;right=410;bottom=70;align="left";dl=1;dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=7};
+chkImTip={cls="plus";text="启用输入法提示";left=214;top=226;right=346;bottom=255;align="left";db=1;dl=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=9};
+chkSysRun={cls="plus";text="允许开机启动";left=39;top=355;right=235;bottom=384;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=11};
+group1={cls="plus";left=18;top=21;right=628;bottom=320;align="left";border={color=-16744448;radius=8;width=1};db=1;dl=1;dr=1;dt=1;font=LOGFONT(h=-14);textPadding={left=16};valign="top";z=2};
+group2={cls="plus";left=18;top=342;right=628;bottom=396;align="left";border={color=-16744448;radius=8;width=1};db=1;dl=1;dr=1;font=LOGFONT(h=-14);textPadding={left=16};valign="top";z=1};
+groupTitle1={cls="plus";text="软件功能";left=31;top=7;right=107;bottom=33;dl=1;dt=1;z=3};
+groupTitle2={cls="plus";text="启动选项";left=36;top=328;right=112;bottom=354;db=1;dl=1;z=5};
+lpHotkey={cls="syslink";text='强大的『超级热键』集成 <a href="https://www.aardio.com">aardio</a> 开发环境，支持 <a href="https://www.aardio.com">aardio</a> 的全部标准库与扩展库。\n提供丰富的热键功能。支持快捷获取屏幕选区文本、输入位置、输入法状态，快捷调用 AI 大模型接口，快速开发智能桌面助手。\n\n<a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">ImTip 超级热键开发指南</a>\n<a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">aardio 语法速览</a>\n<a href="https://www.aardio.com/vip">VIP 技术支持</a>';left=62;top=90;right=599;bottom=219;dl=1;dr=1;dt=1;transparent=1;z=4}
+)
+/*}}*/
 
 var atom,hwnd = mainForm.atom("E474890D-1DFA-4575-B456-7B46C15665DC.imtip");
 if(!atom){
-	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig);
+	if(__argvImTipConfig) win.sendCopyData(hwnd,__argvImTipConfig );
+	else {
+		win.sendCopyData(hwnd,"show");
+	}
+	
 	win.quitMessage();	
 	return;
 }
+
+import fsys.update.simpleMain;
+if( fsys.update.simpleMain(
+	"ImTip 桌面助手",
+	"http://imtip.aardio.com/update/",
+	io.appData("/aardio/std/ImTip/app/update"),
+	function(version,description,status){})){
+	return 0;	
+}
+
+mainForm.chkSysRun.skin(style.checkBox);
+mainForm.chkImTip.skin(style.checkBox);
+mainForm.chkHotkey.skin(style.checkBox);
+mainForm.btnHotkey.skin(style.button);
+mainForm.btnAiChat.skin(style.button);
+mainForm.btnImTip.skin(style.button);
+
 mainForm.enableDpiScaling("init");
 
+import config;
+if(!_ARGV.sys){
+	if(!_ARGV.updated){
+		mainForm.show()
+	}
+	else {
+		if(!config.setting.runOnce){
+			mainForm.show();
+			config.setting.runOnce = true;
+			config.setting.save();
+		}
+	}  
+}
+ 
 //显示输入状态栏
 import key.ime.stateBar;
 imeBar = key.ime.stateBar(mainForm);
 
-import config;
+
 imeBar.interval = config.setting.interval;
 imeBar.timeout = config.setting.timeout;
 imeBar.editorClasses = config.setting.editorClasses;
@@ -36,7 +95,7 @@ imeBar.quirksMode = config.setting.updateQuirksMode();
 //下面创建托盘图标
 import win.util.tray;
 mainForm.tray = win.util.tray(mainForm)  
-mainForm.tray.tip = "ImTip：通用输入法状态跟踪提示工具" //设置鼠标提示 
+mainForm.tray.tip = "ImTip：桌面助手" //设置鼠标提示 
 
 //响应托盘消息
 mainForm.onTrayMessage = {
@@ -48,21 +107,10 @@ mainForm.onTrayMessage = {
 	    menu.popup(); 
 	};
 	[0x201/*_WM_LBUTTONDOWN*/] = function(wParam){ 
-		if(mainHotkeyForm) mainHotkeyForm.hitMin(); 
-		if(!mainSettingForm) mainSettingForm = mainForm.loadForm("\dlg\frmSetting.aardio");
-
-		mainSettingForm.show(); 
-		win.setForeground(mainSettingForm.hwnd);
+	 
+		mainForm.show(); 
+		win.setForeground(mainForm.hwnd);
 	};
-}
-
-import fsys.update.simpleMain;
-if( fsys.update.simpleMain(
-	"ImTip ( 通用输入法状态跟踪提示工具 )",
-	"http://imtip.aardio.com/update/",
-	io.appData("/aardio/std/ImTip/app/update"),
-	function(version,description,status){})){
-	return 0;	
 }
 
 import config;
@@ -104,7 +152,7 @@ mainForm.importImTipStyle = function(path){
 }
 
 mainForm.onCopyData = function(data,dataType){
-	 
+ 
 	if(data=="start"){
 		if(mainSettingForm){
 			return win.setForeground(mainSettingForm.hwnd); 
@@ -121,7 +169,15 @@ mainForm.onCopyData = function(data,dataType){
 		
 		mainForm.importImTipStyle(data);  
 	}
+	else {
+		mainForm.show();
+	}
 }
+
+mainForm.onClose = function(){
+    mainForm.show(false);
+    return true; 
+} 
 
 if(config.style.width){
 	app.util.updateTipStyle(config.style);
@@ -133,7 +189,83 @@ if(__argvImTipConfig){
 }
 
 if(config.hotkey.chkEnableHotkey){
-	mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
+	import app.hotkey;
+	app.hotkey.update(true);
+}
+
+mainForm.btnImTip.oncommand = function(id,event){
+ 
+	if(..mainHotkeyForm) ..mainHotkeyForm.hitMin(); 
+	if(!..mainSettingForm) ..mainSettingForm = ..mainForm.loadForm("\dlg\frmSetting.aardio"); 
+	..mainSettingForm.show();  
+	mainForm.show(false);
+}
+
+mainForm.btnAiChat.oncommand = function(id,event){
+	
+ 	import process.imTip; 
+	process.imTip(chat = ""); 
+	
+	mainForm.show(false);
+}
+
+mainForm.btnHotkey.oncommand = function(id,event){
+	mainForm.btnHotkey.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''}
+	import app.hotkey;
+	app.hotkey.edit();
+	
+	thread.delay(1500);
+	mainForm.btnHotkey.disabledText = null;
+	mainForm.show(false);
+}
+
+mainForm.chkSysRun.checked = config.setting.sysRun;
+mainForm.chkSysRun.oncommand = function(id,event){
+	if(_STUDIO_INVOKED){
+		error("此功能发布后可用。")
+	}
+	
+	import sys.run;
+	import process.admin;
+	
+	if( process.admin.isRunAs() &&  ! _WINXP ){
+		import sys.runAsTask;
+		
+		sys.run("ImTip").delete();
+		
+		if(owner.checked){
+			sys.runAsTask("ImTip","桌面助手").register("/sys");
+		}
+		else {
+			sys.runAsTask("ImTip","桌面助手").delete();
+		} 	
+		
+		mainForm.chkSysRun.text = "允许开机以管理权限启动"
+	}
+	else{
+		if(owner.checked){
+			sys.run("ImTip").register("/sys");
+		}
+		else {
+			sys.run("ImTip").delete()
+		} 
+	}
+	
+	config.setting.sysRun = owner.checked;
+	config.setting.save();
+}
+
+mainForm.chkHotkey.checked = ..config.hotkey.chkEnableHotkey;
+mainForm.chkHotkey.oncommand = function(id,event){
+	..config.hotkey.chkEnableHotkey = !..config.hotkey.chkEnableHotkey;
+	
+	import app.hotkey;
+	app.hotkey.update(..config.hotkey.chkEnableHotkey);	
+}
+
+mainForm.chkImTip.checked = !..imeBar.paused;
+mainForm.chkImTip.oncommand = function(id,event){
+	..imeBar.imeWatch(!!..imeBar.paused);
 }
 
 win.loopMessage();

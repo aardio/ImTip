@@ -1,0 +1,12 @@
+import fsys;
+import fonts;
+
+namespace fonts.fontAwesomeSub{
+    
+    family = ..fonts.addFamily($"/lib/fonts/.res/fontAwesomeSub.ttf","FontAwesome")
+}
+ 
+/**intellisense()
+fonts.fontAwesomeSub = 导入FontAwesome 图标字体用于支持GDI/GDI+，控件/plus控件等,\n所有图标请参考aardio工具->文本文件->图标字体
+fonts.fontAwesomeSub.family = GDI+字体家族,可用于plus控件,gdip等库函数,\n!gdipfamily.
+end intellisense**/

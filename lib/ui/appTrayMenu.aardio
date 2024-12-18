@@ -12,28 +12,27 @@ namespace ui;
 class appTrayMenu{
 	ctor(winform){
 		var popmenu = ..win.ui.popmenu(winform);//创建弹出菜单
-		
-		popmenu.add("管理超级热键",function(){
-			if(..mainSettingForm) ..mainSettingForm.show(false);
-			if(!..mainHotkeyForm) ..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");  
+
+		popmenu.add("编辑超级热键",function(){
 			
-			..mainHotkeyForm.show(); 
-			..win.setForeground(..mainHotkeyForm.hwnd);
+			if(..mainSettingForm) ..mainSettingForm.show(false);
+			
+			import app.hotkey;
+			app.hotkey.edit();
 		})
 		
 		var id = popmenu.add('└──  启用超级热键',function(id){  
 		
-			if(!..mainHotkeyForm){
-				..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");
-			}	
+			..config.hotkey.chkEnableHotkey = !..config.hotkey.chkEnableHotkey;
 			
-			..mainHotkeyForm.enableHotkey(!..config.hotkey.chkEnableHotkey)
+			import app.hotkey;
+			app.hotkey.update(..config.hotkey.chkEnableHotkey);
 		});
 		popmenu.check(id,!!..config.hotkey.chkEnableHotkey,0/*_MF_BYCOMMAND*/);
 		
 		popmenu.add();//分隔线
 		
-		popmenu.add('配置方案',function(id){ 
+		popmenu.add('配置输入提示',function(id){ 
 			if(..mainHotkeyForm) ..mainHotkeyForm.hitMin(); 
 			if(!..mainSettingForm) ..mainSettingForm = ..mainForm.loadForm("\dlg\frmSetting.aardio");
 			
@@ -41,12 +40,14 @@ class appTrayMenu{
 			..win.setForeground(..mainSettingForm.hwnd);
 		});
 		
-		var id = popmenu.add('└──  临时禁用提示',function(id){
+		var id = popmenu.add('└──  临时禁用输入提示',function(id){
 			..imeBar.imeWatch(!!..imeBar.paused);
 		});
 		popmenu.check(id,!!..imeBar.paused,0/*_MF_BYCOMMAND*/);
 		
-		popmenu.add('导出外观配置方案',function(id){
+		var popmenuImTipConfig = ..win.ui.popmenu(winform);//创建弹出菜单
+		
+		popmenuImTipConfig.add('导出配置方案',function(id){
 			if(..mainSettingForm){
 				..win.setForeground(..mainSettingForm.hwnd);
 				return ..mainSettingForm.btnExport.oncommand();
@@ -80,7 +81,7 @@ class appTrayMenu{
 			..string.save(path,data);
 		});
 		
-		popmenu.add('自文件导入外观配置',function(id){ 
+		popmenuImTipConfig.add('自文件导入外观配置',function(id){ 
 			if(..mainSettingForm){
 				..win.setForeground(..mainSettingForm.hwnd);
 				return ..mainSettingForm.btnImport.oncommand();
@@ -93,7 +94,7 @@ class appTrayMenu{
 		});
 		
 		
-		popmenu.add('自剪贴板导入外观配置',function(id){ 
+		popmenuImTipConfig.add('自剪贴板导入外观配置',function(id){ 
 			if(..mainSettingForm){
 				..win.setForeground(..mainSettingForm.hwnd);
 				return ..mainSettingForm.importStyleFromClip();
@@ -126,6 +127,8 @@ class appTrayMenu{
 			} 
 		});
 		
+		popmenu.add('└── 导入导出方案',popmenuImTipConfig);
+		
 		popmenu.add();//分隔线 
 		
 		if(_WIN10_LATER){
@@ -147,7 +150,7 @@ class appTrayMenu{
 			});
 			popmenu.check(id,imStatus.wubi,0/*_MF_BYCOMMAND*/);
 			
-			popmenu.add('└──  词库管理（五笔、郑码、表形码）',function(id){
+			popmenu.add('└──  词库管理',function(id){
 				import process;
 				process.openUrl("http://wubi.aardio.com/");
 			}); 
@@ -222,6 +225,8 @@ class appTrayMenu{
 			import process.wow64;
 			process.wow64.execute("osk")
 		});
+		
+		popmenu.add();//分隔线
 			 
 		popmenu.add('官方网站',function(id){ 
 			import process;

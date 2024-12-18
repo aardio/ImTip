@@ -1,0 +1,512 @@
+import fonts.imtip; 
+import fonts.fontAwesomeDlg;
+import fonts.fontAwesomeSub;
+import config;
+import win.ui;
+/*DSG{{*/
+var winform = win.form(text="ImTip - AI 聊天助手";right=759;bottom=607)
+winform.add(
+btnClear={cls="plus";text="清除";left=589;top=572;right=655;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=5};
+btnCopy={cls="plus";text="复制";left=271;top=572;right=338;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
+btnSend={cls="plus";text="问 AI";left=660;top=572;right=732;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
+btnSetting={cls="plus";text="设置";left=513;top=572;right=580;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=6};
+editMaxTokens={cls="edit";left=427;top=577;right=470;bottom=600;align="right";db=1;dr=1;edge=1;z=8};
+editPrompt={cls="richedit";left=11;top=452;right=754;bottom=567;db=1;dl=1;dr=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=2};
+spinMaxTokens={cls="spin";left=471;top=578;right=491;bottom=600;db=1;dr=1;z=7};
+splitter={cls="splitter";left=8;top=453;right=751;bottom=458;db=1;dl=1;dr=1;frame=1;horz=1;z=3};
+static={cls="static";text="回复长度：";left=352;top=575;right=418;bottom=598;align="right";center=1;db=1;dr=1;transparent=1;z=9};
+wndBrowser={cls="custom";text="自定义控件";left=8;top=5;right=751;bottom=447;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+if(_ARGV.chat){
+	
+	if(#_ARGV.chat){
+		var selIndex = table.find(config.aiChat.itemData,_ARGV.chat);
+		if(selIndex){
+			config.aiChat.selItem = selIndex; 
+			var configItem = config.aiChat.itemData[selIndex];
+			if(configItem){
+				config.aiChat.proxy = null;
+				table.assign(config.aiChat,configItem);  
+			}
+		}
+	}
+	
+	if(#_ARGV.q){
+		winform.editPrompt.text = _ARGV.q;
+		winform.setTimeout(function(){
+			winform.btnSend.oncommand();
+		});
+	}
+}
+
+//创建显示聊天消虑的 Web 浏览器窗口
+import web.form.chat;
+var wb = web.form.chat(winform.wndBrowser);
+
+//清除上下文
+var resetMessages = function(){
+	
+	wb.clear();
+	 
+	//输入系统提示词
+	wb.system( config.aiChat.systemPrompt || "你是 AI 助手，请用中文回答问题" );
+}
+
+resetMessages();
+
+winform.btnClear.oncommand = function(id,event){
+	resetMessages();//清除聊天上下文
+}
+
+//响应按键事件，输入用户提示词
+winform.btnSend.oncommand = function(id,event){
+	
+	var prompt = winform.editPrompt.text;
+	if(!#prompt){
+		winform.msgboxErr("请在上面输入问题。"); 
+		winform.editPrompt.setFocus();
+		return;
+	}
+	
+	//按钮显示等待动画
+	winform.btnSend.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
+	winform.btnClear.disabled = true;
+	winform.btnCopy.disabled = true; 
+	
+	wb.limit = config.aiChat.msgLimit;
+	
+	var assistantMsg = wb.lastAssistantMessage();
+	 
+    var knowledge = ""
+	prompt = string.replace(prompt,`(https?\://[^\s()"']+)`,
+		function(url){
+		 
+			wb.showLoading("正在读取："+url)
+				
+			var md = inet.http.get(url);
+			if(md){
+				md = '\r\n\r\n用户输入的参考网址：' + url 
+					+  '\r\n\r\n下面是自该网址获取的内容：'
+					+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+					
+				knowledge = knowledge + md;
+				
+			}
+		});
+	
+	if(#knowledge){
+		wb.system(knowledge)
+	} 
+
+	//输入 AI 提示词
+	wb.prompt( prompt );
+	winform.editPrompt.text = "";
+
+	config.aiChat.maxTokens = winform.spinMaxTokens.pos;
+	
+	//创建多线程向服务端发送请求
+	thread.invoke( 
+		function(wb,config){
+		
+			for(k,v in config){ 
+				if(v=="")config[k] = null;
+			} 
+			
+			config = table.mix(config,{ 
+				key = "api-key";
+				url = "https://api.deepseek.com/v1";
+				model = "deepseek-chat";
+				temperature = 0.5;
+			});
+			 
+			if(config.maxTokens>1024 && (config.key === "sk-******************" ) ){
+				wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+				return;
+			}
+		
+			//导入调用 HTTP 接口的 REST 客户端
+			import web.rest.aiChat;
+			var client = web.rest.aiChat(config);
+			 
+			var ok,err = client.messages(wb.chatMessage,function(deltaText){
+				wb.assistant(deltaText);
+			} );
+	
+			if(err){
+				//获取错误对象（解析 JSON 格式的错误信息）
+				var errObject = client.lastResponseError()
+				if(errObject[["error"]][["type"]] == "authentication_error" ){
+					wb.errorMessage(`API 密钥错误！<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>`)
+				}
+				else {
+					wb.errorMessage(err)
+				}
+			} 
+		},wb,config.aiChat//将参数传入线程
+	)
+}
+
+//在 AI 回复结束后回调此函数
+wb.onWriteEnd = function(){
+	winform.btnSend.disabledText = null;//关闭等待动画
+	winform.btnClear.disabled = false;
+	winform.btnCopy.disabled = false; 
+	winform.editPrompt.setFocus();
+}
+
+//导出 aardio 函数到网页 JavaScript 中。
+wb.external = {
+	updateApiKey = function(){
+		winform.btnSetting.oncommand();
+	} 
+}
+
+import key;
+import win.clip;
+winform.btnCopy.oncommand = function(id,event){
+	var md = wb.lastMarkdown();
+	if(!#md) return winform.msgboxErr("消息为空。");
+	
+	if(key.getState("CTRL")){
+		
+		var found;
+		for indent,_,code in string.gmatch(md,"!\N([ \t]*)(```+)<\w+>(.+?)!\N\s*\2![^`\S]") { 
+			
+			if(#indent){ 
+				text = string.replace(text,"\n+"+indent,'\n');
+			}	
+		 
+		    win.clip.write( code );
+		    found = true;
+		}
+		
+		if(!found){
+			return winform.msgboxErr("没有找到代码块。");	
+		} 
+	}
+	else{ 
+		win.clip.write( md )
+	}
+	
+	winform.btnCopy.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''} 
+	thread.delay(600);
+	winform.btnCopy.disabledText = null;
+}
+
+//设置接口地址与 API 令牌的窗口
+winform.btnSetting.oncommand = function(id,event){
+	var frmSetting = win.form(text="ImTip - 设置 AI 聊天助手";right=686;bottom=586;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
+	frmSetting.add(
+		btnAdd={cls="plus";left=18;top=473;right=52;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF067';notify=1;textPadding={left=25};z=11};
+		btnEdit={cls="plus";left=93;top=473;right=127;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=13};
+		btnRemove={cls="plus";left=56;top=473;right=90;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF1F8';notify=1;textPadding={left=25};z=12};
+		btnSave={cls="button";text="更新配置";left=491;top=529;right=661;bottom=574;z=5};
+		editApiKey={cls="edit";left=284;top=104;right=662;bottom=131;edge=1;password=1;z=2};
+		editApiUrl={cls="combobox";left=284;top=31;right=662;bottom=57;edge=1;items={};mode="dropdown";z=18};
+		editModel={cls="edit";left=284;top=68;right=662;bottom=95;edge=1;z=6};
+		editProxy={cls="edit";left=283;top=180;right=661;bottom=207;edge=1;z=19};
+		editSystemPrompt={cls="edit";left=281;top=220;right=662;bottom=492;edge=1;hscroll=1;multiline=1;vscroll=1;z=21};
+		groupbox={cls="groupbox";text="选择当前配置：";left=9;top=6;right=675;bottom=513;edge=1;z=1};
+		lbMsgLimit={cls="static";left=423;top=546;right=451;bottom=566;transparent=1;z=16};
+		lbTemperature={cls="static";left=633;top=140;right=659;bottom=160;transparent=1;z=17};
+		lstConfig={cls="listbox";left=18;top=34;right=187;bottom=464;edge=1;hscroll=1;items={};vscroll=1;z=10};
+		static={cls="static";text="模型 ID：";left=196;top=72;right=279;bottom=93;align="right";transparent=1;z=3};
+		static2={cls="static";text="API key：";left=196;top=107;right=279;bottom=128;align="right";transparent=1;z=4};
+		static4={cls="static";text="接口地址：";left=196;top=38;right=279;bottom=59;align="right";transparent=1;z=7};
+		static5={cls="static";text="temperature：";left=196;top=141;right=279;bottom=162;align="right";transparent=1;z=9};
+		static6={cls="static";text="上下文轮数：";left=33;top=552;right=128;bottom=584;align="right";transparent=1;z=15};
+		static7={cls="static";text="代理服务器：";left=196;top=184;right=279;bottom=205;align="right";transparent=1;z=20};
+		static8={cls="static";text="系统提示词：";left=196;top=219;right=279;bottom=240;align="right";transparent=1;z=22};
+		tbMsgLimit={cls="trackbar";left=132;top=544;right=415;bottom=574;max=100;min=0;z=14};
+		tbTemperature={cls="trackbar";left=283;top=137;right=633;bottom=167;max=100;min=0;z=8}
+	)
+	
+	frmSetting.editModel.setCueBannerText("模型名前加 @ 使用 Anthropic 接口，否则使用 OpenAI 接口")
+	frmSetting.editProxy.setCueBannerText("socks=127.0.0.1:1081")
+	frmSetting.editSystemPrompt.limit = -1;
+	
+	frmSetting.editApiUrl.items = {
+		"https://api.deepseek.com/v1",
+		"https://api.anthropic.com/v1",
+		"https://generativelanguage.googleapis.com/v1beta",
+		"https://api.x.ai/v1",
+		"https://api.openai.com/v1"
+	}
+	
+	frmSetting.editApiUrl.onListChange = function(){ 
+		var url = frmSetting.editApiUrl.selText;
+		if(url=="https://api.deepseek.com/v1"){
+			frmSetting.editModel.text = "deepseek-chat"
+		}
+		elseif(url=="https://api.anthropic.com/v1"){
+			frmSetting.editModel.text = "@claude-3-5-sonnet-latest"
+		}
+		elseif(url=="https://generativelanguage.googleapis.com/v1beta"){
+			frmSetting.editModel.text = "gemini-2.0-flash-exp"
+		}
+		elseif(url=="https://api.x.ai/v1"){
+			frmSetting.editModel.text = "grok-beta"
+		}
+		elseif(url=="https://api.openai.com/v1"){
+			frmSetting.editModel.text = "chatgpt-4o-latest"
+		}
+	}
+
+	frmSetting.tbMsgLimit.setRange(3,100);
+	frmSetting.tbTemperature.setRange(0,10);
+	frmSetting.tbTemperature.oncommand = function(id,event,pos){
+ 	
+		var pos = frmSetting.tbTemperature.pos; 
+		frmSetting.tbTemperature.tooltip = pos / 10; 
+		frmSetting.lbTemperature.text = pos / 10; 
+	}
+	
+	frmSetting.tbMsgLimit.oncommand = function(id,event,pos){
+ 	
+		frmSetting.lbMsgLimit.text = frmSetting.tbMsgLimit.pos;;  
+	}
+
+	import win.ui.listEdit;
+	var listEdit = win.ui.listEdit(frmSetting.lstConfig);
+	listEdit.editBox.setCueBannerText("请输入配置名",true);
+
+	if(!#config.aiChat.itemNames) {
+		config.aiChat.itemNames = {"默认"}
+		config.aiChat.itemData = {{
+			url = config.aiChat.url || "https://api.deepseek.com/v1";
+			key = config.aiChat.key;
+			model = #config.aiChat.model ? config.aiChat.model : "deepseek-chat";
+			temperature = config.aiChat.temperature;		
+		}};
+	} 
+	
+	frmSetting.lstConfig.onSelChange = function(){
+		var selIndex = frmSetting.lstConfig.selIndex; 
+		
+		if(config.aiChat.selItem && config.aiChat.selItem != selIndex){
+			//保存上一个配置
+			var configItem = {
+				url = frmSetting.editApiUrl.text;
+				key = frmSetting.editApiKey.text;
+				model = frmSetting.editModel.text;
+				temperature = frmSetting.tbTemperature.pos / 10;
+				msgLimit = frmSetting.tbMsgLimit.pos;
+				proxy = string.trim(frmSetting.editProxy.text);
+				systemPrompt = frmSetting.editSystemPrompt.text;
+			}  
+		
+			config.aiChat.itemData[config.aiChat.selItem] = configItem; 		
+		} 
+		
+		//加载下一个配置
+		var selIndex = frmSetting.lstConfig.selIndex; 
+		var configItem = config.aiChat.itemData[selIndex] || {};
+		
+		frmSetting.editApiUrl.text = configItem.url;
+		frmSetting.editApiKey.text = configItem.key;
+		frmSetting.editProxy.text = configItem.proxy;
+		frmSetting.editSystemPrompt.text = configItem.systemPrompt || "你是 AI 助手，请用中文回答问题";
+		
+		if(configItem.temperature===null) configItem.temperature = 0.1; 
+		frmSetting.tbTemperature.pos = configItem.temperature * 10;
+		frmSetting.tbTemperature.tooltip = configItem.temperature; 
+		frmSetting.lbTemperature.text = configItem.temperature; 
+		
+		frmSetting.tbMsgLimit.pos = configItem.msgLimit || 15;
+		frmSetting.lbMsgLimit.text = configItem.msgLimit || 15; 
+		
+		frmSetting.editModel.text = configItem.model; 
+		
+		config.aiChat.proxy = null;
+		table.assign(config.aiChat,configItem);
+		
+		config.aiChat.itemData[selIndex] = configItem;
+		config.aiChat.itemNames = frmSetting.lstConfig.items; 
+		config.aiChat.itemData = table.slice(config.aiChat.itemData,1,#config.aiChat.itemNames);
+		config.aiChat.selItem = selIndex; 
+		  
+		config.aiChat.save();	
+	}
+	
+	frmSetting.lstConfig.items = config.aiChat.itemNames;
+	frmSetting.lstConfig.selIndex = config.aiChat.selItem || 1;
+	frmSetting.lstConfig.onSelChange();
+ 
+	
+	//保存并更新配置
+	import inet.url;
+	frmSetting.btnSave.oncommand = function(id,event){
+ 	
+		var configItem = {
+			url = frmSetting.editApiUrl.text;
+			key = frmSetting.editApiKey.text;
+			model = frmSetting.editModel.text;
+			temperature = frmSetting.tbTemperature.pos / 10;
+			msgLimit = frmSetting.tbMsgLimit.pos;
+			proxy = string.trim(frmSetting.editProxy.text);
+			systemPrompt = frmSetting.editSystemPrompt.text;
+		}
+		
+		if(!#configItem.proxy){
+			configItem.proxy = null;
+		}
+		
+		var tUrl = inet.url.split(configItem.url); 
+		if(tUrl[["host"]]=="api.anthropic.com"){
+			if(configItem.model[1]!='@'#){
+				configItem.model = '@' + configItem.model;
+			}
+		}
+		elseif(tUrl[["host"]]=="generativelanguage.googleapis.com"){
+			configItem.url = "https://generativelanguage.googleapis.com/v1beta"
+		}
+		
+		var selIndex = frmSetting.lstConfig.selIndex;
+		config.aiChat.selItem = selIndex; 
+		config.aiChat.itemData[selIndex] = configItem;
+		
+		config.aiChat.proxy = null;
+		table.assign(config.aiChat,configItem);  
+		 
+		config.aiChat.save();
+		
+		frmSetting.endModal();
+		
+		if(!wb.started()){
+			resetMessages();
+		}
+		
+		thread.delay(100)
+		winform.editPrompt.setFocus();
+	}
+	
+	frmSetting.btnEdit.oncommand = function(id,event){
+		listEdit.beginEdit();
+	}
+	
+	frmSetting.btnAdd.oncommand = function(id,event){
+		listEdit.beginEdit(0);	
+	}
+	
+	frmSetting.btnRemove.oncommand = function(id,event){
+		if(frmSetting.lstConfig.count==1){
+			return frmSetting.msgboxErr("只有一个配置方案时不允许删除！");
+		}
+		
+		var selIndex = frmSetting.lstConfig.selIndex;
+		frmSetting.lstConfig.delete(selIndex)
+		
+		frmSetting.lstConfig.selIndex = selIndex<=frmSetting.lstConfig.count ? selIndex : selIndex -1;
+		frmSetting.lstConfig.onSelChange() 
+	}	
+	
+	listEdit.onEditChanged = function(newText,selIndex){
+		config.aiChat.itemNames = frmSetting.lstConfig.items; 
+		
+		frmSetting.lstConfig.selIndex = selIndex;
+		frmSetting.lstConfig.onSelChange();
+		
+		config.aiChat.save();	
+	}
+	
+	frmSetting.btnAdd.skin({
+		color={
+			active=0xFF00FF00;
+			default=0xFF3C3C3C;
+			disabled=0xFF6D6D6D;
+			hover=0xFFFF0000		
+		}
+	})
+	
+	frmSetting.btnRemove.skin({
+		color={
+			active=0xFF00FF00;
+			default=0xFF3C3C3C;
+			disabled=0xFF6D6D6D;
+			hover=0xFFFF0000		
+		}
+	})
+	
+	frmSetting.btnEdit.skin({
+		color={
+			active=0xFF00FF00;
+			default=0xFF3C3C3C;
+			disabled=0xFF6D6D6D;
+			hover=0xFFFF0000		
+		}
+	})
+	
+	frmSetting.doModal(winform);
+}
+
+
+//默认设置输入框焦点
+winform.editPrompt.setFocus();
+
+//拆分界面
+winform.splitter.split(winform.wndBrowser,winform.editPrompt);
+
+global.onError = function( err,over ){ 
+    if(!over){
+        import debug;
+        var stack = debug.traceback(,"调用栈",3);
+        err = string.concat(err,stack);
+    }
+    
+    if( _STUDIO_INVOKED ) {
+    	import win;
+    	win.msgboxErr(err);
+    }
+}
+
+winform.spinMaxTokens.buddy = winform.editMaxTokens;
+winform.spinMaxTokens.setRange(1,1024*8);
+winform.spinMaxTokens.pos = config.aiChat.maxTokens || 1024;
+winform.spinMaxTokens.inc = 1024;
+//按钮外观样式
+winform.btnClear.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF999999;
+		hover=0xFFFF0000		
+	}
+})
+
+//按钮外观样式
+winform.btnSend.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF999999;
+		hover=0xFFFF0000		
+	}
+})
+
+//按钮外观样式
+winform.btnSetting.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF999999;
+		hover=0xFFFF0000		
+	}
+})
+
+winform.btnCopy.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF999999;
+		hover=0xFFFF0000		
+	}
+})
+
+winform.beforeDestroy = function(){
+    config.aiChat.maxTokens = winform.spinMaxTokens.pos;
+}
+
+winform.show();
+win.loopMessage();

@@ -1,0 +1,42 @@
+import win.ui;
+/*开发环境（请勿修改）{{*/
+import win.ui;
+if(_STUDIO_INVOKED && ...!="ImTip"){
+	var winform = win.form(text="超级热键";right=759;bottom=469)
+	winform.add(
+	edit={cls="edit";left=29;top=24;right=727;bottom=420;db=1;dl=1;dr=1;dt=1;edge=1;multiline=1;z=1}
+	)
+	winform.show();	
+}
+/*}}*/
+
+/*
+保存此文件 - 自动更新 ImTip 热键配置。
+教程与更多范例: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
+*/
+import fsys;
+import process.popen; 
+import winex;
+import winex.tooltip;
+import winex.selection; 
+import win.clip;
+import win.reg;
+import win.dlg.chineseNumber;
+import mouse;
+import key;
+import key.ime;
+import key.hotkey;
+
+//创建超级热键
+superHotkey = key.hotkey();//不可修改或删除这句代码
+
+superHotkey.loadTable({
+
+	//大写金额与数字输入工具 
+	["Ctrl+$"] = function(hFocus){  
+		win.dlg.chineseNumber().show();
+	};
+})
+
+//启动消息循环
+win.loopMessage();//不可修改或删除这句代码

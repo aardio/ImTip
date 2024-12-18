@@ -1,52 +1,51 @@
-import fonts.imTipUi;
+import fonts.fontAwesomeSub;
 import style;
 import config;
 import app.util;
 import fonts.imtip;
 import win.ui;
 /*DSG{{*/
-var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip 4.6 - 配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
+var frmSetting = win.form(cls="IMTIP_SETTING_FORM";text="ImTip - 输入提示配置方案";right=855;bottom=690;bgcolor=16777215;border="dialog frame";exmode="none";max=false;min=false;mode="popup")
 frmSetting.add(
 bk={cls="bkplus";left=8;top=27;right=445;bottom=82;background="\dlg\images\input.gif";dl=1;dt=1;repeat="scale";z=42};
-bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=119};
-bk3={cls="bk";text="左边距：";left=38;top=261;right=96;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=121};
-bk4={cls="bk";text="上边距：";left=188;top=261;right=246;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=123};
-bk5={cls="bk";text="右边距：";left=341;top=261;right=399;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=125};
-bk6={cls="bk";text="下边距：";left=495;top=261;right=553;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=127};
-bk7={cls="bk";text="渐变角度：";left=337;top=236;right=414;bottom=257;align="right";bgcolor=16777215;dl=1;dt=1;z=129};
+bk2={cls="bk";text="前景颜色：";left=18;top=236;right=96;bottom=260;align="right";dl=1;dt=1;transparent=1;z=118};
+bk3={cls="bk";text="左边距：";left=38;top=261;right=96;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=120};
+bk4={cls="bk";text="上边距：";left=188;top=261;right=246;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=122};
+bk5={cls="bk";text="右边距：";left=341;top=261;right=399;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=124};
+bk6={cls="bk";text="下边距：";left=495;top=261;right=553;bottom=282;align="right";bgcolor=16777215;dl=1;dt=1;z=126};
+bk7={cls="bk";text="渐变角度：";left=337;top=236;right=414;bottom=257;align="right";bgcolor=16777215;dl=1;dt=1;z=128};
 btnBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;notify=1;z=40};
 btnBorderColor={cls="plus";text=" ";left=97;top=163;right=129;bottom=178;dl=1;dt=1;edge=1;notify=1;z=46};
 btnClosedBackground={cls="plus";text=" ";left=97;top=137;right=129;bottom=152;dl=1;dt=1;edge=1;hide=1;notify=1;z=84};
-btnClosedBorderColor={cls="plus";text=" ";left=97;top=163;right=129;bottom=178;dl=1;dt=1;edge=1;hide=1;notify=1;z=103};
-btnClosedForeground={cls="plus";text=" ";left=97;top=239;right=129;bottom=254;dl=1;dt=1;edge=1;hide=1;notify=1;z=132};
+btnClosedBorderColor={cls="plus";text=" ";left=97;top=163;right=129;bottom=178;dl=1;dt=1;edge=1;hide=1;notify=1;z=102};
+btnClosedForeground={cls="plus";text=" ";left=97;top=239;right=129;bottom=254;dl=1;dt=1;edge=1;hide=1;notify=1;z=131};
 btnClosedIconTextColor={cls="plus";text=" ";left=438;top=498;right=470;bottom=513;db=1;dl=1;edge=1;hide=1;notify=1;z=86};
 btnClosedTextColor={cls="plus";text=" ";left=91;top=498;right=123;bottom=513;db=1;dl=1;edge=1;hide=1;notify=1;z=85};
-btnCopy={cls="plus";left=635;top=667;right=660;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0C5';notify=1;textPadding={left=25};z=108};
-btnExport={cls="plus";text="导出";left=609;top=20;right=684;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=92};
-btnForeground={cls="plus";text=" ";left=97;top=240;right=129;bottom=255;dl=1;dt=1;edge=1;notify=1;z=120};
+btnCopy={cls="plus";left=635;top=667;right=660;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0C5';notify=1;textPadding={left=25};z=107};
+btnExport={cls="plus";text="导出";left=596;top=20;right=671;bottom=50;align="left";bgcolor=11580047;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF0C7';notify=1;textPadding={left=29};z=92};
+btnForeground={cls="plus";text=" ";left=97;top=240;right=129;bottom=255;dl=1;dt=1;edge=1;notify=1;z=119};
 btnIconTextColor={cls="plus";text=" ";left=438;top=497;right=470;bottom=512;db=1;dl=1;edge=1;notify=1;z=39};
 btnIconTextFont={cls="plus";text="导入 ...";left=604;top=441;right=669;bottom=465;align="left";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};z=64};
-btnImport={cls="plus";text="导入";left=528;top=20;right=603;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=91};
-btnMoreSchemes={cls="plus";text="更多 ...";left=736;top=588;right=827;bottom=618;align="left";dl=1;dt=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-14;name='ImTipUi');padding={top=2}};iconText='\uF019 ';notify=1;textPadding={left=17;bottom=2};z=141};
-btnPaste={cls="plus";left=660;top=667;right=685;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=107};
-btnReset={cls="plus";text="重置";left=447;top=20;right=522;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=90};
-btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=136};
-btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=137};
-btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;color=5921370;db=1;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=138};
-btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=139};
-btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=140};
+btnImport={cls="plus";text="导入";left=515;top=20;right=590;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF07C';notify=1;textPadding={left=29};z=91};
+btnMoreSchemes={cls="plus";text="更多 ...";left=736;top=588;right=827;bottom=618;align="left";dl=1;dt=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome');padding={top=2}};iconText='\uF019 ';notify=1;textPadding={left=17;bottom=2};z=140};
+btnPaste={cls="plus";left=660;top=667;right=685;bottom=689;align="left";db=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='imtip')};iconText='\uF0EA';notify=1;textPadding={left=25};z=106};
+btnReset={cls="plus";text="重置";left=434;top=20;right=509;bottom=50;align="left";bgcolor=-5197169;dl=1;dt=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=10}};iconText='\uF021';notify=1;textPadding={left=29};z=90};
+btnScheme1={cls="plus";text="配置方案一";left=704;top=141;right=829;bottom=216;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=135};
+btnScheme2={cls="plus";text="配置方案二";left=704;top=229;right=829;bottom=304;color=5921370;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=136};
+btnScheme3={cls="plus";text="配置方案三";left=704;top=316;right=829;bottom=391;color=5921370;db=1;dl=1;dt=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=137};
+btnScheme4={cls="plus";text="配置方案四";left=704;top=404;right=829;bottom=479;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=138};
+btnScheme5={cls="plus";text="配置方案五";left=704;top=491;right=829;bottom=566;color=5921370;db=1;dl=1;edge=1;notify=1;paddingBottom=5;paddingLeft=5;paddingRight=5;paddingTop=5;z=139};
 btnTextColor={cls="plus";text=" ";left=91;top=497;right=123;bottom=512;db=1;dl=1;edge=1;notify=1;z=29};
 btnTextFont={cls="plus";text="选择 ...";left=268;top=441;right=333;bottom=465;align="left";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};z=68};
-btnUndo={cls="plus";left=609;top=667;right=634;bottom=689;align="left";db=1;disabled=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='ImTipUi')};iconText='\uF0E2';notify=1;textPadding={left=25};z=134};
+btnUndo={cls="plus";left=609;top=667;right=634;bottom=689;align="left";db=1;disabled=1;dl=1;font=LOGFONT(h=-13);iconColor=11829830;iconStyle={font=LOGFONT(name='FontAwesome')};iconText='\uF0E2';notify=1;textPadding={left=25};z=133};
 chkClosedStyle={cls="plus";text="变换颜色";left=97;top=87;right=189;bottom=109;align="left";color=8553090;dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1};valign="top"};iconText='\uF0C8 ';notify=1;textPadding={left=21;bottom=1};valign="top";z=83};
 chkIconTextBold={cls="plus";text="粗体";left=567;top=467;right=619;bottom=491;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=78};
-chkLinearGradient={cls="plus";text="前景到背景色渐变";left=172;top=234;right=336;bottom=258;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=131};
-chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};dl=1;dt=1;z=111};
-chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};dl=1;dt=1;z=110};
-chkQuirksMode={cls="plus";text="怪异模式";left=596;top=614;right=681;bottom=638;align="left";clip=1;color=8553090;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20;bottom=1};z=109};
-chkSysRun={cls="plus";text="允许开机启动";left=17;top=665;right=213;bottom=689;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=94};
+chkLinearGradient={cls="plus";text="前景到背景色渐变";left=172;top=234;right=336;bottom=258;align="left";dl=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=130};
+chkPreviewEn={cls="plus";text="En";left=45;top=83;right=75;bottom=101;border={top=1;color=-16744448};dl=1;dt=1;z=110};
+chkPreviewLang={cls="plus";text="中";left=15;top=83;right=45;bottom=101;border={top=1;color=-16744448};dl=1;dt=1;z=109};
+chkQuirksMode={cls="plus";text="怪异模式";left=596;top=614;right=681;bottom=638;align="left";clip=1;color=8553090;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20;bottom=1};z=108};
 chkTextBold={cls="plus";text="粗体";left=216;top=468;right=268;bottom=492;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=15};z=77};
-chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=640;right=224;bottom=664;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=114};
+chkTimeout={cls="plus";text="仅切换输入目标或状态后显示：";left=17;top=640;right=224;bottom=664;align="left";clip=1;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip');padding={top=1}};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=113};
 cmbIconTextRenderingHint={cls="combobox";left=438;top=418;right=555;bottom=438;db=1;dl=1;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=81};
 cmbTextRenderingHint={cls="combobox";left=91;top=418;right=208;bottom=438;db=1;dl=1;edge=1;items={"SystemDefault";"SingleBitPerPixelGridFit";"SingleBitPerPixel";"AntiAliasGridFit";"AntiAlias";"ClearTypeGridFit"};mode="dropdownlist";z=79};
 editCharsCapital={cls="plus";left=542;top=548;right=591;bottom=572;align="left";border={bottom=1;color=-6908266};db=1;dl=1;editable="edit";textPadding={top=6;bottom=3};z=87};
@@ -63,27 +62,27 @@ groupbox={cls="groupbox";text="中 / En";left=15;top=292;right=346;bottom=523;bg
 groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=292;right=683;bottom=523;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;z=3};
 groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dt=1;edge=1;z=4};
 groupbox4={cls="groupbox";text="前景";left=16;top=217;right=685;bottom=288;bgcolor=16777215;dl=1;dt=1;edge=1;z=1};
-groupbox5={cls="groupbox";text="自定义显示字符";left=15;top=527;right=683;bottom=580;bgcolor=16777215;db=1;dl=1;edge=1;z=2};
-groupboxScheme={cls="groupbox";text="外观配置方案";left=692;top=112;right=841;bottom=580;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;hide=1;z=135};
-handRight1={cls="static";text='\uD83D\uDC49';left=3;top=125;right=32;bottom=157;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=115};
-handRight2={cls="static";text='\uD83D\uDC49';left=1;top=151;right=32;bottom=183;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=116};
-handRight3={cls="static";text='\uD83D\uDC49';left=24;top=488;right=53;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=117};
-handRight4={cls="static";text='\uD83D\uDC49';left=367;top=488;right=400;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=118};
-handRight5={cls="static";text='\uD83D\uDC49';left=4;top=228;right=32;bottom=260;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=133};
+groupbox5={cls="groupbox";text="自定义显示字符（ 点击输入框前面的蓝色标题打开图标字体浏览器 ）";left=15;top=527;right=683;bottom=580;bgcolor=16777215;db=1;dl=1;edge=1;z=2};
+groupboxScheme={cls="groupbox";text="外观配置方案";left=692;top=112;right=841;bottom=580;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;hide=1;z=134};
+handRight1={cls="static";text='\uD83D\uDC49';left=3;top=125;right=32;bottom=157;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=114};
+handRight2={cls="static";text='\uD83D\uDC49';left=1;top=151;right=32;bottom=183;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=115};
+handRight3={cls="static";text='\uD83D\uDC49';left=24;top=488;right=53;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=116};
+handRight4={cls="static";text='\uD83D\uDC49';left=367;top=488;right=400;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=117};
+handRight5={cls="static";text='\uD83D\uDC49';left=4;top=228;right=32;bottom=260;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=132};
 lbEditorClasses={cls="static";text="兼容窗口类名：";left=0;top=591;right=107;bottom=611;align="right";db=1;dl=1;transparent=1;z=89};
-lbInterval={cls="static";text="毫秒";left=381;top=618;right=575;bottom=639;bgcolor=16777215;db=1;dl=1;z=106};
-lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=219;top=669;right=607;bottom=690;align="right";bgcolor=16777215;color=10526880;db=1;dl=1;z=95};
+lbInterval={cls="static";text="毫秒";left=381;top=618;right=575;bottom=639;bgcolor=16777215;db=1;dl=1;z=105};
+lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=219;top=669;right=607;bottom=690;align="right";bgcolor=16777215;color=10526880;db=1;dl=1;z=94};
 lbTimeout={cls="static";text="秒";left=505;top=645;right=579;bottom=665;bgcolor=16777215;db=1;dl=1;z=17};
 lbTrans={cls="bk";text="大小：";left=18;top=470;right=91;bottom=491;align="right";bgcolor=16777215;db=1;dl=1;z=76};
-lnkCharsCapital={cls="plus";text="大写:";left=500;top=548;right=538;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=101};
-lnkCharsClose={cls="plus";text='\uF05E:';left=596;top=548;right=618;bottom=572;align="right";color=8388608;db=1;dl=1;font=LOGFONT(h=-13;name='imtip');notify=1;valign="bottom";z=102};
-lnkCharsEn={cls="plus";text="英:";left=101;top=548;right=126;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=99};
-lnkCharsFullShape={cls="plus";text="全角:";left=184;top=548;right=222;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=98};
-lnkCharsHalfShape={cls="plus";text="半角:";left=279;top=548;right=317;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=97};
-lnkCharsLang={cls="plus";text="中:";left=18;top=548;right=43;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=100};
-lnkCharsSymbol={cls="plus";text="中文标点:";left=375;top=548;right=442;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=96};
-plus={cls="plus";left=1;top=83;right=15;bottom=115;border={top=1;color=-16744448};dl=1;dt=1;z=113};
-plus9={cls="plus";left=75;top=83;right=498;bottom=84;bgcolor=16777215;border={color=-16744448};dl=1;dt=1;forecolor=32768;linearGradient=180;z=112};
+lnkCharsCapital={cls="plus";text="大写:";left=500;top=548;right=538;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=100};
+lnkCharsClose={cls="plus";text='\uF05E:';left=596;top=548;right=618;bottom=572;align="right";color=8388608;db=1;dl=1;font=LOGFONT(h=-13;name='imtip');notify=1;valign="bottom";z=101};
+lnkCharsEn={cls="plus";text="英:";left=101;top=548;right=126;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=98};
+lnkCharsFullShape={cls="plus";text="全角:";left=184;top=548;right=222;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=97};
+lnkCharsHalfShape={cls="plus";text="半角:";left=279;top=548;right=317;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=96};
+lnkCharsLang={cls="plus";text="中:";left=18;top=548;right=43;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=99};
+lnkCharsSymbol={cls="plus";text="中文标点:";left=375;top=548;right=442;bottom=572;align="right";color=8388608;db=1;dl=1;notify=1;textPadding={left=5};valign="bottom";z=95};
+plus={cls="plus";left=1;top=83;right=15;bottom=115;border={top=1;color=-16744448};dl=1;dt=1;z=112};
+plus9={cls="plus";left=75;top=83;right=498;bottom=84;bgcolor=16777215;border={color=-16744448};dl=1;dt=1;forecolor=32768;linearGradient=180;z=111};
 preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";bgcolor=15780518;border={radius=11};disabled=1;dl=1;dt=1;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=11}};iconText='\uF186';textPadding={left=13};z=43};
 radIconTextAlignCenter={cls="plus";text="居中";left=488;top=363;right=548;bottom=387;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=34};
 radIconTextAlignLeft={cls="plus";text="左";left=438;top=363;right=486;bottom=387;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=33};
@@ -115,7 +114,7 @@ static22={cls="bk";text="上边距：";left=380;top=335;right=438;bottom=356;ali
 static23={cls="bk";text="下边距：";left=524;top=335;right=582;bottom=359;align="right";db=1;dl=1;dt=1;transparent=1;z=60};
 static24={cls="bk";text="字体：";left=18;top=443;right=91;bottom=465;align="right";bgcolor=16777215;db=1;dl=1;z=62};
 static25={cls="bk";text="字体：";left=360;top=443;right=438;bottom=465;align="right";db=1;dl=1;transparent=1;z=63};
-static26={cls="bk";text="跟踪检测速度：";left=0;top=615;right=107;bottom=635;align="right";db=1;dl=1;transparent=1;z=105};
+static26={cls="bk";text="跟踪检测速度：";left=0;top=615;right=107;bottom=635;align="right";db=1;dl=1;transparent=1;z=104};
 static3={cls="bk";text="纵向偏移：";left=346;top=185;right=424;bottom=209;align="right";dl=1;dt=1;transparent=1;z=10};
 static35={cls="bk";text="大小：";left=360;top=470;right=438;bottom=491;align="right";db=1;dl=1;transparent=1;z=93};
 static36={cls="bk";text="抗锯齿：";left=18;top=417;right=91;bottom=438;align="right";bgcolor=16777215;db=1;dl=1;z=80};
@@ -132,14 +131,14 @@ tbIconTextPaddingLeft={cls="plus";left=438;top=314;right=528;bottom=329;bgcolor=
 tbIconTextPaddingRight={cls="plus";left=583;top=314;right=673;bottom=329;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=57};
 tbIconTextPaddingTop={cls="plus";left=438;top=339;right=528;bottom=354;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=59};
 tbIconTextSize={cls="plus";left=438;top=474;right=555;bottom=489;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=75};
-tbInterval={cls="plus";left=107;top=618;right=371;bottom=633;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=104};
-tbLinearGradient={cls="plus";left=415;top=238;right=672;bottom=253;bgcolor=-2512093;border={radius=-1};color=23807;disabled=1;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=130};
+tbInterval={cls="plus";left=107;top=618;right=371;bottom=633;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=103};
+tbLinearGradient={cls="plus";left=415;top=238;right=672;bottom=253;bgcolor=-2512093;border={radius=-1};color=23807;disabled=1;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=129};
 tbOffsetX={cls="plus";left=97;top=190;right=340;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=8};
 tbOffsetY={cls="plus";left=424;top=190;right=672;bottom=205;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=11};
-tbPaddingBottom={cls="plus";left=552;top=265;right=642;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=128};
-tbPaddingLeft={cls="plus";left=91;top=265;right=181;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=122};
-tbPaddingRight={cls="plus";left=398;top=265;right=488;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=126};
-tbPaddingTop={cls="plus";left=244;top=265;right=334;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=124};
+tbPaddingBottom={cls="plus";left=552;top=265;right=642;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=127};
+tbPaddingLeft={cls="plus";left=91;top=265;right=181;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=121};
+tbPaddingRight={cls="plus";left=398;top=265;right=488;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=125};
+tbPaddingTop={cls="plus";left=244;top=265;right=334;bottom=280;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=123};
 tbRadius={cls="plus";left=466;top=163;right=672;bottom=178;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=6};
 tbTextPaddingBottom={cls="plus";left=244;top=339;right=334;bottom=354;bgcolor=-2512093;border={radius=-1};color=23807;db=1;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=55};
 tbTextPaddingLeft={cls="plus";left=91;top=314;right=181;bottom=329;bgcolor=-2512093;border={radius=-1};color=23807;dl=1;dt=1;foreRight=14;forecolor=-14911489;paddingBottom=5;paddingTop=5;z=19};
@@ -2440,58 +2439,16 @@ frmSetting.editClasses.editBox.enablePopMenu({{},
 		var code = /*
 ["Ctrl+F12"] = function(hFocus){  
 	var cls = win.getClass(hFocus);
+	
 	winex.tooltip.trackPopup(cls + " 已复制到剪贴板!");
 	win.clip.write(cls);
 };
 */
 		win.clip.write(code);
-		if( frmSetting.msgAsk('已复制提取类名热键配置，\n点「确定」转到超级热键配置。') ){
-			if(!..mainHotkeyForm) ..mainHotkeyForm = ..mainForm.loadForm("\dlg\frmHotkey.aardio");  
-			
-			..mainHotkeyForm.show(); 
-			..win.setForeground(..mainHotkeyForm.hwnd);
-			
-			frmSetting.show(false);
-		} 
+		frmSetting.msgOk('已复制提取类名热键配置。'); 
 		
 	} }   
 })
-/*}}*/
-
-/*开机启动{{*/
-frmSetting.chkSysRun.skin(style.checkBox);
-frmSetting.chkSysRun.oncommand = function( id,event ){ 
-	import sys.run;
-	import process.admin
-	
-	if( process.admin.isRunAs() &&  ! _WINXP ){
-		import sys.runAsTask;
-		
-		sys.run("ImTip").delete();
-		
-		if(owner.checked){
-			sys.runAsTask("ImTip","通用输入法跟踪提示工具").register("/sys");
-		}
-		else {
-			sys.runAsTask("ImTip","通用输入法跟踪提示工具").delete();
-		} 	
-		
-		frmSetting.chkSysRun.text = "允许开机以管理权限启动"
-	}
-	else{
-		if(owner.checked){
-			sys.run("ImTip").register("/sys");
-		}
-		else {
-			sys.run("ImTip").delete()
-		} 
-	}
-	
-	config.setting.sysRun = owner.checked;
-	config.setting.save();
-}
-frmSetting.chkSysRun.checked = config.setting.sysRun;
-frmSetting.chkSysRun.disabled = !!_STUDIO_INVOKED; 
 /*}}*/
 
 /*复制粘贴配置{{*/
@@ -2561,18 +2518,16 @@ frmSetting.showStatus = function(text){
 	if(frmSetting.clearStatusId)frmSetting.clearTimeout(frmSetting.clearStatusId);
 	
 	frmSetting.lbStatus.text = text;
-	frmSetting.lbStatus.color = 0x303030;
-	 
-	var header = string.match( frmSetting.text,"ImTip\s+[\d\.]+[\s\-]+");
+	frmSetting.lbStatus.color = 0x303030; 
 	
-	frmSetting.text = header ++ text;
+	frmSetting.text = "ImTip - " ++ text;
 	frmSetting.lbStatus.redraw();
 	
 	frmSetting.clearStatusId = frmSetting.setTimeout( 
 		function(){
 			frmSetting.lbStatus.color = 0xa0a0a0;
 			frmSetting.lbStatus.text = "";
-			frmSetting.text = header + "配置方案";
+			frmSetting.text = "ImTip - 输入提示配置方案";
 		},3000);
 }
 
@@ -2620,6 +2575,6 @@ frmSetting.btnUndo.disabled = true;
 
 mainSettingForm = frmSetting;
 frmSetting.preview.SnapThumbnail(true);
-frmSetting.preview.predraw();
+frmSetting.preview.predraw(); 
 
 win.loopMessage();

@@ -3,7 +3,7 @@
 namespace style{
 	primaryButton = {
 		background={
-			default=0xFF8FB2B0;
+			default=0xDD8FB2B0;
 			hover=0xFF928BB3;
 			disabled=0xFFCCCCCC; 
 		}
