@@ -10,6 +10,9 @@ ImTip 提供超级热键、输入法状态提示、AI 助手等功能。
 
 ![通用输入法状态跟踪提示](./screenshots/imtip.gif)
 
+可以方便地自定义外观方案，例如[单图标方案](https://imtip.aardio.com/#dot-scheme)效果如下：
+
+![ImTip 单图标配置方案](./screenshots/imtip-dot.gif)
 
 **再也不怕按错了！** 保持思考与输入的连续性，避免低头看任务栏或通过其他操作检查输入状态。
 
