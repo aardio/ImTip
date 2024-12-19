@@ -2,7 +2,7 @@
  
 <a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 796 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
 
-ImTip 提供超级热键、输入法状态提示、AI 助手等功能。
+ImTip 提供超级热键、输入法状态提示、自定义 AI 助手等功能。
 
 [超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 
