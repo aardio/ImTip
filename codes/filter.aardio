@@ -1,0 +1,60 @@
+/*
+保存代码自动生效。
+此代码在 ImTip 主界面线程运行，可调用 aardio 开发环境公共库。
+*/
+ 
+// ImTip 切换到新的独立窗口回调下面的函数。
+imeBar.onImeForegroundWindow = function(hwnd){ // imeBar 为 key.ime.stateBar 对象。
+
+	//获取窗口类名
+	var cls = win.getClass(hwnd);
+	
+	//检测类名，支持模式匹配 doc://guide/language/pattern-matching.html
+	if(string.find(cls,"<禁止类名1>|<禁止类名2>")){
+		
+		//返回 false 禁止此窗口提示输入法状态
+		return  false; 
+	}
+	
+	if(string.find(cls,"<自定义窗口类名2>")){
+		
+		/*
+		自定义获取输入光标位置的函数。
+		返回值必须与 winex.caret.get 兼容。
+		细节请参考 key.ime.stateBar 源码
+		*/
+		imeBar.getCaretEx = function(hwnd){
+			
+			//return caret,hFocus; 
+		}
+		
+		return; 
+	}
+	
+	//获取线程 ID，进程 ID。
+	var tid,pid = win.getThreadProcessId(hwnd);
+	
+	//获取执行文件路径
+	var path = process.getPath(pid);
+	if(!#path) return;//普通权限无法获取管理权限进程文件名
+	
+	//转换为不含后缀的文件名
+	var name = io.splitpath(path).name;
+
+	//禁止提示的窗口
+	if(IMTIP_DISABLED_APP[name]){
+		return false; 
+	}
+}
+
+IMTIP_DISABLED_APP = {
+	"禁止的执行文件名1" = true;
+	"禁止的执行文件名2" = true;
+}
+
+//显示提示窗口前触发下面的事件
+/*
+imeBar.onImeStateChange = function(hFocus,imeX,imeY,openNative,symbolMode,text,iconText){
+	return true;//允许提示
+}
+*/

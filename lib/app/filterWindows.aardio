@@ -1,0 +1,89 @@
+﻿import config;
+
+namespace app.filterWindows;
+
+update = function(){ 
+	
+	if(!..config.setting.filterWindows){
+		..imeBar.onImeStateChange = null;
+		..imeBar.onImeForegroundWindow = null;
+		..imeBar.getCaret = null;
+		
+		return;
+	}
+	
+	codePath = ..config.setting.getFilterWindowsCodePath(false);
+	if(!..io.exist(codePath)) return;
+	
+	import process.aardio;
+	process.aardio.run(
+		function(){ 
+			try{
+				loadcodex(codePath);
+				
+				if(!..imeBar.paused){
+					..imeBar.imeWatch(true);
+				}
+			}
+			catch(e){
+				import winex;
+				winex.msgbox(e,"ImTip 过滤规则错误",0x10/*_MB_ICONHAND*/,..win.getForeground());
+			}	
+		}
+	)
+}
+
+
+var thrdWatcherFilterWindows; 
+edit = function(id,event){
+	 
+	import process.aardio;
+	aardioPath = process.aardio.getPath();
+	
+	if(!aardioPath){
+		aardioPath = process.aardio.download();
+		if(!aardioPath) return; 
+	}
+	
+	codePath = ..config.setting.getFilterWindowsCodePath(true);
+	
+	if(!thrdWatcherFilterWindows){
+		import fsys.dirWatcher;
+		import win.debounce;
+		
+		var updateOnCodeChange = win.debounce(update,500);
+		
+		thrdWatcherFilterWindows = ..fsys.dirWatcher.thread(
+			function(filename,action,actionText){ 
+				updateOnCodeChange();
+			}, ..io.splitpath(codePath).dir ); 	
+	}
+
+	process.aardio(codePath); 
+}
+
+watchFullScreen = function(enabled){
+	
+	if(enabled){
+		if(!frmWatchFullscreen){
+			frmWatchFullscreen = ..win.form().messageOnly();
+		}
+	}
+	else {
+		if(frmWatchFullscreen){
+			frmWatchFullscreen.close();
+			frmWatchFullscreen = null;
+		}
+		
+		return; 
+	}
+	
+	import win.appBar;
+	..win.appBar.regist(frmWatchFullscreen,function(code,param){
+
+		if(code == 2/*_ABN_FULLSCREENAPP*/){
+			..imeBar.imeWatch(!param)
+		}
+	}) 
+
+}

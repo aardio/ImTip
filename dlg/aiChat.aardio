@@ -441,6 +441,13 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.doModal(winform);
 }
 
+wb.write("
+- 本工具支持联网自动读取网页链接，并自动生成系统提示词。
+- 按住 `Ctrl`键点 `复制` 按钮可复制 AI 最后一次输出的代码块。
+- <a href=""javascript:void(0)"" onclick=""javascript:external.updateApiKey()"">添加 / 切换 AI 助手</a>
+- <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat"">编写超级热键自动调用 AI 助手</a>
+")
+
 
 //默认设置输入框焦点
 winform.editPrompt.setFocus();

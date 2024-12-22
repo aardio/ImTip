@@ -24,6 +24,7 @@ class appTrayMenu{
 		var id = popmenu.add('└──  启用超级热键',function(id){  
 		
 			..config.hotkey.chkEnableHotkey = !..config.hotkey.chkEnableHotkey;
+			..mainForm.chkHotkey.checked = ..config.hotkey.chkEnableHotkey;
 			
 			import app.hotkey;
 			app.hotkey.update(..config.hotkey.chkEnableHotkey);

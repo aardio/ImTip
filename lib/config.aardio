@@ -175,6 +175,23 @@ config.setting.updateQuirksMode = function(quirksMode){
 	return quirksMode;	
 }
 
+config.setting.getHotkeyCodePath = function(){
+	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey.aardio"); 
+	if(!..io.exist(path)){
+		..string.save(path, $"\codes\hotkey.aardio")
+	}
+	
+	return path;	
+}
+
+config.setting.getFilterWindowsCodePath = function(init){
+	var path = ..io.joinpath(config._cfgDir,".filter/filter.aardio"); 
+	if(init && !..io.exist(path)){ 
+		..string.save(path, $"\codes\filter.aardio")
+	}
+	
+	return path;
+}
 
 /**intellisense(config)
 setting = 通用设置

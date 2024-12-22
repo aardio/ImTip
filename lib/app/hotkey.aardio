@@ -2,11 +2,6 @@
 
 namespace app.hotkey;
 
-mainPath = ..io.appData("/aardio/std/ImTip/.hotkey/hotkey.aardio")
-if(!..io.exist(mainPath)){
-	..string.save(mainPath, $"\hotkey\hotkey.aardio")
-}
- 
 var hotkeyThreadHandle;
 var hotkeyThreadId;
 update = function(enabled){
@@ -14,11 +9,8 @@ update = function(enabled){
 		::User32.PostThreadMessage(hotkeyThreadId,0x12/*_WM_QUIT*/,0,0);
 		if( !..thread.waitOne(hotkeyThreadHandle,1000) ){
 			..thread.terminate(hotkeyThreadHandle,0); 
-			..io.print("异常终止热键线程");
 		}
-		else {
-			..io.print("正常终止热键线程");
-		} 
+	
 		..raw.closehandle(hotkeyThreadHandle)
 		
 		hotkeyThreadHandle = null;
@@ -26,23 +18,26 @@ update = function(enabled){
 	}
 	
 	if(!enabled) return; 	
-		 
+	
+	if(!mainPath) mainPath = ..config.setting.getHotkeyCodePath();	 
 	hotkeyThreadHandle = ..thread.create( 
-		function(){
+		function(form,codePath){
+			..mainForm = form;
+			
 			import process.aardio;
 			process.aardio.run(
 				function(){ 
+					
 					import win;
 					import win.ui;
 					
 					//禁止在关闭最后一个独立窗口时自动退出消息循环。
-					win.autoQuitMessage = false;
+					win.autoQuitMessage = false; 
 					
-					mainPath = ..io.appData("/aardio/std/ImTip/.hotkey/hotkey.aardio");
-					loadcodex(mainPath,"ImTip"); 
-				} 
+					loadcodex(codePath,"ImTip"); 
+				}
 			)
-		}
+		},..mainForm,mainPath
 	)
 	
 	if(hotkeyThreadHandle){
@@ -53,6 +48,8 @@ update = function(enabled){
 
 var thrdWatcher;
 edit = function(){
+	if(!mainPath) mainPath = ..config.setting.getHotkeyCodePath();	 
+	
 	import process.aardio;
 	var path = process.aardio.getPath();
 	if(!path){
@@ -68,7 +65,7 @@ edit = function(){
 		thrdWatcher = ..fsys.dirWatcher.thread(
 			function(filename,action,actionText){ 
 				updateOnCodeChange(..config.hotkey.chkEnableHotkey);
-			}, ..io.appData("/aardio/std/ImTip/.hotkey/") ); 	
+			}, ..io.splitpath(mainPath).dir ); 	
 	}
 
 	process.aardio(mainPath);

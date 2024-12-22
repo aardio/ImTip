@@ -5,14 +5,14 @@ namespace style{
 		background={
 			default=0xDD8FB2B0;
 			hover=0xFF928BB3;
-			disabled=0xFFCCCCCC; 
+			disabled=0xFF999999; 
 		}
 	};
 	button = {
 		background={
 			default=0x668FB2B0;
 			hover=0xFF928BB3;
-			disabled=0xFFCCCCCC; 
+			disabled=0xFF999999; 
 		}
 	};
 	transButton = {
@@ -22,10 +22,10 @@ namespace style{
 			active=0x99928BB3;
 		}
 		color={
-			disabled=0xFFCCCCCC; 
+			disabled=0xFF999999; 
 		}
 		iconColor={
-			disabled=0xFFCCCCCC; 
+			disabled=0xFF999999; 
 		}
 	};
 	checkBox = {
