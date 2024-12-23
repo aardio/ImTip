@@ -52,6 +52,18 @@ IMTIP_DISABLED_APP = {
 	"禁止的执行文件名2" = true;
 }
 
+//扩展托盘菜单
+/*
+mainForm.onTrayMenu = function(menu){ 
+	menu.add("打开 AI 助手",function(){
+		import process.imTip;
+		process.imTip(chat="");	
+	});
+	 
+	menu.add();//分隔线
+} 
+*/
+
 //显示提示窗口前触发下面的事件
 /*
 imeBar.onImeStateChange = function(hFocus,imeX,imeY,openNative,symbolMode,text,iconText){

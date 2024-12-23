@@ -13,15 +13,16 @@ class appTrayMenu{
 	ctor(winform){
 		var popmenu = ..win.ui.popmenu(winform);//创建弹出菜单
 
-		popmenu.add("编辑超级热键",function(){
+		popmenu.add("设置",function(){ 
+			if(..mainSettingForm) ..mainSettingForm.show(false); 
 			
-			if(..mainSettingForm) ..mainSettingForm.show(false);
-			
-			import app.hotkey;
-			app.hotkey.edit();
+			..mainForm.show();
+			..win.setForeground(..mainForm.hwnd);
 		})
 		
-		var id = popmenu.add('└──  启用超级热键',function(id){  
+		popmenu.add();//分隔线 
+		
+		var id = popmenu.add('启用超级热键',function(id){  
 		
 			..config.hotkey.chkEnableHotkey = !..config.hotkey.chkEnableHotkey;
 			..mainForm.chkHotkey.checked = ..config.hotkey.chkEnableHotkey;
@@ -31,105 +32,12 @@ class appTrayMenu{
 		});
 		popmenu.check(id,!!..config.hotkey.chkEnableHotkey,0/*_MF_BYCOMMAND*/);
 		
-		popmenu.add();//分隔线
-		
-		popmenu.add('配置输入提示',function(id){ 
-			if(..mainHotkeyForm) ..mainHotkeyForm.hitMin(); 
-			if(!..mainSettingForm) ..mainSettingForm = ..mainForm.loadForm("\dlg\frmSetting.aardio");
-			
-			..mainSettingForm.show(); 
-			..win.setForeground(..mainSettingForm.hwnd);
-		});
-		
-		var id = popmenu.add('└──  临时禁用输入提示',function(id){
+ 
+		var id = popmenu.add('临时禁用输入提示',function(id){
 			..imeBar.imeWatch(!!..imeBar.paused);
 		});
 		popmenu.check(id,!!..imeBar.paused,0/*_MF_BYCOMMAND*/);
-		
-		var popmenuImTipConfig = ..win.ui.popmenu(winform);//创建弹出菜单
-		
-		popmenuImTipConfig.add('导出配置方案',function(id){
-			if(..mainSettingForm){
-				..win.setForeground(..mainSettingForm.hwnd);
-				return ..mainSettingForm.btnExport.oncommand();
-			}
-			
-			var path = ..fsys.dlg.save("ImTip 外观配置方案(*.aardio)|*.aardio||","导出外观配置方案",,frmSetting,2/*_OFN_OVERWRITEPROMPT*/);
-			if(!path) return;
-	 		
-			var strImTipConfig= ..table.tostring(..config.style); 
-			var data = ..string.loadcode("\dlg\template.aardio",{ imTipConfig= strImTipConfig} ); 
-			
-			if((..config.style.font && ..string.cmp(..config.style.font,"imtip")==0)
-				||(..config.style.iconStyle[["font"]] && ..string.cmp(..config.style.iconStyle[["font"]],"imtip")==0)){
-				data = 'import fonts.imtip;\r\n' + data; 
-			}
-			else {
-				data = 'import fonts;\r\n' + data; 
-			}
-			
-			data = ..string.replace(data,"(embeddingFontData\=raw.buffer\(\d+,')(.+?)'"
-				,function(head,code){
-					var lines = {head};
-					for(i=1;#code;2040){
-						..table.push(lines,..string.slice(code,i,i+2040));
-					}
-					
-					..table.push(lines,"'");
-					return ..string.join(lines,'\r\n');
-			} );
-			
-			..string.save(path,data);
-		});
-		
-		popmenuImTipConfig.add('自文件导入外观配置',function(id){ 
-			if(..mainSettingForm){
-				..win.setForeground(..mainSettingForm.hwnd);
-				return ..mainSettingForm.btnImport.oncommand();
-			}
-			
-			var path = ..fsys.dlg.open("ImTip 外观配置方案(*.aardio)|*.aardio||","导入外观配置方案（可拖动外观配置方案到 ImTip.exe 上快速导入）");
-			if(!path) return;
-			
-			winform.importImTipStyle(path); 
-		});
-		
-		
-		popmenuImTipConfig.add('自剪贴板导入外观配置',function(id){ 
-			if(..mainSettingForm){
-				..win.setForeground(..mainSettingForm.hwnd);
-				return ..mainSettingForm.importStyleFromClip();
-			}
-			
-			var buf = ..win.clip.read();
-			var data = #buf ? ..string.match(buf,"\/\*ImTipConfig\{\{\*\/(.+)\/\*\}\}\*\/") : null;
-			if(!#data) return winform.msgErr("剪贴板不包含有效的 ImTip 外观配置方案!");
-			
-			try{
-				data = ..string.replace(data,'<\u2032>|<\u2018>|<\u2019>',`'`);
-				data = ..string.replace(data,'<\u201C>|<\u201D>|<\uFF02>',`"`);
-		
-				var cfg = eval(data);  
-				..app.util.updateTipStyle(cfg);
-				..imeBar.imeSkin(cfg);	
-				
- 				..config.style.embeddingFontData = null;
-				..config.style.embeddingFontName = null; 
-				..config.style.openStyle = null; 
-				..config.style.border = null;
-				
- 				..table.assign(..config.style,cfg); 
- 				..config.style.save();	
- 				
- 				winform.msgGreat("已成功导入配置");
-			}
-			catch(e){
-				winform.msgboxErr(e);
-			} 
-		});
-		
-		popmenu.add('└── 导入导出方案',popmenuImTipConfig);
-		
+		 
 		popmenu.add();//分隔线 
 		
 		if(_WIN10_LATER){
@@ -151,7 +59,7 @@ class appTrayMenu{
 			});
 			popmenu.check(id,imStatus.wubi,0/*_MF_BYCOMMAND*/);
 			
-			popmenu.add('└──  词库管理',function(id){
+			popmenu.add('└──  管理形码词库',function(id){
 				import process;
 				process.openUrl("http://wubi.aardio.com/");
 			}); 
@@ -227,21 +135,18 @@ class appTrayMenu{
 			process.wow64.execute("osk")
 		});
 		
-		popmenu.add();//分隔线
-			 
-		popmenu.add('官方网站',function(id){ 
-			import process;
-			process.openUrl("http://imtip.aardio.com/");
-		});
+		popmenu.add();//分隔线 
 		
-		popmenu.add();//分隔线
+		if(..mainForm.onTrayMenu){
+			..mainForm.onTrayMenu(popmenu)
+		}
 		
 		popmenu.add('退出程序',function(id){ 
 			if(..mainSettingForm) ..mainSettingForm.exportStyleToSysConfig();
 			
 			winform.close();
 			..win.quitMessage();
-		});	
+		});	 
 		
 		return popmenu; 
 	};
@@ -250,3 +155,7 @@ class appTrayMenu{
 /**intellisense()
 ui.appTrayMenu() = 托盘菜单\n!popmenu.
 end intellisense**/
+
+/*
+import process.imTip
+*/

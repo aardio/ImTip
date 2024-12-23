@@ -22,7 +22,7 @@ import win.ui;
 import win.dlg.message;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 5.1 - 桌面助手";right=649;bottom=417;bgcolor=16777215;border="dialog frame";max=false;min=false)
+mainForm = win.form(text="ImTip 5.2 - 桌面助手";right=649;bottom=414;bgcolor=16777215;border="dialog frame";max=false;min=false)
 mainForm.add(
 btnAiChat={cls="plus";text="AI 智能助手";left=36;top=273;right=178;bottom=303;align="left";bgcolor=11580047;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF007';notify=1;tabstop=1;textPadding={left=29};z=9};
 btnFilterWindows={cls="plus";text="编辑规则";left=439;top=225;right=544;bottom=254;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=12};
@@ -36,7 +36,7 @@ group1={cls="plus";left=18;top=21;right=628;bottom=320;align="left";border={colo
 group2={cls="plus";left=18;top=342;right=628;bottom=396;align="left";border={color=-16744448;radius=8;width=1};db=1;dl=1;dr=1;font=LOGFONT(h=-14);textPadding={left=16};valign="top";z=1};
 groupTitle1={cls="plus";text="软件功能";left=31;top=7;right=107;bottom=33;dl=1;dt=1;z=4};
 groupTitle2={cls="plus";text="启动选项";left=36;top=328;right=112;bottom=354;db=1;dl=1;z=5};
-lpHotkey={cls="syslink";text='强大的『超级热键』集成 <a href="https://www.aardio.com">aardio</a> 开发环境，支持 <a href="https://www.aardio.com">aardio</a> 的全部标准库与扩展库。\n提供丰富的热键功能。支持快捷获取屏幕选区文本、输入位置、输入法状态，快捷调用 AI 大模型接口，快速开发智能桌面助手。\n\n<a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">ImTip 超级热键开发指南</a>\n<a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">aardio 语法速览</a>\n<a href="https://www.aardio.com/vip">VIP 技术支持</a>';left=62;top=90;right=599;bottom=219;db=1;dl=1;dr=1;dt=1;notify=1;transparent=1;z=3}
+lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">ImTip</a> 强大的『超级热键』集成 <a href="https://www.aardio.com">aardio</a> 开发环境，可调用 aardio 的全部标准库与扩展库。\n提供丰富的热键功能。支持快捷获取屏幕选区文本、输入位置、输入法状态，快捷调用 AI 大模型接口，快速开发智能桌面助手。\n\n<a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">ImTip 超级热键开发指南</a>\n<a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">aardio 语法速览</a>\n<a href="https://www.aardio.com/vip">VIP 技术支持</a>';left=62;top=90;right=599;bottom=219;db=1;dl=1;dr=1;dt=1;notify=1;transparent=1;z=3}
 )
 /*}}*/
 
@@ -108,7 +108,8 @@ mainForm.onTrayMessage = {
 	    menu.popup(); 
 	};
 	[0x201/*_WM_LBUTTONDOWN*/] = function(wParam){ 
-	 
+	 	if(..mainSettingForm) ..mainSettingForm.show(false);
+	 	
 		mainForm.show(); 
 		win.setForeground(mainForm.hwnd);
 	};
