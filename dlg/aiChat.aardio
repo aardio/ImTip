@@ -247,7 +247,7 @@ winform.btnSetting.oncommand = function(id,event){
 			frmSetting.editModel.text = "gemini-2.0-flash-exp"
 		}
 		elseif(url=="https://api.x.ai/v1"){
-			frmSetting.editModel.text = "grok-beta"
+			frmSetting.editModel.text = "grok-2-1212"
 		}
 		elseif(url=="https://api.openai.com/v1"){
 			frmSetting.editModel.text = "chatgpt-4o-latest"

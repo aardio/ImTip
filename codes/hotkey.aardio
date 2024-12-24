@@ -38,5 +38,33 @@ superHotkey.loadTable({
 	};
 })
 
+import winex.candidate;
+import key.number;
+
+//中文模式支持数字后输入小数点等分隔符
+superHotkey.onKeyDown = function(vk){
+ 
+	if(key.getStateX("CTRL") || key.getStateX("ALT") ) return; 
+	 
+	if( winex.candidate.visible() ) {
+		superHotkey.prevKeyCode = null;
+		return;
+	} 
+	
+	var sep = key.number.getSeparator(vk);
+
+	if(sep){ 
+		if( key.number.is(superHotkey.prevKeyCode)){ 
+			key.sendString( sep );
+			 
+			return true;
+		} 	
+	} 
+	 
+	if(vk!=0xA0/*_VK_LSHIFT*/ && vk!=0xA1/*_VK_RSHIFT*/){
+		superHotkey.prevKeyCode = vk;	
+	} 
+}
+
 //启动消息循环
 win.loopMessage();//不可修改或删除这句代码

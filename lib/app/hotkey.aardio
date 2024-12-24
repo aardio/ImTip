@@ -48,7 +48,7 @@ update = function(enabled){
 
 var thrdWatcher;
 edit = function(){
-	if(!mainPath) mainPath = ..config.setting.getHotkeyCodePath();	 
+	mainPath = ..config.setting.getHotkeyCodePath();	 
 	
 	import process.aardio;
 	var path = process.aardio.getPath();
