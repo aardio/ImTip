@@ -1,6 +1,7 @@
 /*
 保存代码自动生效。
 此代码在 ImTip 主界面线程运行，可调用 aardio 开发环境公共库。
+教程: https://www.aardio.com/zh-cn/doc/library-guide/std/key/ime.stateBar.html
 */
  
 // ImTip 切换到新的独立窗口回调下面的函数。

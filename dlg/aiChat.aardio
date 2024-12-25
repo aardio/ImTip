@@ -52,6 +52,13 @@ var resetMessages = function(){
 	 
 	//输入系统提示词
 	wb.system( config.aiChat.systemPrompt || "你是 AI 助手，请用中文回答问题" );
+	
+	if(config.aiChat.systemPrompt){
+		if(string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>")){
+			wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);
+		}		
+	}
+
 }
 
 resetMessages();
@@ -114,14 +121,20 @@ winform.btnSend.oncommand = function(id,event){
 				if(v=="")config[k] = null;
 			} 
 			
+			var tempApiKey = ..string.unhex('
+736B2D303839353633393
+937363337346432366134
+393461386161633836613
+9343736',"");//测试 Key 仅临时有效
+			
 			config = table.mix(config,{ 
-				key = "api-key";
+				key = tempApiKey;
 				url = "https://api.deepseek.com/v1";
 				model = "deepseek-chat";
 				temperature = 0.5;
 			});
 			 
-			if(config.maxTokens>1024 && (config.key === "sk-******************" ) ){
+			if(config.maxTokens>1024 && (config.key === tempApiKey) ){
 				wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 				return;
 			}
