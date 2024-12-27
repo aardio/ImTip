@@ -42,9 +42,13 @@ ImTip 支持可视化编辑状态提示外观：
 ImTip 提供可编程扩展的「超级热键」。
 例如按 Ctrl+$ 打开财务大写、日期时间大写、数学运算工具：
 
-![超级热键](./screenshots/cn.gif)
+![超级热键调用中文大写工具](./screenshots/cn.gif)
 
-<a href="https://mp.weixin.qq.com/s/-bdN1oypEdpHhx_SKx2p-Q">官方微信 | 超级热键大全 | 教程 </a>
+超级热键调用 AI 大模型自动编写 aardio 代码：
+
+![超级热键调用 AI 编写代码](./screenshots/fim.gif)
+
+[超级热键大全](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 
 ImTip 托盘菜单提供快捷启用系统输入法、切换双拼方案等功能。
 
