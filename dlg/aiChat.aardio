@@ -7,9 +7,10 @@ import win.ui;
 var winform = win.form(text="ImTip - AI 聊天助手";right=759;bottom=607)
 winform.add(
 btnClear={cls="plus";text="清除";left=589;top=572;right=655;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=5};
-btnCopy={cls="plus";text="复制";left=271;top=572;right=338;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
+btnCopy={cls="plus";text="复制";left=271;top=572;right=335;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
 btnSend={cls="plus";text="问 AI";left=660;top=572;right=732;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
 btnSetting={cls="plus";text="设置";left=513;top=572;right=580;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=6};
+btnSnap={cls="plus";text="分享";left=194;top=572;right=258;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=11};
 editMaxTokens={cls="edit";left=427;top=577;right=470;bottom=600;align="right";db=1;dr=1;edge=1;z=8};
 editPrompt={cls="richedit";left=11;top=452;right=754;bottom=567;db=1;dl=1;dr=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=2};
 spinMaxTokens={cls="spin";left=471;top=578;right=491;bottom=600;db=1;dr=1;z=7};
@@ -68,6 +69,8 @@ winform.btnClear.oncommand = function(id,event){
 	resetMessages();//清除聊天上下文
 }
 
+winform.editPrompt.enablePopMenu();
+
 //响应按键事件，输入用户提示词
 winform.btnSend.oncommand = function(id,event){
 	
@@ -82,6 +85,7 @@ winform.btnSend.oncommand = function(id,event){
 	winform.btnSend.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
 	winform.btnClear.disabled = true;
 	winform.btnCopy.disabled = true; 
+	winform.btnSnap.disabled = true; 
 	
 	wb.limit = config.aiChat.msgLimit;
 	
@@ -167,6 +171,7 @@ wb.onWriteEnd = function(){
 	winform.btnSend.disabledText = null;//关闭等待动画
 	winform.btnClear.disabled = false;
 	winform.btnCopy.disabled = false; 
+	winform.btnSnap.disabled = false; 
 	winform.editPrompt.setFocus();
 }
 
@@ -470,8 +475,9 @@ winform.btnSetting.oncommand = function(id,event){
 }
 
 wb.write("
-- 本工具支持联网自动读取网页链接，并自动生成系统提示词。
-- 按住 `Ctrl`键点 `复制` 按钮可复制 AI 最后一次输出的代码块。
+- 支持联网自动读取用户提示词中的网页链接。
+- 按住 `Ctrl`键点 `复制` 可复制 AI 最后输出的代码块。
+- 按住 `Ctrl`键点 `分享` 可截长屏到剪贴板。 
 - <a href=""javascript:void(0)"" onclick=""javascript:external.updateApiKey()"">添加 / 切换 AI 助手</a>
 - <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat"">编写超级热键自动调用 AI 助手</a>
 ")
@@ -539,8 +545,46 @@ winform.btnCopy.skin({
 	}
 })
 
+winform.btnSnap.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF999999;
+		hover=0xFFFF0000		
+	}
+})
+
 winform.beforeDestroy = function(){
     config.aiChat.maxTokens = winform.spinMaxTokens.pos;
+}
+
+winform.btnSnap.oncommand = function(id,event){
+	import fsys.dlg;
+	import web.form.snap; 
+	
+	if(key.getState("CTRL")){
+		winform.btnSnap.disabled = true;
+		
+		web.form.snap(wb,function(bmp){
+				var hbmp = bmp.copyHandle();
+				win.clip.writeBitmap(hbmp,true);
+				return true;
+		} );  
+	}
+	else{
+		var path = fsys.dlg.save("*.jpg|*.jpg","AI 聊天助手 - 保存对话截图",,winform);
+		if(!path) return;
+		 
+		winform.btnSnap.disabled = true;
+		
+		web.form.snap(wb,path); 
+		winform.editPrompt.setFocus();
+	}
+	
+	wb.doScript(`document.documentElement.scrollTop = document.documentElement.scrollHeight + 50;`);
+ 
+	thread.delay(1000);
+	winform.btnSnap.disabled = false;
 }
 
 winform.show();
