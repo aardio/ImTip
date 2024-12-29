@@ -1,13 +1,16 @@
 # ImTip 桌面助手
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 799 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 …… 等所有流行桌面操作系统。  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 805 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
-ImTip 提供超级热键、输入法状态提示、自定义 AI 助手等功能。
+ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键](#二超级热键)、[自定义 AI 助手](#三-ai-助手) 等功能。
 
 - [超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 - [配置输入法状态跟踪提示规则与外观](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/ime.stateBar.html)
+- [输入法与键盘状态检测原理与规则](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/imeState.html)
 
-输入法提示通过**在输入光标处显示 2 个简洁的图标** —— 提前知道中英、中英标点、全半角、大小写、多语言键盘布局等所有状态。
+## 一、输入跟踪提示
+
+输入跟踪提示通过**在输入光标处显示 2 个简洁的图标** —— 提前知道中英、中英标点、全半角、大小写、多语言键盘布局等所有状态。
 
 ![通用输入法状态跟踪提示](./screenshots/imtip.gif)
 
@@ -39,6 +42,14 @@ ImTip 支持可视化编辑状态提示外观：
 
 ![复制配置方案](./screenshots/copy.gif)
 
+ImTip **CPU 占用极低**，可以通过设置「跟踪检测速度」调整 CPU 占用：
+
+![跟踪检测速度](./screenshots/cpu.png)
+
+默认有微小延迟 —— 这是程序的主动优化( 并非被动延迟 )，您可以加快「跟踪检测速度」（更丝滑，增加的资源占用仍然是可忽略的）。
+
+## 二、超级热键
+
 ImTip 提供可编程扩展的「超级热键」。
 例如按 Ctrl+$ 打开财务大写、日期时间大写、数学运算工具：
 
@@ -48,17 +59,25 @@ ImTip 提供可编程扩展的「超级热键」。
 
 ![超级热键调用 AI 编写代码](./screenshots/fim.gif)
 
-[超级热键大全](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
+[超级热键大全 | 教程](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
+
+## 三、 AI 助手
+
+ImTip 提供简洁可定制的 AI 桌面助手。
+可迅速将大模型 API 转换为可用的桌面助手。
+可自定义多个 AI 助手配置，同一会话也可以随时切换不同的大模型。
+
+![AI 助手](/screenshots/ai.gif)
+
+AI 助手已支持渲染数学公式、代码高亮、一键分享截长屏、自动联网读取文档 …… 等功能。
+
+ImTip 也支持在超级热键中快助调用 AI 大模型接口，或者自动调用 AI 会话窗口。
+
+## 托盘菜单
 
 ImTip 托盘菜单提供快捷启用系统输入法、切换双拼方案等功能。
 
 ![超级热键](./screenshots/menu.png)
-
-ImTip **CPU 占用极低**，可以通过设置「跟踪检测速度」调整 CPU 占用：
-
-![跟踪检测速度](./screenshots/cpu.png)
-
-默认有微小延迟 —— 这是程序的主动优化( 并非被动延迟 )，您可以加快「跟踪检测速度」（更丝滑，增加的资源占用仍然是可忽略的）。
 
 **附：输入法常用快捷键**  
 「Shift」切换中/英输入；  

@@ -51,16 +51,17 @@ wb.enableKatex(config.aiChat.katex);
 var resetMessages = function(){
 	
 	wb.clear();
-	 
-	//输入系统提示词
-	wb.system( config.aiChat.systemPrompt || "你是 AI 助手，请用中文回答问题" );
 	
-	if(config.aiChat.systemPrompt){
-		if(string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>")){
-			wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);
-		}		
-	}
-
+	if(#config.aiChat.systemPrompt){
+		//输入系统提示词 
+		if(config.aiChat.systemPrompt && 
+			string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>") ){
+				wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);  
+		}
+		else {
+			wb.system( config.aiChat.systemPrompt || "你是 AI 助手，请用中文回答问题" ) 
+		} 		
+	} 
 }
 
 resetMessages();
@@ -97,6 +98,7 @@ winform.btnSend.oncommand = function(id,event){
 		 
 			wb.showLoading("正在读取："+url)
 				
+			import inet.http;
 			var md = inet.http.get(url);
 			if(md){
 				md = '\r\n\r\n用户输入的参考网址：' + url 
@@ -126,20 +128,16 @@ winform.btnSend.oncommand = function(id,event){
 				if(v=="")config[k] = null;
 			} 
 			
-			var tempApiKey = ..string.unhex('
-736B2D303839353633393
-937363337346432366134
-393461386161633836613
-9343736',"");//测试 Key 仅临时有效
+			var tempK = '\0\48\67\91\29\86\81\84\8\3\0\85\7\86\1\4\0\4\9\2\82\8\6\83\1\84\6\9\83\81\1\0\86\85\85\4\1';
 			
 			config = table.mix(config,{ 
-				key = tempApiKey;
+				key = tempK;
 				url = "https://api.deepseek.com/v1";
 				model = "deepseek-chat";
 				temperature = 0.5;
 			});
 			 
-			if(config.maxTokens>1024 && (config.key === tempApiKey) ){
+			if(config.maxTokens>1024 && (config.key === tempK) ){
 				wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 				return;
 			}
@@ -227,13 +225,14 @@ winform.btnSetting.oncommand = function(id,event){
 		editApiUrl={cls="combobox";left=284;top=31;right=662;bottom=57;edge=1;items={};mode="dropdown";z=19};
 		editModel={cls="edit";left=284;top=68;right=662;bottom=95;edge=1;z=6};
 		editProxy={cls="edit";left=283;top=180;right=661;bottom=207;edge=1;z=20};
-		editSystemPrompt={cls="edit";left=281;top=220;right=662;bottom=492;edge=1;hscroll=1;multiline=1;vscroll=1;z=22};
+		editSystemPrompt={cls="edit";left=281;top=220;right=662;bottom=485;edge=1;hscroll=1;multiline=1;vscroll=1;z=22};
 		groupbox={cls="groupbox";text="选择当前配置：";left=9;top=6;right=675;bottom=513;edge=1;z=1};
 		lbMsgLimit={cls="static";left=423;top=546;right=451;bottom=566;transparent=1;z=17};
 		lbTemperature={cls="static";left=633;top=140;right=659;bottom=160;transparent=1;z=18};
 		lstConfig={cls="listbox";left=18;top=34;right=187;bottom=464;edge=1;hscroll=1;items={};vscroll=1;z=10};
 		static={cls="static";text="模型 ID：";left=196;top=72;right=279;bottom=93;align="right";transparent=1;z=3};
 		static2={cls="static";text="API key：";left=196;top=107;right=279;bottom=128;align="right";transparent=1;z=4};
+		static3={cls="static";text="不会联网读取系统提示词内的超链接，建议直接添加文档内容";left=282;top=489;right=649;bottom=508;color=5921370;transparent=1;z=24};
 		static4={cls="static";text="接口地址：";left=196;top=38;right=279;bottom=59;align="right";transparent=1;z=7};
 		static5={cls="static";text="temperature：";left=196;top=141;right=279;bottom=162;align="right";transparent=1;z=9};
 		static6={cls="static";text="上下文轮数：";left=33;top=560;right=128;bottom=592;align="right";transparent=1;z=15};
@@ -249,6 +248,8 @@ winform.btnSetting.oncommand = function(id,event){
 	
 	frmSetting.editApiUrl.items = {
 		"https://api.deepseek.com/v1",
+		"https://dashscope.aliyuncs.com/compatible-mode/v1",
+		"https://ark.cn-beijing.volces.com/api/v3/bots",
 		"https://api.anthropic.com/v1",
 		"https://generativelanguage.googleapis.com/v1beta",
 		"https://api.x.ai/v1",
@@ -264,13 +265,19 @@ winform.btnSetting.oncommand = function(id,event){
 			frmSetting.editModel.text = "@claude-3-5-sonnet-latest"
 		}
 		elseif(url=="https://generativelanguage.googleapis.com/v1beta"){
-			frmSetting.editModel.text = "gemini-2.0-flash-exp"
+			frmSetting.editModel.text = "gemini-exp-1206"
 		}
 		elseif(url=="https://api.x.ai/v1"){
 			frmSetting.editModel.text = "grok-2-1212"
 		}
 		elseif(url=="https://api.openai.com/v1"){
 			frmSetting.editModel.text = "chatgpt-4o-latest"
+		}
+		elseif(url=="https://dashscope.aliyuncs.com/compatible-mode/v1"){
+			frmSetting.editModel.text = "qwen-plus-latest"
+		}
+		elseif(url=="https://ark.cn-beijing.volces.com/api/v3/bots"){
+			frmSetting.editModel.text = "bot-"
 		}
 	}
 
