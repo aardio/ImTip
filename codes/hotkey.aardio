@@ -14,6 +14,7 @@ if(_STUDIO_INVOKED && ...!="ImTip"){
 保存此文件 - 自动更新 ImTip 热键配置。
 教程与更多范例: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
 */
+import ide;
 import fsys;
 import process.popen; 
 import winex;
