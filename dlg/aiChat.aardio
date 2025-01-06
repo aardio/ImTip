@@ -85,7 +85,6 @@ winform.btnSend.oncommand = function(id,event){
 	//按钮显示等待动画
 	winform.btnSend.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
 	winform.btnClear.disabled = true;
-	winform.btnCopy.disabled = true; 
 	winform.btnSnap.disabled = true; 
 	
 	wb.limit = config.aiChat.msgLimit;
@@ -162,6 +161,8 @@ winform.btnSend.oncommand = function(id,event){
 			} 
 		},wb,config.aiChat//将参数传入线程
 	)
+	
+	winform.btnCopy.disabled = false; 
 }
 
 //在 AI 回复结束后回调此函数
