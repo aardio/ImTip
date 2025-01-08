@@ -70,14 +70,20 @@ winform.btnClear.oncommand = function(id,event){
 	resetMessages();//清除聊天上下文
 }
 
-winform.editPrompt.enablePopMenu();
+winform.editPrompt.enablePopMenu({
+	{ '问 AI（发送）\tCtrl+Enter';  function(id){
+			winform.btnSend.oncommand();
+	}; 0}; 
+});
+
+winform.splitter.origTop = winform.splitter.top;
 
 //响应按键事件，输入用户提示词
 winform.btnSend.oncommand = function(id,event){
 	
 	var prompt = winform.editPrompt.text;
 	if(!#prompt){
-		winform.msgboxErr("请在上面输入问题。"); 
+		wb.errorMessage("请先输入问题。"); 
 		winform.editPrompt.setFocus();
 		return;
 	}
@@ -118,6 +124,8 @@ winform.btnSend.oncommand = function(id,event){
 	winform.editPrompt.text = "";
 
 	config.aiChat.maxTokens = winform.spinMaxTokens.pos;
+	
+	winform.splitter.splitAt(winform.splitter.origTop);
 	
 	//创建多线程向服务端发送请求
 	thread.invoke( 
@@ -496,6 +504,30 @@ winform.editPrompt.setFocus();
 
 //拆分界面
 winform.splitter.split(winform.wndBrowser,winform.editPrompt);
+
+winform.splitter.ltMin = winform.dpiScale(400);
+winform.splitter.rbMin = winform.dpiScale(150);
+
+var scrollbarHeight = ::User32.GetSystemMetrics(3/*_SM_CYHSCROLL*/)
+winform.editPrompt.onOk = function(ctrl,alt,shift){ 
+	if(ctrl){
+		winform.btnSend.oncommand();
+		return true; 
+	} 
+	
+	var pt = ::POINT()
+	::User32.GetCaretPos(pt) 
+	
+	var lineCount = winform.editPrompt.lineCount;
+	var lineHeight = math.ceil(pt.x / lineCount + winform.dpiScale(5)); 
+	  
+	if(pt.y+(lineHeight+scrollbarHeight)*2.5>winform.editPrompt.height){  
+ 
+		winform.wndBrowser.setRedraw(false)
+		winform.splitter.splitMove(-lineHeight) 
+		winform.wndBrowser.setRedraw(true) 
+	}
+}
 
 global.onError = function( err,over ){ 
     if(!over){
