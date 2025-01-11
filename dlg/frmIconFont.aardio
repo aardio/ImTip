@@ -1,7 +1,7 @@
 //字体图标
 import win.ui;
 /*DSG{{*/
-var frmIconFont = win.form(text="图标字体浏览器";right=963;bottom=500;bgcolor=16777215;exmode="none";max=false;min=false;mode="popup")
+var frmIconFont = win.form(text="图标字体浏览器（点选图标保存设置）";right=963;bottom=500;bgcolor=16777215;exmode="none";max=false;min=false;mode="popup")
 frmIconFont.add()
 /*}}*/
 
@@ -16,7 +16,7 @@ wb.external={
 	}
 	mouseover = function(chr){
 		var str = ustring.fromCharCode(chr);
-		frmIconFont.text ="图标字体浏览器 -  " + string.escape(str,true,true)
+		frmIconFont.text ="图标字体浏览器（点选图标保存设置） -  " + string.escape(str,true,true)
 	}  
 }
  

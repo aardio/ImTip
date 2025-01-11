@@ -1,0 +1,58 @@
+﻿
+namespace app.jab;
+
+enable = function(enabled){
+	if(!enabled) {
+		return false;
+	}
+
+	if(..java[["accessBridge"]]){
+		return true;
+	}
+		
+	import process.aardio;
+	var path = process.aardio.getPath();
+	if(!path){
+		if(!process.aardio.download()) return false;
+	}
+	
+	//尝试在界面线程导入 java.accessBridge	
+	process.aardio.run(	
+		function(){
+			if(..io.libpath("java.accessBridge")){ 
+				global.import("java.accessBridge");
+			}
+		}
+	)
+	
+	if(..java[["accessBridge"]]){
+		return true;
+	}	
+	
+	//如未安装则导入 ide 库支持安装扩展库
+	..thread.invokeAndWait(
+		function(){
+			import process.aardio;
+			
+			//在独立线程导入 ide 扩展库，以避免改变 ImTip 主线程 _STUDIO_INVOKED 的值
+			process.aardio.run(	
+				function(){
+					import ide;
+					global.import("java.accessBridge");
+				}
+			)
+		} 
+	)
+	
+	process.aardio.run(	
+		function(){
+			if(..io.libpath("java.accessBridge")){ 
+				global.import("java.accessBridge");
+			}
+		}
+	)
+	
+	if(..java[["accessBridge"]]){
+		return true;
+	}	
+} 

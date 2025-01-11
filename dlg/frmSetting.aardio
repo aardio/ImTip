@@ -60,16 +60,16 @@ editIconTextFont={cls="plus";left=438;top=441;right=602;bottom=463;align="left";
 editTextFont={cls="plus";left=91;top=441;right=267;bottom=463;align="left";border={bottom=1;color=-6908266};db=1;dl=1;editable="edit";font=LOGFONT(h=-13);textPadding={bottom=2};z=67};
 groupbox={cls="groupbox";text="中 / En";left=15;top=292;right=346;bottom=523;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;z=5};
 groupbox2={cls="groupbox";text="标点符号 / 大写";left=357;top=292;right=683;bottom=523;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;z=3};
-groupbox3={cls="groupbox";text="窗口 / 背景";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dt=1;edge=1;z=4};
-groupbox4={cls="groupbox";text="前景";left=16;top=217;right=685;bottom=288;bgcolor=16777215;dl=1;dt=1;edge=1;z=1};
-groupbox5={cls="groupbox";text="自定义显示字符（ 点击输入框前面的蓝色标题打开图标字体浏览器 ）";left=15;top=527;right=683;bottom=580;bgcolor=16777215;db=1;dl=1;edge=1;z=2};
+groupbox3={cls="groupbox";text="窗口 / 背景（点击色块打开调色器）";left=15;top=111;right=684;bottom=214;bgcolor=16777215;dl=1;dt=1;edge=1;z=4};
+groupbox4={cls="groupbox";text="前景（点击色块打开调色器）";left=16;top=217;right=685;bottom=288;bgcolor=16777215;dl=1;dt=1;edge=1;z=1};
+groupbox5={cls="groupbox";text="自定义显示字符（ 点蓝色标题打开图标库，点输入框预览效果）";left=15;top=527;right=683;bottom=580;bgcolor=16777215;db=1;dl=1;edge=1;z=2};
 groupboxScheme={cls="groupbox";text="外观配置方案";left=692;top=112;right=841;bottom=580;bgcolor=16777215;db=1;dl=1;dt=1;edge=1;hide=1;z=134};
 handRight1={cls="static";text='\uD83D\uDC49';left=3;top=125;right=32;bottom=157;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=114};
 handRight2={cls="static";text='\uD83D\uDC49';left=1;top=151;right=32;bottom=183;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=115};
 handRight3={cls="static";text='\uD83D\uDC49';left=24;top=488;right=53;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=116};
 handRight4={cls="static";text='\uD83D\uDC49';left=367;top=488;right=400;bottom=520;align="right";color=255;db=1;dl=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=117};
 handRight5={cls="static";text='\uD83D\uDC49';left=4;top=228;right=32;bottom=260;align="right";color=255;dl=1;dt=1;font=LOGFONT(h=-23);hide=1;transparent=1;z=132};
-lbEditorClasses={cls="static";text="兼容窗口类名：";left=0;top=591;right=107;bottom=611;align="right";db=1;dl=1;transparent=1;z=89};
+lbEditorClasses={cls="plus";text="兼容窗口类名：";left=1;top=590;right=108;bottom=610;align="right";db=1;dl=1;transparent=1;z=89};
 lbInterval={cls="static";text="毫秒";left=381;top=618;right=575;bottom=639;bgcolor=16777215;db=1;dl=1;z=105};
 lbStatus={cls="static";text="修改设置立即生效，不用点「确定」";left=219;top=669;right=607;bottom=690;align="right";bgcolor=16777215;color=10526880;db=1;dl=1;z=94};
 lbTimeout={cls="static";text="秒";left=505;top=645;right=579;bottom=665;bgcolor=16777215;db=1;dl=1;z=17};
@@ -2513,6 +2513,11 @@ frmSetting.btnUndo.oncommand = function(id,event){
 	frmSetting.showStatus("已恢复上次使用的外观配置方案");
 }
 /*}}*/
+
+frmSetting.lbEditorClasses.skin(style.link);
+frmSetting.lbEditorClasses.oncommand = function( id,event ){
+	raw.execute("https://www.aardio.com/zh-cn/doc/library-guide/std/key/ime.stateBar.html#editorClasses");
+}
 
 frmSetting.showStatus = function(text){
 	if(frmSetting.clearStatusId)frmSetting.clearTimeout(frmSetting.clearStatusId);

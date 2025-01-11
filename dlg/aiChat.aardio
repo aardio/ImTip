@@ -435,14 +435,17 @@ winform.btnSetting.oncommand = function(id,event){
 	}
 	
 	frmSetting.btnRemove.oncommand = function(id,event){
-		if(frmSetting.lstConfig.count==1){
-			return frmSetting.msgboxErr("只有一个配置方案时不允许删除！");
-		}
 		
 		var selIndex = frmSetting.lstConfig.selIndex;
+		 
+		..table.remove(config.itemData,selIndex);
+		..table.remove(config.itemNames,selIndex);
 		frmSetting.lstConfig.delete(selIndex)
 		
-		frmSetting.lstConfig.selIndex = selIndex<=frmSetting.lstConfig.count ? selIndex : selIndex -1;
+		selIndex = selIndex<=frmSetting.lstConfig.count ? selIndex : selIndex -1;
+		  
+		config.selItem = null;
+		frmSetting.lstConfig.selIndex = selIndex;
 		frmSetting.lstConfig.onSelChange() 
 	}	
 	
@@ -505,8 +508,8 @@ winform.editPrompt.setFocus();
 //拆分界面
 winform.splitter.split(winform.wndBrowser,winform.editPrompt);
 
-winform.splitter.ltMin = winform.dpiScale(400);
-winform.splitter.rbMin = winform.dpiScale(150);
+winform.splitter.ltMin = 200;
+winform.splitter.rbMin = 150;
 
 var scrollbarHeight = ::User32.GetSystemMetrics(3/*_SM_CYHSCROLL*/)
 winform.editPrompt.onOk = function(ctrl,alt,shift){ 
@@ -514,14 +517,14 @@ winform.editPrompt.onOk = function(ctrl,alt,shift){
 		winform.btnSend.oncommand();
 		return true; 
 	} 
-	
+
 	var pt = ::POINT()
 	::User32.GetCaretPos(pt) 
 	
 	var lineCount = winform.editPrompt.lineCount;
 	var lineHeight = math.ceil(pt.x / lineCount + winform.dpiScale(5)); 
 	  
-	if(pt.y+(lineHeight+scrollbarHeight)*2.5>winform.editPrompt.height){  
+	if(pt.y+(lineHeight+scrollbarHeight)*3>winform.editPrompt.height){  
  
 		winform.wndBrowser.setRedraw(false)
 		winform.splitter.splitMove(-lineHeight) 

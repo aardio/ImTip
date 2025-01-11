@@ -69,26 +69,25 @@ namespace config {
 			iconTextRenderingHint=3;
 			textPadding={top=0;right=0;left=2;bottom=0}
 		};
-		[4] = {
-			argbColor=-1;
-			border={color=-6647046;radius=29;width=0};
-			offsetX=28;
-			iconStyle={align="right";font={h=-14;name="imtip";weight=700};padding={top=-2;right=5;left=-10;bottom=-25}};
-			background=-4223027;
+		[4] = { 
+			argbColor=16731983;
+			border={color=14395508;radius=6;width=0};
+			offsetX=13;
+			iconStyle={align="left";font={h=-17;name="imtip";weight=700};padding={top=4;right=6;left=1;bottom=0}};
+			background=16745333;
 			textRenderingHint=3;
-			openStyle={[1]={argbColor=-1;foreground=-7441272;background=-4223027;border={color=-6647046;radius=29;width=0};iconColor=-1};[0]={argbColor=-10061202;foreground=-4727353;background=-5072435;border={color=14395508;radius=29;width=0};iconColor=-1}};
-			paddingBottom=21;
+			openStyle={[1]={argbColor=16731983;background=16745333;border={color=14395508;radius=6;width=0};iconColor=-45233};[0]={argbColor=5291856;background=4700671;border={color=14395508;radius=6;width=0};iconColor=-11485360}};
 			align="left";
-			valign="center";
-			tipChars={fullShape='\uF111';close='\uF05E';symbol="。";[1033]="En";[2052]="中";[1041]="あ";capital='\uF031';halfShape='\uF186';[1042]="가";katakana="カ";hanja="漢"};
-			width=43;
-			font={h=-19;name="Segoe UI";weight=700};
-			iconColor=-1;
-			foreground=-7441272;
-			height=43;
-			offsetY=2;
+			textPadding={top=0;right=0;left=-60;bottom=0};
+			tipChars={fullShape='\uF111';close='\uE801';hanja="漢";[1033]='\uF111';[2052]='\uF111';[1041]="あ";katakana="カ";halfShape='\uF042';[1042]="가";capital='\uF031';symbol='\uF111'};
+			width=55;
+			font={h=-18;name="imtip";weight=400};
+			iconColor=-45233;
+			foreground=16745333;
+			height=34;
+			offsetY=3;
 			iconTextRenderingHint=3;
-			textPadding={top=-7;right=-14;left=6;bottom=-13}
+			valign="center" 
 		};
 		[5] = {
 			argbColor=-1;
