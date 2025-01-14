@@ -22,7 +22,7 @@ import win.ui;
 import win.dlg.message;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 5.6 - 桌面助手";right=645;bottom=442;bgcolor=16777215;border="dialog frame";max=false;min=false)
+mainForm = win.form(text="ImTip 5.6 - 智能桌面助手";right=645;bottom=442;bgcolor=16777215;border="dialog frame";max=false;min=false)
 mainForm.add(
 btnAiChat={cls="plus";text="AI 智能助手";left=36;top=273;right=178;bottom=303;align="left";bgcolor=11580047;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF007';notify=1;tabstop=1;textPadding={left=29};z=9};
 btnFilterWindows={cls="plus";text="编辑规则";left=439;top=226;right=544;bottom=255;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=12};
