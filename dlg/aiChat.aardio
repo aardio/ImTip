@@ -4,7 +4,7 @@ import fonts.fontAwesomeSub;
 import config;
 import win.ui;
 /*DSG{{*/
-var winform = win.form(text="ImTip - AI 聊天助手";right=759;bottom=607)
+var winform = win.form(text="ImTip - AI 助手";right=759;bottom=607)
 winform.add(
 btnClear={cls="plus";text="清除";left=589;top=572;right=655;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=5};
 btnCopy={cls="plus";text="复制";left=271;top=572;right=335;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
@@ -134,19 +134,30 @@ winform.btnSend.oncommand = function(id,event){
 			for(k,v in config){ 
 				if(v=="")config[k] = null;
 			} 
-			
-			var tempK = '\0\48\67\91\29\86\81\84\8\3\0\85\7\86\1\4\0\4\9\2\82\8\6\83\1\84\6\9\83\81\1\0\86\85\85\4\1';
-			
-			config = table.mix(config,{ 
-				key = tempK;
+		 
+			config = table.mix(config,{  
 				url = "https://api.deepseek.com/v1";
 				model = "deepseek-chat";
 				temperature = 0.5;
-			});
-			 
-			if(config.maxTokens>1024 && (config.key === tempK) ){
-				wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
-				return;
+			}); 
+			
+			if( string.startWith(config.url,"https://api.deepseek.com/") ){ 
+				/*
+				下面的 key 24 小时后失效，
+				DeepSeek 的 key 充 10 元估计能用上一年，所以请自己申请一个好吗？！
+				*/ 
+				var testKey = '\0\48\67\91\29\86\81\84\8\3\0\85\7\86\1\4\0\4\9\2\82\8\6\83\1\84\6\9\83\81\1\0\86\85\85\4\1';
+			
+				if(!#config.key){
+					config.key = testKey;
+				}
+				
+				import string.escape2;
+				if(config.maxTokens>1024 && (
+					string.escape2(config.key) === string.escape2(testKey)  ) ){ 
+					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					return;
+				}
 			}
 		
 			//导入调用 HTTP 接口的 REST 客户端
@@ -166,6 +177,72 @@ winform.btnSend.oncommand = function(id,event){
 				else {
 					wb.errorMessage(err)
 				}
+			}
+			elseif(!ok){
+				wb.errorMessage("错误代码：" + ( client.lastStatusCode : "未知 " + (client.lastResponseString() || "")))
+			}
+			elseif(config.usage){
+				var last = client.lastResponseObject()
+				
+			
+				if(last){
+					var out = ""
+					
+					var usage = last.usage || last["amazon-bedrock-invocationMetrics"]
+					if(usage){
+						var cTokens,pTokens,cacheTokens;
+						if(client.apiMode=="aliyun"){
+							usage = usage[["models"]][[1]];
+							cTokens = usage.output_tokens
+							pTokens = usage.input_tokens;
+						}
+						else {
+							cTokens = usage.completion_tokens || usage["outputTokenCount"]
+							pTokens = usage.prompt_tokens || usage.inputTokenCount || usage.input_tokens;
+							cacheTokens = usage.prompt_cache_hit_tokens
+						}
+						 
+						if(cTokens){
+							out = out + '回复 tokens:<code>' + ..math.size64(cTokens).format() + "</code> "
+						}
+						 
+						if(pTokens){
+							out = out + '提示 tokens:<code>' + ..math.size64(pTokens).format() + "</code> "
+						}
+						
+						if(cacheTokens){
+							out = out + '缓存 tokens:<code>' + ..math.size64(cacheTokens).format() + "</code> "
+						} 
+						
+						if( string.match( config.url,"<@@https://api.deepseek.com/v1@>" )){
+							if( time() < time("2025/02/09 00:00:00")){
+								out = out + '本次费用:<code>' 
+									+ math.round(((pTokens-cacheTokens)*1+cacheTokens*0.1+cTokens*2)/1000000,3) 
+									+  " 元 </code>"	
+							}
+							else {
+								out = out + '本次费用:<code>' 
+									+ math.round(((pTokens-cacheTokens)*2+cacheTokens*0.5+cTokens*8)/1000000,3) 
+									+  " 元 </code>"		
+							} 
+						}
+ 
+ 						/*
+						if(totalBalance){
+							var ret = client.get("https://api.deepseek.com/user/balance");
+							if(ret[["is_available"]]){
+								var balance = totalBalance - ret.balance_infos[1].total_balance;
+								out = out + '本次费用:<code>' + balance ++ (ret.balance_infos[1].currency=="CNY"?"元":"美元") + "</code>"
+							}
+						}
+		  				*/
+					}
+					
+					wb.errorMessage(#out ? out : "模型未提供 token 用量")
+				}
+				else { 
+					wb.errorMessage("模型未提供 token 用量")
+				} 
 			} 
 		},wb,config.aiChat//将参数传入线程
 	)
@@ -230,6 +307,7 @@ winform.btnSetting.oncommand = function(id,event){
 		btnRemove={cls="plus";left=56;top=473;right=90;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF1F8';notify=1;textPadding={left=25};z=12};
 		btnSave={cls="button";text="更新配置";left=489;top=531;right=659;bottom=576;z=5};
 		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=191;bottom=546;z=16};
+		chkUsage={cls="checkbox";text="显示 token 计数";left=181;top=526;right=349;bottom=546;z=25};
 		editApiKey={cls="edit";left=284;top=104;right=662;bottom=131;edge=1;password=1;z=2};
 		editApiUrl={cls="combobox";left=284;top=31;right=662;bottom=57;edge=1;items={};mode="dropdown";z=19};
 		editModel={cls="edit";left=284;top=68;right=662;bottom=95;edge=1;z=6};
@@ -257,16 +335,19 @@ winform.btnSetting.oncommand = function(id,event){
 	
 	frmSetting.editApiUrl.items = {
 		"https://api.deepseek.com/v1",
-		"https://dashscope.aliyuncs.com/compatible-mode/v1",
-		"https://ark.cn-beijing.volces.com/api/v3/bots",
 		"https://api.anthropic.com/v1",
-		"https://generativelanguage.googleapis.com/v1beta",
+		"https://generativelanguage.googleapis.com/v1beta", 
 		"https://api.x.ai/v1",
-		"https://api.openai.com/v1"
+		"https://api.openai.com/v1", 
+		"https://ark.cn-beijing.volces.com/api/v3/bots",
+		"https://dashscope.aliyuncs.com/api/v1/",
+		"http://localhost:11434/v1/"
 	}
 	
 	frmSetting.editApiUrl.onListChange = function(){ 
+
 		var url = frmSetting.editApiUrl.selText;
+
 		if(url=="https://api.deepseek.com/v1"){
 			frmSetting.editModel.text = "deepseek-chat"
 		}
@@ -282,11 +363,14 @@ winform.btnSetting.oncommand = function(id,event){
 		elseif(url=="https://api.openai.com/v1"){
 			frmSetting.editModel.text = "chatgpt-4o-latest"
 		}
-		elseif(url=="https://dashscope.aliyuncs.com/compatible-mode/v1"){
-			frmSetting.editModel.text = "qwen-plus-latest"
-		}
 		elseif(url=="https://ark.cn-beijing.volces.com/api/v3/bots"){
 			frmSetting.editModel.text = "bot-"
+		}
+		elseif(url=="https://dashscope.aliyuncs.com/api/v1/"){
+			frmSetting.editModel.text = "qwen-coder-plus //也可以指定智能体应用 ID" //qwen-coder-plus-latest
+		}
+		elseif(url=="http://localhost:11434/v1/"){
+			frmSetting.editModel.text = "qwen:0.5b //Ollama 本地模型"
 		}
 	}
 
@@ -325,8 +409,8 @@ winform.btnSetting.oncommand = function(id,event){
 			//保存上一个配置
 			var configItem = {
 				url = frmSetting.editApiUrl.text;
-				key = frmSetting.editApiKey.text;
-				model = frmSetting.editModel.text;
+				key = string.trim(frmSetting.editApiKey.text,`"' 	`);
+				model = ..string.match(frmSetting.editModel.text,"\s*(\S+)");
 				temperature = frmSetting.tbTemperature.pos / 10;
 				msgLimit = frmSetting.tbMsgLimit.pos;
 				proxy = string.trim(frmSetting.editProxy.text);
@@ -340,8 +424,12 @@ winform.btnSetting.oncommand = function(id,event){
 		var selIndex = frmSetting.lstConfig.selIndex; 
 		var configItem = config.aiChat.itemData[selIndex] || {};
 		
-		frmSetting.editApiUrl.text = configItem.url;
-		frmSetting.editApiKey.text = configItem.key;
+		import string.escape2;
+		configItem.key = ..string.escape2.unescape(configItem.key)
+		frmSetting.editApiKey.text = ..string.escape2.escape(configItem.key)
+		
+		
+		frmSetting.editApiUrl.text = configItem.url; 
 		frmSetting.editProxy.text = configItem.proxy;
 		frmSetting.editSystemPrompt.text = configItem.systemPrompt || "你是 AI 助手，请用中文回答问题";
 		
@@ -370,20 +458,24 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.lstConfig.selIndex = config.aiChat.selItem || 1;
 	frmSetting.lstConfig.onSelChange();
 	frmSetting.chkKatex.checked = config.aiChat.katex;
+	frmSetting.chkUsage.checked = config.usage;
 	
 	//保存并更新配置
 	import inet.url;
 	frmSetting.btnSave.oncommand = function(id,event){
- 	
+	 
 		var configItem = {
 			url = frmSetting.editApiUrl.text;
-			key = frmSetting.editApiKey.text;
-			model = frmSetting.editModel.text;
+			key = string.trim(frmSetting.editApiKey.text,`"' 	`);
+			model = ..string.match(frmSetting.editModel.text,"\s*(\S+)");
 			temperature = frmSetting.tbTemperature.pos / 10;
 			msgLimit = frmSetting.tbMsgLimit.pos;
 			proxy = string.trim(frmSetting.editProxy.text);
 			systemPrompt = frmSetting.editSystemPrompt.text;
 		}
+		
+		import string.escape2;
+		configItem.key = ..string.escape2.unescape(configItem.key)
 		
 		if(!#configItem.proxy){
 			configItem.proxy = null;
@@ -409,6 +501,7 @@ winform.btnSetting.oncommand = function(id,event){
 		config.aiChat.katex = frmSetting.chkKatex.checked;
 		wb.enableKatex(config.aiChat.katex);
 		 
+		config.usage = frmSetting.chkUsage.checked;
 		config.aiChat.save();
 		
 		frmSetting.endModal();
@@ -498,7 +591,7 @@ wb.write("
 - 按住 `Ctrl`键点 `复制` 可复制 AI 最后输出的代码块。
 - 按住 `Ctrl`键点 `分享` 可截长屏到剪贴板。 
 - <a href=""javascript:void(0)"" onclick=""javascript:external.updateApiKey()"">添加 / 切换 AI 助手</a>
-- <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat"">编写超级热键自动调用 AI 助手</a>
+- <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai"">超级热键接入 AI</a> <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat"">编程启动 AI 聊天窗口</a>
 ")
 
 

@@ -64,6 +64,13 @@ class appTrayMenu{
 				process.openUrl("http://wubi.aardio.com/");
 			}); 
 			
+			
+			var id = popmenu.add('小小输入法 / 工具',function(id){
+				 	import process.imTip; 
+					process.imTip(yong = "");  
+			}); 
+			popmenu.check(id,imStatus.yong,0/*_MF_BYCOMMAND*/); 
+			
 			popmenu.add();//分隔线
 		
 			popmenu.add('打开系统输入法设置',function(id){
