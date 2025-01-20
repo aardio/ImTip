@@ -101,22 +101,75 @@ winform.btnSend.oncommand = function(id,event){
 	prompt = string.replace(prompt,`(https?\://[^\s()"']+)`,
 		function(url){
 		 
-			wb.showLoading("正在读取："+url)
+			wb.showLoading("正在读取与转换网页数据："+url)
 				
 			import inet.http;
-			var md = inet.http.get(url);
-			if(md){
-				md = '\r\n\r\n用户输入的参考网址：' + url 
-					+  '\r\n\r\n下面是自该网址获取的内容：'
-					+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+			var html = inet.http.get(url);
+			if(html){ 
+				
+				var md;
+				if(_WIN10_LATER){ 
 					
-				knowledge = knowledge + md;
+					try{
+						import web.turndown;
+		
+						var turndownService = web.turndown( codeBlockStyle = "fenced" );
+						turndownService.remove('script');
+						turndownService.remove('style');
+						turndownService.remove('noscript');
+						
+						
+						//启用 gfm（GitHub Flavored Markdown）插件。
+						turndownService.useGfm()
+						
+						// 添加自定义规则处理带类名的代码块
+						turndownService.addRule('codeBlock', "{
+    						filter: function(node) {
+        						return node.nodeName === 'PRE' && node.classList.contains('code');
+    						},
+    						replacement: function(content, node) {
+        						var language = node.classList.item(1)  || ''; 
+        						language = language.replace(/^language-/, '');
+        						return '```' + language + '\n' + content.trim() + '\n```';
+    						}
+						}");
+							
+						//用法参考: https://github.com/mixmark-io/turndown
+						md = turndownService.turndown( 
+							html
+						);
+					
+					
+						md = '\r\n\r\n用户输入的参考网址：' + url 
+							+  '\r\n\r\n下面是自该网址获取的 Markdown 格式内容：'
+							+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+						
+					}
+					catch(e){
+						wb.errorMessage(e)
+					} 
+					
+				}
+				else {
+					import string.html;
+					vmd = string.html.toText(html)
+					
+					md = '\r\n\r\n用户输入的参考网址：' + url 
+						+  '\r\n\r\n下面是自该网址获取的文本内容：'
+						+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+				} 
+					
+				if(#md) knowledge = knowledge ++ md; 
 				
 			}
 		});
 	
 	if(#knowledge){
 		wb.system(knowledge)
+		
+		if(string.match(prompt,`^\s*(https?\://[^\s()"']+)\s*$`)){
+			prompt = "解读分析与总结要点 " + prompt;
+		}
 	} 
 
 	//输入 AI 提示词
@@ -158,6 +211,12 @@ winform.btnSend.oncommand = function(id,event){
 					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 					return;
 				}
+				
+				if(config.model!="deepseek-chat" && (
+					string.escape2(config.key) === string.escape2(testKey)  ) ){
+					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					return;
+				} 
 			}
 		
 			//导入调用 HTTP 接口的 REST 客户端
@@ -587,7 +646,7 @@ winform.btnSetting.oncommand = function(id,event){
 }
 
 wb.write("
-- 支持联网自动读取用户提示词中的网页链接。
+- 支持联网读取用户提示词中的网页链接，自动提取有效的结构化文本。
 - 按住 `Ctrl`键点 `复制` 可复制 AI 最后输出的代码块。
 - 按住 `Ctrl`键点 `分享` 可截长屏到剪贴板。 
 - <a href=""javascript:void(0)"" onclick=""javascript:external.updateApiKey()"">添加 / 切换 AI 助手</a>
