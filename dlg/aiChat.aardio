@@ -393,6 +393,7 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.editSystemPrompt.limit = -1;
 	
 	frmSetting.editApiUrl.items = {
+		"https://ai.aardio.com/api/v1/",
 		"https://api.deepseek.com/v1",
 		"https://api.anthropic.com/v1",
 		"https://generativelanguage.googleapis.com/v1beta", 
@@ -407,7 +408,10 @@ winform.btnSetting.oncommand = function(id,event){
 
 		var url = frmSetting.editApiUrl.selText;
 
-		if(url=="https://api.deepseek.com/v1"){
+		if(url=="https://ai.aardio.com/api/v1/"){
+			frmSetting.editModel.text = "aardio"
+		}
+		elseif(url=="https://api.deepseek.com/v1"){
 			frmSetting.editModel.text = "deepseek-chat"
 		}
 		elseif(url=="https://api.anthropic.com/v1"){
