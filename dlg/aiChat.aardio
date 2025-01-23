@@ -54,14 +54,20 @@ var resetMessages = function(){
 	
 	if(#config.aiChat.systemPrompt){
 		//输入系统提示词 
-		if(config.aiChat.systemPrompt && 
+		if( (config.model=="aardio") ||  
 			string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>") ){
 				wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);  
 		}
 		else {
-			wb.system( config.aiChat.systemPrompt || "你是 AI 助手，请用中文回答问题" ) 
+			wb.system( config.aiChat.systemPrompt) 
 		} 		
 	} 
+	elseif(config.model=="aardio"){
+		wb.chatMessage.aardioSystem();
+	}
+	else {
+		wb.system("你是 ImTip 智能 AI 助手，请用中文回答问题")
+	}
 }
 
 resetMessages();
@@ -176,16 +182,15 @@ winform.btnSend.oncommand = function(id,event){
 	wb.prompt( prompt );
 	winform.editPrompt.text = "";
 
-	config.aiChat.maxTokens = winform.spinMaxTokens.pos;
+	config.aiChat.maxTokens = winform.spinMaxTokens.pos; 
 	
 	winform.splitter.splitAt(winform.splitter.origTop);
 	
 	//创建多线程向服务端发送请求
 	thread.invoke( 
-		function(wb,config){
-		
+		function(wb,config){ 
 			for(k,v in config){ 
-				if(v=="")config[k] = null;
+				if(v==="")config[k] = null;
 			} 
 		 
 			config = table.mix(config,{  
@@ -193,7 +198,7 @@ winform.btnSend.oncommand = function(id,event){
 				model = "deepseek-chat";
 				temperature = 0.5;
 			}); 
-			
+
 			if( string.startWith(config.url,"https://api.deepseek.com/") ){ 
 				/*
 				下面的 key 24 小时后失效，
@@ -221,12 +226,17 @@ winform.btnSend.oncommand = function(id,event){
 		
 			//导入调用 HTTP 接口的 REST 客户端
 			import web.rest.aiChat;
+			
+			config.userAgent = "Mozilla/5.0 (Windows NT "+ _WIN_VER_MAJOR +"."+_WIN_VER_MINOR+"; aardio; rv:"+_AARDIO_VERSION+") like Gecko";
 			var client = web.rest.aiChat(config);
+			
+			client.referer = "https://imtip.aardio.com";
+			client.setHeaders({ "X-Title":"imTip"});
 			 
 			var ok,err = client.messages(wb.chatMessage,function(deltaText){
 				wb.assistant(deltaText);
 			} );
-	
+			
 			if(err){
 				//获取错误对象（解析 JSON 格式的错误信息）
 				var errObject = client.lastResponseError()
@@ -242,11 +252,10 @@ winform.btnSend.oncommand = function(id,event){
 			}
 			elseif(config.usage){
 				var last = client.lastResponseObject()
-				
-			
+  
 				if(last){
 					var out = ""
-					
+	
 					var usage = last.usage || last["amazon-bedrock-invocationMetrics"]
 					if(usage){
 						var cTokens,pTokens,cacheTokens;
@@ -284,20 +293,25 @@ winform.btnSend.oncommand = function(id,event){
 									+ math.round(((pTokens-cacheTokens)*2+cacheTokens*0.5+cTokens*8)/1000000,3) 
 									+  " 元 </code>"		
 							} 
-						}
- 
- 						/*
-						if(totalBalance){
-							var ret = client.get("https://api.deepseek.com/user/balance");
-							if(ret[["is_available"]]){
-								var balance = totalBalance - ret.balance_infos[1].total_balance;
-								out = out + '本次费用:<code>' + balance ++ (ret.balance_infos[1].currency=="CNY"?"元":"美元") + "</code>"
+						} 
+						elseif( string.match( config.url,"<@@https://openrouter.ai/api/v1@>" )){
+							if( config.model=="anthropic/claude-3.5-sonnet"){
+								out = out + '本次费用:<code>' 
+									+ math.round((pTokens*3+cTokens*15)/1000000,3) 
+									+  " 美元 </code>"	
+							} 
+							elseif( ..string.endWith(config.model,":free") ){
+								out = out + "本次费用:<code> 0 美元 </code>"
 							}
-						}
-		  				*/
+						} 
 					}
 					
-					wb.errorMessage(#out ? out : "模型未提供 token 用量")
+					if(last.error){
+						wb.errorMessage( last.error[["message"]] || ..web.json.stringify(last.error,true,false) ) 
+					}
+					else {
+						wb.errorMessage(#out ? out : "模型未提供 token 用量")
+					} 
 				}
 				else { 
 					wb.errorMessage("模型未提供 token 用量")
@@ -365,8 +379,8 @@ winform.btnSetting.oncommand = function(id,event){
 		btnEdit={cls="plus";left=93;top=473;right=127;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=13};
 		btnRemove={cls="plus";left=56;top=473;right=90;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF1F8';notify=1;textPadding={left=25};z=12};
 		btnSave={cls="button";text="更新配置";left=489;top=531;right=659;bottom=576;z=5};
-		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=191;bottom=546;z=16};
-		chkUsage={cls="checkbox";text="显示 token 计数";left=181;top=526;right=349;bottom=546;z=25};
+		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=186;bottom=546;z=16};
+		chkUsage={cls="checkbox";text="显示 token 计数";left=185;top=526;right=349;bottom=546;z=25};
 		editApiKey={cls="edit";left=284;top=104;right=662;bottom=131;edge=1;password=1;z=2};
 		editApiUrl={cls="combobox";left=284;top=31;right=662;bottom=57;edge=1;items={};mode="dropdown";z=19};
 		editModel={cls="edit";left=284;top=68;right=662;bottom=95;edge=1;z=6};
@@ -395,6 +409,7 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.editApiUrl.items = {
 		"https://ai.aardio.com/api/v1/",
 		"https://api.deepseek.com/v1",
+		"https://openrouter.ai/api/v1",
 		"https://api.anthropic.com/v1",
 		"https://generativelanguage.googleapis.com/v1beta", 
 		"https://api.x.ai/v1",
@@ -413,6 +428,9 @@ winform.btnSetting.oncommand = function(id,event){
 		}
 		elseif(url=="https://api.deepseek.com/v1"){
 			frmSetting.editModel.text = "deepseek-chat"
+		}
+		elseif(url=="https://openrouter.ai/api/v1"){
+			frmSetting.editModel.text = "google/gemini-2.0-flash-exp:free //或 anthropic/claude-3.5-sonnet"
 		}
 		elseif(url=="https://api.anthropic.com/v1"){
 			frmSetting.editModel.text = "@claude-3-5-sonnet-latest"
@@ -521,7 +539,7 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.lstConfig.selIndex = config.aiChat.selItem || 1;
 	frmSetting.lstConfig.onSelChange();
 	frmSetting.chkKatex.checked = config.aiChat.katex;
-	frmSetting.chkUsage.checked = config.usage;
+	frmSetting.chkUsage.checked = config.aiChat.usage;
 	
 	//保存并更新配置
 	import inet.url;
@@ -564,7 +582,7 @@ winform.btnSetting.oncommand = function(id,event){
 		config.aiChat.katex = frmSetting.chkKatex.checked;
 		wb.enableKatex(config.aiChat.katex);
 		 
-		config.usage = frmSetting.chkUsage.checked;
+		config.aiChat.usage = frmSetting.chkUsage.checked;
 		config.aiChat.save();
 		
 		frmSetting.endModal();
