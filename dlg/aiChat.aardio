@@ -4,19 +4,22 @@ import fonts.fontAwesomeSub;
 import config;
 import win.ui;
 /*DSG{{*/
-var winform = win.form(text="ImTip - AI 助手";right=759;bottom=607)
+var winform = win.form(text="ImTip - AI 智能助手";right=759;bottom=620;bgcolor=16447992;border="none")
 winform.add(
-btnClear={cls="plus";text="清除";left=589;top=572;right=655;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=5};
-btnCopy={cls="plus";text="复制";left=271;top=572;right=335;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
-btnSend={cls="plus";text="问 AI";left=660;top=572;right=732;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
-btnSetting={cls="plus";text="设置";left=513;top=572;right=580;bottom=602;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=6};
-btnSnap={cls="plus";text="分享";left=194;top=572;right=258;bottom=602;align="left";color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=11};
-editMaxTokens={cls="edit";left=427;top=577;right=470;bottom=600;align="right";db=1;dr=1;edge=1;z=8};
-editPrompt={cls="richedit";left=11;top=452;right=754;bottom=567;db=1;dl=1;dr=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=2};
-spinMaxTokens={cls="spin";left=471;top=578;right=491;bottom=600;db=1;dr=1;z=7};
-splitter={cls="splitter";left=8;top=453;right=751;bottom=458;db=1;dl=1;dr=1;frame=1;horz=1;z=3};
-static={cls="static";text="回复长度：";left=352;top=575;right=418;bottom=598;align="right";center=1;db=1;dr=1;transparent=1;z=9};
-wndBrowser={cls="custom";text="自定义控件";left=8;top=5;right=751;bottom=447;db=1;dl=1;dr=1;dt=1;z=1}
+bk={cls="bk";text="ImTip - AI 智能助手";left=22;top=5;right=213;bottom=20;align="left";dl=1;dt=1;z=14};
+bkPrompt={cls="plus";left=5;top=461;right=754;bottom=615;bgcolor=16777215;border={radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=11};
+bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=14408409;dl=1;dr=1;dt=1;forecolor=6052699;linearGradient=0;z=1};
+btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=4};
+btnCopy={cls="plus";text="复制";left=271;top=588;right=335;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=9};
+btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=2};
+btnSetting={cls="plus";text="设置";left=513;top=588;right=580;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=5};
+btnSnap={cls="plus";text="分享";left=194;top=588;right=258;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=10};
+editMaxTokens={cls="edit";left=427;top=593;right=470;bottom=616;align="right";db=1;dr=1;edge=1;z=7};
+editPrompt={cls="richedit";left=8;top=466;right=751;bottom=580;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;link=1;multiline=1;vscroll=1;z=3};
+spinMaxTokens={cls="spin";left=471;top=594;right=491;bottom=616;db=1;dr=1;z=6};
+splitter={cls="splitter";left=-7;top=457;right=760;bottom=462;bgcolor=13750737;db=1;dl=1;dr=1;horz=1;z=13};
+static={cls="static";text="回复长度：";left=352;top=591;right=418;bottom=614;align="right";bgcolor=16777215;center=1;clipch=1;db=1;dr=1;z=8};
+wndBrowser={cls="custom";text="自定义控件";left=5;top=27;right=753;bottom=455;ah=1;db=1;dl=1;dr=1;dt=1;z=12}
 )
 /*}}*/
 
@@ -74,6 +77,7 @@ resetMessages();
 
 winform.btnClear.oncommand = function(id,event){
 	resetMessages();//清除聊天上下文
+	winform.editPrompt.setFocus();
 }
 
 winform.editPrompt.enablePopMenu({
@@ -108,66 +112,16 @@ winform.btnSend.oncommand = function(id,event){
 		function(url){
 		 
 			wb.showLoading("正在读取与转换网页数据："+url)
-				
-			import inet.http;
-			var html = inet.http.get(url);
-			if(html){ 
-				
-				var md;
-				if(_WIN10_LATER){ 
-					
-					try{
-						import web.turndown;
-		
-						var turndownService = web.turndown( codeBlockStyle = "fenced" );
-						turndownService.remove('script');
-						turndownService.remove('style');
-						turndownService.remove('noscript');
-						
-						
-						//启用 gfm（GitHub Flavored Markdown）插件。
-						turndownService.useGfm()
-						
-						// 添加自定义规则处理带类名的代码块
-						turndownService.addRule('codeBlock', "{
-    						filter: function(node) {
-        						return node.nodeName === 'PRE' && node.classList.contains('code');
-    						},
-    						replacement: function(content, node) {
-        						var language = node.classList.item(1)  || ''; 
-        						language = language.replace(/^language-/, '');
-        						return '```' + language + '\n' + content.trim() + '\n```';
-    						}
-						}");
-							
-						//用法参考: https://github.com/mixmark-io/turndown
-						md = turndownService.turndown( 
-							html
-						);
-					
-					
-						md = '\r\n\r\n用户输入的参考网址：' + url 
-							+  '\r\n\r\n下面是自该网址获取的 Markdown 格式内容：'
-							+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
-						
-					}
-					catch(e){
-						wb.errorMessage(e)
-					} 
-					
-				}
-				else {
-					import string.html;
-					vmd = string.html.toText(html)
-					
-					md = '\r\n\r\n用户输入的参考网址：' + url 
-						+  '\r\n\r\n下面是自该网址获取的文本内容：'
-						+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
-				} 
-					
-				if(#md) knowledge = knowledge ++ md; 
-				
-			}
+			
+			import web.turndown;
+			var md,err = web.turndown.httpGet(url)
+			if(!#md) return;
+ 
+			md = '\r\n\r\n用户输入的参考网址：' + url 
+				+  '\r\n\r\n下面是自该网址获取的' +(err?" Markdown ":"文本")+'格式内容：'
+				+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+		 
+			knowledge = knowledge ++ md;
 		});
 	
 	if(#knowledge){
@@ -213,13 +167,13 @@ winform.btnSend.oncommand = function(id,event){
 				import string.escape2;
 				if(config.maxTokens>1024 && (
 					string.escape2(config.key) === string.escape2(testKey)  ) ){ 
-					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 					return;
 				}
 				
 				if(config.model!="deepseek-chat" && (
 					string.escape2(config.key) === string.escape2(testKey)  ) ){
-					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 					return;
 				} 
 			}
@@ -241,7 +195,7 @@ winform.btnSend.oncommand = function(id,event){
 				//获取错误对象（解析 JSON 格式的错误信息）
 				var errObject = client.lastResponseError()
 				if(errObject[["error"]][["type"]] == "authentication_error" ){
-					wb.errorMessage(`API 密钥错误！<a href="https://platform.deepseek.com">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>`)
+					wb.errorMessage(`API 密钥错误！<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>`)
 				}
 				else {
 					wb.errorMessage(err)
@@ -283,17 +237,26 @@ winform.btnSend.oncommand = function(id,event){
 						} 
 						
 						if( string.match( config.url,"<@@https://api.deepseek.com/v1@>" )){
-							if( time() < time("2025/02/09 00:00:00")){
-								out = out + '本次费用:<code>' 
-									+ math.round(((pTokens-cacheTokens)*1+cacheTokens*0.1+cTokens*2)/1000000,3) 
-									+  " 元 </code>"	
+							
+							if( config.model!="deepseek-reasoner"){ 
+								if( time() < time("2025/02/09 00:00:00")){
+									out = out + '本次费用:<code>' 
+										+ math.round(((pTokens-cacheTokens)*1+cacheTokens*0.1+cTokens*2)/1000000,3) 
+										+  " 元 </code>"	
+								}
+								else {
+									out = out + '本次费用:<code>' 
+										+ math.round(((pTokens-cacheTokens)*2+cacheTokens*0.5+cTokens*8)/1000000,3) 
+										+  " 元 </code>"	 
+								} 
 							}
 							else {
 								out = out + '本次费用:<code>' 
-									+ math.round(((pTokens-cacheTokens)*2+cacheTokens*0.5+cTokens*8)/1000000,3) 
-									+  " 元 </code>"		
-							} 
-						} 
+										+ math.round(((pTokens-cacheTokens)*4+cacheTokens*1+cTokens*16)/1000000,3) 
+										+  " 元 </code>"	
+							}
+							
+						}  
 						elseif( string.match( config.url,"<@@https://openrouter.ai/api/v1@>" )){
 							if( config.model=="anthropic/claude-3.5-sonnet"){
 								out = out + '本次费用:<code>' 
@@ -304,6 +267,26 @@ winform.btnSend.oncommand = function(id,event){
 								out = out + "本次费用:<code> 0 美元 </code>"
 							}
 						} 
+						elseif( string.match( config.url,"<@@https://api.siliconflow.cn/v1@>" )){
+						 
+							if( config.model=="deepseek-ai/DeepSeek-V3"){ 
+								if( time() < time("2025/02/09 00:00:00")){
+									out = out + '本次费用:<code>' 
+										+ math.round((pTokens*1+cTokens*2)/1000000,3) 
+										+  " 元 </code>"	
+								}
+								else {
+									out = out + '本次费用:<code>' 
+										+ math.round((pTokens*2+cTokens*8)/1000000,3) 
+										+  " 元 </code>"	 
+								} 
+							}
+							elseif( config.model == "deepseek-ai/DeepSeek-R1") {
+								out = out + '本次费用:<code>' 
+										+ math.round((pTokens*4+cTokens*16)/1000000,3) 
+										+  " 元 </code>"	
+							}
+						}
 					}
 					
 					if(last.error){
@@ -321,6 +304,7 @@ winform.btnSend.oncommand = function(id,event){
 	)
 	
 	winform.btnCopy.disabled = false; 
+	winform.editPrompt.setFocus();
 }
 
 //在 AI 回复结束后回调此函数
@@ -369,6 +353,7 @@ winform.btnCopy.oncommand = function(id,event){
 	winform.btnCopy.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250';text=''} 
 	thread.delay(600);
 	winform.btnCopy.disabledText = null;
+	winform.editPrompt.setFocus();
 }
 
 //设置接口地址与 API 令牌的窗口
@@ -410,6 +395,7 @@ winform.btnSetting.oncommand = function(id,event){
 		"https://ai.aardio.com/api/v1/",
 		"https://api.deepseek.com/v1",
 		"https://openrouter.ai/api/v1",
+		"https://api.siliconflow.cn/v1",
 		"https://api.anthropic.com/v1",
 		"https://generativelanguage.googleapis.com/v1beta", 
 		"https://api.x.ai/v1",
@@ -428,6 +414,9 @@ winform.btnSetting.oncommand = function(id,event){
 		}
 		elseif(url=="https://api.deepseek.com/v1"){
 			frmSetting.editModel.text = "deepseek-chat"
+		}
+		elseif(url=="https://api.siliconflow.cn/v1"){
+			frmSetting.editModel.text = "deepseek-ai/DeepSeek-V3"
 		}
 		elseif(url=="https://openrouter.ai/api/v1"){
 			frmSetting.editModel.text = "google/gemini-2.0-flash-exp:free //或 anthropic/claude-3.5-sonnet"
@@ -665,22 +654,26 @@ winform.btnSetting.oncommand = function(id,event){
 	}
 	
 	frmSetting.doModal(winform);
+	winform.editPrompt.setFocus();
 }
 
-wb.write("
-- 支持联网读取用户提示词中的网页链接，自动提取有效的结构化文本。
-- 按住 `Ctrl`键点 `复制` 可复制 AI 最后输出的代码块。
-- 按住 `Ctrl`键点 `分享` 可截长屏到剪贴板。 
-- <a href=""javascript:void(0)"" onclick=""javascript:external.updateApiKey()"">添加 / 切换 AI 助手</a>
-- <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai"">超级热键接入 AI</a> <a href=""https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat"">编程启动 AI 聊天窗口</a>
-")
+wb.write(`
+- 支持联网读取用户提示词中的网页链接，自动转换为结构化文本。
+- <a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取免费 API key</a>
+- <a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">设置 API key，添加 / 切换 API 助手</a>
+- <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat">编程启动 AI 助手</a>
+- <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai">超级热键 + 沉浸式 AI 助手</a>  
+- 按住 ``Ctrl`` 键点 ``复制`` 可复制 AI 最后输出的代码块。
+- 按住 ``Ctrl`` 键点 ``分享`` 可截长屏到剪贴板。 
+- 按住 ``Ctrl+Enter`` 可直接发送问题 。
+`)
 
 
 //默认设置输入框焦点
 winform.editPrompt.setFocus();
 
 //拆分界面
-winform.splitter.split(winform.wndBrowser,winform.editPrompt);
+winform.splitter.split(winform.wndBrowser,{winform.bkPrompt,winform.editPrompt});
 
 winform.splitter.ltMin = 200;
 winform.splitter.rbMin = 150;
@@ -802,7 +795,13 @@ winform.btnSnap.oncommand = function(id,event){
  
 	thread.delay(1000);
 	winform.btnSnap.disabled = false;
+	winform.editPrompt.setFocus();
 }
 
+import win.ui.simpleWindow;
+win.ui.simpleWindow(winform);
+
+winform.bkPrompt.directDrawBackgroundOnly();
 winform.show();
+
 win.loopMessage();
