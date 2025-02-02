@@ -1,0 +1,198 @@
+import fonts.fontAwesomeSub;
+import win.ui;
+import win.ui.ctrl.syslink;
+/*DSG{{*/
+var frmSearch = win.form(text="AI 联网搜索接口配置";right=852;bottom=434;bgcolor=16777215;border="dialog frame";max=false)
+frmSearch.add(
+btnSave={cls="plus";text="保存 / 测试搜索";left=657;top=389;right=811;bottom=419;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=15};
+chkBoCha={cls="plus";text="启用博查联网搜索";left=24;top=248;right=235;bottom=279;align="left";db=1;dl=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=3};
+chkExa={cls="plus";text="启用 exa.ai 联网搜索";left=23;top=15;right=242;bottom=51;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=2};
+editBochaCount={cls="edit";text="2";left=114;top=331;right=409;bottom=363;db=1;dl=1;edge=1;multiline=1;num=1;z=16};
+editBochaKey={cls="edit";left=114;top=289;right=409;bottom=321;db=1;dl=1;edge=1;multiline=1;password=1;z=5};
+editExaCount={cls="edit";text="2";left=114;top=106;right=409;bottom=138;dl=1;dt=1;edge=1;multiline=1;num=1;z=7};
+editExaExcludeDomains={cls="edit";left=114;top=191;right=409;bottom=223;db=1;dl=1;dt=1;edge=1;multiline=1;z=11};
+editExaIncludeDomains={cls="edit";left=114;top=149;right=409;bottom=181;dl=1;dt=1;edge=1;multiline=1;z=9};
+editExaKey={cls="edit";left=114;top=64;right=409;bottom=96;dl=1;dt=1;edge=1;multiline=1;password=1;z=1};
+editQuery={cls="edit";left=46;top=391;right=630;bottom=423;db=1;dl=1;dr=1;edge=1;multiline=1;z=13};
+editResult={cls="richedit";left=427;top=23;right=836;bottom=378;db=1;dr=1;dt=1;edge=1;hscroll=1;link=1;multiline=1;vscroll=1;z=14};
+lbBochaCount={cls="static";text="最大网页数：";left=-8;top=339;right=101;bottom=366;align="right";db=1;dl=1;transparent=1;z=17};
+lbBochaKey={cls="static";text="API key：";left=15;top=294;right=101;bottom=321;align="right";db=1;dl=1;transparent=1;z=6};
+lbExaCount={cls="static";text="最大网页数：";left=-11;top=114;right=101;bottom=141;align="right";dl=1;dt=1;transparent=1;z=8};
+lbExaKey={cls="static";text="API key：";left=14;top=71;right=101;bottom=98;align="right";dl=1;dt=1;transparent=1;z=4};
+lbExcludeDomains={cls="static";text="排除域名：";left=34;top=199;right=101;bottom=226;align="right";db=1;dl=1;dt=1;transparent=1;z=12};
+lbIncludeDomains={cls="static";text="搜索域名：";left=34;top=156;right=101;bottom=183;align="right";dl=1;dt=1;transparent=1;z=10};
+lnkBocha={cls="syslink";text='<a href="https://open.bochaai.com/">bochaai.com</a>';left=263;top=254;right=406;bottom=272;bgcolor=16777215;db=1;dl=1;z=19};
+lnkExa={cls="syslink";text='<a href="https://exa.ai/">exa.ai</a>';left=269;top=25;right=412;bottom=43;bgcolor=16777215;dl=1;dt=1;z=18}
+)
+/*}}*/
+
+frmSearch.editResult.text = /*
+- 每次清除上下文之前仅联网搜索一次。
+大模型的上下文是有限的，注意首次的提示词对搜索友好。
+
+- 用于 aardio 编程时建议使用 aardio 自带的 AI 助手。
+有更多针对 aardio 的优化以及专用的 AI 接口: https://aardio.com/vip/
+
+*/
+frmSearch.chkBoCha.oncommand = function(id,event){
+	if(frmSearch.chkBoCha.checked){
+		frmSearch.chkExa.checked = false;
+	}
+}
+
+frmSearch.chkExa.oncommand = function(id,event){
+	if(frmSearch.chkExa.checked){
+		frmSearch.chkBoCha.checked = false;
+	}
+}
+
+import config;
+if(config.search.mode = "exa"){
+	frmSearch.chkExa.checked = true;
+}
+elseif(config.search.mode = "bocha"){
+	frmSearch.chkBoCha.checked = true;
+}
+
+if(config.search.exa){
+	frmSearch.editExaKey.text = config.search.exa.key;
+	frmSearch.editExaCount.text  = config.search.exa.count;
+	
+	if(#config.search.exa.includeDomains){
+		frmSearch.editExaIncludeDomains.text  = string.join(config.search.exa.includeDomains,",");
+	}
+	
+	if(#config.search.exa.excludeDomains){
+		frmSearch.editExaExcludeDomains.text  = string.join(config.search.exa.excludeDomains,",");
+	} 
+}
+
+if(config.search.bocha){
+	frmSearch.editBochaKey.text = config.search.bocha.key;
+	frmSearch.editBochaCount.text  = config.search.bocha.count; 
+}
+
+frmSearch.btnSave.oncommand = function(id,event){
+	
+	config.search.exa = {
+		key = frmSearch.editExaKey.text;
+		count = tonumber(frmSearch.editExaCount.text);
+		includeDomains = #frmSearch.editExaIncludeDomains.text ? string.split(frmSearch.editExaIncludeDomains.text,",") : null;
+		excludeDomains = #frmSearch.editExaExcludeDomains.text ? string.split(frmSearch.editExaExcludeDomains.text,",") : null;
+	}
+	
+	if(#config.search.exa.includeDomains){
+		if(#config.search.exa.excludeDomains){
+			config.search.exa.excludeDomains = null;
+			frmSearch.editExaExcludeDomains.showErrorTip("指定包含域名以后，不能再指定排除域名");
+			return;
+		}
+	}
+	
+	config.search.bocha = {
+		key = frmSearch.editBochaKey.text;
+		count = tonumber(frmSearch.editBochaCount.text);	
+	}
+	
+	
+	if(frmSearch.chkExa.checked){
+		config.search.mode = "exa"
+	}
+	elseif(frmSearch.chkBoCha.checked){
+		config.search.mode = "bocha"	
+	}
+	else {
+		config.search.mode = null;
+		return;
+	}
+	
+	if(!#frmSearch.editQuery.text){
+		frmSearch.editQuery.showInfoTip("已保存设置，但测试搜索的内容为空");
+		return ; 
+	}
+	
+	frmSearch.btnSave.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
+	frmSearch.editResult.text = ""
+	
+	thread.invoke( function(frmSearch){ 
+		import web.rest.jsonClient; 
+		
+		if(frmSearch.chkExa.checked){
+			//导入 Exa 索接口 
+			var exaClient = web.rest.jsonClient(); 
+			exaClient.setHeaders({ "x-api-key": frmSearch.editExaKey.text} )
+			var exa = exaClient.api("https://api.exa.ai/");
+			
+			//搜索
+			var searchData,err = exa.search({
+    			query: frmSearch.editQuery.text,
+    			contents={text= true},
+    			numResults: tonumber( frmSearch.editExaCount.text ),
+    			type:"keyword" //一般 keyword 搜索就够了（价格低一些）
+			}) 
+			
+			var ret  = searchData[["results"]]
+			if(ret){
+				frmSearch.editResult.print(ret);	
+			}
+			elseif(err){
+				frmSearch.editResult.print(err);
+			}		
+		}
+		elseif(frmSearch.chkBoCha.checked){
+			var bochaClient = web.rest.jsonClient(); 
+			bochaClient.setAuthToken(frmSearch.editBochaKey.text);
+			var bocha = bochaClient.api("https://api.bochaai.com/v1/{method}-search");
+			
+			//搜索
+			var searchData,err = bocha.web({ 
+    			"query": frmSearch.editQuery.text,
+    			"freshness": "noLimit",
+    			"answer": false,
+    			"stream": false,
+    			"count":  tonumber( frmSearch.editBochaCount.text ); //返回的搜索结果数量，不必要太多，前两三条就可以了
+			})
+			
+			//将搜索结果添加到系统提示词
+			var ret = searchData[["data"]][["webPages"]][["value"]]
+			if(ret){
+				frmSearch.editResult.print(ret);	
+			}
+			elseif(err){
+				frmSearch.editResult.print(err);
+			}	
+		} 
+		
+		frmSearch.btnSave.disabledText = null;
+	},frmSearch)
+}
+
+var chkStyle = {
+	color={
+		active=0xFF00FF00;
+		default=0xFF000000;
+		disabled=0xEE666666;
+		hover=0xFFFF0000		
+	};
+	checked={
+		iconText='\uF14A'		
+	};
+}
+
+frmSearch.btnSave.skin({
+	color={
+		active=0xFF00FF00;
+		default=0xFF3C3C3C;
+		disabled=0xFF6D6D6D;
+		hover=0xFFFF0000		
+	}
+	iconColor = {
+		disabled=0xFF6D6D6D;
+	}
+})
+
+frmSearch.chkBoCha.skin(chkStyle); 
+frmSearch.chkExa.skin(chkStyle);
+
+frmSearch.show();
+win.loopMessage()
