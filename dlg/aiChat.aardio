@@ -268,7 +268,12 @@ winform.btnSend.oncommand = function(id,event){
 			client.referer = "https://imtip.aardio.com";
 			client.setHeaders({ "X-Title":"imTip"});
 			 
-			var ok,err = client.messages(wb.chatMessage,function(deltaText){
+			var ok,err = client.messages(wb.chatMessage,function(deltaText,deltaReasoning){
+				if(#deltaReasoning){
+					wb.showThinking(deltaReasoning);
+					return;
+				}
+				
 				wb.assistant(deltaText);
 			} );
 			
