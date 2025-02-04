@@ -83,11 +83,32 @@ winform.btnClear.oncommand = function(id,event){
 	winform.editPrompt.setFocus();
 }
 
-winform.editPrompt.enablePopMenu({
-	{ '问 AI（发送）\tCtrl+Enter';  function(id){
-			winform.btnSend.oncommand();
-	}; 0}; 
-});
+winform.editPrompt.enablePopMenu(function(){
+	return {
+		{ '问 AI（发送）\tCtrl+Enter';  function(id){
+				winform.btnSend.oncommand();
+		}; 0}; 
+		
+		{ "导出对话到 *.jsonl";  function(id){
+			import fsys.dlg;
+			var path = fsys.dlg.save("*.jsonl|*.jsonl||");
+			if(!path) return;
+			
+			var file,err = io.file(path,"w+b");
+			if(!file) return winform.msgboxErr(err);
+				
+			var chatMessage = wb.chatMessage;
+			for(i=1;#chatMessage;1){
+				var msg = chatMessage[i]
+				var line  = web.json.stringify(msg,false,false);
+				line = string.crlf(line,"")
+				file.write(line,'\r\n');
+			}
+			file.close();
+			
+		}; #wb.chatMessage<2 ? 1/*_MF_GRAYED*/ : 0}; 	
+	}
+} );
 
 winform.splitter.origTop = winform.splitter.top;
 
