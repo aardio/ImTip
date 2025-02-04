@@ -123,6 +123,13 @@ winform.btnSend.oncommand = function(id,event){
 		return;
 	}
 	
+	var tApiUrl = inet.url.split(config.url);
+	if(!tApiUrl){
+		wb.errorMessage(`错误的接口网址，;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里重新设置</a>`)
+		winform.editPrompt.setFocus();
+		return;
+	}
+	
 	//按钮显示等待动画
 	winform.btnSend.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
 	winform.btnClear.disabled = true;
@@ -130,7 +137,7 @@ winform.btnSend.oncommand = function(id,event){
 	
 	wb.limit = config.aiChat.msgLimit;
 	 
-	if(config.aiChat.url && inet.url.split(config.aiChat.url).host=="ai.aardio.com"){
+	if(config.url && tApiUrl.host=="ai.aardio.com"){
 		//aardio 官方接口已经有更好更全的知识库，联网搜索是无意义的。
 	} 
 	elseif(wb.aiSearched){
@@ -508,6 +515,7 @@ winform.btnSetting.oncommand = function(id,event){
 		"https://api.x.ai/v1",
 		"https://api.openai.com/v1", 
 		"https://ark.cn-beijing.volces.com/api/v3/bots",
+		"https://ark.cn-beijing.volces.com/api/v3",
 		"https://dashscope.aliyuncs.com/api/v1/",
 		"http://localhost:11434/v1/"
 	}
@@ -541,7 +549,10 @@ winform.btnSetting.oncommand = function(id,event){
 			frmSetting.editModel.text = "chatgpt-4o-latest"
 		}
 		elseif(url=="https://ark.cn-beijing.volces.com/api/v3/bots"){
-			frmSetting.editModel.text = "bot-"
+			frmSetting.editModel.text = "bot- //智能体  ID"
+		}
+		elseif(url=="https://ark.cn-beijing.volces.com/api/v3"){
+			frmSetting.editModel.text = "ep- //接入点 ID"
 		}
 		elseif(url=="https://dashscope.aliyuncs.com/api/v1/"){
 			frmSetting.editModel.text = "qwen-coder-plus //也可以指定智能体应用 ID" //qwen-coder-plus-latest
