@@ -1,0 +1,194 @@
+import win.ui;
+/*开发环境（请勿修改）{{*/
+if(_STUDIO_INVOKED && ...!="ImTip"){
+	var winform = win.form(text="超级热键";right=759;bottom=469)
+	winform.add(
+	edit={cls="edit";left=29;top=24;right=727;bottom=420;db=1;dl=1;dr=1;dt=1;edge=1;multiline=1;z=1}
+	)
+	winform.show();	
+}
+/*}}*/
+
+/*
+保存此文件，自动更新 ImTip 热键配置。
+教程: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
+*/
+
+import fsys;
+import ide;
+import winex; 
+import win.dlg.chineseNumber;
+import mouse;
+import key;
+import key.ime;
+import key.hotkey;
+
+//创建超级热键
+superHotkey = key.hotkey();//不可修改或删除这句代码
+
+superHotkey.loadTable({
+
+	//大写金额与数字输入工具 
+	["Ctrl+$"] = function(hFocus){  
+		win.dlg.chineseNumber().show();
+	};
+	
+	// 按 Ctrl+Shift+F1 调用沉浸式 AI 助手，务必修改下面代码中的 API 接口密钥。
+	["Ctrl+Shift+F1"] = function(hFocus){   
+		/*智能续写与补全{{*/
+
+		//创建多线程以执行耗时操作，以避免阻塞键盘钩子消息导致热键失效。
+		thread.invoke( 
+			function(winform,hFocus){  
+				import web.rest.aiChat; 
+				var aiClient = web.rest.aiChat(
+					/*
+					下面的测试密钥 24 小时后失效，
+					DeepSeek 的 key 充 10 元估计能用一年，请自己申请一个吧！
+					*/
+					key =   '\0\48\67\91\29\5\81\84\83\83\4\5\81\81\6\1\86\4\9\84\1\9\1\82\2\86\0\0\83\7\81\6\7\5\86\86\82';
+					url = "https://api.deepseek.com/v1";//接口地址
+					model = "deepseek-chat";//模型名称首字符为 @ 则使用 Anthropic 接口
+					temperature = 0.5;//温度
+					maxTokens = 1024,//最大回复长度
+				)
+				
+				//import java.accessBridge;//支持 Java 程序窗口，例如 JetBrains 系列
+				import winex.editor;
+				import win.version;
+				import key;
+				
+				//获取当前文本输入窗口光标插入点前后的文本。				
+				var leftText,rightText = winex.editor.getText2(true); 
+				if(!#leftText) return;
+				
+				//创建 AI 会话消息队列 
+				var msg = web.rest.aiChat.message();  
+				   
+				//让 AI 更聪明的一个方法就是清楚表达背景、需求、上下文环境，消耗更多 token 得到更多回报。
+				msg.system(`
+## 背景
+
+当前时间为：` + tostring(..time()) + `
+当前操作系统为：` + ..win.version.format() + `;
+当前进程启动文件为："` + (winex.editor.getPath() : "") + `"
+当前窗口标题为："` + (winex.editor.getTitle() : "") + `"
+
+用户当前输入光标插入点在"""前置文本"""与"""后置文本"""中间。
+			
+## 角色
+
+你是智能续写与补全助手。
+
+## 任务
+
+分析上下文（"""前置文本"""与"""后置文本"""）插入新的内容。
+	
+## 要求
+
+- 你需要根据当前操作系统、当前进程的启动文件名、窗口标题、上下文推测用户的输入环境与输入目的。
+- 如果生成的是代码则直接回复代码， 不要放进 Markdown 代码块中 
+- 请直接返回插入的内容，回复不要包含前置文本或后置文本`)
+ 		 
+	    		msg.prompt(`
+	    		
+## 前置文本:  
+
+console.log("Hello,
+
+## 后置文本: 
+
+;//在控制台输出一句话
+
+## 任务
+
+分析上下文（"""前置文本"""与"""后置文本"""）插入新的内容
+ 
+`) 
+
+				//利用小样本学习，以 AI 助手的角色教它一遍，胜过写千万句提示词
+				msg.assistant(`world!")`);
+	    		
+	    		//下面是真正的问题。
+	    		msg.prompt("
+	    		
+## 前置文本  
+
+"+leftText+" 
+
+## 后置文本  
+
+"+(rightText:"")+" 
+
+## 任务
+
+请分析前置文本与后置文本，并在前置文本与后置文本之间插入新的内容。
+
+## 要求
+
+- 请直接返回插入的内容，回复不要包含前置文本或后置文本 
+- 如果生成的是代码则直接回复代码， 不要放进 Markdown 代码块中 。
+")
+
+				if(string.find(leftText,"<//>|<# >|<!\N[ \t]*#>|<#:>\N*[ \t]*$")){
+					winex.editor.sendString('\n')
+				}
+				
+				import winex.loading;
+				var loading = winex.loading("Thinking",hFocus) //进度动画
+				 
+				var ok,err = aiClient.messages(msg,function(delta,reasoning){
+					
+					//如果是推理模型，显示推理过程，推理过程放到 <think></think> 里是错误的做法不处理
+					if(reasoning){ 
+						return loading.thinking(reasoning);;
+					}
+					
+					if(loading.isCanceled()){
+						return false; //用户已取消（关闭进度动画窗口）
+					}
+					
+					//以打字方式逐步输出 AI 回复的增量文本到目标输入框。
+					//关于发送文本 doc://library-guide/std/key/sendString.html
+					winex.editor.sendString(delta) 
+				} ); 
+				
+				if(err){
+					winex.editor.sendString(err) 
+				}
+			},winform,hFocus
+		)
+		/*}}*/
+	};
+})
+
+import winex.candidate;
+import key.number;
+
+//中文模式支持数字后输入小数点等分隔符
+superHotkey.onKeyDown = function(vk){
+ 
+	if(key.getStateX("CTRL") || key.getStateX("ALT") ) return; 
+	 
+	if( winex.candidate.visible() ) {
+		superHotkey.prevKeyCode = null;
+		return;
+	} 
+	
+	var sep = key.number.getSeparator(vk);
+
+	if(sep){ 
+		if( key.number.is(superHotkey.prevKeyCode)){ 
+			key.sendString( sep );
+			 
+			return true;
+		} 	
+	} 
+	 
+	if(vk!=0xA0/*_VK_LSHIFT*/ && vk!=0xA1/*_VK_RSHIFT*/){
+		superHotkey.prevKeyCode = vk;	
+	} 
+}
+
+//启动消息循环
+win.loopMessage();//不可修改或删除这句代码

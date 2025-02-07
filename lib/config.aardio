@@ -177,7 +177,7 @@ config.setting.updateQuirksMode = function(quirksMode){
 config.setting.getHotkeyCodePath = function(){
 	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey.aardio"); 
 	if(!..io.exist(path)){
-		..string.save(path, $"\codes\hotkey.aardio")
+		..string.save(path, $"\codes\hotkey.txt")
 	}
 	
 	return path;	

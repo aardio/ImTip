@@ -276,13 +276,13 @@ winform.btnSend.oncommand = function(id,event){
 				import string.escape2;
 				if(config.maxTokens>1024 && (
 					string.escape2(config.key) === string.escape2(testKey)  ) ){ 
-					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 					return;
 				}
 				
 				if(config.model!="deepseek-chat" && (
 					string.escape2(config.key) === string.escape2(testKey)  ) ){
-					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
+					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
 					return;
 				} 
 			}
@@ -290,11 +290,11 @@ winform.btnSend.oncommand = function(id,event){
 			//导入调用 HTTP 接口的 REST 客户端
 			import web.rest.aiChat;
 			
-			config.userAgent = "Mozilla/5.0 (Windows NT "+ _WIN_VER_MAJOR +"."+_WIN_VER_MINOR+"; aardio; rv:"+_AARDIO_VERSION+") like Gecko";
+			config.userAgent = "Mozilla/5.0 (Windows NT "+ _WIN_VER_MAJOR +"."+_WIN_VER_MINOR+"; ImTip) like Gecko";
 			var client = web.rest.aiChat(config);
 			
 			client.referer = "https://imtip.aardio.com";
-			client.setHeaders({ "X-Title":"imTip"});
+			client.setHeaders({ "X-Title":"ImTip"});
 			 
 			var ok,err = client.messages(wb.chatMessage,function(deltaText,deltaReasoning){
 				if(#deltaReasoning){
@@ -309,7 +309,7 @@ winform.btnSend.oncommand = function(id,event){
 				//获取错误对象（解析 JSON 格式的错误信息）
 				var errObject = client.lastResponseError()
 				if(errObject[["error"]][["type"]] == "authentication_error" ){
-					wb.errorMessage(`API 密钥错误！<a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>`)
+					wb.errorMessage(`API 密钥错误！<a href="https://imtip.aardio.com/api-keys/">点这里获取密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>`)
 				}
 				else {
 					wb.errorMessage(err)
@@ -777,7 +777,7 @@ winform.btnSetting.oncommand = function(id,event){
 
 wb.write(`
 - 支持联网读取用户提示词中的网页链接，自动转换为结构化文本。
-- <a href="https://cloud.siliconflow.cn/i/erciwXKE">点这里获取免费 API key</a>
+- <a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥（API key）</a>
 - <a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">设置 API key，添加 / 切换 API 助手</a>
 - <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat">编程启动 AI 助手</a>
 - <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai">超级热键 + 沉浸式 AI 助手</a>  
