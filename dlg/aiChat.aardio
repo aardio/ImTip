@@ -123,7 +123,7 @@ winform.btnSend.oncommand = function(id,event){
 		return;
 	}
 	
-	var tApiUrl = inet.url.split(config.url);
+	var tApiUrl = config.aiChat.url ? inet.url.split(config.aiChat.url);
 	if(!tApiUrl){
 		wb.errorMessage(`错误的接口网址，;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里重新设置</a>`)
 		winform.editPrompt.setFocus();
@@ -137,10 +137,11 @@ winform.btnSend.oncommand = function(id,event){
 	
 	wb.limit = config.aiChat.msgLimit;
 	 
-	if(config.url && tApiUrl.host=="ai.aardio.com"){
+	if( tApiUrl.host=="ai.aardio.com" ){
 		//aardio 官方接口已经有更好更全的知识库，联网搜索是无意义的。
 	} 
-	elseif(wb.aiSearched){
+	elseif(wb.aiSearched 
+		|| (config.aiChat.model && ..string.endWith(config.aiChat.model,":online") ) ){
 	
 	}
 	elseif( (config.search[["mode"]]=="exa" && config.search.exa )
@@ -156,6 +157,14 @@ winform.btnSend.oncommand = function(id,event){
 					var exaClient = web.rest.jsonClient(); 
 					exaClient.setHeaders({ "x-api-key": searchConfig.exa.key} )
 					var exa = exaClient.api("https://api.exa.ai/");
+					
+					var includeDomains = searchConfig.exa.includeDomains;
+					var excludeDomains =  !searchConfig.exa.includeDomains ? searchConfig.exa.excludeDomains : null;
+					
+					if(..string.find(prompt,"<@@aardio@>") ){
+						includeDomains = {"www.aardio.com"};
+						excludeDomains = null;
+					}
 					
 					//搜索
 					var searchData,err = exa.search({

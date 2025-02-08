@@ -141,6 +141,15 @@ class appTrayMenu{
 			..mainForm.onTrayMenu(popmenu)
 		}
 		
+		popmenu.add('AI 智能助手',function(id){
+ 			import process.imTip; 
+			process.imTip(chat = ""); 
+			
+			..mainForm.show(false);
+		});
+		
+		popmenu.add();//分隔线 
+		
 		popmenu.add('退出程序',function(id){ 
 			if(..mainSettingForm) ..mainSettingForm.exportStyleToSysConfig();
 			
