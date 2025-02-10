@@ -33,10 +33,13 @@ class appTrayMenu{
 		popmenu.check(id,!!..config.hotkey.chkEnableHotkey,0/*_MF_BYCOMMAND*/);
 		
  
-		var id = popmenu.add('临时禁用输入提示',function(id){
-			..imeBar.imeWatch(!!..imeBar.paused);
+		var id = popmenu.add('启用输入跟踪提示',function(id){
+			..config.setting.imeBarDisabled = !..imeBar.paused; 
+			..imeBar.imeWatch(!..config.setting.imeBarDisabled);
+			..mainForm.chkImeBarDisabled.checked = !..config.setting.imeBarDisabled;
+			..config.setting.save();
 		});
-		popmenu.check(id,!!..imeBar.paused,0/*_MF_BYCOMMAND*/);
+		popmenu.check(id,!..imeBar.paused,0/*_MF_BYCOMMAND*/);
 		 
 		popmenu.add();//分隔线 
 		
