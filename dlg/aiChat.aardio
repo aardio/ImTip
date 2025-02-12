@@ -7,20 +7,20 @@ import win.ui;
 var winform = win.form(text="ImTip - AI 智能助手";right=759;bottom=620;bgcolor=16447992;border="none")
 winform.add(
 bk={cls="bk";text="ImTip - AI 智能助手";left=22;top=5;right=213;bottom=20;align="left";dl=1;dt=1;z=14};
-bkPrompt={cls="plus";left=5;top=461;right=754;bottom=615;bgcolor=16777215;border={radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=1};
-bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=14408409;dl=1;dr=1;dt=1;forecolor=6052699;linearGradient=0;z=2};
-btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=5};
-btnCopy={cls="plus";text="复制";left=271;top=588;right=335;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=10};
+bkPrompt={cls="plus";left=5;top=495;right=754;bottom=617;bgcolor=16777215;border={color=-8388608;radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=2};
+bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=14408409;dl=1;dr=1;dt=1;forecolor=6052699;linearGradient=0;z=3};
+btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=6};
+btnCopy={cls="plus";text="复制";left=271;top=588;right=335;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=11};
 btnSearch={cls="plus";text="联网搜索";left=8;top=585;right=99;bottom=615;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF26B';notify=1;textPadding={left=25};z=15};
-btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=3};
-btnSetting={cls="plus";text="设置";left=513;top=588;right=580;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=6};
-btnSnap={cls="plus";text="分享";left=194;top=588;right=258;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=11};
-editMaxTokens={cls="edit";left=427;top=593;right=470;bottom=616;align="right";db=1;dr=1;edge=1;z=8};
-editPrompt={cls="richedit";left=8;top=466;right=751;bottom=580;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;link=1;multiline=1;vscroll=1;z=4};
-spinMaxTokens={cls="spin";left=471;top=594;right=491;bottom=616;db=1;dr=1;z=7};
-splitter={cls="splitter";left=-7;top=457;right=760;bottom=462;bgcolor=13750737;db=1;dl=1;dr=1;horz=1;z=13};
-static={cls="static";text="回复长度：";left=352;top=591;right=418;bottom=614;align="right";bgcolor=16777215;center=1;clipch=1;db=1;dr=1;z=9};
-wndBrowser={cls="custom";text="自定义控件";left=5;top=27;right=753;bottom=455;ah=1;db=1;dl=1;dr=1;dt=1;z=12}
+btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
+btnSetting={cls="plus";text="设置";left=513;top=588;right=580;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=7};
+btnSnap={cls="plus";text="分享";left=194;top=588;right=258;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=12};
+editMaxTokens={cls="edit";left=427;top=593;right=470;bottom=616;align="right";db=1;dr=1;edge=1;z=9};
+editPrompt={cls="richedit";left=7;top=501;right=750;bottom=585;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;link=1;multiline=1;vscroll=1;z=5};
+spinMaxTokens={cls="spin";left=471;top=594;right=491;bottom=616;db=1;dr=1;z=8};
+splitter={cls="splitter";left=-2;top=490;right=760;bottom=495;bgcolor=13750737;db=1;dl=1;dr=1;horz=1;z=13};
+static={cls="static";text="回复长度：";left=352;top=591;right=418;bottom=614;align="right";bgcolor=16777215;center=1;clipch=1;db=1;dr=1;z=10};
+wndBrowser={cls="custom";text="自定义控件";left=5;top=27;right=753;bottom=489;ah=1;db=1;dl=1;dr=1;dt=1;z=1}
 )
 /*}}*/
 
@@ -266,7 +266,7 @@ winform.btnSend.oncommand = function(id,event){
 
 	config.aiChat.maxTokens = winform.spinMaxTokens.pos; 
 	
-	winform.splitter.splitAt(winform.splitter.origTop);
+	winform.splitter.splitAt(winform.splitter.origTop+100);
 	
 	eventStop.reset();
 	
@@ -878,7 +878,7 @@ winform.editPrompt.setFocus();
 winform.splitter.split(winform.wndBrowser,{winform.bkPrompt,winform.editPrompt});
 
 winform.splitter.ltMin = 200;
-winform.splitter.rbMin = 150;
+winform.splitter.rbMin = 70;
 
 var scrollbarHeight = ::User32.GetSystemMetrics(3/*_SM_CYHSCROLL*/)
 winform.editPrompt.onOk = function(ctrl,alt,shift){ 
