@@ -79,7 +79,15 @@ ImTip 提供简洁可定制的 AI 桌面助手。
 
 AI 助手已支持渲染数学公式、代码高亮、一键分享截长屏、自动联网读取文档 …… 等功能。
 
-ImTip 也支持在超级热键中快助调用 AI 大模型接口，或者自动调用 AI 会话窗口。
+ImTip 也支持在超级热键中快助调用 AI 大模型接口，或者自动调用 AI 会话窗口。启用步骤如下：
+1. 在 ImTip 主界面勾选启用超级热键。
+2. 后点击『编辑超级热键』，在超级热键配置中修改 AI 接口参数。
+![在超级热键中配置 AI 接口参数](/screenshots/hotkey-ai.gif)  
+如果没有看到上面的 AI 示例，只要删除旧版热键配置（ hotkey.aardio ）再重新打开即可。
+3. 点击保存按钮后热键自动生效。  
+![保存超级热键配置](/screenshots/hotkey-save.gif)
+
+
 
 ## 托盘菜单
 
@@ -109,9 +117,16 @@ ImTip 使用了多种不同的接口获取输入位置，但少数任何接口�
 
 在设置界面勾选『启用 java.accessBridge 扩展 』可自动支持 JetBrains 等 Java 程序窗口，一键自动启用，不需要其他手动配置与操作。
 
+如果勾选『启用 java.accessBridge 扩展』时自动取消，并且显示 『未启用 java.accessBridge 扩展 』，请检查当前系统是否能正常联网( 此功能需要下载 aardio 扩展库 java.accessBridge  )。也可以自行下载 aardio 最新版，然后在 aardio 中运行下面的代码启用 JAB( Java Access Bridge  ) :
+
+```aardio
+import java.accessBridge;
+print( java.accessBridge.switch(true) );
+```
+
 对于以上方式都不支持的窗口，请参考：[设置兼容窗口类名](https://www.aardio.com/zh-cn/doc/library-guide/std/key/ime.stateBar.html#editorClasses")
 
-微信 4.0 已经完美支持 ImTip，不需要设置。
+微信 4.0 已经完美支持 ImTip，不需要其他设置。
 
 > ImTip 仅在检测到输入框时显示输入状态。即使取消勾选「仅切换输入目标或状态后显示」，在检测不到输入目标的窗口仍然不会显示输入状态（除非所在窗口设置了兼容窗口类名）。
 
