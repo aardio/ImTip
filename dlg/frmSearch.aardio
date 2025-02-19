@@ -5,24 +5,22 @@ import win.ui.ctrl.syslink;
 var frmSearch = win.form(text="AI 联网搜索接口配置";right=852;bottom=434;bgcolor=16777215;border="dialog frame";max=false)
 frmSearch.add(
 btnSave={cls="plus";text="保存 / 测试搜索";left=657;top=389;right=811;bottom=419;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=15};
-chkBoCha={cls="plus";text="启用博查联网搜索";left=24;top=248;right=235;bottom=279;align="left";db=1;dl=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=3};
 chkExa={cls="plus";text="启用 exa.ai 联网搜索";left=23;top=15;right=242;bottom=51;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=2};
-editBochaCount={cls="edit";text="2";left=114;top=331;right=409;bottom=363;db=1;dl=1;edge=1;multiline=1;num=1;z=16};
-editBochaKey={cls="edit";left=114;top=289;right=409;bottom=321;db=1;dl=1;edge=1;multiline=1;password=1;z=5};
-editExaCount={cls="edit";text="2";left=114;top=106;right=409;bottom=138;dl=1;dt=1;edge=1;multiline=1;num=1;z=7};
-editExaExcludeDomains={cls="edit";left=114;top=191;right=409;bottom=223;db=1;dl=1;dt=1;edge=1;multiline=1;z=11};
-editExaIncludeDomains={cls="edit";left=114;top=149;right=409;bottom=181;dl=1;dt=1;edge=1;multiline=1;z=9};
+chkTavily={cls="plus";text="启用 Tavily 联网搜索";left=23;top=111;right=234;bottom=142;align="left";db=1;dl=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=3};
+editSearchCount={cls="edit";text="2";left=114;top=218;right=409;bottom=250;dl=1;dt=1;edge=1;multiline=1;num=1;z=7};
+editExaExcludeDomains={cls="edit";left=114;top=303;right=409;bottom=335;db=1;dl=1;dt=1;edge=1;multiline=1;z=11};
+editExaIncludeDomains={cls="edit";left=114;top=261;right=409;bottom=293;dl=1;dt=1;edge=1;multiline=1;z=9};
 editExaKey={cls="edit";left=114;top=64;right=409;bottom=96;dl=1;dt=1;edge=1;multiline=1;password=1;z=1};
 editQuery={cls="edit";left=46;top=391;right=630;bottom=423;db=1;dl=1;dr=1;edge=1;multiline=1;z=13};
 editResult={cls="richedit";left=427;top=23;right=836;bottom=378;db=1;dr=1;dt=1;edge=1;hscroll=1;link=1;multiline=1;vscroll=1;z=14};
-lbBochaCount={cls="static";text="最大网页数：";left=-8;top=339;right=101;bottom=366;align="right";db=1;dl=1;transparent=1;z=17};
-lbBochaKey={cls="static";text="API key：";left=15;top=294;right=101;bottom=321;align="right";db=1;dl=1;transparent=1;z=6};
-lbExaCount={cls="static";text="最大网页数：";left=-11;top=114;right=101;bottom=141;align="right";dl=1;dt=1;transparent=1;z=8};
+editTavilyKey={cls="edit";left=114;top=152;right=409;bottom=184;db=1;dl=1;edge=1;multiline=1;password=1;z=5};
+lbTavilyKey={cls="static";text="API key：";left=15;top=157;right=101;bottom=184;align="right";db=1;dl=1;transparent=1;z=6};
+lbSearchCount={cls="static";text="最大网页数：";left=-11;top=226;right=101;bottom=253;align="right";dl=1;dt=1;transparent=1;z=8};
 lbExaKey={cls="static";text="API key：";left=14;top=71;right=101;bottom=98;align="right";dl=1;dt=1;transparent=1;z=4};
-lbExcludeDomains={cls="static";text="排除域名：";left=34;top=199;right=101;bottom=226;align="right";db=1;dl=1;dt=1;transparent=1;z=12};
-lbIncludeDomains={cls="static";text="搜索域名：";left=34;top=156;right=101;bottom=183;align="right";dl=1;dt=1;transparent=1;z=10};
-lnkBocha={cls="syslink";text='<a href="https://open.bochaai.com/">bochaai.com</a>';left=263;top=254;right=406;bottom=272;bgcolor=16777215;db=1;dl=1;z=19};
-lnkExa={cls="syslink";text='<a href="https://exa.ai/">exa.ai</a>';left=269;top=25;right=412;bottom=43;bgcolor=16777215;dl=1;dt=1;z=18}
+lbExcludeDomains={cls="static";text="排除域名：";left=34;top=311;right=101;bottom=338;align="right";db=1;dl=1;dt=1;transparent=1;z=12};
+lbIncludeDomains={cls="static";text="搜索域名：";left=34;top=268;right=101;bottom=295;align="right";dl=1;dt=1;transparent=1;z=10};
+lnkExa={cls="syslink";text='<a href="https://exa.ai/">exa.ai</a>';left=269;top=25;right=412;bottom=43;bgcolor=16777215;dl=1;dt=1;z=16};
+lnkTavily={cls="syslink";text='<a href="https://app.tavily.com/home">tavily.com</a>';left=261;top=117;right=404;bottom=135;bgcolor=16777215;db=1;dl=1;z=17}
 )
 /*}}*/
 
@@ -34,49 +32,50 @@ frmSearch.editResult.text = /*
 有更多针对 aardio 的优化以及专用的 AI 接口: https://aardio.com/vip/
 
 */
-frmSearch.chkBoCha.oncommand = function(id,event){
-	if(frmSearch.chkBoCha.checked){
+frmSearch.chkTavily.oncommand = function(id,event){
+	if(frmSearch.chkTavily.checked){
 		frmSearch.chkExa.checked = false;
 	}
 }
 
 frmSearch.chkExa.oncommand = function(id,event){
 	if(frmSearch.chkExa.checked){
-		frmSearch.chkBoCha.checked = false;
+		frmSearch.chkTavily.checked = false;
 	}
 }
 
 import config;
+if(!config.search){
+	config.search = {}
+};
 if(config.search.mode = "exa"){
 	frmSearch.chkExa.checked = true;
 }
-elseif(config.search.mode = "bocha"){
-	frmSearch.chkBoCha.checked = true;
+elseif(config.search.mode = "tavily"){
+	frmSearch.chkTavily.checked = true;
 }
 
-if(config.search.exa){
-	frmSearch.editExaKey.text = config.search.exa.key;
-	frmSearch.editExaCount.text  = config.search.exa.count;
+if(!config.search.exa){
+	config.search.exa = {};
+}
+
+frmSearch.editSearchCount.text  = config.search.exa.count;
+if(#config.search.exa.includeDomains){
+	frmSearch.editExaIncludeDomains.text  = string.join(config.search.exa.includeDomains,",");
+}
+
+if(#config.search.exa.excludeDomains){
+	frmSearch.editExaExcludeDomains.text  = string.join(config.search.exa.excludeDomains,",");
+} 
 	
-	if(#config.search.exa.includeDomains){
-		frmSearch.editExaIncludeDomains.text  = string.join(config.search.exa.includeDomains,",");
-	}
+frmSearch.editExaKey.text = config.search.exa[["key"]]; 
+frmSearch.editTavilyKey.text = config.search.tavily[["key"]];
 	
-	if(#config.search.exa.excludeDomains){
-		frmSearch.editExaExcludeDomains.text  = string.join(config.search.exa.excludeDomains,",");
-	} 
-}
-
-if(config.search.bocha){
-	frmSearch.editBochaKey.text = config.search.bocha.key;
-	frmSearch.editBochaCount.text  = config.search.bocha.count; 
-}
-
 frmSearch.btnSave.oncommand = function(id,event){
 	
 	config.search.exa = {
 		key = frmSearch.editExaKey.text;
-		count = tonumber(frmSearch.editExaCount.text);
+		count = tonumber(frmSearch.editSearchCount.text);
 		includeDomains = #frmSearch.editExaIncludeDomains.text ? string.split(frmSearch.editExaIncludeDomains.text,",") : null;
 		excludeDomains = #frmSearch.editExaExcludeDomains.text ? string.split(frmSearch.editExaExcludeDomains.text,",") : null;
 	}
@@ -89,17 +88,15 @@ frmSearch.btnSave.oncommand = function(id,event){
 		}
 	}
 	
-	config.search.bocha = {
-		key = frmSearch.editBochaKey.text;
-		count = tonumber(frmSearch.editBochaCount.text);	
+	config.search.tavily = {
+		key = frmSearch.editTavilyKey.text;
 	}
-	
 	
 	if(frmSearch.chkExa.checked){
 		config.search.mode = "exa"
 	}
-	elseif(frmSearch.chkBoCha.checked){
-		config.search.mode = "bocha"	
+	elseif(frmSearch.chkTavily.checked){
+		config.search.mode = "tavily"	
 	}
 	else {
 		config.search.mode = null;
@@ -114,7 +111,7 @@ frmSearch.btnSave.oncommand = function(id,event){
 	frmSearch.btnSave.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
 	frmSearch.editResult.text = ""
 	
-	thread.invoke( function(frmSearch){ 
+	thread.invoke( function(frmSearch,searchConfig){ 
 		import web.rest.jsonClient; 
 		
 		if(frmSearch.chkExa.checked){
@@ -125,13 +122,16 @@ frmSearch.btnSave.oncommand = function(id,event){
 			
 			//搜索
 			var searchData,err = exa.search({
-    			query: frmSearch.editQuery.text,
-    			contents={text= true},
-    			numResults: tonumber( frmSearch.editExaCount.text ),
+    			query:"aardio 编程语言: " + frmSearch.editQuery.text,
+    			contents ={ text = true},
+    			includeDomains = searchConfig.exa.includeDomains,
+    			numResults: tonumber( frmSearch.editSearchCount.text ),
     			type:"keyword" //一般 keyword 搜索就够了（价格低一些）
-			}) 
+			})  
 			
 			var ret  = searchData[["results"]]
+			
+			if(!frmSearch.editResult.valid) return;
 			if(ret){
 				frmSearch.editResult.print(ret);	
 			}
@@ -139,22 +139,22 @@ frmSearch.btnSave.oncommand = function(id,event){
 				frmSearch.editResult.print(err);
 			}		
 		}
-		elseif(frmSearch.chkBoCha.checked){
-			var bochaClient = web.rest.jsonClient(); 
-			bochaClient.setAuthToken(frmSearch.editBochaKey.text);
-			var bocha = bochaClient.api("https://api.bochaai.com/v1/{method}-search");
-			
+		elseif(frmSearch.chkTavily.checked){
+			var http = web.rest.jsonClient(); 
+			http.setAuthToken(frmSearch.editTavilyKey.text); 
+			var tavily = http.api("https://api.tavily.com");
+
 			//搜索
-			var searchData,err = bocha.web({ 
-    			"query": frmSearch.editQuery.text,
-    			"freshness": "noLimit",
-    			"answer": false,
-    			"stream": false,
-    			"count":  tonumber( frmSearch.editBochaCount.text ); //返回的搜索结果数量，不必要太多，前两三条就可以了
+			var searchData,err = tavily.search({ 
+    			query = "aardio 编程语言: " + frmSearch.editQuery.text,
+    			includeDomains = searchConfig.exa.includeDomains,
+    			max_results =  tonumber( frmSearch.editSearchCount.text ); //返回的搜索结果数量，不必要太多，前两三条就可以了
 			})
 			
 			//将搜索结果添加到系统提示词
-			var ret = searchData[["data"]][["webPages"]][["value"]]
+			var ret = searchData[["results"]]
+			
+			if(!frmSearch.editResult.valid) return;
 			if(ret){
 				frmSearch.editResult.print(ret);	
 			}
@@ -164,7 +164,7 @@ frmSearch.btnSave.oncommand = function(id,event){
 		} 
 		
 		frmSearch.btnSave.disabledText = null;
-	},frmSearch)
+	},frmSearch,config.search)
 }
 
 var chkStyle = {
@@ -191,7 +191,7 @@ frmSearch.btnSave.skin({
 	}
 })
 
-frmSearch.chkBoCha.skin(chkStyle); 
+frmSearch.chkTavily.skin(chkStyle); 
 frmSearch.chkExa.skin(chkStyle);
 
 frmSearch.show();

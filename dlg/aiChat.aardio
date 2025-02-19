@@ -58,7 +58,7 @@ var resetMessages = function(){
 	
 	if(#config.aiChat.systemPrompt){
 		//输入系统提示词 
-		if( (config.aiChat.model=="aardio") ||  
+		if( (config.aiChat.model && ..string.startWith(config.aiChat.model,"aardio")) ||  
 			string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>") ){
 				wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);  
 		}
@@ -66,7 +66,7 @@ var resetMessages = function(){
 			wb.system( config.aiChat.systemPrompt) 
 		} 		
 	} 
-	elseif(config.aiChat.model=="aardio"){
+	elseif(config.aiChat.model && ..string.startWith(config.aiChat.model,"aardio")){
 		wb.chatMessage.aardioSystem();
 	}
 	else {
@@ -140,45 +140,40 @@ winform.btnSend.oncommand = function(id,event){
 		return;
 	}
 	
+		//输入 AI 提示词
+	wb.prompt( prompt );
+	winform.editPrompt.text = "";
+	
 	//按钮显示等待动画
 	winform.btnSend.disabledText = {'\uF254';'\uF251';'\uF252';'\uF253';'\uF250'}
 	winform.btnClear.disabled = true;
 	winform.btnSnap.disabled = true; 
 	
 	wb.limit = config.aiChat.msgLimit;
-	 
-	if( tApiUrl.host=="ai.aardio.com" ){
-		//aardio 官方接口已经有更好更全的知识库，联网搜索是无意义的。
-	} 
-	elseif(wb.aiSearched 
-		|| (config.aiChat.model && ..string.endWith(config.aiChat.model,":online") ) ){
+ 
+	if(wb.aiSearched 
+		|| (config.aiChat.model && ( ..string.endWith(config.aiChat.model,":online")  ||  ..string.startWith(config.aiChat.model,"aardio") ) ) 
+	){
 	
 	}
 	elseif( (config.search[["mode"]]=="exa" && config.search.exa )
-		||(config.search[["mode"]]=="bocha" && config.search.bocha ) ){
+		||(config.search[["mode"]]=="tavily" && config.search.tavily ) ){
 			
 		wb.showLoading("正在联网搜索");
 		
 		import web.turndown; 
 		var ok = thread.invokeAndWait( function(wb,prompt,searchConfig){
 				import web.rest.jsonClient;;
-			
+				
 				if(searchConfig.mode=="exa"){
+					//导入 Exa 索接口 
 					var exaClient = web.rest.jsonClient(); 
 					exaClient.setHeaders({ "x-api-key": searchConfig.exa.key} )
 					var exa = exaClient.api("https://api.exa.ai/");
 					
-					var includeDomains = searchConfig.exa.includeDomains;
-					var excludeDomains =  !searchConfig.exa.includeDomains ? searchConfig.exa.excludeDomains : null;
-					
-					if(..string.find(prompt,"<@@aardio@>") ){
-						includeDomains = {"www.aardio.com"};
-						excludeDomains = null;
-					}
-					
 					//搜索
 					var searchData,err = exa.search({
-    					query:prompt,
+    					query: prompt,
     					contents={text= true},
     					numResults: searchConfig.exa.count || 2, 
     					includeDomains: searchConfig.exa.includeDomains,
@@ -193,24 +188,23 @@ winform.btnSend.oncommand = function(id,event){
 					}
 					elseif(err){
 						wb.errorMessage(err); 
-					}
+					}		
 				}
-				elseif(searchConfig.mode=="bocha"){
-					var bochaClient = web.rest.jsonClient(); 
-					bochaClient.setAuthToken(searchConfig.bocha.key);
-					var bocha = bochaClient.api("https://api.bochaai.com/v1/{method}-search");
-					
+				elseif(searchConfig.mode=="tavily"){
+					var http = web.rest.jsonClient();  
+					http.setAuthToken(searchConfig.tavily.key); 
+					var tavily = http.api("https://api.tavily.com");
+  	
 					//搜索
-					var searchData,err = bocha.web({ 
-    					"query": prompt,
-    					"freshness": "noLimit",
-    					"answer": false,
-    					"stream": false,
-    					"count":  searchConfig.bocha.count || 2; //返回的搜索结果数量，不必要太多，前两三条就可以了
+					var searchData,err = tavily.search({ 
+    					query =  prompt,
+    					includeDomains = searchConfig.exa.includeDomains,
+    					excludeDomains: !searchConfig.exa.includeDomains ? searchConfig.exa.excludeDomains : null,
+    					max_results =  searchConfig.exa.count || 2 //返回的搜索结果数量，不必要太多，前两三条就可以了
 					})
 					
 					//将搜索结果添加到系统提示词
-					var ret = searchData[["data"]][["webPages"]][["value"]]
+					var ret = searchData[["results"]]
 					if(ret){
 						wb.url(ret);	
 						return true;
@@ -233,23 +227,26 @@ winform.btnSend.oncommand = function(id,event){
 			
 			wb.aiSearched = true;
 			wb.showLoading("正在思考")
-	}
+	} 
 	
     var knowledge = ""
 	prompt = string.replace(prompt,`(https?\://[^\s()"']+)`,
 		function(url){
 		 
-			wb.showLoading("正在读取与转换网页数据："+url)
-			
-			import web.turndown;
-			var md,err = web.turndown.httpGet(url)
-			if(!#md) return;
- 
-			md = '\r\n\r\n用户输入的参考网址：' + url 
-				+  '\r\n\r\n下面是自该网址获取的' +(err?" Markdown ":"文本")+'格式内容：'
-				+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
-		 
-			knowledge = knowledge ++ md;
+		 	if(!..string.match(url,"<@@.js@>|<@@.css@>|<@@.jpg@>|<@@.png@>|<@@.gif@>|<@@.webp@>$") ){
+		 		
+				wb.showLoading("正在读取与转换网页数据："+url)
+				
+				import web.turndown;
+				var md,err = web.turndown.httpGet(url)
+				if(!#md) return;
+ 	
+				md = '\r\n\r\n用户输入的参考网址：' + url 
+					+  '\r\n\r\n下面是自该网址获取的' +(err?" Markdown ":"文本")+'格式内容：'
+					+  '\r\n\r\n' + md +'\r\n\r\n------------------------\r\n\r\n'
+		 	
+				knowledge = knowledge ++ md;
+			}
 		});
 	
 	if(#knowledge){
@@ -259,11 +256,7 @@ winform.btnSend.oncommand = function(id,event){
 			prompt = "解读分析与总结要点 " + prompt;
 		}
 	} 
-
-	//输入 AI 提示词
-	wb.prompt( prompt );
-	winform.editPrompt.text = "";
-
+ 
 	config.aiChat.maxTokens = winform.spinMaxTokens.pos; 
 	
 	winform.splitter.splitAt(winform.splitter.origTop+100);
