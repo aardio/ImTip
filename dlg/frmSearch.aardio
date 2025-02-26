@@ -7,18 +7,18 @@ frmSearch.add(
 btnSave={cls="plus";text="保存 / 测试搜索";left=657;top=389;right=811;bottom=419;align="left";color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=15};
 chkExa={cls="plus";text="启用 exa.ai 联网搜索";left=23;top=15;right=242;bottom=51;align="left";dl=1;dt=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=2};
 chkTavily={cls="plus";text="启用 Tavily 联网搜索";left=23;top=111;right=234;bottom=142;align="left";db=1;dl=1;font=LOGFONT(h=-15);iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=24};z=3};
-editSearchCount={cls="edit";text="2";left=114;top=218;right=409;bottom=250;dl=1;dt=1;edge=1;multiline=1;num=1;z=7};
 editExaExcludeDomains={cls="edit";left=114;top=303;right=409;bottom=335;db=1;dl=1;dt=1;edge=1;multiline=1;z=11};
 editExaIncludeDomains={cls="edit";left=114;top=261;right=409;bottom=293;dl=1;dt=1;edge=1;multiline=1;z=9};
 editExaKey={cls="edit";left=114;top=64;right=409;bottom=96;dl=1;dt=1;edge=1;multiline=1;password=1;z=1};
 editQuery={cls="edit";left=46;top=391;right=630;bottom=423;db=1;dl=1;dr=1;edge=1;multiline=1;z=13};
 editResult={cls="richedit";left=427;top=23;right=836;bottom=378;db=1;dr=1;dt=1;edge=1;hscroll=1;link=1;multiline=1;vscroll=1;z=14};
+editSearchCount={cls="edit";text="2";left=114;top=218;right=409;bottom=250;dl=1;dt=1;edge=1;multiline=1;num=1;z=7};
 editTavilyKey={cls="edit";left=114;top=152;right=409;bottom=184;db=1;dl=1;edge=1;multiline=1;password=1;z=5};
-lbTavilyKey={cls="static";text="API key：";left=15;top=157;right=101;bottom=184;align="right";db=1;dl=1;transparent=1;z=6};
-lbSearchCount={cls="static";text="最大网页数：";left=-11;top=226;right=101;bottom=253;align="right";dl=1;dt=1;transparent=1;z=8};
 lbExaKey={cls="static";text="API key：";left=14;top=71;right=101;bottom=98;align="right";dl=1;dt=1;transparent=1;z=4};
 lbExcludeDomains={cls="static";text="排除域名：";left=34;top=311;right=101;bottom=338;align="right";db=1;dl=1;dt=1;transparent=1;z=12};
 lbIncludeDomains={cls="static";text="搜索域名：";left=34;top=268;right=101;bottom=295;align="right";dl=1;dt=1;transparent=1;z=10};
+lbSearchCount={cls="static";text="最大网页数：";left=-11;top=226;right=101;bottom=253;align="right";dl=1;dt=1;transparent=1;z=8};
+lbTavilyKey={cls="static";text="API key：";left=15;top=157;right=101;bottom=184;align="right";db=1;dl=1;transparent=1;z=6};
 lnkExa={cls="syslink";text='<a href="https://exa.ai/">exa.ai</a>';left=269;top=25;right=412;bottom=43;bgcolor=16777215;dl=1;dt=1;z=16};
 lnkTavily={cls="syslink";text='<a href="https://app.tavily.com/home">tavily.com</a>';left=261;top=117;right=404;bottom=135;bgcolor=16777215;db=1;dl=1;z=17}
 )
@@ -28,9 +28,11 @@ frmSearch.editResult.text = /*
 - 每次清除上下文之前仅联网搜索一次。
 大模型的上下文是有限的，注意首次的提示词对搜索友好。
 
+- 模型 ID 带 :online 后缀（已自带联网）不再重复联网。
+模型 ID 带 aardio 前缀（已自带知识库）不再重复联网。
+
 - 用于 aardio 编程时建议使用 aardio 自带的 AI 助手。
 有更多针对 aardio 的优化以及专用的 AI 接口: https://aardio.com/vip/
-
 */
 frmSearch.chkTavily.oncommand = function(id,event){
 	if(frmSearch.chkTavily.checked){

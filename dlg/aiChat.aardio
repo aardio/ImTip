@@ -37,13 +37,6 @@ if(_ARGV.chat){
 			}
 		}
 	}
-	
-	if(#_ARGV.q){
-		winform.editPrompt.text = _ARGV.q;
-		winform.setTimeout(function(){
-			winform.btnSend.oncommand();
-		});
-	}
 }
 
 //创建显示聊天消虑的 Web 浏览器窗口
@@ -1016,5 +1009,17 @@ win.ui.simpleWindow(winform);
 
 winform.bkPrompt.directDrawBackgroundOnly();
 winform.show();
+
+
+if(_ARGV.chat){
+	if(#_ARGV.q){
+		winform.editPrompt.text = _ARGV.q;
+		winform.setTimeout(function(){
+			winform.btnSend.oncommand();
+		});
+		
+		..win.showForeground(winform.hwnd);
+	}
+}
 
 win.loopMessage();
