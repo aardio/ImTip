@@ -252,7 +252,7 @@ winform.btnSend.oncommand = function(id,event){
  
 	config.aiChat.maxTokens = winform.spinMaxTokens.pos; 
 	
-	winform.splitter.splitAt(winform.splitter.origTop+100);
+	winform.splitter.splitAt(winform.splitter.origTop+80);
 	
 	eventStop.reset();
 	
@@ -547,8 +547,8 @@ winform.btnSetting.oncommand = function(id,event){
 	
 	frmSetting.editApiUrl.onFocusLost = function(){
 		var url = string.trim(frmSetting.editApiUrl.text,`"' 	`);
-		if(!..string.match(url,"^<@@http@>[sS]?\:")){
-			frmSetting.editApiUrl.text = "https://"+url;
+		if(#url && !..string.match(url,"^<@@http@>[sS]?\:")){
+			frmSetting.editApiUrl.text = (string.startWith(url,"localhost")?"http://":"https://")+url;
 		}
 	}
 	
@@ -723,13 +723,28 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.btnSave.oncommand = function(id,event){
 	 
 		var configItem = {
-			url = frmSetting.editApiUrl.text;
+			url = string.trim(frmSetting.editApiUrl.text);
 			key = string.trim(frmSetting.editApiKey.text,`"' 	`);
 			model = ..string.match(frmSetting.editModel.text,"\s*(\S+)");
 			temperature = frmSetting.tbTemperature.pos / 10;
 			msgLimit = frmSetting.tbMsgLimit.pos;
 			proxy = string.trim(frmSetting.editProxy.text);
 			systemPrompt = frmSetting.editSystemPrompt.text;
+		}
+		
+		if(!#configItem.url){
+			frmSetting.editApiUrl.editBox.showWarningTip("ImTip","请输入接口网址！")
+			return; 
+		}
+		
+		if( string.match(configItem.proxy,"^[\w\-_\.]+$") && !(#configItem.model) ){
+			frmSetting.editProxy.showWarningTip("ImTip","是否将模型 ID 输入到代理服务器了呢？！")
+			return;
+		}
+		
+		if(!(#configItem.model)){
+			frmSetting.editModel.editBox.showWarningTip("ImTip","请输入模型 ID ！")
+			return;
 		}
 		
 		import string.escape2;
