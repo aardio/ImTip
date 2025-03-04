@@ -7,6 +7,7 @@ ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键（各�
 - [超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 - [配置输入法状态跟踪提示规则与外观](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/ime.stateBar.html)
 - [输入法与键盘状态检测原理与规则](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/imeState.html)
+- [推荐 AI 接口服务商 / 公益接口](https://imtip.aardio.com/api-keys/)
 
 ## 一、输入跟踪提示
 

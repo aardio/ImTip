@@ -533,13 +533,14 @@ winform.btnSetting.oncommand = function(id,event){
 		"https://ai.aardio.com/api/v1/",
 		"https://api.deepseek.com/v1",
 		"https://openrouter.ai/api/v1",
+		"https://ark.cn-beijing.volces.com/api/v3/bots",
+		"https://ark.cn-beijing.volces.com/api/v3",
 		"https://api.siliconflow.cn/v1",
+		"https://api.ppinfra.com/v3/openai/",
 		"https://api.anthropic.com/v1",
 		"https://generativelanguage.googleapis.com/v1beta", 
 		"https://api.x.ai/v1",
 		"https://api.openai.com/v1", 
-		"https://ark.cn-beijing.volces.com/api/v3/bots",
-		"https://ark.cn-beijing.volces.com/api/v3",
 		"https://api.lkeap.cloud.tencent.com/v1",
 		"https://dashscope.aliyuncs.com/api/v1/",
 		"http://localhost:11434/v1/"
@@ -626,6 +627,9 @@ winform.btnSetting.oncommand = function(id,event){
 		}
 		elseif(url=="https://dashscope.aliyuncs.com/api/v1/"){
 			frmSetting.editModel.text = "qwen-coder-plus //也可以指定智能体应用 ID" //qwen-coder-plus-latest
+		}
+		elseif(url=="https://api.ppinfra.com/v3/openai/"){
+			frmSetting.editModel.text = "deepseek/deepseek-r1/community"
 		}
 		elseif(url=="http://localhost:11434/v1/"){
 			frmSetting.editModel.text = "qwen:0.5b //Ollama 本地模型"
