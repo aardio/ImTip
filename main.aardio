@@ -114,7 +114,15 @@ mainForm.onTrayMessage = {
 	[0x201/*_WM_LBUTTONDOWN*/] = function(wParam){ 
 	 	if(..mainSettingForm) ..mainSettingForm.show(false);
 	 	
-	 	if(::User32.GetKeyState(0x10/*_VK_SHIFT*/) & 0x8000){
+	 	if(::User32.GetKeyState(0x11/*_VK_CTRL*/) & 0x8000){
+	 		..config.setting.imeBarDisabled = !..imeBar.paused; 
+			..imeBar.imeWatch(!..config.setting.imeBarDisabled);
+			..mainForm.chkImeBarDisabled.checked = !..config.setting.imeBarDisabled;
+			..config.setting.save();
+			
+			win.setForeground(mainForm.hwnd);
+	 	}
+	 	elseif(::User32.GetKeyState(0x10/*_VK_SHIFT*/) & 0x8000){
 	 		mainForm.show(false); 
 	 		
 	 		import process.imTip; 

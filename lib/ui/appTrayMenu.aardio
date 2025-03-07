@@ -33,7 +33,7 @@ class appTrayMenu{
 		popmenu.check(id,!!..config.hotkey.chkEnableHotkey,0/*_MF_BYCOMMAND*/);
 		
  
-		var id = popmenu.add('启用输入跟踪提示',function(id){
+		var id = popmenu.add('启用输入跟踪提示\tCtrl+单击托盘',function(id){
 			..config.setting.imeBarDisabled = !..imeBar.paused; 
 			..imeBar.imeWatch(!..config.setting.imeBarDisabled);
 			..mainForm.chkImeBarDisabled.checked = !..config.setting.imeBarDisabled;
@@ -160,7 +160,7 @@ class appTrayMenu{
 			..mainForm.onTrayMenu(popmenu)
 		}
 		
-		popmenu.add('AI 智能助手\tShift+单击托盘图标',function(id){
+		popmenu.add('AI 智能助手\tShift+单击托盘',function(id){
  			import process.imTip; 
 			process.imTip(chat = ""); 
 			
