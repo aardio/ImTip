@@ -67,6 +67,22 @@ class appTrayMenu{
 				process.openUrl("http://wubi.aardio.com/");
 			}); 
 			
+			if(imStatus.weasel){ 
+				
+				if( weaselIsShowNotifications() ){
+					popmenu.add('禁用小狼毫自带悬浮提示',function(id){
+						weaselShowNotifications(false);
+						..mainForm.msgbox("小狼毫自带悬浮提示已关闭。按住 Shift 右键点击托盘图标可显示【启用小狼毫自带悬浮提示】菜单项。","ImTip")
+					}); 	
+				} 
+				elseif(::User32.GetKeyState(0x10/*_VK_SHIFT*/) & 0x8000){
+					popmenu.add('启用小狼毫自带悬浮提示',function(id){
+						weaselShowNotifications(true);
+					}); 
+				}
+				
+			}
+			
 			popmenu.add();//分隔线
 		
 			popmenu.add('打开系统输入法设置',function(id){
@@ -144,7 +160,7 @@ class appTrayMenu{
 			..mainForm.onTrayMenu(popmenu)
 		}
 		
-		popmenu.add('AI 智能助手',function(id){
+		popmenu.add('AI 智能助手\tShift+单击托盘图标',function(id){
  			import process.imTip; 
 			process.imTip(chat = ""); 
 			
@@ -162,6 +178,80 @@ class appTrayMenu{
 		
 		return popmenu; 
 	};
+}
+
+appTrayMenu.weaselIsShowNotifications = function(){
+	import sys.reg;
+	var userDir = ..sys.reg.getValue("RimeUserDir","Software\Rime\Weasel")
+	if(!#userDir){
+		userDir = ..io.getSpecial(0x1a/*_CSIDL_APPDATA*/,"Rime")
+		var cfgPath = ..io.joinpath(userDir,"weasel.custom.yaml");
+		if(..io.exist(cfgPath)){
+			var str = ..string.load(cfgPath);
+			if( ..string.find(str,"show_notifications\:\s*false!\W") ){
+				return false; 
+			}
+		}
+	} 
+	return true;
+}
+
+appTrayMenu.weaselShowNotifications = function(value){
+	value = tostring(value);
+	
+	import sys.reg;
+	import process.cache;
+	import process.popen;
+	import fsys.path;
+	
+	var weaselPath = ..process.cache.find("WeaselServer.exe")
+	var deployerPath = ..fsys.path.replaceFile(weaselPath,"WeaselDeployer.exe")
+	
+	if(weaselPath){
+		var dir = ..io.splitpath(weaselPath).dir
+		var depolyerPath = ..io.joinpath(dir,"WeaselDeployer.exe");
+		if(..io.exist(depolyerPath)){ 
+		 	
+			var userDir = ..sys.reg.getValue("RimeUserDir","Software\Rime\Weasel")
+			if(!#userDir){
+				userDir = ..io.getSpecial(0x1a/*_CSIDL_APPDATA*/,"Rime")
+				var cfgPath = ..io.joinpath(userDir,"weasel.custom.yaml");
+				if(..io.exist(cfgPath)){
+					var count;
+					var str = ..string.load(cfgPath);
+					str,count = ..string.replace(str,"show_notifications\:\s*[\w\_]+","show_notifications: "+value);
+
+					if(!count){
+						str,count = ..string.replace(str,"!\Npatch\:",'patch:\n  show_notifications: '+value);
+						
+						if(!count ){
+							if(!..string.find(str,"!\Npatch\:")){
+								str = str + 'patch:\n  show_notifications: '+value;
+							}
+							else {
+								return false;
+							}
+							
+						}
+					}
+					
+					..string.save(cfgPath, str);
+					..process.popen(deployerPath,"/deploy")
+					
+  					return true;
+				}
+				else {
+					..string.save(cfgPath, 'patch:\n  show_notifications: '+value);
+					..process.popen(deployerPath,"/deploy")
+					
+					return true;
+				}
+				
+			}
+		}
+	}
+	
+	return false;
 }
 
 /**intellisense()
