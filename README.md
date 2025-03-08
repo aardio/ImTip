@@ -1,13 +1,12 @@
 # ImTip 智能桌面助手
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 818 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 824 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
 ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键（各种桌面应用快速接入 AI）](#二超级热键)、[自定义 AI 助手](#三-ai-助手) 等功能。
 
 - [超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 - [配置输入法状态跟踪提示规则与外观](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/ime.stateBar.html)
 - [输入法与键盘状态检测原理与规则](https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/imeState.html)
-- [推荐 AI 接口服务商 / 公益接口](https://imtip.aardio.com/api-keys/)
 
 ## 一、输入跟踪提示
 
@@ -96,11 +95,16 @@ ImTip 托盘菜单提供快捷启用系统输入法、切换双拼方案等功�
 
 ![超级热键](./screenshots/menu.png)
 
-**附：输入法常用快捷键**  
-「Shift」切换中/英输入；  
-「Ctrl + . 」切换中/英标点；  
-「Shift + 空格 」切换全/半角；  
-「Alt + Shift」切换语言  
+ImTip 快捷键：
+
+按住 <kbd>Shift</kbd> 点击托盘图标可打开 AI 助手。  
+接住 <kbd>Ctrl</kbd> 点击托盘图标可启用/禁用输入跟踪提示。
+
+输入法常用快捷键:
+<kbd>Shift</kbd>切换中/英输入；  
+<kbd>Ctrl+.</kbd>切换中/英标点；  
+<kbd>Shift+空格</kbd> 切换全/半角；  
+<kbd>Alt+Shift</kbd>切换语言  
 
 ## 常见问题
 
