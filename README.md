@@ -100,11 +100,11 @@ ImTip 快捷键：
 按住 <kbd>Shift</kbd> 点击托盘图标可打开 AI 助手。  
 接住 <kbd>Ctrl</kbd> 点击托盘图标可启用/禁用输入跟踪提示。
 
-输入法常用快捷键:
-<kbd>Shift</kbd>切换中/英输入；  
-<kbd>Ctrl+.</kbd>切换中/英标点；  
+输入法常用快捷键:  
+<kbd>Shift</kbd> 切换中/英输入；  
+<kbd>Ctrl+.</kbd> 换中/英标点；  
 <kbd>Shift+空格</kbd> 切换全/半角；  
-<kbd>Alt+Shift</kbd>切换语言  
+<kbd>Alt+Shift</kbd> 切换语言  
 
 ## 常见问题
 
