@@ -145,6 +145,8 @@ print( java.accessBridge.switch(true) );
 
 - 小小输入法完美支持  ImTip。如有问题可使用开源工具 [IMY](https://github.com/aardio/IMY) 卸载重装一次小小输入法就可以了。
 
+- 小狼毫输入法请安装最新 [nightly build](https://github.com/rime/weasel/releases/tag/latest) 版可支持 ImTip ，可通过 ImTip 托盘菜单启用或禁用输入法悬浮提示
+
 - 微信输入法、手心输入法、讯飞输入法需要勾选『怪异模式』，勾选『怪异模式』以后不支持其他正常输入法。
 
 - 小鹤输入法在英文模式下切换全半角后状态会错乱，按 Shift 切换一次中英模式会恢复正常，可能基于多多的输入法都有类似问题。
