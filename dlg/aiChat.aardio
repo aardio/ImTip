@@ -617,7 +617,7 @@ winform.btnSetting.oncommand = function(id,event){
 		"https://ark.cn-beijing.volces.com/api/v3",
 		"https://api.siliconflow.cn/v1",
 		"https://api.anthropic.com/v1",
-		"https://generativelanguage.googleapis.com/v1beta", 
+		"https://generativelanguage.googleapis.com/v1beta/openai", 
 		"https://api.x.ai/v1",
 		"https://api.openai.com/v1", 
 		"https://api.lkeap.cloud.tencent.com/v1",
@@ -689,7 +689,7 @@ winform.btnSetting.oncommand = function(id,event){
 		elseif(url=="https://api.anthropic.com/v1"){
 			frmSetting.editModel.text = "@claude-3-5-sonnet-latest"
 		}
-		elseif(url=="https://generativelanguage.googleapis.com/v1beta"){
+		elseif(url=="https://generativelanguage.googleapis.com/v1beta/openai"){
 			frmSetting.editModel.text = "gemini-exp-1206"
 		}
 		elseif(url=="https://api.x.ai/v1"){
@@ -841,7 +841,7 @@ winform.btnSetting.oncommand = function(id,event){
 			}
 		}
 		elseif(tUrl[["host"]]=="generativelanguage.googleapis.com"){
-			configItem.url = "https://generativelanguage.googleapis.com/v1beta"
+			configItem.url = "https://generativelanguage.googleapis.com/v1beta/openai"
 		}
 		
 		var selIndex = frmSetting.lstConfig.selIndex;
