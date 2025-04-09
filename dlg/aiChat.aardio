@@ -10,30 +10,42 @@ bk={cls="bk";text="ImTip - AI 智能助手";left=22;top=5;right=213;bottom=20;al
 bkPrompt={cls="plus";left=5;top=495;right=754;bottom=617;bgcolor=16777215;border={color=-8388608;radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=2};
 bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=14408409;dl=1;dr=1;dt=1;forecolor=6052699;linearGradient=0;z=3};
 btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=6};
-btnCopy={cls="plus";text="复制";left=271;top=588;right=335;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=11};
-btnSearch={cls="plus";text="联网搜索";left=8;top=585;right=99;bottom=615;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF26B';notify=1;textPadding={left=25};z=15};
+btnCopy={cls="plus";text="复制";left=369;top=588;right=433;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=11};
+btnSearch={cls="plus";text="联网";left=8;top=588;right=67;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dl=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF26B';notify=1;textPadding={left=25};z=15};
 btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
-btnSetting={cls="plus";text="设置";left=513;top=588;right=580;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=7};
-btnSnap={cls="plus";text="分享";left=194;top=588;right=258;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=12};
-editMaxTokens={cls="edit";left=427;top=593;right=470;bottom=616;align="right";db=1;dr=1;edge=1;z=9};
+btnSetting={cls="plus";text="设置";left=73;top=588;right=140;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;dl=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=7};
+btnSnap={cls="plus";text="分享";left=302;top=588;right=366;bottom=618;align="left";bgcolor=16777215;color=3947580;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=12};
+cmbAgent={cls="combobox";left=145;top=592;right=269;bottom=614;db=1;dl=1;edge=1;items={};mode="dropdownlist";z=16};
+editMaxTokens={cls="edit";left=509;top=593;right=552;bottom=616;align="right";db=1;dr=1;edge=1;z=9};
 editPrompt={cls="richedit";left=7;top=501;right=750;bottom=585;autohscroll=false;bgcolor=16777215;db=1;dl=1;dr=1;link=1;multiline=1;vscroll=1;z=5};
-spinMaxTokens={cls="spin";left=471;top=594;right=491;bottom=616;db=1;dr=1;z=8};
+spinMaxTokens={cls="spin";left=553;top=594;right=573;bottom=616;db=1;dr=1;z=8};
 splitter={cls="splitter";left=-2;top=490;right=760;bottom=495;bgcolor=13750737;db=1;dl=1;dr=1;horz=1;z=13};
-static={cls="static";text="回复长度：";left=352;top=591;right=418;bottom=614;align="right";bgcolor=16777215;center=1;clipch=1;db=1;dr=1;z=10};
+static={cls="static";text="回复长度：";left=434;top=591;right=500;bottom=614;align="right";bgcolor=16777215;center=1;clipch=1;db=1;dr=1;z=10};
 wndBrowser={cls="custom";text="自定义控件";left=5;top=27;right=753;bottom=489;ah=1;db=1;dl=1;dr=1;dt=1;z=1}
 )
 /*}}*/
 
+var aiChatConfig = ..table.assign({},config.aiChat);
+
+if(config.aiChat.itemNames){
+	winform.cmbAgent.items = config.aiChat.itemNames;
+}
+
+if(config.aiChat.selItem){
+	winform.cmbAgent.selIndex = config.aiChat.selItem;
+} 
+
 if(_ARGV.chat){
 	
-	if(#_ARGV.chat){
-		var selIndex = table.find(config.aiChat.itemData,_ARGV.chat);
+	if(#_ARGV.chat && config.aiChat.itemNames){
+		var selIndex = table.find(config.aiChat.itemNames,_ARGV.chat);
 		if(selIndex){
-			config.aiChat.selItem = selIndex; 
+			winform.cmbAgent.selIndex = selIndex;
+			
 			var configItem = config.aiChat.itemData[selIndex];
 			if(configItem){
-				config.aiChat.proxy = null;
-				table.assign(config.aiChat,configItem);  
+				aiChatConfig.proxy = null;
+				table.assign(aiChatConfig,configItem);  
 			}
 		}
 	}
@@ -49,17 +61,17 @@ var resetMessages = function(){
 	
 	wb.clear();
 	
-	if(#config.aiChat.systemPrompt){
+	if(#aiChatConfig.systemPrompt){
 		//输入系统提示词 
-		if( (config.aiChat.model && ..string.startWith(config.aiChat.model,"aardio")) ||  
-			string.find(config.aiChat.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>") ){
-				wb.chatMessage.aardioSystem(config.aiChat.systemPrompt);  
+		if( (aiChatConfig.model && ..string.startWith(aiChatConfig.model,"aardio")) ||  
+			string.find(aiChatConfig.systemPrompt,"<@@aardio@>|<@@imtip@>|<超级热键>") ){
+				wb.chatMessage.aardioSystem(aiChatConfig.systemPrompt);  
 		}
 		else {
-			wb.system( config.aiChat.systemPrompt) 
+			wb.system( aiChatConfig.systemPrompt) 
 		} 		
 	} 
-	elseif(config.aiChat.model && ..string.startWith(config.aiChat.model,"aardio")){
+	elseif(aiChatConfig.model && ..string.startWith(aiChatConfig.model,"aardio")){
 		wb.chatMessage.aardioSystem();
 	}
 	else {
@@ -70,6 +82,20 @@ var resetMessages = function(){
 }
 
 resetMessages();
+
+winform.cmbAgent.onOk = function(){ 
+	if(winform.cmbAgent.selIndex){
+		var configItem = config.aiChat.itemData[winform.cmbAgent.selIndex];
+		if(configItem){
+			aiChatConfig.proxy = null;
+			table.assign(aiChatConfig,configItem);  
+			
+			if(!wb.started()){
+				resetMessages();
+			}
+		}		
+	}
+}
 
 winform.btnClear.oncommand = function(id,event){
 	resetMessages();//清除聊天上下文
@@ -206,7 +232,7 @@ winform.btnSend.oncommand = function(id,event){
 		return;
 	}
 	
-	var tApiUrl = config.aiChat.url ? inet.url.split(config.aiChat.url);
+	var tApiUrl = aiChatConfig.url ? inet.url.split(aiChatConfig.url);
 	if(!tApiUrl){
 		wb.errorMessage(`错误的接口网址，;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里重新设置</a>`)
 		winform.editPrompt.setFocus();
@@ -225,7 +251,7 @@ winform.btnSend.oncommand = function(id,event){
 	wb.limit = config.aiChat.msgLimit;
  
 	if(wb.aiSearched 
-		|| (config.aiChat.model && ( ..string.endWith(config.aiChat.model,":online")  ||  ..string.startWith(config.aiChat.model,"aardio") ) ) 
+		|| (aiChatConfig.model && ( ..string.endWith(aiChatConfig.model,":online")  ||  ..string.startWith(aiChatConfig.model,"aardio") ) ) 
 	){
 	
 	}
@@ -347,41 +373,18 @@ winform.btnSend.oncommand = function(id,event){
 	//创建多线程向服务端发送请求
 	thread.invoke( 
 		function(wb,config,eventStop){ 
+			
 			for(k,v in config){ 
 				if(v==="")config[k] = null;
 			} 
 		 
 			config = table.mix(config,{  
-				url = "https://api.deepseek.com/v1";
-				model = "deepseek-chat";
+				url = "https://ai.aardio.com/api/v1/";
+				key = '\0\1\96';
+				model = "imtip";
 				temperature = 0.5;
 			}); 
 
-			if( string.startWith(config.url,"https://api.deepseek.com/") ){ 
-				/*
-				下面的 key 24 小时后失效，
-				DeepSeek 的 key 充 10 元估计能用上一年，所以请自己申请一个好吗？！
-				*/ 
-				var testKey = '\0\48\67\91\29\86\81\84\8\3\0\85\7\86\1\4\0\4\9\2\82\8\6\83\1\84\6\9\83\81\1\0\86\85\85\4\1';
-			
-				if(!#config.key){
-					config.key = testKey;
-				}
-				
-				import string.escape2;
-				if(config.maxTokens>1024 && (
-					string.escape2(config.key) === string.escape2(testKey)  ) ){ 
-					wb.errorMessage(`回复长度超过 1024 时，必须更改为您自己的 API 密钥 。<a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
-					return;
-				}
-				
-				if(config.model!="deepseek-chat" && (
-					string.escape2(config.key) === string.escape2(testKey)  ) ){
-					wb.errorMessage(`已切换默认模型，必须更改为您自己的 API 密钥 。<a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥</a>，&nbsp;<a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">点这里设置新密钥</a>。`);
-					return;
-				} 
-			}
-		
 			//导入调用 HTTP 接口的 REST 客户端
 			import web.rest.aiChat;
 			
@@ -513,7 +516,7 @@ winform.btnSend.oncommand = function(id,event){
 					wb.errorMessage("模型未提供 token 用量")
 				} 
 			} 
-		},wb,config.aiChat,eventStop//将参数传入线程
+		},wb,aiChatConfig,eventStop//将参数传入线程
 	)
 	
 	winform.btnCopy.disabled = false; 
@@ -582,7 +585,7 @@ winform.btnSetting.oncommand = function(id,event){
 		btnEdit={cls="plus";left=93;top=473;right=127;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=12};
 		btnRemove={cls="plus";left=56;top=473;right=90;bottom=503;align="left";color=3947580;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF1F8';notify=1;textPadding={left=25};z=11};
 		btnSave={cls="button";text="更新配置";left=489;top=531;right=659;bottom=576;z=5};
-		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=186;bottom=546;z=15};
+		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=182;bottom=546;z=15};
 		chkUsage={cls="checkbox";text="显示 token 计数";left=185;top=526;right=349;bottom=546;z=24};
 		editApiKey={cls="edit";left=281;top=68;right=662;bottom=95;edge=1;password=1;z=2};
 		editApiUrl={cls="combobox";left=281;top=31;right=662;bottom=57;edge=1;items={};mode="dropdown";z=18};
@@ -786,6 +789,11 @@ winform.btnSetting.oncommand = function(id,event){
 		
 		config.aiChat.itemData[selIndex] = configItem;
 		config.aiChat.itemNames = frmSetting.lstConfig.items; 
+		
+		var currentSelIndex = winform.cmbAgent.selIndex;
+		winform.cmbAgent.items = config.aiChat.itemNames;
+		winform.cmbAgent.selIndex = currentSelIndex;
+		
 		config.aiChat.itemData = table.slice(config.aiChat.itemData,1,#config.aiChat.itemNames);
 		config.aiChat.selItem = selIndex; 
 		  
@@ -847,6 +855,9 @@ winform.btnSetting.oncommand = function(id,event){
 		var selIndex = frmSetting.lstConfig.selIndex;
 		config.aiChat.selItem = selIndex; 
 		config.aiChat.itemData[selIndex] = configItem;
+		
+		table.assign(aiChatConfig,configItem);  
+		winform.cmbAgent.selIndex = selIndex; 
 		
 		config.aiChat.proxy = null;
 		table.assign(config.aiChat,configItem);  
@@ -1106,7 +1117,6 @@ win.ui.simpleWindow(winform);
 
 winform.bkPrompt.directDrawBackgroundOnly();
 winform.show();
-
 
 if(_ARGV.chat){
 	if(#_ARGV.q){

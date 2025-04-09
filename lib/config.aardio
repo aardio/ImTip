@@ -192,6 +192,13 @@ config.setting.getFilterWindowsCodePath = function(init){
 	return path;
 }
 
+if(!config.aiChat.itemData) {
+	config.aiChat.itemNames={[1]="默认";[2]="词典";[3]="翻译"};
+	config.aiChat.itemData={[1]={temperature=0.1;key='\0\1\96';model="imtip";url="https://ai.aardio.com/api/v1/";systemPrompt="";msgLimit=15};[2]={proxy="";temperature=0.3;key='\0\1\96';model="imtip";url="https://ai.aardio.com/api/v1/";systemPrompt='你是一位英语教授，你的任务是根据输入的单词完成一系列英语学习相关的任务。以下是输入的单词：\r\n<单词>\r\n{{WORD}}\r\n</单词>\r\n\r\n请完成以下具体任务：\r\n### 任务1：单词释义\r\n- 列出单词包含的所有词性对应的**词性**、**音标**、所有的**中文释义**和**英文释义**，一行一个。\r\n- 音标输出格式为 [🔊/音标/](https://dict.youdao.com/dictvoice?audio={WORD}&type=2)\r\n- 如果单词是动词，要展示**现在分词**、**过去式**、**过去分词**；如果是名词，要展示**第三人称单数**；如果是形容词，要展示**比较级**和**最高级**。\r\n- 讲述该单词的**词根词缀起源故事**。\r\n\r\n### 任务2：场景例句\r\n用这个单词造5个工作场景的英文例句，并附上英文翻译。\r\n\r\n### 任务3：相近词\r\n用这个单词的词根词缀，拓展5个相近单词，附带**词性**和**中文释义**。\r\n\r\n### 任务4：英文故事\r\n用任务3拓展出的单词编写一个有趣的A2难度英文故事，限7行内。\r\n\r\n### 任务5：小测验\r\n基于前4个任务生成的内容创造3个单选题，每个题目的选项一行一个，最后一起给出答案。\r\n\r\n请按照以下Markdown格式排版输出你的结果：\r\n\r\n### 单词释义\r\n\r\n### 场景例句\r\n\r\n### 相近词\r\n\r\n### 英文故事\r\n\r\n### 小测验 \r\n\r\n<details><summary>查看答案</summary><blockquote>这里输入小测验答案</blockquote></details>';msgLimit=15};[3]={proxy="";temperature=0.5;key='\0\1\96';model="imtip";url="https://ai.aardio.com/api/v1/";systemPrompt='你是一位专业翻译。\r\n每当我输入简体中文你就帮我翻译为英文，输入其他语言你就帮我翻译成简体中文。\r\n\r\n请分成两个步骤进行翻译：\r\n1. 首先根据原文直译为目标语言，不要遗漏任何信息。\r\n2. 参考第一次直译的结果重新意译为目标语言，在遵守原意的前提下让翻译后的内容更通俗易懂，更加符合以目标语言作为母语的表达习惯。\r\n3. 以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解，如果遇到特殊的语言现象、文化背景知识也请适当说明。\r\n\r\n将以上任务结果按以下 Markdown 格式排版输出：\r\n\r\n## 直译\r\n\r\n## 意译\r\n\r\n## 讲解';msgLimit=15}};
+	..table.assign(config.aiChat,config.aiChat.itemData[1]);
+	config.aiChat.selItem=1;
+}
+
 /**intellisense(config)
 setting = 通用设置
 saveAll() = 写入所有配置到文件
