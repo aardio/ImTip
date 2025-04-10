@@ -1,6 +1,6 @@
 # ImTip 智能桌面助手
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 824 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 829 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
 ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键（各种桌面应用快速接入 AI）](#二超级热键)、[自定义 AI 助手](#三-ai-助手) 等功能。
 
@@ -147,7 +147,7 @@ print( java.accessBridge.switch(true) );
 
 - 小狼毫输入法请安装最新 [nightly build](https://github.com/rime/weasel/releases/tag/latest) 版可支持 ImTip ，可通过 ImTip 托盘菜单启用或禁用输入法悬浮提示
 
-- 微信输入法、手心输入法、讯飞输入法需要勾选『怪异模式』，勾选『怪异模式』以后不支持其他正常输入法。
+- 微信输入法、手心输入法、讯飞输入法需要勾选『怪异模式』。注意这三种输入法分别使用不同的『怪异模式』，最好不要同时安装这些有问题的输入法，安装变动后也请重新勾选一次『怪异模式』以更新配置。勾选『怪异模式』则不支持其他正常输入法。
 
 - 小鹤输入法在英文模式下切换全半角后状态会错乱，按 Shift 切换一次中英模式会恢复正常，可能基于多多的输入法都有类似问题。
 

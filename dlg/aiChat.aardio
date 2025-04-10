@@ -1009,7 +1009,7 @@ global.onError = function( err,over ){
 }
 
 winform.spinMaxTokens.buddy = winform.editMaxTokens;
-winform.spinMaxTokens.setRange(1,1024*8);
+winform.spinMaxTokens.setRange(1,1024*16);
 winform.spinMaxTokens.pos = config.aiChat.maxTokens || 1024;
 winform.spinMaxTokens.inc = 1024;
 
