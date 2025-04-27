@@ -113,26 +113,33 @@ winform.editPrompt.enablePopMenu(function(){
 		
 		{ "导出对话";  function(id){
 			import fsys.dlg;
-			var path = fsys.dlg.save("*.jsonl|*.jsonl||","导出对话到 *.jsonl");
+			var path = fsys.dlg.save("*.jsonl|*.jsonl|*.json|*.json||","导出对话到 *.jsonl");
 			if(!path) return;
 			
 			var file,err = io.file(path,"w+b");
 			if(!file) return winform.msgboxErr(err);
 				
 			var chatMessage = wb.chatMessage;
-			for(i=1;#chatMessage;1){
-				var msg = chatMessage[i]
-				var line  = web.json.stringify(msg,false,false);
-				line = string.crlf(line,"")
-				file.write(line,'\r\n');
+			
+			if(..string.endWith(path,".jsonl",true)){
+				for(i=1;#chatMessage;1){
+					var msg = chatMessage[i]
+					var line  = JSON.stringify(msg,false,false);
+					line = string.crlf(line,"")
+					file.write(line,'\r\n');
+				}
 			}
+			else {
+				file.write((JSON.stringifyArray(chatMessage,true,false)));
+			}
+			
 			file.close();
 			
 		}; #wb.chatMessage<2 ? 1/*_MF_GRAYED*/ : 0}; 	
 		
 		{ '导入对话';  function(id){
 			import fsys.dlg;
-			var path = fsys.dlg.open("*.jsonl|*.jsonl||","自 *.jsonl 文件导入对话");
+			var path = fsys.dlg.open("*.jsonl|*.jsonl|*.json|*.json||","自 jsonl 或 json 文件导入对话");
 			if(!path) return;
 			
 			wb.importChatMessages(path);
@@ -141,25 +148,28 @@ winform.editPrompt.enablePopMenu(function(){
 } );
 
 wb.BeforeNavigate2 = function( pDisp, url, flags, targetFrame, postData, headers, cancel ) { 
-   
-    if(..string.endWith(url,".jsonl",true) && io.exist(url) ){
-        winform.setTimeout( 
+    
+   	if( string.match(url,"/dictvoice\?audio=")) {
+   		..wmPlayer := com.CreateObject("WMPlayer.OCX"); 
+   		..wmPlayer.url = url;
+   	}
+   	elseif(..string.match(url,"\.<@@jsonl@>|<@@json@>$")){
+   		winform.setTimeout( 
         	function(){
         		wb.importChatMessages(url)
         	}
-        );	
-    	
-    } 
-    else {
-    	..raw.execute(url);
-    }
+        );
+   	} 
+   	else {
+   		..raw.execute(url);
+   	} 
     
     return url, flags, targetFrame, postData, headers, true;
 } 
 
 winform.onDropFiles = function(files){
 	var path = files[1];
-	if(..string.endWith(path,".jsonl",true)){
+	if(..string.match(path,"\.<@@jsonl@>|<@@json@>$")){
 		wb.importChatMessages(path);
 	}
 }
@@ -170,7 +180,14 @@ wb.importChatMessages = function(path){
 		return winform.msgboxErr("无效对话数据")
 	}
 	
-	var messages = web.json.ndParse(json);
+	var messages;
+	
+	if(..string.endsWith(path,".jsonl",true)){
+		messages = JSON.ndParse(json);
+	}
+	else {
+		messages = JSON.parse(json);
+	}
 	
 	if(!#messages){
 		return winform.msgboxErr("无效对话数据")
@@ -192,6 +209,17 @@ wb.importChatMessages = function(path){
 			}
 		}
 		
+		if(type(msg.content)!="string"){
+			
+			if(msg[["role"]]!="user"){
+				resetMessages();
+				return winform.msgboxErr("对话数据格式错误，role 字段的值不是 user 则 content 字段必须是字符串！")
+			}
+			elseif(!..table.isArray(msg.content)){
+				return winform.msgboxErr("对话数据格式错误，content 字段只能是字符串或数组！")
+			}
+		}
+		
 		if(msg[["role"]]=="system"){
 			wb.system(msg.content)
 		}
@@ -200,10 +228,11 @@ wb.importChatMessages = function(path){
 		}
 		elseif(msg[["role"]]=="assistant"){
 			wb.assistant(msg.content)
+			wb.assistant(null)
 		}
 		else {
-			resetMessages();
-			return winform.msgboxErr("对话数据格式错误，role 字段必须是 system,user,assistant 之一。")
+			//resetMessages();
+			//return winform.msgboxErr("对话数据格式错误，role 字段必须是 system,user,assistant 之一。")
 		} 
 	} 	
 }
@@ -506,7 +535,7 @@ winform.btnSend.oncommand = function(id,event){
 					}
 					
 					if(last.error){
-						wb.errorMessage( last.error[["message"]] || ..web.json.stringify(last.error,true,false) ) 
+						wb.errorMessage( last.error[["message"]] || ..JSON.stringify(last.error,true,false) ) 
 					}
 					else {
 						wb.errorMessage(#out ? out : "模型未提供 token 用量")
@@ -961,7 +990,7 @@ wb.write(`
 - 按住 ``Ctrl+Enter`` 可直接发送问题 
 - 按住 ``Ctrl`` 键点 ``复制`` 可复制 AI 最后输出的代码块。
 - 按住 ``Ctrl`` 键点 ``分享`` 可截长屏到剪贴板。 
-- 输入框右键菜单可导出对话，拖拽 jsonl 文件到窗口可导入对话。
+- 输入框右键菜单可导出对话，拖拽 json/jsonl 文件到窗口可导入对话。
 `)
 
 
