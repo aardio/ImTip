@@ -144,6 +144,16 @@ winform.editPrompt.enablePopMenu(function(){
 			
 			wb.importChatMessages(path);
 		}; winform.btnSend.text == "停止" ? 1/*_MF_GRAYED*/ : 0}; 
+		
+		{ /*分隔线*/ };
+		
+		(win.getStyleEx(winform.hwnd, 8/*_WS_EX_TOPMOST*/) & 8)
+		? ( { '取消置顶';  function(id){
+			win.setTopmost(winform.hwnd,false)
+		} } ) 
+		: ( { '置顶窗口';  function(id){
+			win.setTopmost(winform.hwnd)
+		} } )
 	}
 } );
 
