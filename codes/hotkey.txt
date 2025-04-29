@@ -60,7 +60,7 @@ superHotkey.loadTable({
 				
 				//创建 AI 会话消息队列 
 				var msg = web.rest.aiChat.message();  
-				   
+					
 				//让 AI 更聪明的一个方法就是清楚表达背景、需求、上下文环境，消耗更多 token 得到更多回报。
 				msg.system(`
 ## 背景
@@ -85,9 +85,9 @@ superHotkey.loadTable({
 - 你需要根据当前操作系统、当前进程的启动文件名、窗口标题、上下文推测用户的输入环境与输入目的。
 - 如果生成的是代码则直接回复代码， 不要放进 Markdown 代码块中 
 - 请直接返回插入的内容，回复不要包含前置文本或后置文本`)
- 		 
-	    		msg.prompt(`
-	    		
+				
+				msg.prompt(`
+				
 ## 前置文本:  
 
 console.log("Hello,
@@ -99,15 +99,15 @@ console.log("Hello,
 ## 任务
 
 分析上下文（"""前置文本"""与"""后置文本"""）插入新的内容
- 
+	
 `) 
 
 				//利用小样本学习，以 AI 助手的角色教它一遍，胜过写千万句提示词
 				msg.assistant(`world!")`);
-	    		
-	    		//下面是真正的问题。
-	    		msg.prompt("
-	    		
+				
+				//下面是真正的问题。
+				msg.prompt("
+				
 ## 前置文本  
 
 "+leftText+" 
@@ -132,7 +132,7 @@ console.log("Hello,
 				
 				import winex.loading;
 				var loading = winex.loading("Thinking",hFocus) //进度动画
-				 
+					
 				var ok,err = aiClient.messages(msg,function(delta,reasoning){
 					
 					//如果是推理模型，显示推理过程，推理过程放到 <think></think> 里是错误的做法不处理
@@ -157,37 +157,37 @@ console.log("Hello,
 		/*}}*/
 	};
 
-   ["ctrl+Shift+#"] = function(){
-        
-        import winex.selection;
-        var txt = winex.selection.get(true);
-        if(!#txt) return true;//选区文本为空，继续发送按键
+	["ctrl+Shift+#"] = function(){
+		
+		import winex.selection;
+		var txt = winex.selection.get(true);
+		if(!#txt) return true;//选区文本为空，继续发送按键
 
 		txt = string.trim(txt);
 		if(!#txt) return true;
 		
-        var words = string.splitEx(txt,"\s");
-        
-        return function(){ 
+		var words = string.splitEx(txt,"\s");
+		
+		return function(){ 
 			import process.imTip;
 			
-            if(#words>1){ 
-        		process.imTip(
-            		chat = "翻译",// AI 助手配置名称
-            		q = txt
-        		)  
-            }
-            else{
-        		process.imTip(
-            		chat = "词典",// AI 助手配置名称
-            		q = txt
-        		)  
-        		
-        		..wmPlayer := com.CreateObject("WMPlayer.OCX"); 
-        		..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+txt+"&type=2"
-            }
-        }  
-    }
+			if(#words>1 || (..string.find(txt,":") && ..string.len(txt)>4 ) ){ 
+				process.imTip(
+					chat = "翻译",// AI 助手配置名称
+					q = "请翻译:" + txt
+				)  
+			}
+			else{
+				process.imTip(
+					chat = "词典",// AI 助手配置名称
+					q = txt
+				)  
+				
+				..wmPlayer := com.CreateObject("WMPlayer.OCX"); 
+				..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+txt+"&type=2"
+			}
+		}  
+	}
 })
 
 import winex.candidate;
@@ -195,9 +195,9 @@ import key.number;
 
 //中文模式支持数字后输入小数点等分隔符
 superHotkey.onKeyDown = function(vk){
- 
+	
 	if(key.getStateX("CTRL") || key.getStateX("ALT") ) return; 
-	 
+		
 	if( winex.candidate.visible() ) {
 		superHotkey.prevKeyCode = null;
 		return;
@@ -208,11 +208,11 @@ superHotkey.onKeyDown = function(vk){
 	if(sep){ 
 		if( key.number.is(superHotkey.prevKeyCode)){ 
 			key.sendString( sep );
-			 
+				
 			return true;
 		} 	
 	} 
-	 
+		
 	if(vk!=0xA0/*_VK_LSHIFT*/ && vk!=0xA1/*_VK_RSHIFT*/){
 		superHotkey.prevKeyCode = vk;	
 	} 
