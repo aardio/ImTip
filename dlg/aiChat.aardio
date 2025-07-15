@@ -12,7 +12,7 @@ bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=0xDBDAD9;dl=1;dr=1;dt
 btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=6};
 btnCopy={cls="plus";text="复制";left=369;top=588;right=433;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=11};
 btnSearch={cls="plus";text="联网";left=8;top=588;right=67;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dl=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF26B';notify=1;textPadding={left=25};z=15};
-btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dr=1;font=LOGFONT(h=-13);iconColor=5724159;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
+btnSend={cls="plus";text="问 AI";left=660;top=588;right=732;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dr=1;font=LOGFONT(h=-13);iconColor=0x5757FF;iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF0AA';notify=1;textPadding={left=25};z=4};
 btnSetting={cls="plus";text="设置";left=73;top=588;right=140;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dl=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF013';notify=1;textPadding={left=25};z=7};
 btnSnap={cls="plus";text="分享";left=302;top=588;right=366;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF030';notify=1;textPadding={left=25};z=12};
 cmbAgent={cls="combobox";left=145;top=592;right=269;bottom=614;db=1;dl=1;edge=1;items={};mode="dropdownlist";z=16};
@@ -599,7 +599,7 @@ winform.btnCopy.oncommand = function(id,event){
 		for indent,_,code in string.gmatch(md,"!\N([ \t]*)(```+)<\w+>(.+?)!\N\s*\2![^`\S]") { 
 			
 			if(#indent){ 
-				text = string.replace(text,"\n+"+indent,'\n');
+				code = string.replace(code,"\n+"+indent,'\n');
 			}	
 		 
 		    win.clip.write( code );
