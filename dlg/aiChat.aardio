@@ -687,20 +687,21 @@ winform.btnSetting.oncommand = function(id,event){
 	}
 	
 	frmSetting.editApiUrl.items = {
-		"https://ai.aardio.com/api/v1/",
+		"https://ai.aardio.com/api/v1",
 		"https://api.deepseek.com/v1",
 		"https://openrouter.ai/api/v1",
+		"https://api-inference.modelscope.cn/v1",
 		"https://ark.cn-beijing.volces.com/api/v3/bots",
-		"https://ark.cn-beijing.volces.com/api/v3",
-		"https://api.siliconflow.cn/v1",
+		"https://ark.cn-beijing.volces.com/api/v3", 
 		"https://api.anthropic.com/v1",
+		"https://api.openai.com/v1", 
 		"https://generativelanguage.googleapis.com/v1beta/openai",
 		"https://aiplatform.googleapis.com/v1beta1/projects/{project_id}/locations/global/endpoints/openapi/",
 		"https://api.x.ai/v1",
-		"https://api.openai.com/v1", 
+		"https://api.siliconflow.cn/v1",
 		"https://api.lkeap.cloud.tencent.com/v1",
-		"https://dashscope.aliyuncs.com/api/v1/",
-		"http://localhost:11434/v1/"
+		"https://dashscope.aliyuncs.com/api/v1",
+		"http://localhost:11434/v1"
 	}
 	
 	frmSetting.editApiUrl.onFocusLost = function(){
