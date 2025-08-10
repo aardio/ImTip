@@ -17,8 +17,8 @@ for(k,v in _ARGV){
 
 import style;
 import fonts.imtip;
-import win.ui.atom;
 import win.ui;
+import win.ui.atom;
 import win.dlg.message;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
@@ -92,15 +92,15 @@ if(!_ARGV.sys){
 import key.ime.stateBar;
 imeBar = key.ime.stateBar(mainForm);
 
-imeBar.interval = config.setting.interval;
 imeBar.timeout = config.setting.timeout;
+imeBar.interval = config.setting.interval;
 imeBar.editorClasses = config.setting.editorClasses;
 imeBar.quirksMode = config.setting.updateQuirksMode();
 
 //下面创建托盘图标
 import win.util.tray;
 mainForm.tray = win.util.tray(mainForm)  
-mainForm.tray.tip = "ImTip：桌面助手" //设置鼠标提示 
+mainForm.tray.tip = "ImTip：智能桌面助手" //设置鼠标提示 
 
 //响应托盘消息
 mainForm.onTrayMessage = {

@@ -1,6 +1,6 @@
 # ImTip 智能桌面助手
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 832 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 859 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
 ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键（各种桌面应用快速接入 AI）](#二超级热键)、[自定义 AI 助手](#三-ai-助手) 等功能。
 
@@ -166,6 +166,22 @@ aardio 提供 process.imTip 库可以方便地启动 ImTip 聊天助手，可参
 - `ImTip.exe /sys`
 启动时不显示主界面。勾选开机启动时设置的这是这个参数。
 
+### 6. 删除或重置 ImTip 配置与数据。
+
+先退出 ImTip ，然后按 <kbd>Ctrl+R</kbd>打开「运行」，
+输入   
+`cmd /c rd /s /q  %localappdata%\aardio\std\ImTip`   
+回车执行即可删除配置目录( 也会删除超级热键配置 )。
+
+重新运行 ImTip 会自动重置到最新版的默认配置。  
+最新版 AI 助手默认配置了翻译、词典等助手，默认提供了以下超级热键：
+
+- <kbd>Ctrl+Shift+#</kbd> 
+
+    如果当前选中的是英文单词则自动调用 AI 词典助手，否则自动调用 AI 翻译助手。
+- <kbd>Ctrl+Shift+#,#</kbd> 这个热键要连续按 <kbd>#</kbd> 两下。
+
+    如果当前选中的是英文单词则快速查单词并显示为汽泡提示，否则自动打开大声朗读工具并且同时自动调用 AI 翻译。
 
 ****
 
