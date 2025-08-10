@@ -156,8 +156,8 @@ console.log("Hello,
 		)
 		/*}}*/
 	};
-
-	["ctrl+Shift+#"] = function(){
+	
+	["Ctrl+Shift+#"] = function(){
 		
 		import winex.selection;
 		var txt = winex.selection.get(true);
@@ -188,6 +188,103 @@ console.log("Hello,
 			}
 		}  
 	}
+	
+	["Ctrl+Shift+#,#"] = function(){
+		 
+		import winex.selection;
+		var txt = winex.selection.get(true);
+		
+		txt = txt ? string.trim(txt);
+		if(!#txt) return true;
+		
+		//查单词 + 朗读
+		if(string.find(txt,"^\a[\a\-\.é'’]*$") ){
+			import string.words;
+			import table.coca20000;
+			
+			var coca20000 = {}
+			for(k,v in table.coca20000){
+				coca20000[v.word] = v.phonetic 
+			}
+			
+			var getWordMeaning = function(txt){
+				var m,w = string.words(txt)
+				if(m){
+					var p = coca20000[word] || coca20000[w]
+					if(p) m = p + " " + m;
+				}
+				
+				return m,w;
+			}
+
+			var meaning,word = getWordMeaning(txt) 
+			if(meaning){
+				import winex.tooltip;
+				var x,y = win.getMessagePos();
+				winex.tooltip.balloon(meaning,x,y+50);
+				
+				..wmPlayer := ..com.CreateObject("WMPlayer.OCX"); 
+				..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+word+"&type=2"
+			}
+			
+			return;
+		}
+		
+		//翻译 + 大声朗读
+		import web.edgeTextToSpeech.ui; 
+		var ttsForm = web.edgeTextToSpeech.ui();
+		ttsForm.edit.selText = txt;
+	 
+		ttsForm.edit.hide = true;
+		ttsForm.add( custom={cls="custom";left=12;top=10;right=804;bottom=514;z=8;dt=1;dl=1;dr=1;db=1} );
+
+		import web.form.chat;
+		var chatUi = web.form.chat(ttsForm.custom);
+		chatUi.writeDelta(txt+'\r\n\r\n')
+		
+		if( !string.find(txt,":") && string.find(txt,"\a+\s\a+") ){ 
+			chatUi.chatMessage.system("你是一位专业翻译。请将用户输入的英文翻译为中文。
+			在遵守原意的前提下，让翻译后的内容更地道、更通俗易懂，更符合以中文作为母语的表达习惯。
+			并以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解（以中文讲解），如果遇到特殊的语言现象、文化背景知识也请适当说明（以中文说明）。")
+		}
+		else{
+			chatUi.chatMessage.system("你是一位专业翻译。请将用户输入的中文翻译为英文。
+			在遵守原意的前提下，让翻译后的内容更地道、更通俗易懂，更符合以英文作为母语的表达习惯。
+			并以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解（以中文讲解），如果遇到特殊的语言现象、文化背景知识也请适当说明（以中文说明）。 ")
+		}
+		
+		chatUi.chatMessage.prompt(txt);
+		
+		thread.invoke( 
+			function(chatUi){
+		
+				import web.rest.aiChat;
+				var aiClient = web.rest.aiChat(
+					key =   '\0\1\96';
+					url = "https://ai.aardio.com/api/v1/";
+					model = "imtip";
+					temperature = 0.5;
+				)
+				
+				//调用聊天接口。
+				var ok,err = aiClient.messages(chatUi.chatMessage,
+					function(deltaText,reasoning){ 
+						if(reasoning)  chatUi.showThinking(reasoning);  
+						chatUi.assistant(deltaText);
+					}
+				);
+				
+				if(err) chatUi.errorMessage(err) 
+			},chatUi
+		)		 
+	
+	
+		ttsForm.onInitDialog = function(hwnd,message,wParam,lParam){
+			..win.showForeground(hwnd)
+		}
+		
+		ttsForm.doModal();
+	};
 })
 
 import winex.candidate;
