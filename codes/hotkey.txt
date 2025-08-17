@@ -22,6 +22,8 @@ import mouse;
 import key;
 import key.ime;
 import key.hotkey;
+import string.words;
+import table.coca20000;
 
 //创建超级热键
 superHotkey = key.hotkey();//不可修改或删除这句代码
@@ -198,9 +200,7 @@ console.log("Hello,
 		if(!#txt) return true;
 		
 		//查单词 + 朗读
-		if(string.find(txt,"^\a[\a\-\.é'’]*$") ){
-			import string.words;
-			import table.coca20000;
+		if( string.words(txt,true/*validateOnly*/) ){
 			
 			var coca20000 = {}
 			for(k,v in table.coca20000){
