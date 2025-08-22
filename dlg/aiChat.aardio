@@ -464,100 +464,7 @@ winform.btnSend.oncommand = function(id,event){
 				wb.errorMessage("错误代码：" + ( client.lastStatusCode : "未知 " + (client.lastResponseString() || "")))
 			}
 			elseif(config.usage){
-				var last = client.lastResponseObject()
-  
-				if(last){
-					var out = ""
-	
-					var usage = last.usage || last["amazon-bedrock-invocationMetrics"]
-					if(usage){
-						var cTokens,pTokens,cacheTokens;
-						if(client.apiMode=="aliyun"){
-							usage = usage[["models"]][[1]];
-							cTokens = usage.output_tokens
-							pTokens = usage.input_tokens;
-						}
-						else {
-							cTokens = usage.completion_tokens || usage["outputTokenCount"]
-							pTokens = usage.prompt_tokens || usage.inputTokenCount || usage.input_tokens;
-							cacheTokens = usage.prompt_cache_hit_tokens
-						}
-						 
-						if(cTokens){
-							out = out + '回复 tokens:<code>' + ..math.size64(cTokens).format() + "</code> "
-						}
-						 
-						if(pTokens){
-							out = out + '提示 tokens:<code>' + ..math.size64(pTokens).format() + "</code> "
-						}
-						
-						if(cacheTokens){
-							out = out + '缓存 tokens:<code>' + ..math.size64(cacheTokens).format() + "</code> "
-						} 
-						
-						if( string.match( config.url,"<@@https://api.deepseek.com/v1@>" )){
-							
-							if( config.model!="deepseek-reasoner"){ 
-								if( time() < time("2025/02/09 00:00:00")){
-									out = out + '本次费用:<code>' 
-										+ math.round(((pTokens-cacheTokens)*1+cacheTokens*0.1+cTokens*2)/1000000,3) 
-										+  " 元 </code>"	
-								}
-								else {
-									out = out + '本次费用:<code>' 
-										+ math.round(((pTokens-cacheTokens)*2+cacheTokens*0.5+cTokens*8)/1000000,3) 
-										+  " 元 </code>"	 
-								} 
-							}
-							else {
-								out = out + '本次费用:<code>' 
-										+ math.round(((pTokens-cacheTokens)*4+cacheTokens*1+cTokens*16)/1000000,3) 
-										+  " 元 </code>"	
-							}
-							
-						}  
-						elseif( string.match( config.url,"<@@https://openrouter.ai/api/v1@>" )){
-							if( config.model=="anthropic/claude-3.5-sonnet"){
-								out = out + '本次费用:<code>' 
-									+ math.round((pTokens*3+cTokens*15)/1000000,3) 
-									+  " 美元 </code>"	
-							} 
-							elseif( ..string.endWith(config.model,":free") ){
-								out = out + "本次费用:<code> 0 美元 </code>"
-							}
-						} 
-						elseif( string.match( config.url,"<@@https://api.siliconflow.cn/v1@>" )){
-						 
-							if( config.model=="deepseek-ai/DeepSeek-V3"){ 
-								if( time() < time("2025/02/09 00:00:00")){
-									out = out + '本次费用:<code>' 
-										+ math.round((pTokens*1+cTokens*2)/1000000,3) 
-										+  " 元 </code>"	
-								}
-								else {
-									out = out + '本次费用:<code>' 
-										+ math.round((pTokens*2+cTokens*8)/1000000,3) 
-										+  " 元 </code>"	 
-								} 
-							}
-							elseif( config.model == "deepseek-ai/DeepSeek-R1") {
-								out = out + '本次费用:<code>' 
-										+ math.round((pTokens*4+cTokens*16)/1000000,3) 
-										+  " 元 </code>"	
-							}
-						}
-					}
-					
-					if(last.error){
-						wb.errorMessage( last.error[["message"]] || ..JSON.stringify(last.error,true,false) ) 
-					}
-					else {
-						wb.errorMessage(#out ? out : "模型未提供 token 用量")
-					} 
-				}
-				else { 
-					wb.errorMessage("模型未提供 token 用量")
-				} 
+				 
 			} 
 		},wb,aiChatConfig,eventStop//将参数传入线程
 	)
@@ -629,7 +536,6 @@ winform.btnSetting.oncommand = function(id,event){
 		btnRemove={cls="plus";left=56;top=473;right=90;bottom=503;align="left";color=0x3C3C3C;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF1F8';notify=1;textPadding={left=25};z=7};
 		btnSave={cls="button";text="更新配置";left=489;top=531;right=659;bottom=576;z=27};
 		chkKatex={cls="checkbox";text=" 解析数学公式";left=55;top=526;right=182;bottom=546;z=24};
-		chkUsage={cls="checkbox";text="显示 token 计数";left=185;top=526;right=349;bottom=546;z=25};
 		editApiKey={cls="edit";left=281;top=68;right=662;bottom=95;edge=1;multiline=1;z=18};
 		editApiUrl={cls="combobox";left=281;top=31;right=662;bottom=57;edge=1;hscroll=1;items={};mode="dropdown";z=17};
 		editExtraParameters={cls="edit";left=281;top=215;right=662;bottom=242;edge=1;multiline=1;z=22};
@@ -854,7 +760,6 @@ winform.btnSetting.oncommand = function(id,event){
 	frmSetting.lstConfig.selIndex = config.aiChat.selItem || 1;
 	frmSetting.lstConfig.onSelChange();
 	frmSetting.chkKatex.checked = config.aiChat.katex;
-	frmSetting.chkUsage.checked = config.aiChat.usage;
 	
 	//保存并更新配置
 	import inet.url;
@@ -927,7 +832,6 @@ winform.btnSetting.oncommand = function(id,event){
 		config.aiChat.katex = frmSetting.chkKatex.checked;
 		wb.enableKatex(config.aiChat.katex);
 		 
-		config.aiChat.usage = frmSetting.chkUsage.checked;
 		config.aiChat.save();
 		
 		frmSetting.endModal();
