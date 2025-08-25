@@ -193,7 +193,7 @@ config.setting.getFilterWindowsCodePath = function(init){
 }
 
 if(!config.aiChat.itemData) {
-	config.aiChat.itemNames={[1]="默认";[2]="词典";[3]="翻译"};
+	config.aiChat.itemNames={[1]="默认";[2]="词典";[3]="翻译";[4]="画图"};
 	config.aiChat.itemData=[
 		{
 			extraParameters="";
@@ -305,6 +305,21 @@ if(!config.aiChat.itemData) {
 ## 意译
 
 ## 讲解
+***********/;
+			temperature=0.5;
+			url="https://ai.aardio.com/api/v1/"		
+		},
+		{
+			key="\0\1\96";
+			model="imtip";
+			msgLimit=15;
+			proxy="";
+			systemPrompt=/***********
+你是画图小助手。
+请根据用户提示与你的想像生动描述要生成的图片，并将图片描述转换成英文填充到下面 URL 的占位符中：
+![Image](https://image.pollinations.ai/prompt/{prompt}?width=1024&height=1024&nologo=true)
+
+在以上 URL 占位符之外的描述请使用中文。
 ***********/;
 			temperature=0.5;
 			url="https://ai.aardio.com/api/v1/"		
