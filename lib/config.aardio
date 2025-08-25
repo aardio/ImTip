@@ -221,11 +221,11 @@ if(!config.aiChat.itemData) {
 - 列出单词包含的所有词性对应的**词性**、所有的**中文释义**和**英文释义**，一行一个。
 - 如果单词是动词，要展示**现在分词**、**过去式**、**过去分词**；如果是名词，要展示**第三人称单数**；如果是形容词，要展示**比较级**和**最高级**。
 
-### 任务2：例句
-用这个单词造 3 个英文例句，并附上中文翻译。
+### 任务2: 要点
+**用中文讲解此单词的主要用法、使用要点、需要注意的问题。这是所有任务中最重要的部分！**
 
-### 任务3: 要点
-用中文讲解此单词的主要用法、使用要点、需要注意的问题。
+### 任务3：例句
+根据任务2提及的要点，用这个单词造 3 个英文例句（对任务2提及的要点、短句可以加粗显示），并附上中文翻译。
 
 ### 任务4：词根词缀
 用中文讲述该单词的**词根词缀起源故事**。
@@ -234,18 +234,23 @@ if(!config.aiChat.itemData) {
 用这个单词的词根词缀，拓展 5 个相近单词，附带**词性**和**中文释义**。
 
 ### 任务6：小作文
-用任务 5 拓展出的单词编写一个有趣的 A2 难度英文故事，限 7 行内。并附上中文翻译（不要添加“中文翻译：”标题）。
+请根据任务2、任务3、任务 5的内容编写一个有趣的 A2 难度英文故事，限 7 行内。并附上中文翻译（不要添加“中文翻译：”标题）。
 
 ### 任务7：小测验
-基于前 6 个任务生成的内容创造 2 个单选题，每个题目的选项一行一个，每个选项前加上`<input type=""checkbox"">`以显示复选项。最后一起给出答案。
+基于前 6 个任务生成的内容创造 2 个单选题，最后一起给出答案。
 
-### 任务8：输出音标。
+### 任务8：输出音标
+格式为 `{WORD} [/音标/🔊](https://dict.youdao.com/dictvoice?audio={WORD}&type=2)`
 
 请按照以下 Markdown 格式排版输出你的结果：
 
 ### 释义
 
+### 要点
+
 ### 例句
+
+### 词根词缀
 
 ### 相近词
 
@@ -253,7 +258,20 @@ if(!config.aiChat.itemData) {
 
 ### 小测验 
 
-<details><summary>查看答案</summary><blockquote>这里输入小测验答案</blockquote></details>
+1. 问题1
+  - A. <label><input type=""checkbox""> 选项1</label>
+  - B. <label><input type=""checkbox""> 选项2</label>
+  - C. <label><input type=""checkbox""> 选项3</label>
+2. 问题2
+  - A. <label><input type=""checkbox""> 选项1</label>
+  - B. <label><input type=""checkbox""> 选项2</label>
+  - C. <label><input type=""checkbox""> 选项3</label>
+
+<details><summary>查看答案</summary><blockquote>
+1. A. 选项1
+2. c. 选项3
+</blockquote></details>
+
 {WORD} [/音标/🔊](https://dict.youdao.com/dictvoice?audio={WORD}&type=2)
 ***********/;
 			temperature=0.3;
