@@ -171,21 +171,21 @@ console.log("Hello,
 		if(!#selectedText) return true;
 
 		//创建线程更流畅
-		thread.invoke( 
-			function(txt){
-				var words = string.splitEx(txt,"\s");
-				if(#words>1 || (..string.find(txt,":") && ..string.len(txt)>4 ) ){ 
-					import process.imTip;
-					process.imTip(
-						chat = "翻译",// AI 助手配置名称
-						q = "请翻译:" + txt
-					)  
-				}
-				else{
-					import win.dlg.flashDict;
-					win.dlg.flashDict(,txt).doModal();;
-				}	
-			},selectedText);
+        thread.invoke( 
+            function(txt){ 
+                import win.dlg.flashDict;
+
+                if( win.dlg.flashDict.isWord(txt) ){ 
+                    win.dlg.flashDict(,txt).doModal();
+                }
+                else{
+                    import process.imTip;
+                    process.imTip(
+                        chat = "翻译",// AI 助手配置名称
+                        q = "请翻译:" + txt
+                    ); 
+                }
+            },selectedText);
 	}
 	
 	["Ctrl+Shift+#,#"] = function(){
