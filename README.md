@@ -1,6 +1,6 @@
 # ImTip 智能桌面助手
  
-<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 859 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
+<a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 免费开源，仅 860 KB。独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
 ImTip 提供 [输入跟踪提示](#一输入跟踪提示)、[超级热键（各种桌面应用快速接入 AI）](#二超级热键)、[自定义 AI 助手](#三-ai-助手) 等功能。
 
@@ -54,7 +54,7 @@ ImTip 提供可编程扩展的「超级热键」。
 
 默认提供以下热键：
 - <kbd>Ctrl+@</kbd> AI 英汉词典 / AI 英汉翻译
-- <kbd>Ctrl+#</kbd> 快速查单词
+- <kbd>Ctrl+#</kbd> 快速查单词（汽泡提示）
 - <kbd>Ctrl+$</kbd> 打开财务大写、日期时间大写、数学运算工具
 
 ![超级热键调用中文大写工具](./screenshots/cn.gif)
@@ -75,12 +75,19 @@ ImTip 提供可编程扩展的「超级热键」。
 
 [超级热键大全 | 教程](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 
+>  AI 英汉词典需要用到 `string.words`,`table.coca2000` 扩展库，AI 翻译的大声朗读功能需要用到 `web.edgeTextToSpeech` 扩展库。
+>  1. 请先在 aardio 在点击「 工具 » 扩展库 」
+>  2. 搜索关键词“英语”，勾选找到的 `string.words`,`table.coca2000` 扩展库
+>  3. 然后点击 「安装」 按钮
+>  
+>  如果 aardio 已运行并且当前线程调用了 `import ide` 则支持自动安装扩展库
+
 ## 三、 AI 助手
 
 ImTip 提供简洁可定制的 AI 桌面助手。
 可迅速将大模型 API 转换为可用的桌面助手。AI 助手已支持渲染数学公式、代码高亮、一键分享截长屏、自动联网读取文档 …… 等功能。
 
-可自定义多个 AI 助手配置，同一会话也可以随时切换不同的大模型。新版 ImTip 已经默认添加了翻译、词典等 AI 助手，并且支持通过超级热键调用这些 AI 助手翻译其他程序中的选区文本。使用旧版本的用户可以在关闭 ImTip 以后删除旧版配置目录 `%localappdata%/aardio/std/imtip` 并重新启用 ImTip 就可以重置为新版默认配置。
+可自定义多个 AI 助手配置，同一会话也可以随时切换不同的大模型。新版 ImTip 已经默认添加了翻译、词典等 AI 助手。
 
 ![AI 助手](/screenshots/ai.gif)
 
@@ -88,7 +95,6 @@ ImTip 也支持在超级热键中快助调用 AI 大模型接口，或者自动�
 1. 在 ImTip 主界面勾选启用超级热键。
 2. 后点击『编辑超级热键』，在超级热键配置中修改 AI 接口参数。
 ![在超级热键中配置 AI 接口参数](/screenshots/hotkey-ai.gif)  
-如果没有看到上面的 AI 示例，只要删除旧版热键配置（ hotkey2.aardio ）再重新打开即可。
 3. 点击保存按钮后热键自动生效。  
 ![保存超级热键配置](/screenshots/hotkey-save.gif)
 
@@ -180,14 +186,6 @@ aardio 提供 process.imTip 库可以方便地启动 ImTip 聊天助手，可参
 回车执行即可删除配置目录( 也会删除超级热键配置 )。
 
 重新运行 ImTip 会自动重置到最新版的默认配置。  
-最新版 AI 助手默认配置了翻译、词典等助手，默认提供了以下超级热键：
-
-- <kbd>Ctrl+Shift+#</kbd> 
-
-    如果当前选中的是英文单词则自动调用 AI 词典助手，否则自动调用 AI 翻译助手。
-- <kbd>Ctrl+Shift+#,#</kbd> 这个热键要连续按 <kbd>#</kbd> 两下。
-
-    如果当前选中的是英文单词则快速查单词并显示为汽泡提示，否则自动打开大声朗读工具并且同时自动调用 AI 翻译。
 
 ****
 
