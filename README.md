@@ -51,11 +51,17 @@ ImTip **CPU 占用极低**，可以通过设置「跟踪检测速度」调整 CP
 ## 二、超级热键
 
 ImTip 提供可编程扩展的「超级热键」。
-例如按 Ctrl+$ 打开财务大写、日期时间大写、数学运算工具：
+
+默认提供以下热键：
+- <kbd>Ctrl+@</kbd> AI 英汉词典 / AI 英汉翻译
+- <kbd>Ctrl+#</kbd> 快速查单词
+- <kbd>Ctrl+$</kbd> 打开财务大写、日期时间大写、数学运算工具
 
 ![超级热键调用中文大写工具](./screenshots/cn.gif)
 
-超级热键调用 AI 大模型自动编写 aardio 代码：
+更多示例：
+
+超级热键调用 AI 大模型自动编写 aardio 代码（ aardio 现在已自带类似的 F1 键 AI 助手）：
 
 ![超级热键调用 AI 编写代码](./screenshots/fim.gif)
 
@@ -82,7 +88,7 @@ ImTip 也支持在超级热键中快助调用 AI 大模型接口，或者自动�
 1. 在 ImTip 主界面勾选启用超级热键。
 2. 后点击『编辑超级热键』，在超级热键配置中修改 AI 接口参数。
 ![在超级热键中配置 AI 接口参数](/screenshots/hotkey-ai.gif)  
-如果没有看到上面的 AI 示例，只要删除旧版热键配置（ hotkey.aardio ）再重新打开即可。
+如果没有看到上面的 AI 示例，只要删除旧版热键配置（ hotkey2.aardio ）再重新打开即可。
 3. 点击保存按钮后热键自动生效。  
 ![保存超级热键配置](/screenshots/hotkey-save.gif)
 

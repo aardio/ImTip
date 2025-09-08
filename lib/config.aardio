@@ -175,7 +175,7 @@ config.setting.updateQuirksMode = function(quirksMode){
 }
 
 config.setting.getHotkeyCodePath = function(){
-	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey.aardio"); 
+	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey2.aardio"); 
 	if(!..io.exist(path)){
 		..string.save(path, $"\codes\hotkey.txt")
 	}
@@ -234,10 +234,10 @@ if(!config.aiChat.itemData) {
 用这个单词的词根词缀，拓展 5 个相近单词，附带**词性**和**中文释义**。
 
 ### 任务6：小作文
-请根据任务2、任务3、任务 5的内容编写一个有趣的 A2 难度英文故事，限 7 行内。并附上中文翻译（不要添加“中文翻译：”标题）。
+请根据任务2、任务3、任务5的内容编写一个有趣的 A2 难度英文故事，限 7 行内。并附上中文翻译（不要添加“中文翻译：”标题）。
 
 ### 任务7：小测验
-基于前 6 个任务生成的内容创造 2 个单选题，最后一起给出答案。
+基于前 6 个任务生成的内容创造 2 个单选题（不要提前勾选并泄露答案，仅将答案放在折叠的 details 标签内）。
 
 ### 任务8：输出音标
 格式为 `{WORD} [/音标/🔊](https://dict.youdao.com/dictvoice?audio={WORD}&type=2)`
@@ -259,13 +259,14 @@ if(!config.aiChat.itemData) {
 ### 小测验 
 
 1. 问题1
-  - A. <label><input type=""checkbox""> 选项1</label>
-  - B. <label><input type=""checkbox""> 选项2</label>
-  - C. <label><input type=""checkbox""> 选项3</label>
+- [ ] A. 选项1
+- [ ] B. 选项2
+- [ ] C. 选项3
+
 2. 问题2
-  - A. <label><input type=""checkbox""> 选项1</label>
-  - B. <label><input type=""checkbox""> 选项2</label>
-  - C. <label><input type=""checkbox""> 选项3</label>
+- [ ] A. 选项1
+- [ ] B. 选项2
+- [ ] C. 选项3
 
 <details><summary>查看答案</summary><blockquote>
 1. A. 选项1
@@ -292,8 +293,8 @@ if(!config.aiChat.itemData) {
 - 如果上文已经存在翻译结果，则请继续解答用户对翻译结果的疑问。
 
 # 对用户第一次输入的内容请分成以下步骤进行翻译：
-1. 首先根据用户第一次输入的内容使用的语言确定翻译的"""目标语言"""。
-如果用户输入为简体中文，则翻译"""目标语言"""为英文，否则翻译"""目标语言"""为中文。
+1. 首先根据用户第一次输入的内容使用的"""源语言"""确定翻译的"""目标语言"""。
+如果用户输入为简体中文则"""目标语言"""为英文，否则"""目标语言"""为中文。
 2. 首先根据原文直译为"""目标语言"""，不要遗漏原文的任何信息。
 3. 参考第一次直译的结果，将原文重新意译为“目标语言”，在遵守原意的前提下，让翻译后的内容更地道、更通俗易懂，更符合以目标语言作为母语的表达习惯。
 4. 以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解，如果遇到特殊的语言现象、文化背景知识也请适当说明。

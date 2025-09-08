@@ -10,7 +10,8 @@ if(_STUDIO_INVOKED && ...!="ImTip"){
 /*}}*/
 
 /*
-保存此文件，自动更新 ImTip 热键配置。
+1. 保存此文件，自动更新 ImTip 热键配置。
+2. 删除并关闭此文件，在 ImTip 中再次点击「编辑超级热键」可恢复默认配置。
 教程: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
 */
 
@@ -29,11 +30,87 @@ superHotkey = key.hotkey();//不可修改或删除这句代码
 superHotkey.loadTable({
 
 	//大写金额与数字输入工具 
+	//如果要保留 Ctrl+4 请改为 Ctrl+Shift+$，不需要此热键可直接删除（或注释掉）
 	["Ctrl+$"] = function(hFocus){  
 		win.dlg.chineseNumber().show();
 	};
 	
-	// 按 Ctrl+Shift+F1 调用沉浸式 AI 助手，务必修改下面代码中的 API 接口密钥。
+	//如果要保留 Ctrl+2 请改为 Ctrl+Shift+@
+	["Ctrl+@"] = function(){
+		
+		//获取选区文本
+		import winex.selection;
+		var selectedText = winex.selection.get(true);
+		
+		//选区文本为空，继续发送按键
+		if(!#selectedText) return true;
+
+		//去除首尾空格
+		selectedText = string.trim(selectedText);
+		if(!#selectedText) return true;
+
+		//创建线程更流畅
+		thread.invoke( 
+			function(txt){
+				
+				var words = string.splitEx(txt,"\s");
+				if(#words>1 || (..string.find(txt,":") && ..string.len(txt)>4 ) ){ 
+					
+					//翻译 + 大声朗读
+					import web.edgeTextToSpeech.translate; 
+					var ttsForm = web.edgeTextToSpeech.translate(,txt) 
+					ttsForm.text = "@AI 中英翻译 - 此页面支持英文划词速查";
+					ttsForm.doModal();
+				
+					/*
+					import process.imTip;
+					process.imTip(
+						chat = "翻译",// AI 助手配置名称
+						q = "请翻译:" + txt
+					)  
+					*/
+				}
+				else{
+					import win.dlg.flashDict;
+					var flashDict = win.dlg.flashDict(,txt)
+					flashDict.text = "@AI 中英词典";
+					flashDict.doModal();;
+				}	
+			},selectedText);
+	}
+	
+	//如果要保留 Ctrl+3 请改为 Ctrl+Shift+#
+	["Ctrl+#"] = function(){
+			
+		import winex.selection;
+		var selectedText = winex.selection.get(true);
+		
+		selectedText = selectedText ? string.trim(selectedText);
+		if(!#selectedText) return true;
+		
+		import string.words;
+		import table.coca20000;
+			
+		//查单词 + 朗读
+		if( string.words(selectedText,true) ){ //是否单词
+		
+			var meaning,word = table.coca20000(selectedText,true)
+			if(meaning){
+				import winex.tooltip;
+				var x,y = win.getMessagePos();
+				winex.tooltip.balloon(meaning,x,y+50);
+				
+				..wmPlayer := ..com.CreateObject("WMPlayer.OCX"); 
+				..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+word+"&type=2"
+			}
+			
+			return;
+		}
+		
+		return true;//继续发送按键
+	};
+	
+	// 按 Ctrl+Shift+F1 调用 AI 补全与续写助手。
 	["Ctrl+Shift+F1"] = function(hFocus){   
 		/*智能续写与补全{{*/
 
@@ -156,120 +233,6 @@ console.log("Hello,
 		)
 		/*}}*/
 	};
-	
-	["Ctrl+Shift+#"] = function(){
-		
-		//获取选区文本
-		import winex.selection;
-		var selectedText = winex.selection.get(true);
-		
-		//选区文本为空，继续发送按键
-		if(!#selectedText) return true;
-
-		//去除首尾空格
-		selectedText = string.trim(selectedText);
-		if(!#selectedText) return true;
-
-		//创建线程更流畅
-        thread.invoke( 
-            function(txt){ 
-                import win.dlg.flashDict;
-
-                if( win.dlg.flashDict.isWord(txt) ){ 
-                    win.dlg.flashDict(,txt).doModal();
-                }
-                else{
-                    import process.imTip;
-                    process.imTip(
-                        chat = "翻译",// AI 助手配置名称
-                        q = "请翻译:" + txt
-                    ); 
-                }
-            },selectedText);
-	}
-	
-	["Ctrl+Shift+#,#"] = function(){
-			
-		import winex.selection;
-		var selectedText = winex.selection.get(true);
-		
-		selectedText = selectedText ? string.trim(selectedText);
-		if(!#selectedText) return true;
-		
-		import string.words;
-		import table.coca20000;
-			
-		//查单词 + 朗读
-		if( string.words(selectedText,true) ){ //是否单词
-		
-			var meaning,word = table.coca20000(selectedText,true)
-			if(meaning){
-				import winex.tooltip;
-				var x,y = win.getMessagePos();
-				winex.tooltip.balloon(meaning,x,y+50);
-				
-				..wmPlayer := ..com.CreateObject("WMPlayer.OCX"); 
-				..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+word+"&type=2"
-			}
-			
-			return;
-		}
-		
-		//翻译 + 大声朗读
-		import web.edgeTextToSpeech.ui; 
-		var ttsForm = web.edgeTextToSpeech.ui();
-		ttsForm.edit.selText = selectedText;
-		
-		ttsForm.edit.hide = true;
-		ttsForm.add( custom={cls="custom";left=12;top=10;right=804;bottom=514;z=8;dt=1;dl=1;dr=1;db=1} );
-
-		import web.form.chat;
-		var chatUi = web.form.chat(ttsForm.custom);
-		chatUi.writeDelta(selectedText+'\r\n\r\n')
-		
-		if( !string.find(selectedText,":") && string.find(selectedText,"\a+\s\a+") ){ 
-			chatUi.chatMessage.system("你是一位专业翻译。请将用户输入的英文翻译为中文。
-			在遵守原意的前提下，让翻译后的内容更地道、更通俗易懂，更符合以中文作为母语的表达习惯。
-			并以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解（以中文讲解），如果遇到特殊的语言现象、文化背景知识也请适当说明（以中文说明）。")
-		}
-		else{
-			chatUi.chatMessage.system("你是一位专业翻译。请将用户输入的中文翻译为英文。
-			在遵守原意的前提下，让翻译后的内容更地道、更通俗易懂，更符合以英文作为母语的表达习惯。
-			并以教学为目的对翻译时涉及的重点语法与技巧进行适当的讲解（以中文讲解），如果遇到特殊的语言现象、文化背景知识也请适当说明（以中文说明）。 ")
-		}
-		
-		chatUi.chatMessage.prompt(selectedText);
-		
-		thread.invoke( 
-			function(chatUi){
-		
-				import web.rest.aiChat;
-				var aiClient = web.rest.aiChat(
-					key =   '\0\1\96';
-					url = "https://ai.aardio.com/api/v1/";
-					model = "imtip";
-					temperature = 0.5;
-				)
-				
-				//调用聊天接口。
-				var ok,err = aiClient.messages(chatUi.chatMessage,
-					function(deltaText,reasoning){ 
-						if(reasoning)  chatUi.showThinking(reasoning);  
-						chatUi.assistant(deltaText);
-					}
-				);
-				
-				if(err) chatUi.errorMessage(err) 
-			},chatUi
-		)		 
-	
-	
-		ttsForm.onInitDialog = function(hwnd,message,wParam,lParam){
-			..win.showForeground(hwnd)
-		}
-		
-		ttsForm.doModal();
-	};
 })
 
 import winex.candidate;
@@ -300,5 +263,5 @@ superHotkey.onKeyDown = function(vk){
 	} 
 }
 
-//启动消息循环
+//启动线程消息循环
 win.loopMessage();//不可修改或删除这句代码
