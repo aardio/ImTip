@@ -52,7 +52,8 @@ superHotkey.loadTable({
 		//创建线程更流畅
 		thread.invoke( 
 			function(txt){
-				
+				import ide;//允许此线程调用 IDE 环境安装扩展库
+
 				var words = string.splitEx(txt,"\s");
 				if(#words>1 || (..string.find(txt,":") && ..string.len(txt)>4 ) ){ 
 					
