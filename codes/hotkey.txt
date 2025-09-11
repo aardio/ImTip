@@ -98,8 +98,7 @@ superHotkey.loadTable({
 			var meaning,word = table.coca20000(selectedText,true)
 			if(meaning){
 				import winex.tooltip;
-				var x,y = win.getMessagePos();
-				winex.tooltip.balloon(meaning,x,y+50);
+				winex.tooltip.balloon(meaning);
 				
 				..wmPlayer := ..com.CreateObject("WMPlayer.OCX"); 
 				..wmPlayer.url = "https://dict.youdao.com/dictvoice?audio="+word+"&type=2"
