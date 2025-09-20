@@ -73,6 +73,10 @@ ImTip 提供可编程扩展的「超级热键」。
 
 ![超级热键调调用 AI 大模型在记事本中续写与补全](https://www.aardio.com/zh-cn/doc/images/fim-notepad.gif)
 
+<kbd>Ctrl+@</kbd> 调用 AI 词典
+
+![AI 词典](./screenshots/dict.gif)
+
 [超级热键大全 | 教程](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 
 >  AI 英汉词典需要用到 `string.words`,`table.coca2000` 扩展库，AI 翻译的大声朗读功能需要用到 `web.edgeTextToSpeech` 扩展库。
