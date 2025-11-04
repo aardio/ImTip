@@ -53,7 +53,7 @@ ImTip **CPU 占用极低**，可以通过设置「跟踪检测速度」调整 CP
 ImTip 提供可编程扩展的「超级热键」。
 
 默认提供以下热键：
-- <kbd>Ctrl+@</kbd> AI 英汉词典 / AI 英汉翻译
+- <kbd>Ctrl+@</kbd> AI 全局翻译与词典
 - <kbd>Ctrl+#</kbd> 快速查单词（汽泡提示）
 - <kbd>Ctrl+$</kbd> 打开财务大写、日期时间大写、数学运算工具
 
@@ -73,13 +73,13 @@ ImTip 提供可编程扩展的「超级热键」。
 
 ![超级热键调调用 AI 大模型在记事本中续写与补全](https://www.aardio.com/zh-cn/doc/images/fim-notepad.gif)
 
-<kbd>Ctrl+@</kbd> 调用 AI 词典
+<kbd>Ctrl+@</kbd> 调用 AI 全局翻译 + 词典
 
-![AI 词典](./screenshots/dict.gif)
+![AI 全局翻译与词典](./screenshots/dict.gif)
 
 [超级热键大全 | 教程](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
 
->  AI 英汉词典需要用到 `string.words`,`table.coca2000` 扩展库，AI 翻译的大声朗读功能需要用到 `web.edgeTextToSpeech` 扩展库。
+>  AI 翻译与词典需要用到 `string.words`,`table.coca2000` 扩展库，AI 翻译的大声朗读功能需要用到 `web.edgeTextToSpeech` 扩展库。
 >  1. 请先在 aardio 在点击「 工具 » 扩展库 」
 >  2. 搜索关键词“英语”，勾选找到的 `string.words`,`table.coca2000` 扩展库
 >  3. 然后点击 「安装」 按钮
