@@ -177,10 +177,20 @@ class appTrayMenu{
 				return ..mainForm.msgboxErr("请先点击「编辑超级热键」以创建 aardio 环境。");
 			}
 			
-			process.aardio.run(
+			..thread.invoke(
 				function(){   
-					global.import("win.dlg.flashDict");
-					..win.dlg.flashDict().doModal();
+					import process.aardio; 
+					var path = process.aardio.getPath();
+					if(!path){
+						if(!process.aardio.download()) return;
+					}
+	
+					process.aardio.run( 
+						function(){
+							global.import("win.dlg.flashDict");
+							..win.dlg.flashDict().doModal();
+						}
+					);
 				}
 			)
 			
