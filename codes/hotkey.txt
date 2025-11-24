@@ -106,8 +106,6 @@ superHotkey.loadTable({
 			
 			return;
 		}
-		
-		return true;//继续发送按键
 	};
 	
 	// 按 Ctrl+Shift+F1 调用 AI 补全与续写助手。
