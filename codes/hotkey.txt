@@ -29,7 +29,7 @@ superHotkey = key.hotkey();//不可修改或删除这句代码
 
 superHotkey.loadTable({
 
-	//大写金额与数字输入工具 
+	//大写金额与数字输入工具，支持算式表达式可作为简易计算器使用
 	//如果要保留 Ctrl+4 请改为 Ctrl+Shift+$，不需要此热键可直接删除（或注释掉）
 	["Ctrl+$"] = function(hFocus){  
 		win.dlg.chineseNumber().show();
@@ -83,11 +83,26 @@ superHotkey.loadTable({
 	//如果要保留 Ctrl+3 请改为 Ctrl+Shift+#
 	["Ctrl+#"] = function(){
 			
+		import winex.tooltip;	
 		import winex.selection;
 		var selectedText = winex.selection.get(true);
 		
 		selectedText = selectedText ? string.trim(selectedText);
 		if(!#selectedText) return true;
+		
+		//显示数值的中文格式，支持 k,m 后缀
+		var num = string.match(selectedText,"^([+-]?0*\d[\d,]*\.?\d*<\s?[kKmM]>?)$")
+		if(num){ 
+			num = string.replace(num,"[\s,\_]","");
+			num = string.replace(num,"<\s?[kK]>$","000");
+			num = string.replace(num,"<\s?[mM]>$","000000");
+			
+			import string.chineseNumber;
+			var zh = string.chineseNumber().number(num);
+			
+			winex.tooltip.balloon(zh);
+			return; 
+		}
 		
 		import string.words;
 		import table.coca20000;
@@ -97,7 +112,6 @@ superHotkey.loadTable({
 		
 			var meaning,word = table.coca20000(selectedText,true)
 			if(meaning){
-				import winex.tooltip;
 				winex.tooltip.balloon(meaning);
 				
 				..wmPlayer := ..com.CreateObject("WMPlayer.OCX"); 
