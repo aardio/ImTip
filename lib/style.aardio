@@ -1,160 +1,313 @@
-﻿//style 外观样式
+﻿//style 外观样式 - 活力橙点缀版 (硬编码颜色值)
 
 namespace style{
-	primaryButton = {
-		background={
-			default=0xDD8FB2B0;
-			hover=0xFF928BB3;
-			disabled=0xFF999999; 
-		}
-	};
-	button = {
-		background={
-			default=0x668FB2B0;
-			hover=0xFF928BB3;
-			disabled=0xFF999999; 
-		}
-	};
-	transButton = {
-		background={
-			default=0;
-			hover=0xFF928BB3;
-			active=0x99928BB3;
-		}
-		color={
-			disabled=0xFF999999; 
-		}
-		iconColor={
-			disabled=0xFF999999; 
-		}
-	};
-	checkBox = {
-		color = { 
-			hover = 0xFFFF0000; 
-			active = 0xFF00FF00;
-			disabled = 0xEE666666;
-		}
-		checked = {
-			color = { 
-				hover = 0xFFFF0000; 
-				active = 0xFF00FF00;
-				disabled = 0xEE666666;
-			}
-			iconText = '\uF14a'/*_FA_CHECK_SQUARE*/
-		} 	
-	};
-	checkBoxGray = {
-		color = { 
-			hover = 0xFFFF0000; 
-			active = 0xFF00FF00;
-			disabled = 0xEE666666;
-		}
-		checked = {
-			color = { 
-				hover = 0xFFFF0000; 
-				active = 0xFF00FF00;
-				disabled = 0xEE666666;
-			}
-			iconText = '\uF14a'/*_FA_CHECK_SQUARE*/
-		} 	
-	};
-	radio ={
-		color = { 
-			hover = 0xFFFF0000; 
-			active = 0xFF00FF00;
-		}
-		checked = {  
-			iconText = '\uF058'/*_FA_CHECK_CIRCLE*/
-		} 	
-	}; 
-	link = {
-		color = { 
-			default = 0xFF000080;
-			hover = 0xFFFF0000; 
-			active = 0xFF00FF00; 
-		}
-	};
-	plainButton = {
-		color = { 
-			default = 0xFF3C3C3C;
-			hover = 0xFFFF0000; 
-			active = 0xFF00FF00; 
-		}
-	};
-	key = {
-		foreground={
-			default = 0x00FFFFFF;
-			hover= 0xFF8ADBAF;
-		};
-		checked = {
-			foreground={
-				default = 0x6600FF00;
-				hover= 0xFF8ADBAF;
-			};
-		}
-	};
-	dropdown = {
-		background={
-			default=0xFF68CC95;
-			disabled=0xFFC4CCC8;
-			hover=0xFF4A522F;
-		};
-		color={
-			default=0xFF000000;
-			disabled=0xFF8A8A8A;
-			hover=0xFFFFFFFF
-		};
-		checked = { 
-			foreground={
-				default = 0xFFDB8A8E;
-				hover= 0xFF8ADBAF;
-			}; 
-		}
-	};
-	trackbar = {
-		background={
-			default=0xFF23ABD9;
-			disabled=0xFFC6C6C6;
-			hover=0xFF4AC3F2
-		};
-		foreground={
-			default=0xFFFF771C;
-			disabled=0xFF808080;
-			hover=0xFFFF7E24
-		};
-		color={
-			active=0xFFEE630A;
-			default=0xFFFF711E;
-			disabled=0xFF808080;
-			hover=0xFFF88917
-		}
-	};
-	palette = {
-		color={
-			default=0xFFE0E3D1
-		};
-		border={
-			active={color=0xFF9D9E96;width=2};hover={color=0xFF00AEFF;width=2}
-		};
-		checked={
-			border={
-				default={color=0xF0FF0000;width=1};hover={color=0xFF00AEFF;width=2}
-			}
-		};
-		group="palette";
-	};
-	scheme = {
-		color={
-			default=0xFF5a5a5a;
-		};
-		border={
-			active={color=0xFF9D9E96;width=2};hover={color=0xFF00AEFF;width=2}
-		};
-		checked={
-			border={
-				default={color=0xF0FF0000;width=1};hover={color=0xFF00AEFF;width=2}
-			}
-		};
-		group="scheme";
-	};
+    
+    // 主要按钮 (蓝色 - 确认/提交)
+    button = {
+        color = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFFFFFFF;
+            active = 0xFFF0F0F0;
+            disabled = 0xFFF3F2F1;
+        };
+        background = {
+            default = 0xFF0078D4;      // 天空蓝
+            hover = 0xFF2B88D8;        // 悬停变亮
+            active = 0xFF005A9E;       // 按下变深
+            disabled = 0xFFC8C6C4;
+        };
+        border = { radius = 4 }; 
+    };
+    
+    // 成功按钮 (绿色)
+    successButton = {
+        color = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFFFFFFF;
+            active = 0xFFF0F0F0;
+            disabled = 0xFFF3F2F1;
+        };
+        background = {
+            default = 0xFF107C10;      // 舒适绿
+            hover = 0xFF219653;
+            active = 0xFF0B5A2D;
+            disabled = 0xFFC8C6C4;
+        };
+    };
+    
+    // 警告按钮 (橙色 - 活力点缀)
+    warningButton = {
+        color = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFFFFFFF;
+            active = 0xFFF0F0F0;
+            disabled = 0xFFF3F2F1;
+        };
+        background = {
+            default = 0xFFF7630C;      // 活力橙
+            hover = 0xFFF87A30;
+            active = 0xFFDA3B01;
+            disabled = 0xFFC8C6C4;
+        };
+    };
+    
+    // 危险按钮 (红色)
+    dangerButton = {
+        color = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFFFFFFF;
+            active = 0xFFF0F0F0;
+            disabled = 0xFFF3F2F1;
+        };
+        background = {
+            default = 0xFFD13438;      // 柔和红
+            hover = 0xFFE81123;
+            active = 0xFFA4262C;
+            disabled = 0xFFC8C6C4;
+        };
+    };
+    
+    // 强调按钮 (紫色 - AI/特殊功能)
+    accentButton = {
+        color = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFFFFFFF;
+            active = 0xFFF0F0F0;
+            disabled = 0xFFF3F2F1;
+        };
+        background = {
+            default = 0xFF5C2D91;      // 紫色
+            hover = 0xFF6B399C;
+            active = 0xFF421D6E;
+            disabled = 0xFFC8C6C4;
+        };
+    };
+    
+    // 透明按钮 (用于次要操作)
+    transButton = {
+        color = {
+            default = 0xFF0078D4;      // 蓝色文字
+            hover = 0xFF2B88D8;
+            active = 0xFF005A9E;
+            disabled = 0xFFA19F9D;
+        };
+        background = {
+            default = 0x00FFFFFF;      // 透明
+            hover = 0x100078D4;        // 极淡蓝背景
+            active = 0x250078D4;       // 淡蓝背景
+            disabled = 0x00FFFFFF;
+        };
+    };
+    
+    // 边框按钮
+    outlineButton = {
+        color = {
+            default = 0xFF0078D4;      // 蓝色文字
+            hover = 0xFFFFFFFF;        // 悬停变白
+            active = 0xFFFFFFFF;
+            disabled = 0xFFA19F9D;
+        };
+        background = {
+            default = 0x00FFFFFF;      // 透明
+            hover = 0xFF0078D4;        // 悬停变蓝实心
+            active = 0xFF005A9E;
+            disabled = 0x00FFFFFF;
+        };
+        border = {
+            default = { color = 0xFFE1DFDD; width = 1 }; // 平时是淡灰边框
+            hover = { color = 0xFF0078D4; width = 1 };
+            active = { color = 0xFF005A9E; width = 1 };
+            disabled = { color = 0xFFE1DFDD; width = 1 };
+        };
+    };
+    
+    // 复选框
+    checkBox = {
+        color = {
+            default = 0xFF201F1E;      // 深灰文字
+            hover = 0xFF0078D4;        // 悬停变蓝
+            active = 0xFF005A9E;
+            disabled = 0xFFA19F9D;
+        };
+        checked = {
+            iconText = '\uF14A';
+            color = {
+                default = 0xFF0078D4;  // 选中蓝色
+                hover = 0xFF2B88D8;
+                active = 0xFF005A9E;
+            };
+        };
+    };
+    
+    // 灰色复选框 (次要选项)
+    checkBoxGray = {
+        color = { 
+            default = 0xFF605E5C;      // 次级灰
+            hover = 0xFF201F1E;
+            active = 0xFF201F1E;
+            disabled = 0xFFA19F9D;
+        };
+        checked = {
+            iconText = '\uF14A';
+            color = { 
+                default = 0xFF605E5C;
+                hover = 0xFF0078D4;
+                active = 0xFF005A9E;
+            };
+        };
+    };
+    
+    // 单选按钮
+    radio = {
+        color = { 
+            default = 0xFF201F1E;
+            hover = 0xFF0078D4;
+            active = 0xFF005A9E;
+        };
+        checked = {  
+            iconText = '\uF058';
+            color = {
+                default = 0xFF0078D4;
+                hover = 0xFF2B88D8;
+            };
+        };
+    };
+    
+    // 链接样式
+    link = {
+        color = { 
+            default = 0xFF005A9E;      // 默认深蓝灰，不抢眼
+            hover = 0xFFF7630C;        // 悬停变橙色，增加互动趣味
+            active = 0xFFDA3B01;
+        };
+    };
+    
+    // 纯文本按钮
+    plainButton = {
+        color = { 
+            default = 0xFF201F1E;
+            hover = 0xFF0078D4;
+            active = 0xFF005A9E;
+        };
+    };
+    
+    // 快捷键样式
+    key = {
+        foreground = {
+            default = 0x00FFFFFF;
+            hover = 0xFFEFF6FC;        // 极淡蓝
+        };
+        checked = {
+            foreground = {
+                default = 0xFFDEECF9;  // 淡蓝
+                hover = 0xFFC7E0F4;
+            };
+        };
+    };
+    
+    // 下拉框
+    dropdown = {
+        background = {
+            default = 0xFFFFFFFF;
+            hover = 0xFFF3F2F1;
+            disabled = 0xFFFDFDFD;
+        };
+        color = {
+            default = 0xFF201F1E;
+            hover = 0xFF201F1E;
+            disabled = 0xFFA19F9D;
+        };
+        border = {
+            default = { color = 0xFFE1DFDD; width = 1 };
+            hover = { color = 0xFF0078D4; width = 1 };
+            active = { color = 0xFF005A9E; width = 1 };
+        };
+    };
+    
+    // 滑动条 (界面点睛之笔 - 活力橙)
+    trackbar = {
+        // 轨道颜色：极浅灰，衬托橙色
+        background = {
+            default = 0xFFEDEBE9; 
+            hover = 0xFFE1DFDD;
+            disabled = 0xFFF3F2F1;
+        };
+        // 填充条颜色：活力橙
+        foreground = {
+            default = 0xFFF7630C;      
+            hover = 0xFFF87A30;
+            disabled = 0xFFC8C6C4;
+        };
+        // 滑块按钮颜色：活力橙
+        color = {
+            default = 0xFFF7630C;
+            hover = 0xFFF87A30;
+            active = 0xFFDA3B01;
+            disabled = 0xFFC8C6C4;
+        };
+    };
+    
+    // 调色板
+    palette = {
+        color = { default = 0xFFE0E3D1 };
+        border = {
+            default = { color = 0x00FFFFFF; width = 2 };
+            hover = { color = 0xFF0078D4; width = 2 };
+            active = { color = 0xFF605E5C; width = 2 };
+        };
+        checked = {
+            border = {
+                default = { color = 0xFFF7630C; width = 2 }; // 选中橙色
+                hover = { color = 0xFF0078D4; width = 2 };
+            };
+        };
+        group = "palette";
+    };
+    
+    // 方案选择
+    scheme = {
+        color = { default = 0xFF605E5C };
+        border = {
+            default = { color = 0x00FFFFFF; width = 2 };
+            hover = { color = 0xFF0078D4; width = 2 };
+            active = { color = 0xFF605E5C; width = 2 };
+        };
+        checked = {
+            border = {
+                default = { color = 0xFFF7630C; width = 2 }; // 选中橙色
+                hover = { color = 0xFF0078D4; width = 2 };
+            };
+        };
+        group = "scheme";
+    };
+    
+    // 卡片样式 (通透大气)
+    card = {
+        background = { default = 0xFFFFFFFF };
+        border = { 
+            // 边框极淡，圆角8px
+            default = { color = 0xFFEAEAEA; radius = 8; width = 1 }; 
+            hover = { color = 0xFFD0D0D0; radius = 8; width = 1 };
+        };
+    };
+    
+    // 标题栏样式 (统一蓝)
+    titleBar = {
+        background = { default = 0xFF0078D4 };
+        color = { default = 0xFFFFFFFF };
+    };
+    
+    // 额外定义背景色，供主窗体引用
+    colors = {
+        background = 0xFFFAF9F8;   // 暖调极淡灰
+        text = 0xFF201F1E;         // 主文本
+        textSecondary = 0xFF605E5C;// 次级文本
+        primary = 0xFF0078D4;      // 供主界面图标使用
+        accent = 0xFF5C2D91;       // 供AI图标使用
+        highlight = 0xFFF7630C;    // 供配置图标使用
+        card = 0xFFFFFFFF;
+        border = 0xFFE1DFDD;
+        linkDefault = 0xFF005A9E;
+        linkHover = 0xFFF7630C;
+    }
 }

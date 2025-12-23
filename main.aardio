@@ -22,23 +22,41 @@ import win.ui.atom;
 import win.dlg.message;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 7.9 - 智能桌面助手";right=645;bottom=397;bgcolor=0xFFFFFF;border="dialog frame";max=false;min=false)
+mainForm = win.form(text="ImTip 8.0 - 智能桌面助手";right=680;bottom=511;bgcolor=0xF5F5F5;border="none";max=false;min=false)
 mainForm.add(
-btnAiChat={cls="plus";text="AI 智能助手";left=36;top=233;right=179;bottom=263;align="left";bgcolor=0xB0B28F;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF007';notify=1;tabstop=1;textPadding={left=29};z=9};
-btnFilterWindows={cls="plus";text="编辑规则";left=529;top=186;right=622;bottom=215;align="left";color=0x3C3C3C;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF044';notify=1;textPadding={left=25};z=12};
-btnHotkey={cls="plus";text="编辑超级热键";left=36;top=40;right=179;bottom=70;align="left";bgcolor=0xB0B28F;dl=1;dt=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='imtip');padding={left=10;top=1}};iconText='\uE8CE';notify=1;tabstop=1;textPadding={left=29};z=6};
-btnImTip={cls="plus";text="配置输入提示";left=36;top=186;right=179;bottom=216;align="left";bgcolor=0xB0B28F;db=1;dl=1;font=LOGFONT(h=-14);iconStyle={align="left";font=LOGFONT(h=-16;name='FontAwesome');padding={left=10;top=1}};iconText='\uF0F6';notify=1;tabstop=1;textPadding={left=29};z=8};
-chkFilterWindows={cls="plus";text="启用扩展规则";left=417;top=186;right=524;bottom=215;align="left";db=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=13};
-chkHotkey={cls="plus";text="启用超级热键";left=193;top=41;right=389;bottom=70;align="left";dl=1;dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=7};
-chkImeBarDisabled={cls="plus";text="启用输入提示";left=193;top=186;right=300;bottom=215;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=15};
-chkJab={cls="plus";text="启用 aardio / java.accessBridge 扩展（支持 JetBrains 等 Java 程序窗口）";left=36;top=338;right=525;bottom=367;align="left";db=1;dl=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=14};
-chkSysRun={cls="plus";text="允许开机启动";left=36;top=309;right=601;bottom=338;align="left";db=1;dl=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=10};
-chkWatchFullScreen={cls="plus";text="忽略全屏窗口";left=305;top=186;right=412;bottom=215;align="left";db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-15;name='FontAwesome');padding={top=1}};iconText='\uF0C8 ';notify=1;tabstop=1;textPadding={left=20};z=11};
-group1={cls="plus";left=19;top=24;right=629;bottom=277;align="left";border={color=0xFF008000;radius=8;width=1};db=1;dl=1;dr=1;dt=1;font=LOGFONT(h=-14);textPadding={left=16};valign="top";z=2};
-group2={cls="plus";left=19;top=296;right=629;bottom=380;align="left";border={color=0xFF008000;radius=8;width=1};db=1;dl=1;dr=1;font=LOGFONT(h=-14);textPadding={left=16};valign="top";z=1};
-groupTitle1={cls="plus";text="软件功能";left=31;top=8;right=107;bottom=34;dl=1;dt=1;z=4};
-groupTitle2={cls="plus";text="通用选项";left=36;top=281;right=112;bottom=307;db=1;dl=1;z=5};
-lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">ImTip</a> 强大的『超级热键』集成 <a href="https://www.aardio.com">aardio</a> 开发环境，可调用 aardio 的全部标准库与扩展库。\n可直接调用大模型 API 接口，支持 <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai">将各种桌面应用快速接入 AI 智能助手</a>。\n\n<a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">ImTip 超级热键开发指南</a>\n<a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">aardio 语法速览</a>';left=62;top=90;right=599;bottom=181;db=1;dl=1;dr=1;dt=1;notify=1;transparent=1;z=3}
+btnAiChat={cls="plus";text="打开助手";left=100;top=165;right=310;bottom=195;bgcolor=0x6B6BFF;border={radius=6};color=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-13);notify=1;z=20};
+btnClose={cls="plus";text="×";left=653;top=0;right=681;bottom=28;color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-22);notify=1;z=30};
+btnFilterWindows={cls="plus";text="编辑规则";left=570;top=305;right=640;bottom=335;bgcolor=0x00A5FF;border={radius=6};color=0xFFFFFF;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);notify=1;z=25};
+btnHotkey={cls="plus";text="编辑热键";left=100;top=438;right=200;bottom=468;bgcolor=0xD77800;border={radius=6};color=0xFFFFFF;db=1;dl=1;font=LOGFONT(h=-13);notify=1;z=11};
+btnImTip={cls="plus";text="配置";left=570;top=165;right=640;bottom=195;bgcolor=0x6BA800;border={radius=6};color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-13);notify=1;z=16};
+cardAiChat={cls="plus";left=20;top=80;right=330;bottom=200;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};dl=1;dt=1;z=3};
+cardFilter={cls="plus";left=350;top=220;right=660;bottom=340;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dr=1;z=2};
+cardHotkey={cls="plus";left=20;top=360;right=660;bottom=480;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dl=1;dr=1;z=5};
+cardImeTip={cls="plus";left=350;top=80;right=660;bottom=200;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};dr=1;dt=1;z=4};
+cardSystem={cls="plus";left=20;top=220;right=330;bottom=340;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dl=1;z=1};
+chkFilterWindows={cls="plus";text="扩展规则";left=430;top=299;right=530;bottom=319;align="left";bgcolor=0xFFFFFF;db=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=24};
+chkHotkey={cls="plus";text="启用热键";left=220;top=443;right=320;bottom=463;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=10};
+chkImeBarDisabled={cls="plus";text="启用";left=430;top=170;right=510;bottom=190;align="left";bgcolor=0xFFFFFF;dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=15};
+chkJab={cls="plus";text="启用 Java 程序支持（JetBrains 等）";left=100;top=299;right=310;bottom=324;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=28};
+chkSysRun={cls="plus";text="开机启动";left=100;top=274;right=200;bottom=299;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=27};
+chkWatchFullScreen={cls="plus";text="忽略全屏";left=430;top=274;right=530;bottom=294;align="left";bgcolor=0xFFFFFF;db=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=23};
+iconAiChat={cls="plus";text='\uF031';left=40;top=96;right=90;bottom=146;bgcolor=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-22;name='imtip');iconColor=0x6B6BFF;z=17};
+iconFilter={cls="plus";text='\uE82E';left=370;top=236;right=420;bottom=286;bgcolor=0xFFFFFF;db=1;dr=1;font=LOGFONT(h=-22;name='imtip');iconColor=0x00A5FF;z=21};
+iconHotkey={cls="plus";text='\uE8CE';left=40;top=380;right=90;bottom=430;bgcolor=0xFFFFFF;db=1;dl=1;font=LOGFONT(h=-22;name='imtip');iconColor=0xD77800;z=7};
+iconImeTip={cls="plus";text='\uF0EB';left=370;top=96;right=420;bottom=146;bgcolor=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-22;name='imtip');iconColor=0x6BA800;z=12};
+iconSystem={cls="plus";text='\uF013';left=40;top=236;right=90;bottom=286;bgcolor=0xFFFFFF;db=1;dl=1;font=LOGFONT(h=-22;name='FontAwesome');iconColor=0x666666;z=31};
+lblAiChatDesc={cls="plus";text="支持多种大模型
+智能对话与代码生成";left=100;top=127;right=310;bottom=167;align="left";bgcolor=0xFFFFFF;color=0x666666;dl=1;dt=1;valign="top";z=19};
+lblAiChatTitle={cls="plus";text="AI 智能助手";left=100;top=99;right=310;bottom=124;align="left";bgcolor=0xFFFFFF;color=0x333333;dl=1;dt=1;font=LOGFONT(h=-16;weight=600);z=18};
+lblFilterTitle={cls="plus";text="提示规则";left=430;top=239;right=640;bottom=264;align="left";bgcolor=0xFFFFFF;color=0x333333;db=1;dr=1;font=LOGFONT(h=-16;weight=600);z=22};
+lblHotkeyDesc={cls="syslink";text='强大的可编程热键，集成 <a href="https://www.aardio.com">aardio</a> 开发环境，快速接入大模型 API';left=100;top=410;right=640;bottom=435;bgcolor=0xFFFFFF;color=0x666666;db=1;dl=1;dr=1;valign="top";z=9};
+lblHotkeyTitle={cls="plus";text="超级热键";left=100;top=385;right=310;bottom=410;align="left";bgcolor=0xFFFFFF;color=0x333333;db=1;dl=1;font=LOGFONT(h=-16;weight=600);z=8};
+lblImeTipDesc={cls="static";text="智能显示输入法状态
+支持多种窗口类型";left=430;top=127;right=640;bottom=167;bgcolor=0xFFFFFF;color=0x666666;dr=1;dt=1;valign="top";z=14};
+lblImeTipTitle={cls="plus";text="输入提示";left=430;top=99;right=640;bottom=124;align="left";bgcolor=0xFFFFFF;color=0x333333;dr=1;dt=1;font=LOGFONT(h=-16;weight=600);z=13};
+lblSystemTitle={cls="plus";text="系统选项";left=100;top=239;right=210;bottom=264;align="left";bgcolor=0xFFFFFF;color=0x333333;db=1;dl=1;font=LOGFONT(h=-16;weight=600);z=26};
+lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">软件官网</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">开发指南</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">语法速览</a>';left=377;top=444;right=640;bottom=465;align="right";bgcolor=0xFFFFFF;db=1;dr=1;notify=1;transparent=1;z=29};
+titleBar={cls="bk";text="    ImTip 智能桌面助手 8.0";left=0;top=0;right=682;bottom=60;align="left";bgcolor=0xD77800;color=0xFFFFFF;dl=1;dr=1;dt=1;font=LOGFONT(h=-18;weight=600);textPadding={left=20;top=15};z=6}
 )
 /*}}*/
 
@@ -72,7 +90,44 @@ mainForm.btnHotkey.skin(style.button);
 mainForm.btnAiChat.skin(style.button);
 mainForm.btnImTip.skin(style.button);
 
+mainForm.cardAiChat.directDrawBackgroundOnly();
+mainForm.cardImeTip.directDrawBackgroundOnly();
+mainForm.cardFilter.directDrawBackgroundOnly();
+mainForm.cardHotkey.directDrawBackgroundOnly();
+mainForm.cardSystem.directDrawBackgroundOnly();
+
+mainForm.btnAiChat.skin({
+    color =={default= style.button.color};
+    background = {
+        default = 0xFFFF6B6B;
+        hover = 0xFFFF5252;
+        active = 0xFFC64920;
+        disabled = 0xFFCCCCCC;
+    };
+});
+mainForm.btnImTip.skin({
+    color =={default= style.button.color};
+    background = {
+        default = 0xFF00A86B;
+        hover = 0xFF008F5A;
+        active = 0xFF3E6842;
+        disabled = 0xFFCCCCCC;
+    };
+});
+mainForm.btnFilterWindows.skin({
+    color =={default= style.button.color};
+    background = {
+        default = 0xFFFFA500;
+        hover = 0xFFFF8C00;
+        active = 0xFFFF7300;
+        disabled = 0xFFCCCCCC;
+    };
+});
+
 mainForm.enableDpiScaling("init");
+
+import win.ui.shadow;
+win.ui.shadow(mainForm);
 
 import config;
 if(!_ARGV.sys){
@@ -387,6 +442,29 @@ if(..config.setting.imeBarDisabled){
 }
 else {
 	mainForm.chkImeBarDisabled.checked = true; 
+}
+
+//现在是无边框窗体，在右上角用 plus 控件加一个关闭按钮，skin 配置好样式
+
+
+mainForm.btnClose.skin({
+    background = {
+        hover = 0xFFE81123;
+        active = 0xFFF1707A;
+        default = 0x00FFFFFF;
+    };
+    color = {
+        hover = 0xFFFFFFFF;
+        default = 0xFFFFFFFF;
+    }
+})
+
+mainForm.btnClose.oncommand = function(id,event){
+    mainForm.close();
+}
+
+mainForm.onMouseDown  = function(wParam,lParam){ 
+    mainForm.hitCaption();
 }
 
 win.loopMessage();

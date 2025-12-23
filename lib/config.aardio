@@ -192,6 +192,7 @@ config.setting.getFilterWindowsCodePath = function(init){
 	return path;
 }
 
+config.aiChat.enableAutoSave(false);
 if(!config.aiChat.itemData) {
 	config.aiChat.itemNames={[1]="默认";[2]="词典";[3]="翻译";[4]="画图"};
 	config.aiChat.itemData=[
@@ -333,7 +334,7 @@ if(!config.aiChat.itemData) {
 
 /**intellisense(config)
 setting = 通用设置
-saveAll() = 写入所有配置到文件
-? = 获取值时指定不以下划线开始的配置表名称，\n返回一个可自动序列化到同名配置文件的表对象。\n如果此对象名以下划线开始，则可以正常读写值不会序列化为配置文件。\n否则不能对此对象直接赋值，只能对配置表对象的成员赋值。\n\n配置表可自动自文件加载,退出线程前自动序列化并存入文件。\n仅序列化以字符串、数值为键的元素，\n仅序列化值为字符串、数值、buffer 以及定义了 _serialize 元方法的成员。\n循环引用的值转换为 null，序列化时忽略成员函数\n!fsys_table.
+saveAll() = 保存当前对象（fsys.config ）管理的所有文件同步表（fsys.table 对象）到文件。\n如果 fsys.table 对象调用 enableAutoSave(false) 禁用了自动保存，则 saveAll 调用对其无效。\n禁用自动保存的 fsys.table 对象必须显式调用其 save 方法保存表数据到文件。
+? = 如果指定不以下划线开始的成员名称（只读不可写入），\n则返回当前配置目录下同名的文件同步表（fsys.table 对象）。\n这是一个可自动序列化到同名配置文件的表对象。\n仅序列化以字符串、数值为键的元素，\n仅序列化值为字符串、数值、buffer 以及定义了 _serialize 元方法的成员。\n循环引用的值转换为 null，序列化时忽略成员函数\n如果指定的成员名以下划线开始，则正常读写对应的属性值而非打开文件同步表。\n注意下划线开始的属于只读常量，设为非 null 值以后不可再修改。\n!fsys_table.
 __defaultScheme() = 返回当前选择的配置方案初始默认方案
 end intellisense**/

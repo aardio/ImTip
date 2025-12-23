@@ -25,6 +25,8 @@ wndBrowser={cls="custom";text="自定义控件";left=5;top=27;right=753;bottom=4
 )
 /*}}*/
 
+config.aiChat.enableAutoSave(false);
+
 if(config.aiChat.itemNames){
 	winform.cmbAgent.items = config.aiChat.itemNames;
 }
@@ -530,6 +532,12 @@ winform.btnCopy.oncommand = function(id,event){
 //设置接口地址与 API 令牌的窗口
 winform.btnSetting.oncommand = function(id,event){
 	     
+	/*
+	因为 AI 助手是多进程共享同一配置文件，这里获取最新配置。
+	但在打开配置以前，应当允许不同进程使用不同的配置。
+	*/
+	config.aiChat.load();
+	
 	..table.assign(config.aiChat,{
 		title = "ImTip - AI 智能助手";
 		//f1Title = "设为 F1 键编码助手";
@@ -555,11 +563,16 @@ winform.btnSetting.oncommand = function(id,event){
 	}
 	
 	frmSetting.onHyperlink = function(apiUrl,apiKey){
-		
-		 
+		thread.invoke( 
+			function(){
+				raw.execute("https://imtip.aardio.com/api-keys/")
+			}
+		);
 	}
 	
 	if( frmSetting.doModal(winform) ){
+		config.aiChat.save();
+		
 		var configItem = config.aiChat.selItem ? config.aiChat.itemData[config.aiChat.selItem] 
 		if(configItem){
 			
