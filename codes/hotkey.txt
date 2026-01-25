@@ -120,6 +120,54 @@ superHotkey.loadTable({
 			
 			return;
 		}
+
+		thread.invoke( 
+			function(selectedText){ 
+				import winex.tooltip;
+				import web.rest.tencentCloud;
+				
+				/*
+				请到 https://console.cloud.tencent.com/cam/capi 开通免费版。
+				开通后每月免费 500 万字符，翻译速度很快。
+				默认关闭后付费（需手动勾选），仅开通免费版不会收任何费用。
+				*/
+				var tmtConfig = {
+    				secretId = "SecretId"; // 替换为你的 SecretId
+    				secretKey = "SecretKey"; // 替换为你的 SecretKey
+    				region = "ap-guangzhou"; // 接口地域
+    				service = "tmt"; // 机器翻译服务标识
+    				version = "2018-03-21"; // 接口版本号
+    				action = "TextTranslate"; // 接口动作
+				}
+				
+				if(tmtConfig.secretId=="SecretId"){
+					winex.tooltip.balloon("请在 ImTip 中点击“编辑热键”，在热键配置中找到 `tencentConfig` 并按说明设置参数。");
+					thread.delay(10000)
+					return;
+				}
+				
+				var client = web.rest.tencentCloud(tmtConfig);
+				var tmtApi = client.api("https://tmt.tencentcloudapi.com");
+				
+				var result, err = tmtApi.post({
+    				"SourceText": selectedText,
+    				"Source": "auto", // 自动检测源语言
+    				"Target": string.find(selectedText,":")?"en":"zh", 
+    				"ProjectId": 0    // 项目 ID,默认填 0
+				});
+				
+				if(result){
+    				var resp = result[["Response"]];
+				
+    				// 检查是否有业务错误
+    				if(!resp[["Error"]]){ 
+        				import winex.tooltip;
+        				winex.tooltip.balloon(resp[["TargetText"]]);
+						thread.delay(5000)
+    				}
+				}
+			},selectedText
+		);
 	};
 	
 	// 按 Ctrl+Shift+F1 调用 AI 补全与续写助手。
