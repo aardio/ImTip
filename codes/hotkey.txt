@@ -152,7 +152,7 @@ superHotkey.loadTable({
 				var result, err = tmtApi.post({
     				"SourceText": selectedText,
     				"Source": "auto", // 自动检测源语言
-    				"Target": string.find(selectedText,":")?"en":"zh", 
+    				"Target": string.find(selectedText,"<[\a_-]+\s+[\a_-]+\s+[\a_-]+>")?"zh":"en", 
     				"ProjectId": 0    // 项目 ID,默认填 0
 				});
 				
