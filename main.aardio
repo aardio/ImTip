@@ -5,6 +5,10 @@ if(_ARGV.chat){
 	loadcodex("\dlg\aiChat.aardio");
 	return; 
 }
+elseif(_ARGV.qrfs){ 
+	loadcodex("\dlg\qrfs.aardio");
+	return; 
+}
 
 for(k,v in _ARGV){
 	if(string.endWith(v,".aardio",true)){

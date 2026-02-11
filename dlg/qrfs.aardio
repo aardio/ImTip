@@ -1,0 +1,11 @@
+import process.aardio;
+var path = process.aardio.getPath();
+if(!path){
+	if(!process.aardio.download()) return;
+}
+
+process.aardio.run( 
+	function(){
+		loadcodex("\example\Web\HTTPServer\asyncHttpServer.file.aardio");
+	}
+);	

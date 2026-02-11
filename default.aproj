@@ -11,5 +11,6 @@
 		<folder name="images" path="dlg\images" comment="dlg\images">
 			<file name="input.gif" path="dlg\images\input.gif" comment="dlg\images\input.gif"/>
 		</folder>
+		<file name="qrfs.aardio" path="dlg\qrfs.aardio" comment="dlg\qrfs.aardio"/>
 	</folder>
 </project>
