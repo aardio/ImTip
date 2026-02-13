@@ -149,10 +149,20 @@ superHotkey.loadTable({
 				var client = web.rest.tencentCloud(tmtConfig);
 				var tmtApi = client.api("https://tmt.tencentcloudapi.com");
 				
+				/*
+				检测文本是否以拉丁字母为主（例如英文）。
+				如果文本中的多字节字符（例如汉字）较少则返回 true 。
+				
+				考虑英文双单词短语多数情况下多于 6 个字母（含空格），
+				而 2 个汉字的 UTF-8 编码一般为 6 个字节，
+				则以此为判断中英文占比的分界线，得出计算方法如下：
+				*/
+				var latinLike = lambda(str) !..string.find(str,":") || (..string.len(str) > #str/1.5);
+	
 				var result, err = tmtApi.post({
     				"SourceText": selectedText,
     				"Source": "auto", // 自动检测源语言
-    				"Target": string.find(selectedText,"<[\a_-]+\s+[\a_-]+\s+[\a_-]+>")?"zh":"en", 
+    				"Target": latinLike(selectedText) ? "zh" : "en", 
     				"ProjectId": 0    // 项目 ID,默认填 0
 				});
 				
