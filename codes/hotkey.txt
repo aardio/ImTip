@@ -12,6 +12,7 @@ if(_STUDIO_INVOKED && ...!="ImTip"){
 /*
 1. 保存此文件，自动更新 ImTip 热键配置。
 2. 删除并关闭此文件，在 ImTip 中再次点击「编辑超级热键」可恢复默认配置。
+最新版本: https://github.com/aardio/ImTip/blob/main/codes/hotkey.txt
 教程: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
 */
 
@@ -125,12 +126,7 @@ superHotkey.loadTable({
 			function(selectedText){ 
 				import winex.tooltip;
 				import web.rest.tencentCloud;
-				
-				/*
-				请到 https://console.cloud.tencent.com/cam/capi 开通免费版。
-				开通后每月免费 500 万字符，翻译速度很快。
-				默认关闭后付费（需手动勾选），仅开通免费版不会收任何费用。
-				*/
+		
 				var tmtConfig = {
     				secretId = "SecretId"; // 替换为你的 SecretId
     				secretKey = "SecretKey"; // 替换为你的 SecretKey

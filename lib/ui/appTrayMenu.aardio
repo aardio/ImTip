@@ -167,13 +167,6 @@ class appTrayMenu{
 			..mainForm.show(false);
 		});
 		
-		popmenu.add('扫码快传 / 共享输入法',function(id){
-			//发布后才能使用此功能
-			import process.imTip;
-			..process.imTip(qrfs = "true");
-			..mainForm.show(false);
-		}); 
-		
 		popmenu.add();//分隔线 
 		
 		popmenu.add('退出程序',function(id){ 
