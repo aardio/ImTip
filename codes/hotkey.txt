@@ -11,19 +11,30 @@ if(_STUDIO_INVOKED && ...!="ImTip"){
 
 /*
 1. 保存此文件，自动更新 ImTip 热键配置。
-2. 删除并关闭此文件，在 ImTip 中再次点击「编辑超级热键」可恢复默认配置。
-最新版本: https://github.com/aardio/ImTip/blob/main/codes/hotkey.txt
-教程: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
+2. 禁用并重新启用热键热键也会重新加载此代码。
+3. 删除并关闭此文件，在 ImTip 中再次点击「编辑超级热键」可恢复默认配置。
+
+此文件最新版本: https://github.com/aardio/ImTip/blob/main/codes/hotkey.txt
+超键热键开发指南: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
 */
 
 import fsys;
 import ide;
 import winex; 
-import win.dlg.chineseNumber;
 import mouse;
 import key;
 import key.ime;
 import key.hotkey;
+import winex.selection;
+import winex.tooltip;
+import win.dlg.chineseNumber;
+
+/*
+按 F5 运行自动安装以下扩展库，
+同线程的 import 语句建议写在注册热键之前而非热键函数内部。
+*/
+import table.coca20000;
+import string.words;
 
 //创建超级热键
 superHotkey = key.hotkey();//不可修改或删除这句代码
@@ -40,7 +51,6 @@ superHotkey.loadTable({
 	["Ctrl+@"] = function(){
 		
 		//获取选区文本
-		import winex.selection;
 		var selectedText = winex.selection.get(true);
 		
 		//选区文本为空，继续发送按键
@@ -84,19 +94,20 @@ superHotkey.loadTable({
 	//如果要保留 Ctrl+3 请改为 Ctrl+Shift+#
 	["Ctrl+#"] = function(){
 			
-		import winex.tooltip;	
-		import winex.selection;
 		var selectedText = winex.selection.get(true);
 		
 		selectedText = selectedText ? string.trim(selectedText);
 		if(!#selectedText) return true;
 		
 		//显示数值的中文格式，支持 k,m 后缀
-		var num = string.match(selectedText,"^([+-]?0*\d[\d,]*\.?\d*<\s?[kKmM]>?)$")
+		//显示数值的中文格式，支持 k,m 后缀
+		var num = string.match(selectedText,"^([+-]?0*\d[\d,]*\.?\d*<\s?[kKmMbBgGtT]>?)$")
 		if(num){ 
 			num = string.replace(num,"[\s,\_]","");
 			num = string.replace(num,"<\s?[kK]>$","000");
 			num = string.replace(num,"<\s?[mM]>$","000000");
+			num = string.replace(num,"<\s?[bBgG]>$","000000000");
+			num = string.replace(num,"<\s?[tT]>$","000000000000");
 			
 			import string.chineseNumber;
 			var zh = string.chineseNumber().number(num);
@@ -104,9 +115,6 @@ superHotkey.loadTable({
 			winex.tooltip.balloon(zh);
 			return; 
 		}
-		
-		import string.words;
-		import table.coca20000;
 			
 		//查单词 + 朗读
 		if( string.words(selectedText,true) ){ //是否单词
