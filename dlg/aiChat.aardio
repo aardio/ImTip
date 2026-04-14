@@ -379,6 +379,7 @@ winform.btnSend.oncommand = function(id,event){
 				
 				import web.turndown;
 				var md,err = web.turndown.httpGet(url)
+				
 				if(!#md) return;
  	
 				md = '\r\n\r\n用户输入的参考网址：' + url 
@@ -599,11 +600,10 @@ wb.write(`
 - <a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">设置 API key，添加 / 切换 API 助手</a>
 - <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat">编程启动 AI 助手</a>
 - <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai">超级热键 + 沉浸式 AI 助手</a>  
-- 按住 ``Shift`` + 单击托盘直接启动 AI 助手。
+- 按住 ``Shift`` + 单击托盘直接启动 AI 助手
 - 按住 ``Ctrl+Enter`` 可直接发送问题 
-- 按住 ``Ctrl`` 键点 ``复制`` 可复制 AI 最后输出的代码块。
-- 按住 ``Ctrl`` 键点 ``分享`` 可截长屏到剪贴板。 
-- 输入框右键菜单可导出对话，拖拽 json/jsonl 文件到窗口可导入对话。
+- 按住 ``Ctrl`` 键点 ``复制`` 可复制 AI 最后输出的代码块
+- 按住 ``Ctrl`` 键点 ``分享`` 可截长屏到剪贴板
 `)
 
 
