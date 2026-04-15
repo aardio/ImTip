@@ -2,7 +2,8 @@
  
 [超级热键](#一超级热键) ·  [AI 集成](#二-ai-集成)  ·  [输入跟踪](#三输入跟踪提示)
 
-> <a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 仅 900 KB，独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
+> <a href="https://imtip.aardio.com/update/ImTip.7z">点这里下载 ImTip</a> - 仅 900 KB  
+> 独立 EXE 无任何外部依赖，兼容 XP，Vista，Win7，Win8，Win10，Win11 ……  
 
 ## 一、超级热键
 
