@@ -8,11 +8,12 @@
 
 ImTip 提供可编程扩展的「超级热键」。
 
-ImTip 提供可编程的「超级热键」系统，让您在任何软件中都能一键触发强大功能。所有热键功能均由 [aardio](https://aardio.com) 语言编写，您可以轻松修改、扩展，甚至用 AI 自动编写新的热键配置代码，实现无限可能。
-
 [» 快速开始](https://imtip.aardio.com/#help-hotkey) 
 
- [» 超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
+ImTip 提供可编程的「超级热键」系统，让您在任何软件中都能一键触发强大功能。所有热键功能均由 [aardio](https://aardio.com) 语言编写，您可以轻松修改、扩展，甚至用 AI 自动编写新的热键配置代码，实现无限可能。
+
+[» 超级热键开发指南](https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html)
+
 
 默认已配置以下热键：
 - <kbd>Ctrl+#</kbd> 极速版：全局翻译 + 查单词（闪电搜索海量数据，自动还原词形、自动分解合成词）
