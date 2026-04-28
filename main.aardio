@@ -26,23 +26,23 @@ import win.ui.atom;
 import win.dlg.message;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 8.4 - 智能桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
+mainForm = win.form(text="ImTip 8.5 - 智能桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
 mainForm.add(
-btnAiChat={cls="plus";text="打开助手";left=97;top=169;right=197;bottom=199;bgcolor=0x6B6BFF;border={radius=4};color=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-13);notify=1;z=20};
+btnAiChat={cls="plus";text="打开助手";left=97;top=168;right=197;bottom=198;bgcolor=0x6B6BFF;border={radius=4};color=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-13);notify=1;z=20};
 btnClose={cls="plus";text="×";left=663;top=0;right=691;bottom=28;color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-22);notify=1;z=30};
 btnFilterWindows={cls="plus";text="编辑规则";left=572;top=317;right=642;bottom=347;color=0xD47800;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);notify=1;z=25};
-btnHotkey={cls="plus";text="编辑热键";left=97;top=455;right=197;bottom=485;bgcolor=0xD77800;border={radius=4};color=0xFFFFFF;db=1;dl=1;font=LOGFONT(h=-13);notify=1;z=11};
-btnImTip={cls="plus";text="配置";left=572;top=169;right=642;bottom=199;bgcolor=0x6BA800;border={radius=4};color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-13);notify=1;z=16};
-cardAiChat={cls="plus";left=20;top=80;right=336;bottom=210;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};dl=1;dt=1;z=3};
-cardFilter={cls="plus";left=355;top=228;right=671;bottom=358;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dr=1;z=2};
-cardHotkey={cls="plus";left=20;top=376;right=671;bottom=496;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dl=1;dr=1;z=5};
-cardImeTip={cls="plus";left=355;top=80;right=671;bottom=210;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};dr=1;dt=1;z=4};
-cardSystem={cls="plus";left=20;top=228;right=336;bottom=358;bgcolor=0xFFFFFF;border={color=0xFFE8E8E8;radius=12;width=1};db=1;dl=1;z=1};
+btnHotkey={cls="plus";text="编辑热键";left=97;top=454;right=197;bottom=484;bgcolor=0xD77800;border={radius=4};color=0xFFFFFF;db=1;dl=1;font=LOGFONT(h=-13);notify=1;z=11};
+btnImTip={cls="plus";text="配置";left=572;top=168;right=642;bottom=198;bgcolor=0x6BA800;border={radius=4};color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-13);notify=1;z=16};
+cardAiChat={cls="bkplus";left=20;top=80;right=336;bottom=210;bgcolor=0xFFFFFF;border={color=0xE8E8E8;radius=12;width=1};dl=1;dt=1;z=3};
+cardFilter={cls="bkplus";left=355;top=228;right=671;bottom=358;bgcolor=0xFFFFFF;border={color=0xE8E8E8;radius=12;width=1};db=1;dr=1;z=2};
+cardHotkey={cls="bkplus";left=20;top=376;right=671;bottom=496;bgcolor=0xFFFFFF;border={color=0xE8E8E8;radius=12;width=1};db=1;dl=1;dr=1;z=5};
+cardImeTip={cls="bkplus";left=355;top=80;right=671;bottom=210;bgcolor=0xFFFFFF;border={color=0xE8E8E8;radius=12;width=1};dr=1;dt=1;z=4};
+cardSystem={cls="bkplus";left=20;top=228;right=336;bottom=358;bgcolor=0xFFFFFF;border={color=0xE8E8E8;radius=12;width=1};db=1;dl=1;z=1};
 chkFilterWindows={cls="plus";text="扩展规则";left=432;top=307;right=532;bottom=327;align="left";bgcolor=0xFFFFFF;db=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=24};
-chkHotkey={cls="plus";text="启用热键";left=217;top=461;right=317;bottom=481;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=10};
-chkImeBarDisabled={cls="plus";text="启用";left=432;top=171;right=512;bottom=191;align="left";bgcolor=0xFFFFFF;dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=15};
-chkJab={cls="plus";text="启用 Java 程序支持（JetBrains 等）";left=97;top=307;right=323;bottom=332;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=28};
-chkSysRun={cls="plus";text="开机启动";left=97;top=282;right=197;bottom=307;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=27};
+chkHotkey={cls="plus";text="启用热键";left=217;top=460;right=317;bottom=480;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=10};
+chkImeBarDisabled={cls="plus";text="启用";left=432;top=172;right=512;bottom=192;align="left";bgcolor=0xFFFFFF;dr=1;dt=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=15};
+chkJab={cls="plus";text="启用 Java 程序支持（JetBrains 等）";left=97;top=307;right=330;bottom=332;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=28};
+chkSysRun={cls="plus";text="开机启动";left=97;top=282;right=312;bottom=307;align="left";bgcolor=0xFFFFFF;db=1;dl=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=27};
 chkWatchFullScreen={cls="plus";text="忽略全屏";left=432;top=282;right=532;bottom=302;align="left";bgcolor=0xFFFFFF;db=1;dr=1;iconStyle={align="left";font=LOGFONT(h=-14;name='FontAwesome')};iconText='\uF0C8 ';notify=1;textPadding={left=20};z=23};
 iconAiChat={cls="plus";text='\uF031';left=37;top=96;right=87;bottom=146;bgcolor=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-22;name='imtip');iconColor=0x6B6BFF;z=17};
 iconFilter={cls="plus";text='\uE82E';left=372;top=244;right=422;bottom=294;bgcolor=0xFFFFFF;db=1;dr=1;font=LOGFONT(h=-22;name='imtip');iconColor=0x00A5FF;z=21};
@@ -59,8 +59,8 @@ lblImeTipDesc={cls="static";text="智能显示输入法状态
 支持多种窗口类型";left=432;top=129;right=642;bottom=169;bgcolor=0xFFFFFF;color=0x666666;dr=1;dt=1;z=14};
 lblImeTipTitle={cls="plus";text="输入提示";left=432;top=99;right=642;bottom=124;align="left";bgcolor=0xFFFFFF;color=0x333333;dr=1;dt=1;font=LOGFONT(h=-16;weight=600);z=13};
 lblSystemTitle={cls="plus";text="系统选项";left=97;top=247;right=207;bottom=272;align="left";bgcolor=0xFFFFFF;color=0x333333;db=1;dl=1;font=LOGFONT(h=-16;weight=600);z=26};
-lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">软件官网</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">开发指南</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">语法速览</a>';left=374;top=462;right=637;bottom=483;align="right";bgcolor=0xFFFFFF;db=1;dr=1;notify=1;transparent=1;z=29};
-titleBar={cls="bk";text="    IᵐTⁱᵖ 智能桌面助手 8.4";left=0;top=0;right=692;bottom=60;align="left";bgcolor=0xD77800;color=0xFFFFFF;dl=1;dr=1;dt=1;font=LOGFONT(h=-18;weight=600);z=6}
+lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">软件官网</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">开发指南</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">语法速览</a>';left=374;top=461;right=637;bottom=482;align="right";bgcolor=0xFFFFFF;db=1;dr=1;notify=1;transparent=1;z=29};
+titleBar={cls="bk";text="    IᵐTⁱᵖ 智能桌面助手 8.5";left=0;top=0;right=692;bottom=60;align="left";bgcolor=0xD77800;color=0xFFFFFF;dl=1;dr=1;dt=1;font=LOGFONT(h=-18;weight=600);z=6}
 )
 /*}}*/
 
@@ -90,12 +90,6 @@ mainForm.chkJab.skin(style.checkBox);
 mainForm.chkFilterWindows.skin(style.checkBox);
 mainForm.chkWatchFullScreen.skin(style.checkBox);
 mainForm.chkImeBarDisabled.skin(style.checkBox);
-
-mainForm.cardAiChat.directDrawBackgroundOnly();
-mainForm.cardImeTip.directDrawBackgroundOnly();
-mainForm.cardFilter.directDrawBackgroundOnly();
-mainForm.cardHotkey.directDrawBackgroundOnly();
-mainForm.cardSystem.directDrawBackgroundOnly();
 
 mainForm.btnAiChat.skin({
     color =={default= style.button.color};
@@ -337,7 +331,7 @@ mainForm.chkSysRun.oncommand = function(id,event){
 			sys.run("ImTip").delete()
 		} 
 		
-		mainForm.chkSysRun.text = "允许开机以普通权限启动（当前进程无管理权限）"
+		mainForm.chkSysRun.text = "开机以普通权限启动"
 	}
 	
 	config.setting.sysRun = owner.checked;
@@ -406,7 +400,8 @@ mainForm.chkJab.oncommand = function(id,event){
 		
 		if(owner.checked){
  			config.setting.jab = true; 
- 			mainForm.chkJab.text = "已启用 java.accessBridge 扩展，如未生效请重启目标程序或操作系统"
+ 			mainForm.chkJab.text = "已启用 java.accessBridge 扩展"
+ 			mainForm.msgOk('已启用 java.accessBridge 扩展， \n如未生效请重启目标程序或操作系统',3000);
 		}
 		else {
 			mainForm.chkJab.text = "未启用 java.accessBridge 扩展"
@@ -415,7 +410,7 @@ mainForm.chkJab.oncommand = function(id,event){
 	}
 	else {
 		config.setting.jab = null; 
-		mainForm.msgbox("禁用 java.accessBridge 扩展在重启 ImTip 后生效！")
+		mainForm.msgOk("禁用 java.accessBridge 扩展在重启 ImTip 后生效！")
 	}
 	
 	config.setting.save();
