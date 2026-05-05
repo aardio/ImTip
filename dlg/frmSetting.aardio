@@ -321,8 +321,6 @@ frmSetting.importStyle = function(cfg){
 	if(cfg.iconStyle){
 		var font = cfg.iconStyle.font;
 		if(font){
-			app.util.updateTipStyle(cfg);
-			
 			var font = ::LOGFONT(font);
 			frmSetting.editIconTextFont.text = font.name;
 			frmSetting.tbIconTextSize.progressPos = math.abs(font.h);

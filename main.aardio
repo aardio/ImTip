@@ -19,14 +19,14 @@ for(k,v in _ARGV){
 }
 /*}}*/
 
-import style;
-import fonts.imtip;
 import win.ui;
 import win.ui.atom;
 import win.dlg.message;
+import style;
+import fonts.imtip;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 8.5 - 智能桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
+mainForm = win.form(text="ImTip 8.6 - 智能桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
 mainForm.add(
 btnAiChat={cls="plus";text="打开助手";left=97;top=168;right=197;bottom=198;bgcolor=0x6B6BFF;border={radius=4};color=0xFFFFFF;dl=1;dt=1;font=LOGFONT(h=-13);notify=1;z=20};
 btnClose={cls="plus";text="×";left=663;top=0;right=691;bottom=28;color=0xFFFFFF;dr=1;dt=1;font=LOGFONT(h=-22);notify=1;z=30};
@@ -60,7 +60,7 @@ lblImeTipDesc={cls="static";text="智能显示输入法状态
 lblImeTipTitle={cls="plus";text="输入提示";left=432;top=99;right=642;bottom=124;align="left";bgcolor=0xFFFFFF;color=0x333333;dr=1;dt=1;font=LOGFONT(h=-16;weight=600);z=13};
 lblSystemTitle={cls="plus";text="系统选项";left=97;top=247;right=207;bottom=272;align="left";bgcolor=0xFFFFFF;color=0x333333;db=1;dl=1;font=LOGFONT(h=-16;weight=600);z=26};
 lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">软件官网</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">开发指南</a> | <a href="https://www.aardio.com/zh-cn/doc/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">语法速览</a>';left=374;top=461;right=637;bottom=482;align="right";bgcolor=0xFFFFFF;db=1;dr=1;notify=1;transparent=1;z=29};
-titleBar={cls="bk";text="    IᵐTⁱᵖ 智能桌面助手 8.5";left=0;top=0;right=692;bottom=60;align="left";bgcolor=0xD77800;color=0xFFFFFF;dl=1;dr=1;dt=1;font=LOGFONT(h=-18;weight=600);z=6}
+titleBar={cls="bk";text="    IᵐTⁱᵖ 智能桌面助手 8.6";left=0;top=0;right=692;bottom=60;align="left";bgcolor=0xD77800;color=0xFFFFFF;dl=1;dr=1;dt=1;font=LOGFONT(h=-18;weight=600);z=6}
 )
 /*}}*/
 
@@ -90,7 +90,6 @@ mainForm.chkJab.skin(style.checkBox);
 mainForm.chkFilterWindows.skin(style.checkBox);
 mainForm.chkWatchFullScreen.skin(style.checkBox);
 mainForm.chkImeBarDisabled.skin(style.checkBox);
-
 mainForm.btnAiChat.skin({
     color =={default= style.button.color};
     background = {
@@ -109,7 +108,6 @@ mainForm.btnImTip.skin({
         disabled = 0xFFCCCCCC;
     };
 });
-
 mainForm.enableDpiScaling("init");
 
 import win.ui.shadow;
@@ -187,8 +185,7 @@ mainForm.importImTipStyle = function(path){
 	if(!#data) return mainForm.msgboxErr("此文件不包含有效的 ImTip 外观配置方案!");
 	
 	try{
-		var cfg = eval(data);  
-		app.util.updateTipStyle(cfg);
+		var cfg = eval(data); 
 		imeBar.imeSkin(cfg);	
 		
  		config.style.embeddingFontData = null;
@@ -242,6 +239,20 @@ mainForm.onCopyData = function(data,dataType){
 	elseif(data=="ime-switch"){
 		imeBar.imeWatch(!!..imeBar.paused);
 	}
+	elseif(data=="hotkey-enable"){
+	
+		config.hotkey.chkEnableHotkey = true;
+		mainForm.chkHotkey.checked = true;
+			
+		import app.hotkey;
+		app.hotkey.update(true);	
+	}
+	elseif(data=="hotkey-edit"){
+		mainForm.btnHotkey.oncommand();	
+	}
+	elseif(data=="hotkey-init"){
+		config.setting.getHotkeyCodePath();
+	}
 	else {
 		mainForm.show();
 	}
@@ -253,8 +264,13 @@ mainForm.onClose = function(){
 } 
 
 if(config.style.width){
-	app.util.updateTipStyle(config.style);
 	imeBar.imeSkin(config.style)
+}
+
+imeBar.afterDpiChanged = function(scaleX,scaleY,origScaleX,origScaleY){
+    if(config.style.width){
+    	imeBar.imeSkin(config.style)
+    }
 }
 
 if(__argvImTipConfig){
@@ -431,8 +447,10 @@ else {
 	mainForm.chkImeBarDisabled.checked = true; 
 }
 
-//现在是无边框窗体，在右上角用 plus 控件加一个关闭按钮，skin 配置好样式
 
+mainForm.btnClose.oncommand = function(id,event){
+    mainForm.close();
+}
 
 mainForm.btnClose.skin({
     background = {
@@ -446,9 +464,6 @@ mainForm.btnClose.skin({
     }
 })
 
-mainForm.btnClose.oncommand = function(id,event){
-    mainForm.close();
-}
 
 mainForm.onMouseDown  = function(wParam,lParam){ 
     mainForm.hitCaption();
