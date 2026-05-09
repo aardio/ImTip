@@ -2450,7 +2450,7 @@ frmSetting.editClasses.editBox.enablePopMenu({{},
 /*}}*/
 
 /*复制粘贴配置{{*/
-import web.json;
+import JSON;
 frmSetting.exportPreviewImage = function(){ 
 	var schemeIndex = ..config.setting.schemeIndex;   
 	var ctrl = ..mainSettingForm["btnScheme" + schemeIndex ];   
