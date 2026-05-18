@@ -7,7 +7,7 @@ import win.ui;
 var winform = win.form(text="ImTip - AI 智能助手";right=759;bottom=620;bgcolor=0xFAF9F8;border="none")
 winform.add(
 bk={cls="bk";text="ImTip - AI 智能助手";left=22;top=5;right=213;bottom=20;align="left";dl=1;dt=1;z=14};
-bkPrompt={cls="plus";left=5;top=495;right=754;bottom=617;bgcolor=0xFFFFFF;border={color=0xFF800000;radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=2};
+bkPrompt={cls="plus";left=5;top=495;right=754;bottom=617;bgcolor=0xFFFFFF;border={color=0x000080;radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=2};
 bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=0xDBDAD9;dl=1;dr=1;dt=1;forecolor=0x5C5B5B;linearGradient=0;z=3};
 btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=6};
 btnCopy={cls="plus";text="复制";left=369;top=588;right=433;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;disabled=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='imtip');padding={left=8}};iconText='\uF0C5';notify=1;textPadding={left=25};z=11};
@@ -430,12 +430,11 @@ winform.btnSend.oncommand = function(id,event){
 			//导入调用 HTTP 接口的 REST 客户端
 			import web.rest.aiChat;
 			
-			config.userAgent = "Mozilla/5.0 (Windows NT "+ _WIN_VER_MAJOR +"."+_WIN_VER_MINOR+"; ImTip) like Gecko";
+			config.userAgent = "ImTip/8.7(Windows NT "+ _WIN_VER_MAJOR +"."+_WIN_VER_MINOR+")";
 			var client = web.rest.aiChat(config);
 			
 			client.referer = "https://imtip.aardio.com";
-			client.setHeaders({ "X-Title":"ImTip"});
-			
+
 			if(type(config.extraParameters)==="table"){
 				client.extraParameters = config.extraParameters;
 			} 
@@ -452,7 +451,7 @@ winform.btnSend.oncommand = function(id,event){
 				
 				wb.assistant(deltaText);
 			} );
-			
+
 			if(err){
 				//获取错误对象（解析 JSON 格式的错误信息）
 				var errObject = client.lastResponseError()
