@@ -562,14 +562,6 @@ winform.btnSetting.oncommand = function(id,event){
 		}
 	}
 	
-	frmSetting.onHyperlink = function(apiUrl,apiKey){
-		thread.invoke( 
-			function(){
-				raw.execute("https://imtip.aardio.com/api-keys/")
-			}
-		);
-	}
-	
 	if( frmSetting.doModal(winform) ){
 		config.aiChat.save();
 		
