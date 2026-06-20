@@ -160,10 +160,16 @@ class appTrayMenu{
 			..mainForm.onTrayMenu(popmenu)
 		}
 		
-		popmenu.add('AI 智能助手\tShift+单击托盘',function(id){
+		popmenu.add('AI 对话助手\tShift+单击托盘',function(id){
  			import process.imTip; 
 			process.imTip(chat = ""); 
 			
+			..mainForm.show(false);
+		});
+		
+		popmenu.add('全自主智能体（AA）',function(id){
+ 			import process;
+ 			process.openUrl("https://www.aau.cn");
 			..mainForm.show(false);
 		});
 		

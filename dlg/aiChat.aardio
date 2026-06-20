@@ -4,9 +4,9 @@ import fonts.fontAwesomeSub;
 import config;
 import win.ui;
 /*DSG{{*/
-var winform = win.form(text="ImTip - AI 智能助手";right=759;bottom=620;bgcolor=0xFAF9F8;border="none")
+var winform = win.form(text="ImTip - AI 助手";right=759;bottom=620;bgcolor=0xFAF9F8;border="none")
 winform.add(
-bk={cls="bk";text="ImTip - AI 智能助手";left=22;top=5;right=213;bottom=20;align="left";dl=1;dt=1;z=14};
+bk={cls="bk";text="ImTip - AI 助手";left=22;top=5;right=213;bottom=20;align="left";dl=1;dt=1;z=14};
 bkPrompt={cls="plus";left=5;top=495;right=754;bottom=617;bgcolor=0xFFFFFF;border={color=0x000080;radius=12};clip=1;clipBk=false;db=1;disabled=1;dl=1;dr=1;z=2};
 bkTitle={cls="bk";left=0;top=0;right=764;bottom=27;bgcolor=0xDBDAD9;dl=1;dr=1;dt=1;forecolor=0x5C5B5B;linearGradient=0;z=3};
 btnClear={cls="plus";text="清除";left=589;top=588;right=655;bottom=618;align="left";bgcolor=0xFFFFFF;color=0x3C3C3C;db=1;dr=1;font=LOGFONT(h=-13);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=8}};iconText='\uF014';notify=1;textPadding={left=25};z=6};
@@ -509,7 +509,7 @@ winform.btnSetting.oncommand = function(id,event){
 	config.aiChat.load();
 	
 	..table.assign(config.aiChat,{
-		title = "ImTip - AI 智能助手";
+		title = "ImTip - AI 助手";
 		//f1Title = "设为 F1 键编码助手";
 		hyperlink1Title = "获取";
 		//f1MultiSelect = false;
@@ -556,11 +556,9 @@ winform.btnSetting.oncommand = function(id,event){
 }
 
 wb.write(`
-- 支持联网读取用户提示词中的网页链接，自动转换为结构化文本。
 - <a href="https://imtip.aardio.com/api-keys/">点这里获取接口密钥（API key）</a>
 - <a href="javascript:void(0)" onclick="javascript:external.updateApiKey()">设置 API key，添加 / 切换 API 助手</a>
-- <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#imtip-ai-chat">编程启动 AI 助手</a>
-- <a href="https://www.aardio.com/zh-cn/doc/library-guide/std/key/hotkey.html#ai">超级热键 + 沉浸式 AI 助手</a>  
+- <a href="https://www.aau.cn">最小最丝滑的全自主智能体 AA（aardio autos）</a>
 - 按住 ``Shift`` + 单击托盘直接启动 AI 助手
 - 按住 ``Ctrl+Enter`` 可直接发送问题 
 - 按住 ``Ctrl`` 键点 ``复制`` 可复制 AI 最后输出的代码块
