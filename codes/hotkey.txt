@@ -15,7 +15,7 @@ if(_STUDIO_INVOKED && ...!="ImTip"){
 3. 删除并关闭此文件，在 ImTip 中再次点击「编辑超级热键」可恢复默认配置。
 
 此文件最新版本: https://github.com/aardio/ImTip/blob/main/codes/hotkey.txt
-超键热键开发指南: https://www.aardio.com/zh-cn/doc/?q=library-guide/std/key/hotkey.html
+超级热键开发指南: https://www.aardio.com/zh-cn/docs/?q=library-guide/std/key/hotkey.html
 */
 
 import fsys;
