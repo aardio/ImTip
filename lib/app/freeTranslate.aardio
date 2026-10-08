@@ -1,0 +1,76 @@
+﻿import web.rest.jsonClient;
+import web.rest.aiChat;
+
+with string{ latinLike = lambda(str) !find(str,":") || (len(str) > #str/1.5);}
+
+namespace app;
+
+class freeTranslate{
+	ctor(str){
+		if(!#str) return; 
+		str = ..string.trim(str);
+		if(!#str) return; 
+		
+		var r,e = translate(str);
+		if(!r){
+			if(translate===bTranslate){
+				translate = edgeTranslate;
+			}
+			else{
+				translate = bTranslate
+			}
+		}
+		
+		return translate(str);
+	}; 
+}
+
+namespace freeTranslate{
+
+	var edgeClient = ..web.rest.jsonClient();
+	var edgeApi = edgeClient.api("https://edge.microsoft.com");
+	
+	edgeTranslate = function(str){
+
+		var ret, err = edgeApi.translate.translatetext.post([str], {
+			from="";
+			isEnterpriseClient="false";
+			to=..string.latinLike(str)?"zh-Hans":"en-US"
+		});	
+		
+		if(ret[[1]]){
+			ret = ..table.map(ret,lambda(v,k) v[["translations"]][[1]][["text"]]) 
+			return ret[1]
+		}
+		
+		return null,err;
+	}
+	
+	var aiClient = ..web.rest.aiChat(
+		url = "https://index-translate.bilibili.com/v1";
+		model = "Index-Translate-35B-A3B"
+	)
+	
+	bTranslate = function(str){ 
+		
+		
+		if(..string.latinLike(str)){
+			return aiClient.getText('翻译为中文（直接提供翻译结果，无需解释）：\n\n'+str);	
+		} 
+		else{
+			return aiClient.getText('翻译为英文（直接提供翻译结果，无需解释）：\n\n'+str);	
+		}
+	}	
+	 
+	translate = bTranslate;
+}
+
+/*****intellisense()
+app.freeTranslate(__) = 翻译文本
+end intellisense*****/
+
+
+
+				
+				
+			

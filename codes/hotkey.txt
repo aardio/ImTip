@@ -134,6 +134,7 @@ superHotkey.loadTable({
 			function(selectedText){ 
 				import winex.tooltip;
 				import web.rest.jsonClient;
+				import web.rest.aiChat;
 				
 				/*
 				检测文本是否以拉丁字母为主（例如英文）。
@@ -145,9 +146,11 @@ superHotkey.loadTable({
 				*/
 				..string.latinLike = lambda(str) !..string.find(str,":") || (..string.len(str) > #str/1.5);
 	
+				var aiClient = ..web.rest.aiChat(url = "https://index-translate.bilibili.com/v1";model = "Index-Translate-35B-A3B")
 				var edgeClient = web.rest.jsonClient();
 				var edgeApi = edgeClient.api("https://edge.microsoft.com");
 				var edgeTranslate = function(str){
+					
 					var ret, err = edgeApi.translate.translatetext.post([str], {
 						from="";
 						isEnterpriseClient="false";
@@ -159,12 +162,18 @@ superHotkey.loadTable({
 						return ret[1]
 					}
 					
+					if(..string.latinLike(str)){
+						return aiClient.getText('翻译为中文（直接提供翻译结果，无需解释）：\n\n'+str);	
+					} 
+					else{
+						return aiClient.getText('翻译为英文（直接提供翻译结果，无需解释）：\n\n'+str);	
+					}
+					
 					return null,err;
 				}
 			
 				
 				var result, err = edgeTranslate(selectedText);
-				
 				if(result){ 
 				
     				// 检查是否有业务错误

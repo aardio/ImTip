@@ -26,7 +26,7 @@ import style;
 import fonts.imtip;
 import fonts.fontAwesomeSub;
 /*DSG{{*/
-mainForm = win.form(text="ImTip 9.0 - 桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
+mainForm = win.form(text="ImTip 9.2 - 桌面助手";right=690;bottom=516;bgcolor=0xF5F5F5;border="none";max=false;min=false)
 mainForm.add(
 btnAiChat={cls="plus";text="打开助手";left=97;top=168;right=197;bottom=198;anchors={left=1;top=1};bgcolor=0x6B6BFF;border={radius=4};color=0xFFFFFF;font=LOGFONT(h=-13);notify=1;z=20};
 btnClose={cls="plus";text="×";left=663;top=0;right=691;bottom=28;anchors={top=1;right=1};color=0xFFFFFF;font=LOGFONT(h=-22);notify=1;z=30};
@@ -60,7 +60,7 @@ lblImeTipDesc={cls="static";text="实时提示输入法状态
 lblImeTipTitle={cls="plus";text="输入提示";left=432;top=99;right=642;bottom=124;align="left";anchors={top=1;right=1};bgcolor=0xFFFFFF;color=0x333333;font=LOGFONT(h=-16;weight=600);z=13};
 lblSystemTitle={cls="plus";text="系统选项";left=97;top=247;right=207;bottom=272;align="left";anchors={left=1;bottom=1};bgcolor=0xFFFFFF;color=0x333333;font=LOGFONT(h=-16;weight=600);z=26};
 lpHotkey={cls="syslink";text='<a href="https://imtip.aardio.com">软件官网</a> | <a href="https://www.aardio.com/zh-cn/docs/?q=library-guide%2Fstd%2Fkey%2Fhotkey.html">开发指南</a> | <a href="https://www.aardio.com/zh-cn/docs/?q=guide%2Flanguage%2Fsyntax-quick-ref.html">语法速览</a>';left=374;top=461;right=637;bottom=482;align="right";anchors={right=1;bottom=1};bgcolor=0xFFFFFF;notify=1;transparent=1;z=29};
-titleBar={cls="bk";text="    IᵐTⁱᵖ 桌面助手 9.0";left=0;top=0;right=692;bottom=60;align="left";anchors={left=1;top=1;right=1};bgcolor=0xD77800;color=0xFFFFFF;font=LOGFONT(h=-18;weight=600);z=6}
+titleBar={cls="bk";text="    IᵐTⁱᵖ 桌面助手 9.2";left=0;top=0;right=692;bottom=60;align="left";anchors={left=1;top=1;right=1};bgcolor=0xD77800;color=0xFFFFFF;font=LOGFONT(h=-18;weight=600);z=6}
 )
 /*}}*/
 

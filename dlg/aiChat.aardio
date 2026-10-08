@@ -712,6 +712,47 @@ winform.btnSnap.oncommand = function(id,event){
 	winform.editPrompt.setFocus();
 }
 
+import web.form.menu;
+wb.showMenu = function(x,y,id,ele){
+
+	if(id!==4/*_CONTEXT_MENU_TEXTSELECT */){
+		return true;
+	}
+	
+    web.form.menu( wb, {
+    	[4/*_CONTEXT_MENU_TEXTSELECT */] = {  
+        	{ "剪切";"Cut" }; 
+        	{ "复制";"Copy" }; 
+        	{ "粘贴";"Paste" };
+        	{ "删除";"Delete" }; 
+        	{};
+        	{ "翻译 / 还原";function(id,hwnd,ele,x,y){
+        	 
+        		var range = wb.script.getSelectionObject();
+        		if(!range) return;
+        		
+        		with string{ latinLike = lambda(str) !find(str,":") || (len(str) > #str/1.5);}
+				
+				var text = range.text;
+				text = string.trim(text);
+				if(!#text) return;
+				
+				import app.freeTranslate;
+				var result,err = app.freeTranslate(text);
+				
+				if(result){
+					range.text = result;
+				}
+				elseif(err){
+					mainForm.msgboxErr(er);
+				}
+        	} }; 
+        }
+	} ).popup(x,y,id,ele);	
+	
+	return false; 
+}
+
 winform.btnSearch.oncommand = function(id,event){
 	
 	var frmSearch = winform.loadForm("\dlg\frmSearch.aardio"); 

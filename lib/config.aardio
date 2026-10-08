@@ -175,11 +175,22 @@ config.setting.updateQuirksMode = function(quirksMode){
 }
 
 config.setting.getHotkeyCodePath = function(){
-	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey3.aardio"); 
-	if(!..io.exist(path)){
-		..string.save(path, $"\codes\hotkey.txt")
-	}
 	
+	var path = ..io.joinpath(config._cfgDir,".hotkey/hotkey3.aardio"); 
+	var current = ..string.load(path);
+	var example = $"\codes\hotkey.txt";
+	
+	if((!#current) || (current==example)){
+		import web.rest.github;
+		latest = ..web.rest.github.getContent("aardio","ImTip","/codes/hotkey.txt" ) ;
+		if(latest)..string.save(path,latest)
+	} 
+	
+	current = ..string.load(path);
+	if(!#current){
+		..string.save(path,example)
+	} 
+	 
 	return path;	
 }
 
