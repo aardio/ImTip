@@ -99,34 +99,52 @@ superHotkey.loadTable({
 		selectedText = selectedText ? string.trim(selectedText);
 		if(!#selectedText) {
 			
-			import gdip.snap;
-			import mouse.screenArea;
-			var screenArea = mouse.screenArea();
-			screenArea.onSelectionChanged = function(rc){
-				
-				var bmp = gdip.snap(screenArea.hwnd,rc);
-				owner.endModal(true);
-			
-				import web.rest.aiChat;
-				var aiClient = web.rest.aiChat(
-					url = "https://index-translate.bilibili.com/v1";
-					model = "Index-Translate-35B-A3B"
-				)
-				
-				import web.rest.aiChat.messages;
-				var msg = web.rest.aiChat.messages();
-				msg.prompt("请识别图像并直接翻译为中文（不要解释）" ,bmp);
-				bmp.delete();
-				
-				var empty;
-				var resp,err = aiClient.messages(msg,
-					function(deltaText,reasoning){
-						winex.tooltip.popupDelta(deltaText);
+			thread.invoke( 
+				function(selectedText){
+					
+					import gdip.snap;
+					import mouse.screenArea;
+					var screenArea = mouse.screenArea();
+					screenArea.onSelectionChanged = function(rc){
+						
+						var bmp = gdip.snap(screenArea.hwnd,rc);
+						owner.endModal(true);
+					
+						import web.rest.aiChat;
+						var aiClient = web.rest.aiChat(
+							url = "https://index-translate.bilibili.com/v1";
+							model = "Index-Translate-35B-A3B"
+						)
+						
+						import web.rest.aiChat.messages;
+						var msg = web.rest.aiChat.messages();
+						msg.prompt("请识别图像并直接翻译为中文（不要解释）" ,bmp);
+						bmp.delete();
+						
+						var content = "";
+						import winex.tooltip;
+						var resp,err = aiClient.messages(msg,
+							function(deltaText,reasoning){
+								if(!#deltaText){
+									if(#content){
+										winex.tooltip.popupDelta(content);
+										return;
+									}
+								}
+								
+								//避免刷新过快
+								content = content ++ deltaText;
+								if(string.len(content)>10){
+									winex.tooltip.popupDelta(content);
+									thread.delay(200);
+									content = "";
+								} 
+							}
+						)
 					}
-				)
-			}
-			
-			screenArea.doModal();
+					
+					screenArea.doModal();	
+				},selectedText) 
 			return;
 		}
 		
