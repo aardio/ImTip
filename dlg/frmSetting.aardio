@@ -83,7 +83,7 @@ lnkCharsLang={cls="plus";text="中:";left=18;top=548;right=43;bottom=572;align="
 lnkCharsSymbol={cls="plus";text="中文标点:";left=375;top=548;right=442;bottom=572;align="right";anchors={left=1;bottom=1};color=0x800000;notify=1;textPadding={left=5};valign="bottom";z=95};
 plus={cls="plus";left=1;top=83;right=15;bottom=115;anchors={left=1;top=1};border={top=1;color=0x008000};z=112};
 plus9={cls="plus";left=75;top=83;right=498;bottom=84;anchors={left=1;top=1};bgcolor=0xFFFFFF;border={color=0x008000};forecolor=0x008000;linearGradient=180;z=111};
-preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";anchors={left=1;top=1};bgcolor=0xF0CAA6;border={radius=11};disabled=1;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=11}};iconText='\uF186';textPadding={left=13};z=43};
+preview={cls="plus";text="中";left=109;top=5;right=174;bottom=33;align="left";anchors={left=1;top=1};bgcolor=0xF0CAA6;border={radius=11};clipBk=1;disabled=1;iconStyle={align="right";font=LOGFONT(name='imtip');padding={right=11}};iconText='\uF186';textPadding={left=13};z=43};
 radIconTextAlignCenter={cls="plus";text="居中";left=488;top=363;right=548;bottom=387;align="left";anchors={left=1;bottom=1};iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=34};
 radIconTextAlignLeft={cls="plus";text="左";left=438;top=363;right=486;bottom=387;align="left";anchors={left=1;bottom=1};iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=33};
 radIconTextAlignRight={cls="plus";text="右";left=550;top=363;right=598;bottom=387;align="left";anchors={left=1;bottom=1};iconStyle={align="left";font=LOGFONT(h=-15;name='imtip')};iconText='\uF111 ';notify=1;textPadding={left=20};z=44};
@@ -908,7 +908,8 @@ frmSetting.onMinimized = function(){
 }
 /*}}*/
 
-/*选择配置方案{{*/
+/*选择配置方案{
+{*/
 for(i=1;5;1){
 	var ctrl = frmSetting["btnScheme" + i ]; 
 	ctrl.schemeIndex = i; 
@@ -940,34 +941,25 @@ if(schemeThumbnails){
  
 frmSetting.preview.SnapThumbnail = function(snap){ 
 	if(!snap){
-		owner.onDrawEnd = null;
 		return;
 	}
- 	 
-	owner.onDrawEnd = function(graphics,rc,bmpTemp){ 
-		var schemeIndex = config.setting.schemeIndex;
-		var ctrl = frmSetting["btnScheme" + schemeIndex ]; 
-		
-		var foreground;
- 		var dpiScaleX = owner.dpiScaleX : 1;
- 		if(dpiScaleX>1){
- 			
- 			foreground = gdip.bitmap(bmpTemp.width/dpiScaleX,bmpTemp.height/dpiScaleX);
- 			
- 			var graphics = foreground.getGraphics();
- 			graphics.drawImageScale(bmpTemp,::RECT(0,0,bmpTemp.width/dpiScaleX,bmpTemp.height/dpiScaleX));
- 			graphics.delete();
- 			
- 		}
- 		else {
- 			foreground = bmpTemp.clone();
- 		} 
- 		
- 		ctrl.text = "";
- 		var prevBmp = ctrl.setForeground(foreground,false);
-		if(prevBmp){
-			prevBmp.dispose();
-		}
+
+	var schemeIndex = config.setting.schemeIndex;
+	var ctrl = frmSetting["btnScheme" + schemeIndex ]; 
+	var tempBmp = frmSetting.preview.snap();
+	if(!tempBmp) return;
+	
+	var foreground = tempBmp;
+	var dpiX,dpiY = frmSetting.preview.dpiScale(1,1);
+	if(dpiX>1){
+		foreground = tempBmp.resize(foreground.width/dpiX,foreground.height/dpiY);
+		tempBmp.delete();
+	}
+	
+	ctrl.text = "";
+	var prevBmp = ctrl.setForeground(foreground,false);
+	if(prevBmp){
+		prevBmp.dispose();
 	}
 }
 
